@@ -1,3 +1,5 @@
+arm-none-eabi-binutils 291
+variants universal portdir cross/arm-none-eabi-binutils description {newlib for arm-none-eabi} epoch 0 platforms darwin name arm-none-eabi-binutils license unknown maintainers nomaintainer long_description {newlib compiled for arm-none-eabi} categories {cross devel} version 2.20 revision 0
 arm-none-eabi-gcc-linaro 349
 variants universal portdir cross/arm-none-eabi-gcc-linaro description {GCC Linaro} epoch 0 platforms darwin name arm-none-eabi-gcc-linaro depends_lib {port:gmp port:mpfr port:mpc port:libiconv port:arm-none-eabi-newlib} long_description {GCC Linaro} license unknown maintainers nomaintainer categories {cross devel} version 4.5-2010.11-1 revision 0
 arm-none-eabi-newlib 289
