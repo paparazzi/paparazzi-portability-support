@@ -15,4 +15,5 @@ patchfiles          patch-summon-arm-toolchain.diff
 patch.pre_args      -p1
 build.cmd           ./summon-arm-toolchain
 use_configure       no
-depends_lib-append  port:wget
+depends_lib-append      port:wget
+
