@@ -1,0 +1,20 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+PortSystem              1.0
+name                    ivy-ocaml
+version                 0.1
+categories              devel
+platforms               darwin
+maintainers             gondwana.com.au:bernard
+description             Ivy bus ocaml library
+long_description        Ivy is the software bus that will creep over your network!
+homepage                http://www.tls.cena.fr/products/ivy/
+fetch.type              svn
+svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-ocaml/trunk
+svn.revision            3457
+svn.post_args-append    ${worksrcdir}
+use_configure           no
+build.args              
+depends_lib-append      port:caml-ocamlnet \
+                        port:ivy-c
+

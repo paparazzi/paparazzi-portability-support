@@ -1,0 +1,42 @@
+Index: src/Makefile.osx
+===================================================================
+--- src/Makefile.osx	(revision 3457)
++++ src/Makefile.osx	(working copy)
+@@ -90,20 +90,20 @@
+ 	$(LIBTOOL) $@ $(OMPOBJ)
+ 
+ libivy.dylib: $(OBJ)
+-	#$(CC) $(CFLAGS) -dynamiclib -install_name $(DESTDIR)$(PREFIX)/lib/libivy.dylib -o $@ $(OBJ) $(PCRELIB)
+-	$(CC) $(CFLAGS) -dynamiclib  -o $@ $(OBJ) $(PCRELIB)
++	$(CC) $(CFLAGS) -dynamiclib -install_name $(DESTDIR)$(PREFIX)/lib/libivy.dylib -o $@ $(OBJ) $(PCRELIB)
++	#$(CC) $(CFLAGS) -dynamiclib  -o $@ $(OBJ) $(PCRELIB)
+ 
+ libivy_omp.dylib: $(OMPOBJ)
+-	#$(OMPCC) -dynamiclib -install_name $(DESTDIR)$(PREFIX)$(LIB)/lib/libivy_omp.dylib -o $@ $(OMPOBJ) $(PCRELIB) $(OMPLIB)
+-	$(OMPCC) -dynamiclib -o $@ $(OMPOBJ) $(PCRELIB) $(OMPLIB)
++	$(OMPCC) -dynamiclib -install_name $(DESTDIR)$(PREFIX)$(LIB)/lib/libivy_omp.dylib -o $@ $(OMPOBJ) $(PCRELIB) $(OMPLIB)
++	#$(OMPCC) -dynamiclib -o $@ $(OMPOBJ) $(PCRELIB) $(OMPLIB)
+ 	
+ libglibivy.a: $(GLIBOBJ)
+ 	rm -f $@
+ 	$(LIBTOOL) $@ $(GLIBOBJ)
+ 
+ libglibivy.dylib: $(GLIBOBJ)
+-	#$(CC) $(CFLAGS)  -dynamiclib -install_name $(DESTDIR)$(PREFIX)/lib/libglibivy.dylib  -o $@ $(GLIBOBJ) $(PCRELIB) $(GLIBLIB)	
+-	$(CC) $(CFLAGS)  -dynamiclib -o $@ $(GLIBOBJ) $(PCRELIB) $(GLIBLIB)
++	$(CC) $(CFLAGS)  -dynamiclib -install_name $(DESTDIR)$(PREFIX)/lib/libglibivy.dylib  -o $@ $(GLIBOBJ) $(PCRELIB) $(GLIBLIB)	
++	#$(CC) $(CFLAGS)  -dynamiclib -o $@ $(GLIBOBJ) $(PCRELIB) $(GLIBLIB)
+ 
+  
+ 
+@@ -111,8 +111,8 @@
+ 
+ installlibs: static-libs shared-libs
+ 	test -d $(DESTDIR)$(PREFIX)$(LIB)  || mkdir -p $(DESTDIR)$(PREFIX)$(LIB)
+-	install_name_tool -id $(DESTDIR)$(PREFIX)/lib/libivy.dylib libivy.dylib
+-	install_name_tool -id $(DESTDIR)$(PREFIX)/lib/libglibivy.dylib libglibivy.dylib
++	install_name_tool -id $(PREFIX)/lib/libivy.dylib libivy.dylib
++	install_name_tool -id $(PREFIX)/lib/libglibivy.dylib libglibivy.dylib
+ 	install -m644 libivy.a		$(DESTDIR)$(PREFIX)/lib/
+ 	install -m644 libivy.dylib	$(DESTDIR)$(PREFIX)/lib/
+ 	install -m644 libglibivy.a	$(DESTDIR)$(PREFIX)/lib/

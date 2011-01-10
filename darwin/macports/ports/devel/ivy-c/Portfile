@@ -1,0 +1,20 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+PortSystem              1.0
+name                    ivy-c
+version                 0.1
+categories              devel
+platforms               darwin
+maintainers             gondwana.com.au:bernard
+description             Ivy bus C library
+long_description        Ivy is the software bus that will creep over your network!
+homepage                http://www.tls.cena.fr/products/ivy/
+fetch.type              svn
+svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-c/trunk
+svn.revision            3457
+use_configure           no
+build.args              -C src -f Makefile.osx PREFIX=${prefix}
+destroot.args           -C src -f Makefile.osx PREFIX=${prefix}
+svn.post_args-append    ${worksrcdir}
+patchfiles              patch-src-Makefile.osx.diff
+
