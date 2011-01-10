@@ -5,7 +5,7 @@ name                paparazzi
 version             0.1
 categories          devel
 platforms           darwin
-maintainers         gondwana.com.au:bernard
+maintainers         nomaintainer
 description         Paparazzi development requirements
 long_description    The requirements for building and developing with Paparazzi.
 homepage            http://paparazzi.enac.fr/Wiki

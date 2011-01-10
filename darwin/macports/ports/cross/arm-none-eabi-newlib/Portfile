@@ -1,0 +1,31 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+PortSystem          1.0
+name                arm-none-eabi-newlib
+version             1.18.0
+categories          cross devel
+platforms           darwin
+maintainers         nomaintainer
+description         newlib for arm-none-eabi
+long_description    newlib compiled for arm-none-eabi
+master_sites        ftp://sources.redhat.com/pub/newlib/
+distfiles           newlib-${version}.tar.gz
+worksrcdir          newlib-${version}
+checksums           md5     3dae127d4aa659d72f8ea8c0ff2a7a20 \
+                    sha1    a47d3b8a508304143334b36bdb5b33786a61ce94 \
+                    rmd160  69d96fd323a23857072f30cb51899040099857cd
+# All cross ports violate the mtree layout.
+destroot.violate_mtree  yes
+configure.args      --target=arm-none-eabi \
+                    --prefix=${prefix} \
+                    --enable-interwork \
+                    --enable-multilib \
+                    --with-gnu-as \
+                    --with-gnu-ld \
+                    --disable-nls \
+                    --disable-werror \
+                    --disable-newlib-supplied-syscalls \
+                    --with-float=soft
+build.args-append   CFLAGS_FOR_TARGET="-msoft-float" CCASFLAGS="-msoft-float"
+
+

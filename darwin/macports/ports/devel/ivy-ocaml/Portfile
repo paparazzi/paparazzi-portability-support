@@ -5,7 +5,7 @@ name                    ivy-ocaml
 version                 0.1
 categories              devel
 platforms               darwin
-maintainers             gondwana.com.au:bernard
+maintainers             nomaintainer
 description             Ivy bus ocaml library
 long_description        Ivy is the software bus that will creep over your network!
 homepage                http://www.tls.cena.fr/products/ivy/

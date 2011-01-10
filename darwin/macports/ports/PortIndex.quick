@@ -1,4 +1,6 @@
-ivy-c 0
-ivy-ocaml 347
-paparazzi 754
-summon-arm-toolchain 1288
+arm-none-eabi-gcc-linaro 0
+arm-none-eabi-newlib 378
+ivy-c 692
+ivy-ocaml 1028
+paparazzi 1424
+summon-arm-toolchain 1953

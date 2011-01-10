@@ -1,8 +1,12 @@
-ivy-c 337
-portdir devel/ivy-c description {Ivy bus C library} depends_fetch bin:svn:subversion homepage http://www.tls.cena.fr/products/ivy/ epoch 0 platforms darwin name ivy-c license unknown maintainers gondwana.com.au:bernard long_description {Ivy is the software bus that will creep over your network!} categories devel version 0.1 revision 0
-ivy-ocaml 393
-portdir devel/ivy-ocaml description {Ivy bus ocaml library} depends_fetch bin:svn:subversion homepage http://www.tls.cena.fr/products/ivy/ epoch 0 platforms darwin depends_lib {port:caml-ocamlnet port:ivy-c} name ivy-ocaml license unknown maintainers gondwana.com.au:bernard long_description {Ivy is the software bus that will creep over your network!} categories devel version 0.1 revision 0
-paparazzi 520
-variants universal portdir devel/paparazzi depends_fetch bin:git:git-core description {Paparazzi development requirements} homepage http://paparazzi.enac.fr/Wiki epoch 0 platforms darwin name paparazzi depends_lib {port:git-core port:xml-light port:caml-ocamlnet port:libftdi port:lablgtk2 port:gmp port:mpfr port:libmpc port:ivy-c port:ivy-ocaml} long_description {The requirements for building and developing with Paparazzi.} maintainers gondwana.com.au:bernard license unknown categories devel version 0.1 revision 0
-summon-arm-toolchain 365
-portdir devel/summon-arm-toolchain description {Summons the ARM toolchain} depends_fetch bin:git:git-core homepage http://paparazzi.enac.fr/Wiki epoch 0 platforms darwin name summon-arm-toolchain license unknown maintainers gondwana.com.au:bernard long_description {Summons the ARM toolchain required for building Paparazzi} categories devel version 0.1 revision 0
+arm-none-eabi-gcc-linaro 349
+variants universal portdir cross/arm-none-eabi-gcc-linaro description {GCC Linaro} epoch 0 platforms darwin name arm-none-eabi-gcc-linaro depends_lib {port:gmp port:mpfr port:mpc port:libiconv port:arm-none-eabi-newlib} long_description {GCC Linaro} license unknown maintainers nomaintainer categories {cross devel} version 4.5-2010.11-1 revision 0
+arm-none-eabi-newlib 289
+variants universal portdir cross/arm-none-eabi-newlib description {newlib for arm-none-eabi} epoch 0 platforms darwin name arm-none-eabi-newlib license unknown maintainers nomaintainer long_description {newlib compiled for arm-none-eabi} categories {cross devel} version 1.18.0 revision 0
+ivy-c 326
+portdir devel/ivy-c description {Ivy bus C library} depends_fetch bin:svn:subversion homepage http://www.tls.cena.fr/products/ivy/ epoch 0 platforms darwin name ivy-c license unknown maintainers nomaintainer long_description {Ivy is the software bus that will creep over your network!} categories devel version 0.1 revision 0
+ivy-ocaml 382
+portdir devel/ivy-ocaml description {Ivy bus ocaml library} depends_fetch bin:svn:subversion homepage http://www.tls.cena.fr/products/ivy/ epoch 0 platforms darwin depends_lib {port:caml-ocamlnet port:ivy-c} name ivy-ocaml license unknown maintainers nomaintainer long_description {Ivy is the software bus that will creep over your network!} categories devel version 0.1 revision 0
+paparazzi 515
+variants universal portdir devel/paparazzi-devel depends_fetch bin:git:git-core description {Paparazzi development requirements} homepage http://paparazzi.enac.fr/Wiki epoch 0 platforms darwin name paparazzi depends_lib {port:git-core port:xml-light port:caml-ocamlnet port:libftdi port:lablgtk2 port:gmp port:mpfr port:libmpc port:ivy-c port:ivy-ocaml} long_description {The requirements for building and developing with Paparazzi.} maintainers nomaintainer license unknown categories devel version 0.1 revision 0
+summon-arm-toolchain 375
+portdir devel/summon-arm-toolchain description {Summons the ARM toolchain} depends_fetch bin:git:git-core homepage http://paparazzi.enac.fr/Wiki epoch 0 platforms darwin depends_lib port:wget name summon-arm-toolchain license unknown maintainers nomaintiner long_description {Summons the ARM toolchain required for building Paparazzi} categories devel version 0.1 revision 0
