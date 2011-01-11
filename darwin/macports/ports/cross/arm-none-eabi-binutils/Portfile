@@ -26,4 +26,11 @@ configure.args      --target=arm-none-eabi \
                     --disable-nls \
                     --disable-werror 
 
+post-destroot {
+	file rename ${destroot}${prefix}/share/info/configure.info \
+		${destroot}${prefix}/share/info/configure-binutils.info
+	file rename ${destroot}${prefix}/share/info/standards.info \
+		${destroot}${prefix}/share/info/standards-binutils.info
+}
+
 

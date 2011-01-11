@@ -30,4 +30,11 @@ configure.args          --target=arm-none-eabi \
                         --with-float=soft
 build.args-append       CFLAGS_FOR_TARGET="-msoft-float" CCASFLAGS="-msoft-float"
 
+post-destroot {
+	file rename ${destroot}${prefix}/share/info/configure.info \
+		${destroot}${prefix}/share/info/configure-newlib.info
+	file rename ${destroot}${prefix}/share/info/standards.info \
+		${destroot}${prefix}/share/info/standards-newlib.info
+}
+
 
