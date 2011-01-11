@@ -1,7 +1,7 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # $Id$
 PortSystem              1.0
-name                    arm-none-eabi-gcc-linaro
+name                    arm-none-eabi-gcc-linaro-boot
 version                 4.5-2010.11-1
 categories              cross devel
 platforms               darwin
@@ -21,14 +21,14 @@ depends_lib-append      port:gmp \
                         port:mpfr \
                         port:mpc \
                         port:libiconv \
-                        port:arm-none-eabi-newlib \
-                        port:arm-none-eabi-gcc-linaro-boot
+                        port:arm-none-eabi-binutils
 configure.args          --target=arm-none-eabi \
                         --prefix=${prefix} \
                         --enable-interwork \
                         --enable-multilib \
-                        --enable-languages="c,c++" \
+                        --enable-languages="c" \
                         --with-newlib \
+                        --without-headers \
                         --disable-shared \
                         --with-gnu-as \
                         --with-gnu-ld \
@@ -39,3 +39,5 @@ configure.args          --target=arm-none-eabi \
                         --with-mpfr=${prefix} \
                         --with-mpc=${prefix} \
                         --with-libiconv-prefix=${prefix}
+build.target            all-gcc
+destroot.target         install-gcc

@@ -1,9 +1,11 @@
-arm-none-eabi-binutils 291
-variants universal portdir cross/arm-none-eabi-binutils description {newlib for arm-none-eabi} epoch 0 platforms darwin name arm-none-eabi-binutils license unknown maintainers nomaintainer long_description {newlib compiled for arm-none-eabi} categories {cross devel} version 2.20 revision 0
-arm-none-eabi-gcc-linaro 349
-variants universal portdir cross/arm-none-eabi-gcc-linaro description {GCC Linaro} epoch 0 platforms darwin name arm-none-eabi-gcc-linaro depends_lib {port:gmp port:mpfr port:mpc port:libiconv port:arm-none-eabi-newlib} long_description {GCC Linaro} license unknown maintainers nomaintainer categories {cross devel} version 4.5-2010.11-1 revision 0
-arm-none-eabi-newlib 289
-variants universal portdir cross/arm-none-eabi-newlib description {newlib for arm-none-eabi} epoch 0 platforms darwin name arm-none-eabi-newlib license unknown maintainers nomaintainer long_description {newlib compiled for arm-none-eabi} categories {cross devel} version 1.18.0 revision 0
+arm-none-eabi-binutils 295
+variants universal portdir cross/arm-none-eabi-binutils description {binutils for arm-none-eabi} epoch 0 platforms darwin name arm-none-eabi-binutils license unknown maintainers nomaintainer long_description {binutils compiled for arm-none-eabi} categories {cross devel} version 2.20 revision 0
+arm-none-eabi-gcc-linaro 384
+variants universal portdir cross/arm-none-eabi-gcc-linaro description {GCC Linaro} epoch 0 platforms darwin name arm-none-eabi-gcc-linaro depends_lib {port:gmp port:mpfr port:mpc port:libiconv port:arm-none-eabi-newlib port:arm-none-eabi-gcc-linaro-boot} long_description {GCC Linaro} license unknown maintainers nomaintainer categories {cross devel} version 4.5-2010.11-1 revision 0
+arm-none-eabi-gcc-linaro-boot 361
+variants universal portdir cross/arm-none-eabi-gcc-linaro-boot description {GCC Linaro} epoch 0 platforms darwin name arm-none-eabi-gcc-linaro-boot depends_lib {port:gmp port:mpfr port:mpc port:libiconv port:arm-none-eabi-binutils} long_description {GCC Linaro} license unknown maintainers nomaintainer categories {cross devel} version 4.5-2010.11-1 revision 0
+arm-none-eabi-newlib 366
+variants universal portdir cross/arm-none-eabi-newlib description {newlib for arm-none-eabi} epoch 0 platforms darwin name arm-none-eabi-newlib depends_lib {port:arm-none-eabi-gcc-linaro-boot port:arm-none-eabi-binutils} long_description {newlib compiled for arm-none-eabi} license unknown maintainers nomaintainer categories {cross devel} version 1.18.0 revision 0
 ivy-c 326
 portdir devel/ivy-c description {Ivy bus C library} depends_fetch bin:svn:subversion homepage http://www.tls.cena.fr/products/ivy/ epoch 0 platforms darwin name ivy-c license unknown maintainers nomaintainer long_description {Ivy is the software bus that will creep over your network!} categories devel version 0.1 revision 0
 ivy-ocaml 382

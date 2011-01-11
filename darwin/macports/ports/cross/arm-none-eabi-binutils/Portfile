@@ -6,8 +6,8 @@ version             2.20
 categories          cross devel
 platforms           darwin
 maintainers         nomaintainer
-description         newlib for arm-none-eabi
-long_description    newlib compiled for arm-none-eabi
+description         binutils for arm-none-eabi
+long_description    binutils compiled for arm-none-eabi
 master_sites        http://ftp.gnu.org/gnu/binutils/
 distfiles           binutils-${version}.tar.bz2
 use_bzip2           yes
