@@ -1,47 +1,32 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # $Id$
-# Maybe we should copy a lot of what the arm-elf-gcc Portfile does into this.
-# like including newlib, and a lot of the build options
 PortSystem              1.0
-name                    arm-none-eabi-gcc-linaro
+name                    arm-none-eabi-gcc-linaro-boot
 version                 4.5-2010.11-1
-
-set branch              [join [lrange [split ${version} .] 0 1] .]
-set crossgcc-target     arm-none-eabi
-set newlibversion       1.18.0
 categories              cross devel
 platforms               darwin
 maintainers             nomaintainer
-description             gcc cross-compilers for arm-none-eabi, with newlib runtime library.
-long_description        gnu compilers collection (including c and c++) for arm-none-eabi, with newlib runtime library.
+description             gcc cross-compilers for arm-none-eabi
+long_description        gnu compilers collection (including c) for arm-none-eabi
 homepage                http://gcc.gnu.org/
-master_sites            http://launchpad.net/gcc-linaro/4.5/4.5-2010.11-0/+download/:gcc \
-                        ftp://sources.redhat.com/pub/newlib/:newlib
-distfiles               gcc-linaro-${version}.tar.bz2:gcc \
-                        newlib-${newlibversion}.tar.gz:newlib
+master_sites            http://launchpad.net/gcc-linaro/4.5/4.5-2010.11-0/+download/
+distfiles               gcc-linaro-${version}.tar.bz2
 use_bzip2               yes
-checksums               gcc-linaro-${version}.tar.bz2 md5     9e18a60d2c5ae4f3338814aabf80bb90 \
+checksums               md5     9e18a60d2c5ae4f3338814aabf80bb90 \
                         sha1    2e66bdfdf3c847e67bfca2c5ad2645eb41276167 \
-                        rmd160  9a709d16f16e1a0fb10ef176c06b8f0b677e4533 \
-                        newlib-${newlibversion}.tar.gz md5     3dae127d4aa659d72f8ea8c0ff2a7a20 \
-                        sha1    a47d3b8a508304143334b36bdb5b33786a61ce94 \
-                        rmd160  69d96fd323a23857072f30cb51899040099857cd
+                        rmd160  9a709d16f16e1a0fb10ef176c06b8f0b677e4533
 # All cross ports violate the mtree layout.
 destroot.violate_mtree  yes
 depends_lib-append      port:gmp \
                         port:mpfr \
                         port:mpc \
                         port:libiconv \
-                        port:${crossgcc-target}-binutils
+                        port:arm-none-eabi-binutils
 # gmp and mpfr are not universal
 universal_variant	no
 worksrcdir              build
-extract.only            gcc-linaro-${version}.tar.bz2
-# Extract newlib and create a symlink of newlib/newlib in gcc directory.
-post-extract    {
-        system "cd ${workpath} && gzip -dc ${distpath}/newlib-${newlibversion}.tar.gz | tar -xf -"
-        system "ln -s ${workpath}/newlib-${newlibversion}/newlib ${workpath}/gcc-linaro-${version}/"
-}
+set branch              [join [lrange [split ${version} .] 0 1] .]
+set crossgcc-target arm-none-eabi
 
 # Since we don't build gcc and binutils at the same time, gcc's Makefile will try to transform
 # program names as gcc's name (add -${version} with ${version} being the version of gcc).
@@ -60,14 +45,15 @@ pre-configure {
 }
 configure.env           ${environment}
 configure.cmd           ../gcc-linaro-${version}/configure
-configure.cc-append     -I${prefix}/include
+configure.cc-append    -I${prefix}/include
 configure.args          --target=arm-none-eabi \
                         --program-prefix=${crossgcc-target}- \
                         --program-suffix=-${branch} \
                         --enable-interwork \
                         --enable-multilib \
-                        --enable-languages=c,c++ \
+                        --enable-languages="c" \
                         --with-newlib \
+                        --without-headers \
                         --disable-shared \
                         --with-gnu-as \
                         --with-gnu-ld \
@@ -78,6 +64,7 @@ configure.args          --target=arm-none-eabi \
                         --with-mpfr=${prefix} \
                         --with-mpc=${prefix} \
                         --with-libiconv-prefix=${prefix}
+
 configure.cc_archflags
 configure.cxx_archflags
 configure.objc_archflags
@@ -86,7 +73,9 @@ if {[info exists configure.ld_archflags]} {
 }
 
 build.args              ${environment}
+build.target            all-gcc
 destroot.args           ${environment}
+destroot.target         install-gcc
 
 post-patch {
         namespace eval crossgcc {}

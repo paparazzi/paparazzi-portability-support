@@ -11,26 +11,26 @@ long_description    binutils compiled for arm-none-eabi
 master_sites        http://ftp.gnu.org/gnu/binutils/
 distfiles           binutils-${version}.tar.bz2
 use_bzip2           yes
-worksrcdir          binutils-${version}
 checksums           md5     ee2d3e996e9a2d669808713360fa96f8 \
                     sha1    747e7b4d94bce46587236dc5f428e5b412a590dc \
                     rmd160  284074e2453e517d036ffce2c0f3d56439e2e5c0
 # All cross ports violate the mtree layout.
 destroot.violate_mtree  yes
+worksrcdir          build
+pre-configure {
+    file mkdir ${worksrcpath}
+}
+configure.cmd       ../binutils-${version}/configure
 configure.args      --target=arm-none-eabi \
-                    --prefix=${prefix} \
                     --enable-interwork \
                     --enable-multilib \
                     --with-gnu-as \
                     --with-gnu-ld \
                     --disable-nls \
                     --disable-werror 
-
 post-destroot {
-	file rename ${destroot}${prefix}/share/info/configure.info \
-		${destroot}${prefix}/share/info/configure-binutils.info
-	file rename ${destroot}${prefix}/share/info/standards.info \
-		${destroot}${prefix}/share/info/standards-binutils.info
+    file rename ${destroot}${prefix}/share/info/configure.info \
+        ${destroot}${prefix}/share/info/configure-mp-${version}-binutils.info
+    file rename ${destroot}${prefix}/share/info/standards.info \
+        ${destroot}${prefix}/share/info/standards-mp-${version}-binutils.info
 }
-
-

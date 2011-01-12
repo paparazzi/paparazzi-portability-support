@@ -1,0 +1,44 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+PortSystem              1.0
+set crossgcc-target     arm-none-eabi
+name                    ${crossgcc-target}-openocd
+version                 master
+categories              cross devel
+platforms               darwin
+maintainers             nomaintainer
+description             OpenOCD
+long_description        OpenOCD compiled for arm-none-eabi
+fetch.type              git
+git.url                 git://openocd.git.sourceforge.net/gitroot/openocd/openocd
+
+set environment         [list CFLAGS="-m32 -I${prefix}/${crossgcc-target}/include" \
+                        LDFLAGS="-L${prefix}/${crossgcc-target}/lib"]
+
+worksrcdir              build
+pre-configure {
+    file mkdir ${worksrcpath}
+}
+configure.env           ${environment}
+configure.cmd           ../openocd-${version}/configure
+configure.args          --enable-maintainer-mode \
+                        --enable-dummy \
+                        --enable-parport \
+                        --enable-ft2232_libftdi \
+                        --enable-usb_blaster_libftdi \
+                        --enable-amtjtagaccel \
+                        --enable-zy1000 \
+                        --enable-ep93xx \
+                        --enable-at91rm9200 \
+                        --enable-gw16012 \
+                        --enable-presto_libftdi \
+                        --enable-usbprog \
+                        --enable-jlink \
+                        --enable-vsllink \
+                        --enable-rlink \
+                        --enable-arm-jtag-ew \
+                        --enable-buspirate
+
+build.env               ${environment}
+destroot.env            ${environment}
+

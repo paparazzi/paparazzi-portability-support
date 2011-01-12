@@ -10,7 +10,6 @@ description             newlib for arm-none-eabi
 long_description        newlib compiled for arm-none-eabi
 master_sites            ftp://sources.redhat.com/pub/newlib/
 distfiles               newlib-${version}.tar.gz
-worksrcdir              newlib-${version}
 checksums               md5     3dae127d4aa659d72f8ea8c0ff2a7a20 \
                         sha1    a47d3b8a508304143334b36bdb5b33786a61ce94 \
                         rmd160  69d96fd323a23857072f30cb51899040099857cd
@@ -18,8 +17,12 @@ checksums               md5     3dae127d4aa659d72f8ea8c0ff2a7a20 \
 destroot.violate_mtree  yes
 depends_lib-append      port:arm-none-eabi-gcc-linaro-boot \
                         port:arm-none-eabi-binutils
+worksrcdir              build
+pre-configure {
+    file mkdir ${worksrcpath}
+}
+configure.cmd           ../newlib-${version}/configure
 configure.args          --target=arm-none-eabi \
-                        --prefix=${prefix} \
                         --enable-interwork \
                         --enable-multilib \
                         --with-gnu-as \
@@ -31,10 +34,9 @@ configure.args          --target=arm-none-eabi \
 build.args-append       CFLAGS_FOR_TARGET="-msoft-float" CCASFLAGS="-msoft-float"
 
 post-destroot {
-	file rename ${destroot}${prefix}/share/info/configure.info \
-		${destroot}${prefix}/share/info/configure-newlib.info
-	file rename ${destroot}${prefix}/share/info/standards.info \
-		${destroot}${prefix}/share/info/standards-newlib.info
+    file rename ${destroot}${prefix}/share/info/configure.info \
+        ${destroot}${prefix}/share/info/configure-mp-${version}-newlib.info
+    file rename ${destroot}${prefix}/share/info/standards.info \
+        ${destroot}${prefix}/share/info/standards-mp-${version}-newlib.info
 }
-
 

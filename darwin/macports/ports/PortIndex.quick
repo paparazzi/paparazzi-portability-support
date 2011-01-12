@@ -1,8 +1,10 @@
 arm-none-eabi-binutils 0
 arm-none-eabi-gcc-linaro 322
-arm-none-eabi-gcc-linaro-boot 735
-arm-none-eabi-newlib 1130
-ivy-c 1521
-ivy-ocaml 1857
-paparazzi 2253
-summon-arm-toolchain 2782
+arm-none-eabi-gdb 853
+arm-none-eabi-openocd 1282
+ivy-c 1612
+ivy-ocaml 1948
+paparazzi-devel 2344
+summon-arm-toolchain 2885
+arm-none-eabi-gcc-linaro-boot 3285
+arm-none-eabi-newlib 3763
