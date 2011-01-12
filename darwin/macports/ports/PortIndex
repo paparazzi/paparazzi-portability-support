@@ -2,8 +2,8 @@ arm-none-eabi-binutils 295
 variants universal portdir cross/arm-none-eabi-binutils description {binutils for arm-none-eabi} epoch 0 platforms darwin name arm-none-eabi-binutils license unknown maintainers nomaintainer long_description {binutils compiled for arm-none-eabi} categories {cross devel} version 2.20 revision 0
 arm-none-eabi-gcc-linaro 502
 portdir cross/arm-none-eabi-gcc-linaro description {gcc cross-compilers for arm-none-eabi, with newlib runtime library.} homepage http://gcc.gnu.org/ epoch 0 platforms darwin name arm-none-eabi-gcc-linaro depends_lib {port:gmp port:mpfr port:mpc port:libiconv port:arm-none-eabi-binutils} license unknown maintainers nomaintainer long_description {gnu compilers collection (including c and c++) for arm-none-eabi, with newlib runtime library.} categories {cross devel} version 4.5-2010.11-1 revision 0
-arm-none-eabi-gdb 407
-variants universal portdir cross/arm-none-eabi-gdb description {GDB for arm-none-eabi} epoch 0 platforms darwin name arm-none-eabi-gdb depends_lib {port:arm-none-eabi-binutils port:arm-none-eabi-gcc-linaro-boot port:arm-none-eabi-newlib port:arm-none-eabi-gcc-linaro} long_description {GDB compiled for arm-none-eabi} license unknown maintainers nomaintainer categories {cross devel} version 7.2 revision 0
+arm-none-eabi-gdb 346
+variants universal portdir cross/arm-none-eabi-gdb description {GDB for arm-none-eabi} epoch 0 platforms darwin name arm-none-eabi-gdb depends_lib {port:arm-none-eabi-binutils port:arm-none-eabi-gcc-linaro} long_description {GDB compiled for arm-none-eabi} license unknown maintainers nomaintainer categories {cross devel} version 7.2 revision 0
 arm-none-eabi-openocd 304
 variants universal portdir cross/arm-none-eabi-openocd description OpenOCD depends_fetch bin:git:git-core epoch 0 platforms darwin name arm-none-eabi-openocd long_description {OpenOCD compiled for arm-none-eabi} license unknown maintainers nomaintainer categories {cross devel} version master revision 0
 ivy-c 326

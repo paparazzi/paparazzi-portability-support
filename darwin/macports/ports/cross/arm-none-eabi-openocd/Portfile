@@ -11,14 +11,19 @@ description             OpenOCD
 long_description        OpenOCD compiled for arm-none-eabi
 fetch.type              git
 git.url                 git://openocd.git.sourceforge.net/gitroot/openocd/openocd
+post-fetch    {
+        system "cd ${workpath}/openocd-${version} && ./bootstrap"
+}
 
 set environment         [list CFLAGS="-m32 -I${prefix}/${crossgcc-target}/include" \
                         LDFLAGS="-L${prefix}/${crossgcc-target}/lib"]
 
-worksrcdir              build
+worksrcdir              openocd-${version}
 pre-configure {
-    file mkdir ${worksrcpath}
+    file mkdir ${build.dir}
 }
+
+configure.dir           ${workpath}/build
 configure.env           ${environment}
 configure.cmd           ../openocd-${version}/configure
 configure.args          --enable-maintainer-mode \
@@ -39,6 +44,7 @@ configure.args          --enable-maintainer-mode \
                         --enable-arm-jtag-ew \
                         --enable-buspirate
 
+build.dir               ${workpath}/build
 build.env               ${environment}
 destroot.env            ${environment}
 
