@@ -6,8 +6,9 @@ version                 7.2
 categories              cross devel
 platforms               darwin
 maintainers             nomaintainer
-description             GDB for arm-none-eabi
-long_description        GDB compiled for arm-none-eabi
+description             GDB for the arm-none-eabi processors
+long_description        arm-none-eabi-gdb is a version of the GNU Debugger that through the avarice program can be used to debug code for the arm-none-eabi processors.
+homepage                http://www.gnu.org/software/gdb/gdb.html
 master_sites            http://ftp.gnu.org/gnu/gdb/
 distfiles               gdb-${version}.tar.bz2
 use_bzip2               yes
