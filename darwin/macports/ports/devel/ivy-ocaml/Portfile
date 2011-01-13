@@ -11,7 +11,7 @@ long_description        Ivy is the software bus that will creep over your networ
 homepage                http://www.tls.cena.fr/products/ivy/
 fetch.type              svn
 svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-ocaml/trunk
-svn.revision            3457
+svn.revision            3443
 svn.post_args-append    ${worksrcdir}
 use_configure           no
 build.args              

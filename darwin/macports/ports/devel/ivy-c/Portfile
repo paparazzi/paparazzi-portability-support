@@ -11,8 +11,10 @@ long_description        Ivy is the software bus that will creep over your networ
 homepage                http://www.tls.cena.fr/products/ivy/
 fetch.type              svn
 svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-c/trunk
-svn.revision            3457
+svn.revision            3458
 use_configure           no
+depends_lib-append      port:glib2
+
 build.args              -C src -f Makefile.osx PREFIX=${prefix}
 destroot.args           -C src -f Makefile.osx PREFIX=${prefix}
 svn.post_args-append    ${worksrcdir}
