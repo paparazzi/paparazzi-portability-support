@@ -19,5 +19,11 @@ depends_lib             port:arm-none-eabi-gcc-linaro
 set environment         [list PATH="${prefix}/${targetarch}/bin"]
 build.env               ${environment}
 build.args              arch_prefix=${targetarch} prefix=${prefix}
-destroot.args           arch_prefix=${targetarch} prefix=${destroot} install
+
+# All cross ports violate the mtree layout.
+destroot.violate_mtree  yes
+pre-destroot {
+        file mkdir "${destroot}${prefix}/${targetarch}/lib"
+}
+destroot.args           arch_prefix=${targetarch} install_dir=${destroot}${prefix}/${targetarch} install
 

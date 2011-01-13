@@ -13,7 +13,7 @@ homepage            http://paparazzi.enac.fr/Wiki
 master_sites
 platforms           darwin
 
-depends_lib  port:git-core \
+depends_lib         port:git-core \
                     port:xml-light \
                     port:caml-ocamlnet \
                     port:libftdi \
@@ -23,7 +23,14 @@ depends_lib  port:git-core \
                     port:libmpc \
                     port:ivy-c \
                     port:ivy-ocaml \
-		    port:arm-none-eabi-binutils \		    port:arm-none-eabi-gcc-linaro \		    port:arm-none-eabi-gdb \                    port:openocd	
+                    port:arm-none-eabi-binutils \
+                    port:arm-none-eabi-gcc-linaro \
+                    port:arm-none-eabi-gdb \
+                    port:openocd \
+                    port:libcmsis \
+                    port:libstm32 \
+                    port:libstm32usb \
+                    port:libopenstm32
 
 distfiles
 use_configure   no
