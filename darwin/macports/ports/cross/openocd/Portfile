@@ -2,22 +2,23 @@
 # $Id$
 PortSystem              1.0
 set crossgcc-target     arm-none-eabi
-name                    ${crossgcc-target}-openocd
+name                    openocd
 version                 master
 categories              cross devel
 platforms               darwin
-maintainers             nomaintainer
-description             OpenOCD
-long_description        OpenOCD compiled for arm-none-eabi
+license                 GPL
+maintainers             snc openmaintainer
+description             Open On-Chip Debugger
+long_description        The Open On-Chip Debugger (OpenOCD) aims to provide debugging, in-system programming and boundary-scan testing for embedded target devices. Built with support for FT2232 based devices.
+homepage                http://openocd.berlios.de/
 fetch.type              git
 git.url                 git://openocd.git.sourceforge.net/gitroot/openocd/openocd
 post-fetch    {
         system "cd ${workpath}/openocd-${version} && ./bootstrap"
 }
 
-set environment         [list CFLAGS="-m32 -I${prefix}/${crossgcc-target}/include" \
-                        LDFLAGS="-L${prefix}/${crossgcc-target}/lib"]
-
+set environment         [list CFLAGS="-m32"]
+depends_lib             port:libftdi
 worksrcdir              openocd-${version}
 pre-configure {
     file mkdir ${build.dir}
@@ -42,7 +43,8 @@ configure.args          --enable-maintainer-mode \
                         --enable-vsllink \
                         --enable-rlink \
                         --enable-arm-jtag-ew \
-                        --enable-buspirate
+                        --enable-buspirate \
+                        --disable-werror
 
 build.dir               ${workpath}/build
 build.env               ${environment}

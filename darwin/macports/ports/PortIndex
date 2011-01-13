@@ -4,8 +4,8 @@ arm-none-eabi-gcc-linaro 502
 portdir cross/arm-none-eabi-gcc-linaro description {gcc cross-compilers for arm-none-eabi, with newlib runtime library.} homepage http://gcc.gnu.org/ epoch 0 platforms darwin name arm-none-eabi-gcc-linaro depends_lib {port:gmp port:mpfr port:mpc port:libiconv port:arm-none-eabi-binutils} license unknown maintainers nomaintainer long_description {gnu compilers collection (including c and c++) for arm-none-eabi, with newlib runtime library.} categories {cross devel} version 4.5-2010.11-1 revision 0
 arm-none-eabi-gdb 346
 variants universal portdir cross/arm-none-eabi-gdb description {GDB for arm-none-eabi} epoch 0 platforms darwin name arm-none-eabi-gdb depends_lib {port:arm-none-eabi-binutils port:arm-none-eabi-gcc-linaro} long_description {GDB compiled for arm-none-eabi} license unknown maintainers nomaintainer categories {cross devel} version 7.2 revision 0
-arm-none-eabi-openocd 304
-variants universal portdir cross/arm-none-eabi-openocd description OpenOCD depends_fetch bin:git:git-core epoch 0 platforms darwin name arm-none-eabi-openocd long_description {OpenOCD compiled for arm-none-eabi} license unknown maintainers nomaintainer categories {cross devel} version master revision 0
+openocd 507
+variants universal portdir cross/openocd description {Open On-Chip Debugger} depends_fetch bin:git:git-core homepage http://openocd.berlios.de/ epoch 0 platforms darwin depends_lib port:libftdi name openocd long_description {The Open On-Chip Debugger (OpenOCD) aims to provide debugging, in-system programming and boundary-scan testing for embedded target devices. Built with support for FT2232 based devices.} maintainers {snc openmaintainer} license GPL categories {cross devel} version master revision 0
 ivy-c 326
 portdir devel/ivy-c description {Ivy bus C library} depends_fetch bin:svn:subversion homepage http://www.tls.cena.fr/products/ivy/ epoch 0 platforms darwin name ivy-c license unknown maintainers nomaintainer long_description {Ivy is the software bus that will creep over your network!} categories devel version 0.1 revision 0
 ivy-ocaml 382
