@@ -13,8 +13,8 @@ long_description        The Open On-Chip Debugger (OpenOCD) aims to provide debu
 homepage                http://openocd.berlios.de/
 fetch.type              git
 git.url                 git://openocd.git.sourceforge.net/gitroot/openocd/openocd
-post-fetch    {
-        system "cd ${workpath}/openocd-${version} && ./bootstrap"
+post-fetch  {
+    system "cd ${workpath}/openocd-${version} && ./bootstrap"
 }
 
 set environment         [list CFLAGS="-m32"]
@@ -49,4 +49,31 @@ configure.args          --enable-maintainer-mode \
 build.dir               ${workpath}/build
 build.env               ${environment}
 destroot.env            ${environment}
+
+post-destroot {
+    file rename ${destroot}/bin/jimsh \
+       ${destroot}${prefix}/bin/jimsh
+    file mkdir  ${destroot}${prefix}/share/doc/jim
+    file rename ${destroot}/doc/jim/Tcl.html \
+       ${destroot}${prefix}/share/doc/jim/Tcl.html
+    file rename ${destroot}/include/jim-config.h \
+       ${destroot}${prefix}/include/jim-config.h
+    file rename ${destroot}/include/jim-eventloop.h \
+       ${destroot}${prefix}/include/jim-eventloop.h
+    file rename ${destroot}/include/jim-nvp.h \
+       ${destroot}${prefix}/include/jim-nvp.h
+    file rename ${destroot}/include/jim-signal.h \
+       ${destroot}${prefix}/include/jim-signal.h
+    file rename ${destroot}/include/jim-subcmd.h \
+       ${destroot}${prefix}/include/jim-subcmd.h
+    file rename ${destroot}/include/jim-win32compat.h \
+       ${destroot}${prefix}/include/jim-win32compat.h
+    file rename ${destroot}/include/jim.h \
+       ${destroot}${prefix}/include/jim.h
+    file mkdir  ${destroot}${prefix}/lib/jim
+    file rename ${destroot}/lib/jim/README.extensions \
+       ${destroot}${prefix}/lib/jim/README.extensions
+    file rename ${destroot}/lib/libjim.a \
+       ${destroot}${prefix}/lib/libjim.a
+}
 

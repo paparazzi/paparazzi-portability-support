@@ -2,10 +2,10 @@ arm-none-eabi-binutils 0
 arm-none-eabi-gcc-linaro 322
 arm-none-eabi-gdb 853
 libcmsis 1369
-libstm32 1651
-openocd 1940
-ivy-c 2459
-ivy-ocaml 2795
-libftdi 3191
-paparazzi-devel 3673
-summon-arm-toolchain 4214
+libstm32 1656
+openocd 1945
+ivy-c 2464
+ivy-ocaml 2800
+libftdi 3196
+paparazzi-devel 3678
+summon-arm-toolchain 4219
