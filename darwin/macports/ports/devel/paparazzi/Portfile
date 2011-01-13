@@ -1,24 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # $Id$
 PortSystem          1.0
-name                paparazzi-devel
+name                paparazzi
 version             0.1
 categories          devel
 platforms           darwin
 maintainers         nomaintainer
-description         Paparazzi development requirements
+description         Paparazzi source code
 long_description    The requirements for building and developing with Paparazzi.
 homepage            http://paparazzi.enac.fr/Wiki
-depends_lib-append  port:git-core \
-                    port:xml-light \
-                    port:caml-ocamlnet \
-                    port:libftdi \
-                    port:lablgtk2 \
-                    port:gmp \
-                    port:mpfr \
-                    port:libmpc \
-                    port:ivy-c \
-                    port:ivy-ocaml
+depends_lib         port:paparazzi-tools
 fetch.type          git
 git.url             git://github.com/paparazzi/paparazzi.git
 

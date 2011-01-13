@@ -22,5 +22,8 @@ build.args              arch_prefix=${targetarch} prefix=${prefix}
 
 # All cross ports violate the mtree layout.
 destroot.violate_mtree  yes
-destroot.args           arch_prefix=${targetarch} install_dir=${destroot}/${prefix}/${targetarch} install
+pre-destroot {
+        file mkdir "${destroot}${prefix}/${targetarch}/lib"
+}
+destroot.args           arch_prefix=${targetarch} install_dir=${destroot}${prefix}/${targetarch} install
 

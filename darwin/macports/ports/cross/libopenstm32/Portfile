@@ -2,28 +2,25 @@
 # $Id$
 PortSystem              1.0
 set targetarch          arm-none-eabi
-name                    libstm32
+name                    libopenstm32
 version                 master
 categories              cross devel
 platforms               darwin
 maintainers             nomaintainer
-description             libstm32
-long_description        libstm32
+description             libopenstm32
+long_description        libopenstm32
 fetch.type              git
-git.url                 git://git.open-bldc.org/libstm32.git
+git.url                 git://libopenstm32.git.sourceforge.net/gitroot/libopenstm32/libopenstm32
 
 worksrcdir              ${name}
 use_configure           no
 use_parallel_build      no
 depends_lib             port:arm-none-eabi-gcc-linaro
-set environment         [list PATH="${prefix}/${targetarch}/bin"]
+set environment         [list PATH="${prefix}/${targetarch}/bin" LDFLAGS="-L${prefix}/${targetarch}/lib"]
 build.env               ${environment}
-build.args              arch_prefix=${targetarch} prefix=${prefix}
+build.args              PREFIX=${targetarch} DISTDIR=${prefix}
 
 # All cross ports violate the mtree layout.
 destroot.violate_mtree  yes
-pre-destroot {
-        file mkdir "${destroot}${prefix}/${targetarch}/lib"
-}
-destroot.args           arch_prefix=${targetarch} install_dir=${destroot}${prefix}/${targetarch} install
+destroot.args           PREFIX=${targetarch} DISTDIR=${destroot}/${prefix} install
 
