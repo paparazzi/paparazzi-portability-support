@@ -6,5 +6,3 @@ ivy-c 1551
 ivy-ocaml 1887
 paparazzi-devel 2283
 summon-arm-toolchain 2824
-arm-none-eabi-gcc-linaro-boot 3224
-arm-none-eabi-newlib 3702
