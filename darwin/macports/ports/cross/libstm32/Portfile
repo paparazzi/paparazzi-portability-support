@@ -1,0 +1,51 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+PortSystem              1.0
+set targetarch          arm-none-eabi
+name                    libstm32
+version                 master
+categories              cross devel
+platforms               darwin
+maintainers             nomaintainer
+description             
+long_description        
+homepage                
+fetch.type              git
+git.url                 git://openocd.git.sourceforge.net/gitroot/openocd/openocd
+post-fetch    {
+        system "cd ${workpath}/openocd-${version} && ./bootstrap"
+}
+
+set environment         [list CFLAGS="-m32"]
+depends_lib             port:libftdi
+worksrcdir              openocd-${version}
+pre-configure {
+    file mkdir ${build.dir}
+}
+
+configure.dir           ${workpath}/build
+configure.env           ${environment}
+configure.cmd           ../openocd-${version}/configure
+configure.args          --enable-maintainer-mode \
+                        --enable-dummy \
+                        --enable-parport \
+                        --enable-ft2232_libftdi \
+                        --enable-usb_blaster_libftdi \
+                        --enable-amtjtagaccel \
+                        --enable-zy1000 \
+                        --enable-ep93xx \
+                        --enable-at91rm9200 \
+                        --enable-gw16012 \
+                        --enable-presto_libftdi \
+                        --enable-usbprog \
+                        --enable-jlink \
+                        --enable-vsllink \
+                        --enable-rlink \
+                        --enable-arm-jtag-ew \
+                        --enable-buspirate \
+                        --disable-werror
+
+build.dir               ${workpath}/build
+build.env               ${environment}
+destroot.env            ${environment}
+
