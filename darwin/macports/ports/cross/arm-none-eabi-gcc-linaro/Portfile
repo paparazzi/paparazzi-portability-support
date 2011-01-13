@@ -7,7 +7,7 @@ name                    arm-none-eabi-gcc-linaro
 version                 4.5-2010.11-1
 
 set branch              [join [lrange [split ${version} .] 0 1] .]
-set crossgcc-target     arm-none-eabi
+set targetarch     arm-none-eabi
 set newlibversion       1.18.0
 categories              cross devel
 platforms               darwin
@@ -32,7 +32,7 @@ depends_lib-append      port:gmp \
                         port:mpfr \
                         port:mpc \
                         port:libiconv \
-                        port:${crossgcc-target}-binutils
+                        port:${targetarch}-binutils
 # gmp and mpfr are not universal
 universal_variant	no
 worksrcdir              build
@@ -49,11 +49,11 @@ post-extract    {
 # had, they would actually have the binutils' version suffix (and not gcc's version).
 # So let's tell gcc's Makefile not to do that mistake.
 
-set environment         [list AR_FOR_TARGET=${crossgcc-target}-ar \
-                        AS_FOR_TARGET=${crossgcc-target}-as \
-                        LD_FOR_TARGET=${crossgcc-target}-ld \
-                        NM_FOR_TARGET=${crossgcc-target}-nm \
-                        RANLIB_FOR_TARGET=${crossgcc-target}-ranlib]
+set environment         [list AR_FOR_TARGET=${targetarch}-ar \
+                        AS_FOR_TARGET=${targetarch}-as \
+                        LD_FOR_TARGET=${targetarch}-ld \
+                        NM_FOR_TARGET=${targetarch}-nm \
+                        RANLIB_FOR_TARGET=${targetarch}-ranlib]
 
 pre-configure {
     file mkdir ${worksrcpath}
@@ -62,8 +62,7 @@ configure.env           ${environment}
 configure.cmd           ../gcc-linaro-${version}/configure
 configure.cc-append     -I${prefix}/include
 configure.args          --target=arm-none-eabi \
-                        --program-prefix=${crossgcc-target}- \
-                        --program-suffix=-${branch} \
+                        --program-prefix=${targetarch}- \
                         --enable-interwork \
                         --enable-multilib \
                         --enable-languages=c,c++ \
@@ -98,43 +97,43 @@ post-patch {
         # name: name of the info page (e.g. as)
         # suffix: suffix of the souce page (texinfo or texi)
         proc crossgcc::fixinfo { path makefile name suffix } {
-                global crossgcc-target worksrcpath
+                global targetarch worksrcpath
 
                 # Fix the source
-                reinplace "s|setfilename ${name}.info|setfilename ${crossgcc-target}-${name}.info|g" \
+                reinplace "s|setfilename ${name}.info|setfilename ${targetarch}-${name}.info|g" \
                         ${worksrcpath}/${path}/${name}.${suffix}
-                reinplace "s|(${name})|(${crossgcc-target}-${name})|g" \
+                reinplace "s|(${name})|(${targetarch}-${name})|g" \
                         ${worksrcpath}/${path}/${name}.${suffix}
-                reinplace "s|@file{${name}}|@file{${crossgcc-target}-${name}}|g" \
+                reinplace "s|@file{${name}}|@file{${targetarch}-${name}}|g" \
                         ${worksrcpath}/${path}/${name}.${suffix}
 
                 # Fix the Makefile
-                reinplace "s| ${name}.info| ${crossgcc-target}-${name}.info|g" \
+                reinplace "s| ${name}.info| ${targetarch}-${name}.info|g" \
                         ${worksrcpath}/${makefile}
-                reinplace "s|/${name}.info|/${crossgcc-target}-${name}.info|g" \
+                reinplace "s|/${name}.info|/${targetarch}-${name}.info|g" \
                         ${worksrcpath}/${makefile}
-                reinplace "s|^${name}.info|${crossgcc-target}-${name}.info|g" \
+                reinplace "s|^${name}.info|${targetarch}-${name}.info|g" \
                         ${worksrcpath}/${makefile}
-                reinplace "s| ${name}.pod| ${crossgcc-target}-${name}.pod|g" \
+                reinplace "s| ${name}.pod| ${targetarch}-${name}.pod|g" \
                         ${worksrcpath}/${makefile}
-                reinplace "s|/${name}.pod|/${crossgcc-target}-${name}.pod|g" \
+                reinplace "s|/${name}.pod|/${targetarch}-${name}.pod|g" \
                         ${worksrcpath}/${makefile}
-                reinplace "s|^${name}.pod|${crossgcc-target}-${name}.pod|g" \
+                reinplace "s|^${name}.pod|${targetarch}-${name}.pod|g" \
                         ${worksrcpath}/${makefile}
-                reinplace "s| ${name}.${suffix}| ${crossgcc-target}-${name}.${suffix}|g" \
+                reinplace "s| ${name}.${suffix}| ${targetarch}-${name}.${suffix}|g" \
                         ${worksrcpath}/${makefile}
-                reinplace "s|/${name}.${suffix}|/${crossgcc-target}-${name}.${suffix}|g" \
+                reinplace "s|/${name}.${suffix}|/${targetarch}-${name}.${suffix}|g" \
                         ${worksrcpath}/${makefile}
-                reinplace "s|^${name}.${suffix}|${crossgcc-target}-${name}.${suffix}|g" \
+                reinplace "s|^${name}.${suffix}|${targetarch}-${name}.${suffix}|g" \
                         ${worksrcpath}/${makefile}
 
                 # Rename the source
                 file rename ${worksrcpath}/${path}/${name}.${suffix} \
-                        ${worksrcpath}/${path}/${crossgcc-target}-${name}.${suffix}
+                        ${worksrcpath}/${path}/${targetarch}-${name}.${suffix}
 
                 # Fix install-info's dir.
                 # (note: this may be effectless if there was no info dir to be fixed)
-                reinplace "s|--info-dir=\$(DESTDIR)\$(infodir)|--dir-file=\$(DESTDIR)\$(infodir)/${crossgcc-target}-gcc-dir|g" \
+                reinplace "s|--info-dir=\$(DESTDIR)\$(infodir)|--dir-file=\$(DESTDIR)\$(infodir)/${targetarch}-gcc-dir|g" \
                         "${worksrcpath}/${makefile}"
         }
 
@@ -142,16 +141,16 @@ post-patch {
         #
         # module: name of the module (e.g. gas)
         proc crossgcc::fixgettext { module } {
-                global crossgcc-target worksrcpath
+                global targetarch worksrcpath
 
                 if { [ file exists "${worksrcpath}/${module}/Makefile.in" ] } {
-                        reinplace "s|@PACKAGE@|${crossgcc-target}-@PACKAGE@|g" \
+                        reinplace "s|@PACKAGE@|${targetarch}-@PACKAGE@|g" \
                                 "${worksrcpath}/${module}/Makefile.in"
-                        reinplace "s|${module}\.mo|${crossgcc-target}-${module}.mo|g" \
+                        reinplace "s|${module}\.mo|${targetarch}-${module}.mo|g" \
                                 "${worksrcpath}/${module}/Makefile.in"
                 }
                 if { [ file exists "${worksrcpath}/${module}/doc/Makefile.in" ] } {
-                        reinplace "s|@PACKAGE@|${crossgcc-target}-@PACKAGE@|g" \
+                        reinplace "s|@PACKAGE@|${targetarch}-@PACKAGE@|g" \
                                 "${worksrcpath}/${module}/doc/Makefile.in"
                 }
         }
@@ -185,8 +184,8 @@ post-patch {
 pre-destroot {
         # gcc needs the cross directory structure to be present
         # in order to fill it during installation.
-        file mkdir "${destroot}${prefix}/${crossgcc-target}/bin"
-        file mkdir "${destroot}${prefix}/${crossgcc-target}/lib"
+        file mkdir "${destroot}${prefix}/${targetarch}/bin"
+        file mkdir "${destroot}${prefix}/${targetarch}/lib"
 }
 
 post-destroot {
@@ -197,12 +196,12 @@ post-destroot {
         # section: section of the man page (e.g. 1)
         # manpage: name of the man page (e.g. cpp)
         proc crossgcc::rename_man_page { section manpage } {
-                global crossgcc-target destroot prefix
+                global targetarch destroot prefix
 
                 set manpage_path "${destroot}${prefix}/share/man/man${section}/${manpage}.${section}"
                 if { [ file exists ${manpage_path} ] } {
                         file rename ${manpage_path} \
-                                "${destroot}${prefix}/share/man/man${section}/${crossgcc-target}-${manpage}.${section}"
+                                "${destroot}${prefix}/share/man/man${section}/${targetarch}-${manpage}.${section}"
                 }
         }
 
@@ -243,6 +242,6 @@ post-destroot {
         # $(target_noncanonical)-gcc-$(version)
         # and hence the driver isn't installed.
         xinstall -c "${workpath}/build/gcc/xgcc" \
-            "${destroot}${prefix}/bin/${crossgcc-target}-gcc-${version}"
+            "${destroot}${prefix}/bin/${targetarch}-gcc-${version}"
 }
 

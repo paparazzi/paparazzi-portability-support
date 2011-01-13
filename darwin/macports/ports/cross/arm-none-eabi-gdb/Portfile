@@ -17,8 +17,7 @@ checksums               md5     64260e6c56979ee750a01055f16091a5 \
                         rmd160  2f2f5eb331593a276f1b7024ac35f7ca1520653d
 # All cross ports violate the mtree layout.
 destroot.violate_mtree  yes
-depends_lib-append      port:arm-none-eabi-binutils \
-                        port:arm-none-eabi-gcc-linaro
+depends_lib-append      port:arm-none-eabi-gcc-linaro
 worksrcdir              build
 pre-configure {
     file mkdir ${worksrcpath}
@@ -29,3 +28,20 @@ configure.args          --target=arm-none-eabi \
                         --enable-multilib \
                         --disable-werror
 
+post-destroot {
+    # (host) libiberty
+    foreach f [glob -directory "${destroot}${prefix}/lib" libiberty.a */libiberty.a] {
+        file delete $f
+    }
+
+    file rename ${destroot}${prefix}/share/info/configure.info \
+                ${destroot}${prefix}/share/info/configure-mp-${version}-gdb.info
+    file rename ${destroot}${prefix}/share/info/bfd.info \
+                ${destroot}${prefix}/share/info/bfd-mp-${version}-gdb.info
+    file rename ${destroot}${prefix}/share/info/standards.info \
+                ${destroot}${prefix}/share/info/standards-mp-${version}-gdb.info
+    file rename ${destroot}${prefix}/share/info/annotate.info \
+                ${destroot}${prefix}/share/info/annotate-mp-${version}-gdb.info
+    file rename ${destroot}${prefix}/share/info/stabs.info \
+                ${destroot}${prefix}/share/info/stabs-mp-${version}-gdb.info
+}
