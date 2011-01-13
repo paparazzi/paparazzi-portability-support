@@ -7,45 +7,20 @@ version                 master
 categories              cross devel
 platforms               darwin
 maintainers             nomaintainer
-description             
-long_description        
-homepage                
+description             libstm32
+long_description        libstm32
 fetch.type              git
-git.url                 git://openocd.git.sourceforge.net/gitroot/openocd/openocd
-post-fetch    {
-        system "cd ${workpath}/openocd-${version} && ./bootstrap"
-}
+git.url                 git://git.open-bldc.org/libstm32.git
 
-set environment         [list CFLAGS="-m32"]
-depends_lib             port:libftdi
-worksrcdir              openocd-${version}
-pre-configure {
-    file mkdir ${build.dir}
-}
-
-configure.dir           ${workpath}/build
-configure.env           ${environment}
-configure.cmd           ../openocd-${version}/configure
-configure.args          --enable-maintainer-mode \
-                        --enable-dummy \
-                        --enable-parport \
-                        --enable-ft2232_libftdi \
-                        --enable-usb_blaster_libftdi \
-                        --enable-amtjtagaccel \
-                        --enable-zy1000 \
-                        --enable-ep93xx \
-                        --enable-at91rm9200 \
-                        --enable-gw16012 \
-                        --enable-presto_libftdi \
-                        --enable-usbprog \
-                        --enable-jlink \
-                        --enable-vsllink \
-                        --enable-rlink \
-                        --enable-arm-jtag-ew \
-                        --enable-buspirate \
-                        --disable-werror
-
-build.dir               ${workpath}/build
+worksrcdir              ${name}
+use_configure           no
+use_parallel_build      no
+depends_lib             port:arm-none-eabi-gcc-linaro
+set environment         [list PATH="${prefix}/${targetarch}/bin"]
 build.env               ${environment}
-destroot.env            ${environment}
+build.args              arch_prefix=${targetarch} prefix=${prefix}
+
+# All cross ports violate the mtree layout.
+destroot.violate_mtree  yes
+destroot.args           arch_prefix=${targetarch} install_dir=${destroot}/${prefix}/${targetarch} install
 

@@ -6,8 +6,8 @@ arm-none-eabi-gdb 494
 variants universal portdir cross/arm-none-eabi-gdb description {GDB for the arm-none-eabi processors} homepage http://www.gnu.org/software/gdb/gdb.html epoch 0 platforms darwin name arm-none-eabi-gdb depends_lib port:arm-none-eabi-gcc-linaro long_description {arm-none-eabi-gdb is a version of the GNU Debugger that through the avarice program can be used to debug code for the arm-none-eabi processors.} maintainers nomaintainer license unknown categories {cross devel} version 7.2 revision 0
 libcmsis 274
 portdir cross/libcmsis description libcmsis depends_fetch bin:git:git-core epoch 0 platforms darwin name libcmsis depends_lib port:arm-none-eabi-gcc-linaro license unknown maintainers nomaintainer long_description libcmsis categories {cross devel} version master revision 0
-libstm32 276
-variants universal portdir cross/libstm32 description {} depends_fetch bin:git:git-core homepage {} epoch 0 platforms darwin depends_lib port:libftdi name libstm32 long_description {} maintainers nomaintainer license unknown categories {cross devel} version master revision 0
+libstm32 274
+portdir cross/libstm32 description libstm32 depends_fetch bin:git:git-core epoch 0 platforms darwin name libstm32 depends_lib port:arm-none-eabi-gcc-linaro license unknown maintainers nomaintainer long_description libstm32 categories {cross devel} version master revision 0
 openocd 507
 variants universal portdir cross/openocd description {Open On-Chip Debugger} depends_fetch bin:git:git-core homepage http://openocd.berlios.de/ epoch 0 platforms darwin depends_lib port:libftdi name openocd long_description {The Open On-Chip Debugger (OpenOCD) aims to provide debugging, in-system programming and boundary-scan testing for embedded target devices. Built with support for FT2232 based devices.} maintainers {snc openmaintainer} license GPL categories {cross devel} version master revision 0
 ivy-c 326
