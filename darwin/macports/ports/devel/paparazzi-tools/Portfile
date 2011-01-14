@@ -18,7 +18,9 @@ depends_lib         port:git-core \
                     port:caml-ocamlnet \
                     port:libftdi \
                     port:lablgtk2 \
-                    port:gmp \
+                    port:gtk-theme-switch \
+                    port:gnome-themes \
+		    port:gmp \
                     port:mpfr \
                     port:libmpc \
                     port:ivy-c \
