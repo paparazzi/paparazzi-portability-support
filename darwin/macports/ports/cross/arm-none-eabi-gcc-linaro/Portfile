@@ -31,6 +31,8 @@ destroot.violate_mtree  yes
 depends_lib-append      port:gmp \
                         port:mpfr \
                         port:mpc \
+                        port:libmpc\
+                        port:gettext \
                         port:libiconv \
                         port:${targetarch}-binutils
 # gmp and mpfr are not universal
