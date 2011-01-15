@@ -12,4 +12,22 @@ homepage            http://paparazzi.enac.fr/Wiki
 depends_lib         port:paparazzi-tools
 fetch.type          git
 git.url             git://github.com/paparazzi/paparazzi.git
+use_configure       no
+
+# We want paparazzi installed in the users home directory
+# i.e. ~/paparazzi
+destroot.violate_mtree  yes
+
+set prefix          /Users/Shared
+build.args
+build.target
+use_parallel_build  no
+pre-destroot {
+        file mkdir "${destroot}/Users"
+        file mkdir "${destroot}/Users/Shared"
+}
+
+destroot {
+    file copy ${workpath}/paparazzi-${version} ${destroot}${prefix}/paparazzi
+}
 
