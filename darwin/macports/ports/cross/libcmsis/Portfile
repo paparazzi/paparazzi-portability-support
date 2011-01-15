@@ -11,13 +11,14 @@ description             libcmsis
 long_description        libcmsis
 fetch.type              git
 git.url                 git://git.open-bldc.org/libcmsis.git
+patchfiles              patch-include-cmsis-stm32-h.diff
 
 worksrcdir              ${name}
 use_configure           no
 use_parallel_build      no
 depends_lib             port:arm-none-eabi-gcc-linaro
-set environment         [list PATH="${prefix}/${targetarch}/bin"]
-build.env               ${environment}
+#set environment         [list PATH="${prefix}/${targetarch}/bin"]
+#build.env               ${environment}
 build.args              arch_prefix=${targetarch} prefix=${prefix}
 
 # All cross ports violate the mtree layout.

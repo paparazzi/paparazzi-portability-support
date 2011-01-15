@@ -1,0 +1,12 @@
+--- include/cmsis/stm32.h.orig	2011-01-15 11:18:58.000000000 +1100
++++ include/cmsis/stm32.h	2011-01-15 11:20:15.000000000 +1100
+@@ -234,7 +234,9 @@
+ //typedef __I uint16_t vuc16;  /*!< Read Only */
+ //typedef __I uint8_t vuc8;   /*!< Read Only */
+ 
++#ifndef FALSE
+ typedef enum {FALSE = 0, TRUE = !FALSE} bool;
++#endif
+ 
+ typedef enum {RESET = 0, SET = !RESET} FlagStatus, ITStatus;
+ 
