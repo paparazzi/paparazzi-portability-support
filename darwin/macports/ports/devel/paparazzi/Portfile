@@ -18,16 +18,13 @@ use_configure       no
 # i.e. ~/paparazzi
 destroot.violate_mtree  yes
 
-set prefix          /Users/Shared
+set prefix          $env(HOME)
 build.args
 build.target
 use_parallel_build  no
-pre-destroot {
-        file mkdir "${destroot}/Users"
-        file mkdir "${destroot}/Users/Shared"
-}
-
 destroot {
-    file copy ${workpath}/paparazzi-${version} ${destroot}${prefix}/paparazzi
+    xinstall -d ${destroot}${prefix}
+    file copy ${workpath}/${name}-${version} ${destroot}${prefix}/${name}
+    system "chown -R `echo ${prefix} | sed -e 's/.Users.//'`:staff ${destroot}${prefix}/${name}"
 }
 
