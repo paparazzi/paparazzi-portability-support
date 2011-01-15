@@ -9,5 +9,6 @@ openocd 2571
 ivy-c 3090
 ivy-ocaml 3449
 libftdi 3845
-paparazzi 4327
-paparazzi-tools 4705
+libusb-compat 4327
+paparazzi 4750
+paparazzi-tools 5128
