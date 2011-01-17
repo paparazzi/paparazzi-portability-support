@@ -57,16 +57,13 @@ set environment         [list AR_FOR_TARGET=${targetarch}-ar \
                         LD_FOR_TARGET=${targetarch}-ld \
                         NM_FOR_TARGET=${targetarch}-nm \
                         RANLIB_FOR_TARGET=${targetarch}-ranlib \
-                        CPPFLAGS=-I${prefixorig}/include \
-                        LDFLAGS=-L${prefixorig}/lib \
                         PATH=${prefixorig}/bin:${prefix}/bin:$env(PATH) ]
 
 pre-configure {
     file mkdir ${worksrcpath}
 }
 configure.env           ${environment}
-configure.cppflags      -I${prefixorig}/include -I${prefix}/include
-configure.ldflags       -L${prefixorig}/lib -L${prefix}/lib
+configure.ldflags       -L${prefixorig}/lib
 configure.cc-append     -I${prefixorig}/include
 configure.cmd           ../gcc-linaro-${version}/configure
 configure.args          --target=${targetarch} \
@@ -92,7 +89,7 @@ if {[info exists configure.ld_archflags]} {
     configure.ld_archflags
 }
 
-compiler.library_path   ${prefix}/lib:${prefixorig}/lib
+compiler.library_path   ${prefixorig}/lib
 build.env               ${environment}
 build.args              ${environment} -w
 destroot.args           ${environment}
