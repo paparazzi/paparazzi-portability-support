@@ -1,0 +1,27 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+PortSystem              1.0
+name                    jsbsim
+version                 0.1
+categories              devel
+platforms               darwin
+maintainers             nomaintainer
+set prefix ${prefix}/${name}
+description             JSBsim flight dynamics & control software library
+long_description        An open source, platform-independent, flight dynamics & control software library in C++ 
+homepage                http://jsbsim.sourceforge.net/
+fetch.type              cvs
+cvs.root                :pserver:anonymous@jsbsim.cvs.sourceforge.net:/cvsroot/jsbsim
+cvs.module 		JSBSim
+
+worksrcdir		JSBSim 
+
+use_configure           yes
+pre-configure { system "cd ${workpath}/${worksrcdir} && ./autogen.sh"}
+
+configure.args          --enable-libraries \
+                        --enable-shared \
+                        --prefix=${prefix}
+
+
+
