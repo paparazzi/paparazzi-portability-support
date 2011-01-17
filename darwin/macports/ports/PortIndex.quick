@@ -8,7 +8,8 @@ libstm32usb 2275
 openocd 2571
 ivy-c 3090
 ivy-ocaml 3449
-libftdi 3845
-libusb-compat 4327
-paparazzi 4750
-paparazzi-tools 5128
+jsbsim 3845
+libftdi 4251
+libusb-compat 4733
+paparazzi 5156
+paparazzi-tools 5534
