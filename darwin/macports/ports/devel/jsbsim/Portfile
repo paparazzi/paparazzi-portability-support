@@ -16,6 +16,13 @@ cvs.module 		JSBSim
 
 worksrcdir		JSBSim 
 
+patchfiles              patch_easyxml.hxx \
+                        patch_FGJSBBase.h \
+                        patch_FGTank.cpp \
+                        patch_FGTank.h \
+                        patch_FGThruster.h \
+                        patch_FGForce.h
+
 use_configure           yes
 pre-configure { system "cd ${workpath}/${worksrcdir} && ./autogen.sh"}
 
