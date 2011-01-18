@@ -11,7 +11,7 @@ long_description        Ivy is the software bus that will creep over your networ
 homepage                http://www.tls.cena.fr/products/ivy/
 fetch.type              svn
 svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-c/trunk
-svn.revision            3458
+svn.revision            3459
 use_configure           no
 depends_lib-append      port:glib2
 
