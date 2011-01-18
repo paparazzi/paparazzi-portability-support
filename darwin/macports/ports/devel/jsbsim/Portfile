@@ -6,7 +6,7 @@ version                 0.1
 categories              devel
 platforms               darwin
 maintainers             nomaintainer
-set prefix ${prefix}/${name}
+#set prefix ${prefix}/${name}
 description             JSBsim flight dynamics & control software library
 long_description        An open source, platform-independent, flight dynamics & control software library in C++ 
 homepage                http://jsbsim.sourceforge.net/
