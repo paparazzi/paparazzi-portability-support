@@ -2,8 +2,6 @@
 # $Id$
 PortSystem              1.0
 set targetarch          arm-none-eabi
-set prefixorig          ${prefix}
-set prefix              ${prefix}/${targetarch}
 name                    libopenstm32
 version                 master
 categories              cross devel
@@ -17,12 +15,10 @@ git.url                 git://libopenstm32.git.sourceforge.net/gitroot/libopenst
 worksrcdir              ${name}
 use_configure           no
 use_parallel_build      no
-depends_lib             port:${targetarch}-gcc-linaro
-set path                PATH="${prefix}/${targetarch}/bin:${prefix}/bin:$env(PATH)"
-set environment         [list ${path} \
-                              LDFLAGS="-L${prefix}/${targetarch}/lib -L${prefix}/lib -L${prefixorig}/lib"]
+depends_lib             port:arm-none-eabi-gcc-linaro
+set environment         [list PATH="${prefix}/${targetarch}/bin" LDFLAGS="-L${prefix}/${targetarch}/lib"]
 build.env               ${environment}
-build.args              PREFIX=${targetarch} DISTDIR=${prefix} ${path}
+build.args              PREFIX=${targetarch} DISTDIR=${prefix}
 
 # All cross ports violate the mtree layout.
 destroot.violate_mtree  yes

@@ -2,8 +2,6 @@
 # $Id$
 PortSystem              1.0
 set targetarch          arm-none-eabi
-set prefixorig          ${prefix}
-set prefix              ${prefix}/${targetarch}
 name                    libstm32
 version                 master
 categories              cross devel
@@ -18,14 +16,13 @@ patchfiles              patch-src-Makefile.diff
 worksrcdir              ${name}
 use_configure           no
 use_parallel_build      no
-depends_lib             port:${targetarch}-gcc-linaro
+depends_lib             port:arm-none-eabi-gcc-linaro
 set environment         [list PATH="${prefix}/${targetarch}/bin"]
 build.env               ${environment}
 build.args              arch_prefix=${targetarch} prefix=${prefix}
 
 # All cross ports violate the mtree layout.
 destroot.violate_mtree  yes
-build.env               PATH=${prefixorig}/bin:${prefix}/bin:$env(PATH)
 pre-destroot {
         file mkdir "${destroot}${prefix}/${targetarch}/lib"
 }
