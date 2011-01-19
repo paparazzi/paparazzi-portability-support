@@ -6,7 +6,6 @@ version                 0.1
 categories              devel
 platforms               darwin
 maintainers             nomaintainer
-set prefix ${prefix}/${name}
 description             JSBsim flight dynamics & control software library
 long_description        An open source, platform-independent, flight dynamics & control software library in C++ 
 homepage                http://jsbsim.sourceforge.net/
@@ -16,15 +15,30 @@ cvs.module 		JSBSim
 
 worksrcdir		JSBSim 
 
-patchfiles              patch_easyxml.hxx \
-                        patch_FGJSBBase.h \
-                        patch_FGTank.cpp \
-                        patch_FGTank.h \
-                        patch_FGThruster.h \
-                        patch_FGForce.h
+patchfiles              patch-src-FGJSBBase-h.diff \
+                        patch-src-Makefile-am.diff \
+                        patch-src-initialization-Makefile-am.diff \
+                        patch-src-input_output-Makefile-am.diff \
+                        patch-src-math-Makefile-am.diff \
+                        patch-src-models-Makefile-am.diff \
+                        patch-src-models-atmosphere-Makefile-am.diff \
+                        patch-src-models-flight_control-Makefile-am.diff \
+                        patch-src-models-propulsion-FGForce_h.diff \
+                        patch-src-models-propulsion-FGTank-cpp.diff \
+                        patch-src-models-propulsion-FGTank-h.diff \
+                        patch-src-models-propulsion-FGThruster-h.diff \
+                        patch-src-models-propulsion-Makefile-am.diff \
+                        patch-src-simgear-Makefile-am.diff \
+                        patch-src-simgear-magvar-Makefile-am.diff \
+                        patch-src-simgear-misc-Makefile-am.diff \
+                        patch-src-simgear-props-Makefile-am.diff \
+                        patch-src-simgear-xml-Makefile-am.diff \
+                        patch-src-simgear-xml-easyxml-hxx.diff
 
 use_configure           yes
-pre-configure { system "cd ${workpath}/${worksrcdir} && ./autogen.sh"}
+pre-configure {
+    system "cd ${workpath}/${worksrcdir} && ./autogen.sh"
+}
 
 configure.args          --enable-libraries \
                         --enable-shared \

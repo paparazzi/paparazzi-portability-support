@@ -1,0 +1,8 @@
+--- ./src/simgear/props/Makefile.am.orig	2011-01-19 10:55:55.000000000 +1100
++++ ./src/simgear/props/Makefile.am	2011-01-19 10:58:55.000000000 +1100
+@@ -1,4 +1,4 @@
+-includedir = @includedir@/JSBSim/simgear/props
++includedir = @includedir@/simgear/props
+ 
+ LIBRARY_SOURCES = props.cxx
+ 

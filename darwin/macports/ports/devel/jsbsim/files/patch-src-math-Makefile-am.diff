@@ -1,0 +1,8 @@
+--- ./src/math/Makefile.am.orig	2011-01-19 10:55:55.000000000 +1100
++++ ./src/math/Makefile.am	2011-01-19 10:57:28.000000000 +1100
+@@ -1,4 +1,4 @@
+-includedir = @includedir@/JSBSim/math
++includedir = @includedir@/math
+ 
+ LIBRARY_SOURCES = FGColumnVector3.cpp FGFunction.cpp FGLocation.cpp FGMatrix33.cpp \
+                     FGPropertyValue.cpp FGQuaternion.cpp FGRealValue.cpp FGTable.cpp \

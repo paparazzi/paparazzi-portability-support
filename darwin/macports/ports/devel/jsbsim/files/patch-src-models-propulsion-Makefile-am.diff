@@ -1,0 +1,8 @@
+--- ./src/models/propulsion/Makefile.am.orig	2011-01-19 10:55:55.000000000 +1100
++++ ./src/models/propulsion/Makefile.am	2011-01-19 10:58:09.000000000 +1100
+@@ -1,4 +1,4 @@
+-includedir = @includedir@/JSBSim/models/propulsion
++includedir = @includedir@/models/propulsion
+ 
+ LIBRARY_SOURCES = FGElectric.cpp FGEngine.cpp FGForce.cpp FGNozzle.cpp \
+                          FGPiston.cpp FGPropeller.cpp FGRocket.cpp \

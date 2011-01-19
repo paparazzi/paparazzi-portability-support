@@ -1,0 +1,8 @@
+--- ./src/models/Makefile.am.orig	2011-01-19 10:55:55.000000000 +1100
++++ ./src/models/Makefile.am	2011-01-19 10:57:55.000000000 +1100
+@@ -1,4 +1,4 @@
+-includedir = @includedir@/JSBSim/models
++includedir = @includedir@/models
+ 
+ SUBDIRS = atmosphere propulsion flight_control
+ 

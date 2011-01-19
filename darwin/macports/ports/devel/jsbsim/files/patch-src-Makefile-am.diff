@@ -1,0 +1,8 @@
+--- ./src/Makefile.am.orig	2011-01-19 10:55:55.000000000 +1100
++++ ./src/Makefile.am	2011-01-19 10:57:20.000000000 +1100
+@@ -1,4 +1,4 @@
+-includedir = @includedir@/JSBSim
++includedir = @includedir@
+ 
+ EXTRA_DIST = \
+ 	JSBSim.hxx JSBSim.cxx

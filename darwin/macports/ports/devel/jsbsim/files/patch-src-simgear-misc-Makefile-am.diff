@@ -1,0 +1,17 @@
+--- ./src/simgear/misc/Makefile.am.orig	2011-01-19 10:55:55.000000000 +1100
++++ ./src/simgear/misc/Makefile.am	2011-01-19 10:58:48.000000000 +1100
+@@ -1,7 +1,7 @@
+-includedir = @includedir@/JSBSim/simgear/misc
+-
+-LIBRARY_INCLUDES = stdint.hxx
+-
+-if BUILD_LIBRARIES
+-include_HEADERS = $(LIBRARY_INCLUDES)
+-endif
++includedir = @includedir@/simgear/misc
++
++LIBRARY_INCLUDES = stdint.hxx
++
++if BUILD_LIBRARIES
++include_HEADERS = $(LIBRARY_INCLUDES)
++endif
