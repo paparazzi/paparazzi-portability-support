@@ -3,7 +3,7 @@
 PortSystem              1.0
 set crossgcc-target     arm-none-eabi
 name                    openocd
-version                 master
+version                 master-2011.01.20.01
 categories              cross devel
 platforms               darwin
 license                 GPL
