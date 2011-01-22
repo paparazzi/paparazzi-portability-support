@@ -3,7 +3,7 @@
 PortSystem              1.0
 set crossgcc-target     arm-none-eabi
 name                    openocd
-version                 master-2011.01.20.01
+version                 0.1
 categories              cross devel
 platforms               darwin
 license                 GPL
@@ -12,48 +12,41 @@ description             Open On-Chip Debugger
 long_description        The Open On-Chip Debugger (OpenOCD) aims to provide debugging, in-system programming and boundary-scan testing for embedded target devices. Built with support for FT2232 based devices.
 homepage                http://openocd.berlios.de/
 fetch.type              git
-git.url                 git://openocd.git.sourceforge.net/gitroot/openocd/openocd
+git.url                 https://github.com/esden/openocd.git
+
 post-fetch  {
-    system "cd ${workpath}/openocd-${version} && ./bootstrap"
+    system "cd ${workpath}/${worksrcdir} && ./bootstrap && git submodule init && git submodule update"
 }
 
 set environment         [list CFLAGS="-m32"]
 depends_lib             port:libftdi
-worksrcdir              openocd-${version}
-pre-configure {
-    file mkdir ${build.dir}
-}
+worksrcdir              ${name}-${version}
 
-configure.dir           ${workpath}/build
+configure.dir           ${workpath}/${worksrcdir}
 configure.env           ${environment}
-configure.cmd           ../openocd-${version}/configure
+configure.cmd           ./configure
 configure.args          --enable-maintainer-mode \
                         --enable-dummy \
-                        --enable-parport \
                         --enable-ft2232_libftdi \
                         --enable-usb_blaster_libftdi \
-                        --enable-amtjtagaccel \
-                        --enable-zy1000 \
                         --enable-ep93xx \
                         --enable-at91rm9200 \
-                        --enable-gw16012 \
                         --enable-presto_libftdi \
                         --enable-usbprog \
                         --enable-jlink \
                         --enable-vsllink \
                         --enable-rlink \
                         --enable-arm-jtag-ew \
-                        --enable-buspirate \
-                        --disable-werror
+                        --disable-werror \
+                        --prefix=${prefix}
 
-build.dir               ${workpath}/build
 build.env               ${environment}
 destroot.env            ${environment}
 
 post-destroot {
     file rename ${destroot}/bin/jimsh \
        ${destroot}${prefix}/bin/jimsh
-    file mkdir  ${destroot}${prefix}/share/doc/jim
+    file mkdir ${destroot}${prefix}/share/doc/jim
     file rename ${destroot}/doc/jim/Tcl.html \
        ${destroot}${prefix}/share/doc/jim/Tcl.html
     file rename ${destroot}/include/jim-config.h \
@@ -70,10 +63,9 @@ post-destroot {
        ${destroot}${prefix}/include/jim-win32compat.h
     file rename ${destroot}/include/jim.h \
        ${destroot}${prefix}/include/jim.h
-    file mkdir  ${destroot}${prefix}/lib/jim
+    file mkdir ${destroot}${prefix}/lib/jim
     file rename ${destroot}/lib/jim/README.extensions \
        ${destroot}${prefix}/lib/jim/README.extensions
     file rename ${destroot}/lib/libjim.a \
        ${destroot}${prefix}/lib/libjim.a
 }
-
