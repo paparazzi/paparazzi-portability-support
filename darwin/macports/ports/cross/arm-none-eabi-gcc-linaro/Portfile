@@ -4,28 +4,31 @@
 # like including newlib, and a lot of the build options
 PortSystem              1.0
 name                    arm-none-eabi-gcc-linaro
-version                 4.5-2010.11-1
+version                 4.5-2011.01-1
 
 set branch              [join [lrange [split ${version} .] 0 1] .]
-set targetarch     arm-none-eabi
-set newlibversion       1.18.0
+set targetarch          arm-none-eabi
+set newlibversion       1.19.0
 categories              cross devel
 platforms               darwin
 maintainers             nomaintainer
 description             gcc cross-compilers for arm-none-eabi, with newlib runtime library.
 long_description        gnu compilers collection (including c and c++) for arm-none-eabi, with newlib runtime library.
 homepage                http://gcc.gnu.org/
-master_sites            http://launchpad.net/gcc-linaro/4.5/4.5-2010.11-0/+download/:gcc \
+master_sites            http://launchpad.net/gcc-linaro/4.5/4.5-2011.01-1/+download/:gcc \
                         ftp://sources.redhat.com/pub/newlib/:newlib
 distfiles               gcc-linaro-${version}.tar.bz2:gcc \
                         newlib-${newlibversion}.tar.gz:newlib
 use_bzip2               yes
-checksums               gcc-linaro-${version}.tar.bz2 md5     9e18a60d2c5ae4f3338814aabf80bb90 \
-                        sha1    2e66bdfdf3c847e67bfca2c5ad2645eb41276167 \
-                        rmd160  9a709d16f16e1a0fb10ef176c06b8f0b677e4533 \
-                        newlib-${newlibversion}.tar.gz md5     3dae127d4aa659d72f8ea8c0ff2a7a20 \
-                        sha1    a47d3b8a508304143334b36bdb5b33786a61ce94 \
-                        rmd160  69d96fd323a23857072f30cb51899040099857cd
+checksums               gcc-linaro-4.5-2011.01-1.tar.bz2 \
+                        md5     82d9719082edbbfa1baaae590add19a1 \
+                        sha1    8112f919c324324b62510af92c40511694bfe626 \
+                        rmd160  a35f1f0e93f65c2f807326b07fa24a098fe12ef9 \
+                        newlib-1.19.0.tar.gz \
+                        md5     0966e19f03217db9e9076894b47e6601 \
+                        sha1    b2269d30ce7b93b7c714b90ef2f40221c2df0fcd \
+                        rmd160  a28bd656ec895da0738dac3fb367851a2992d724
+
 # All cross ports violate the mtree layout.
 destroot.violate_mtree  yes
 depends_lib-append      port:gmp \
