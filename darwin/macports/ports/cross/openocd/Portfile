@@ -12,19 +12,12 @@ description             Open On-Chip Debugger
 long_description        The Open On-Chip Debugger (OpenOCD) aims to provide debugging, in-system programming and boundary-scan testing for embedded target devices. Built with support for FT2232 based devices.
 homepage                http://openocd.berlios.de/
 fetch.type              git
-git.url                 https://github.com/esden/openocd.git
+git.url                 git://openocd.git.sourceforge.net/gitroot/openocd/openocd
 
-post-fetch  {
-    system "cd ${workpath}/${worksrcdir} && ./bootstrap && git submodule init && git submodule update"
-}
-
-set environment         [list CFLAGS="-m32"]
 depends_lib             port:libftdi
-worksrcdir              ${name}-${version}
 
-configure.dir           ${workpath}/${worksrcdir}
-configure.env           ${environment}
-configure.cmd           ./configure
+configure.optflags-delete    -O2
+configure.cmd           ./bootstrap && ./configure
 configure.args          --enable-maintainer-mode \
                         --enable-dummy \
                         --enable-ft2232_libftdi \
@@ -39,9 +32,6 @@ configure.args          --enable-maintainer-mode \
                         --enable-arm-jtag-ew \
                         --disable-werror \
                         --prefix=${prefix}
-
-build.env               ${environment}
-destroot.env            ${environment}
 
 post-destroot {
     file rename ${destroot}/bin/jimsh \
