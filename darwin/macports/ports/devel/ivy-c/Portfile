@@ -2,7 +2,7 @@
 # $Id$
 PortSystem              1.0
 name                    ivy-c
-version                 0.1
+version                 0.2
 categories              devel
 platforms               darwin
 maintainers             nomaintainer
@@ -10,8 +10,10 @@ description             Ivy bus C library
 long_description        Ivy is the software bus that will creep over your network!
 homepage                http://www.tls.cena.fr/products/ivy/
 fetch.type              svn
-svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-c/trunk
 svn.revision            3459
+svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-c/trunk
+svn.post_args-append    -r ${svn.revision}
+svn.method              checkout
 use_configure           no
 depends_lib-append      port:glib2
 
