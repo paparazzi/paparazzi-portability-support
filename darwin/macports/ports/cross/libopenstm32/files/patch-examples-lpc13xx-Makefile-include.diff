@@ -1,0 +1,11 @@
+--- examples/lpc13xx/Makefile.include.orig	2011-01-31 22:20:50.000000000 +1100
++++ examples/lpc13xx/Makefile.include	2011-01-31 22:21:02.000000000 +1100
+@@ -27,7 +27,7 @@
+ # Uncomment this line if you want to use the installed (not local) library.
+ # TOOLCHAIN_DIR = `dirname \`which $(CC)\``/../$(PREFIX)
+ TOOLCHAIN_DIR   = ../../../..
+-CFLAGS		+= -Os -g -Wall -Wextra -I$(TOOLCHAIN_DIR)/include -fno-common \
++CFLAGS		+= -g -Wall -Wextra -I$(TOOLCHAIN_DIR)/include -fno-common \
+ 		   -mcpu=cortex-m3 -mthumb
+ LDSCRIPT	= $(BINARY).ld
+ LDFLAGS         += -L$(TOOLCHAIN_DIR)/lib -L$(TOOLCHAIN_DIR)/lib/lpc13xx \
