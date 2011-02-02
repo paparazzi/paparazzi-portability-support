@@ -1,0 +1,34 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+PortSystem              1.0
+PortGroup               python27 1.0
+name                    ivy-python
+version                 0.2
+categories              python
+platforms               darwin
+maintainers             nomaintainer
+description             Ivy bus python library
+long_description        Ivy is the software bus that will creep over your network!
+homepage                http://www.tls.cena.fr/products/ivy/
+fetch.type              svn
+svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-python/trunk
+#svn.revision            3443
+#svn.post_args-append    -r ${svn.revision} ${worksrcdir}
+svn.post_args-append    ${worksrcdir}
+use_configure           no
+build.args              
+#depends_lib-append      port:caml-ocamlnet \
+#                        port:ivy-c
+
+build.env               LDFLAGS=-L${prefix}/lib
+
+post-patch {
+  reinplace "s|@PREFIX@|$prefix|" ${worksrcpath}/setup.py
+}
+
+post-destroot {
+  set docdir ${prefix}/share/doc/${name}-${version}
+  xinstall -d ${destroot}${docdir}
+  xinstall -m 0644 -W ${worksrcpath} README ${destroot}${docdir}
+}
+
