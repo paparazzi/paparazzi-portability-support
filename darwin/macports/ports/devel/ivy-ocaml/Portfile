@@ -2,7 +2,7 @@
 # $Id$
 PortSystem              1.0
 name                    ivy-ocaml
-version                 0.1
+version                 0.2
 categories              devel
 platforms               darwin
 maintainers             nomaintainer
@@ -12,7 +12,7 @@ homepage                http://www.tls.cena.fr/products/ivy/
 fetch.type              svn
 svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-ocaml/trunk
 svn.revision            3443
-svn.post_args-append    ${worksrcdir}
+svn.post_args-append    -r ${svn.revision} ${worksrcdir}
 use_configure           no
 build.args              
 depends_lib-append      port:caml-ocamlnet \
