@@ -84,15 +84,25 @@ configure.args          --target=${targetarch} \
                         --enable-languages=c,c++ \
                         --with-newlib \
                         --disable-shared \
+                        --disable-threads \
+                        --disable-nls \
+                        --with-gcc \
                         --with-gnu-as \
                         --with-gnu-ld \
-                        --disable-nls \
+                        --with-dwarf2 \
+                        --with-headers=${workpath}/newlib-${newlibversion}/newlib/libc/include \
+                        --disable-libssp \
+                        --disable-libstdcxx-pch \
+                        --disable-libmudflap \
+                        --disable-libgomp \
                         --disable-werror \
                         --with-system-zlib \
                         --with-gmp=${prefix} \
                         --with-mpfr=${prefix} \
                         --with-mpc=${prefix} \
-                        --with-libiconv-prefix=${prefix}
+                        --with-libiconv-prefix=${prefix} \
+                        -v \
+                        --disable-newlib-supplied-syscalls
 configure.cc_archflags
 configure.cxx_archflags
 configure.objc_archflags
