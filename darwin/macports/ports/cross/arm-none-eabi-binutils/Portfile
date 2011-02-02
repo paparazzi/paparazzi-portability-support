@@ -1,21 +1,20 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # $Id$
-PortSystem          1.0
-name                arm-none-eabi-binutils
-version             2.20
-categories          cross devel
-platforms           darwin
-maintainers         nomaintainer
-description         binutils for arm-none-eabi
-long_description    binutils compiled for arm-none-eabi
-master_sites        http://ftp.gnu.org/gnu/binutils/
-distfiles           binutils-${version}.tar.bz2
-use_bzip2           yes
-checksums           md5     ee2d3e996e9a2d669808713360fa96f8 \
-                    sha1    747e7b4d94bce46587236dc5f428e5b412a590dc \
-                    rmd160  284074e2453e517d036ffce2c0f3d56439e2e5c0
-                            
-                            
+PortSystem                  1.0
+set targetarch              arm-none-eabi
+name                        ${targetarch}-binutils
+version                     2.21
+categories                  cross devel
+platforms                   darwin
+maintainers                 nomaintainer
+description                 binutils for ${targetarch}
+long_description            binutils compiled for ${targetarch}
+master_sites                http://ftp.gnu.org/gnu/binutils/
+distfiles                   binutils-${version}.tar.bz2
+use_bzip2                   yes
+checksums                   md5     c84c5acc9d266f1a7044b51c85a823f5 \
+                            sha1    ef93235588eb443e4c4a77f229a8d131bccaecc6 \
+                            rmd160  8d2ebab3287a6283267879074b808d20fe9112b0
 # All cross ports violate the mtree layout.
 destroot.violate_mtree  yes
 worksrcdir                  build
