@@ -76,7 +76,7 @@ configure.cc                gcc
 configure.cxx               g++
 configure.cppflags
 configure.ldflags
-#configure.cc-append     -I${prefix}/include
+configure.cc-append     -I${prefix}/include
 configure.args          --target=${targetarch} \
                         --program-prefix=${targetarch}- \
                         --enable-interwork \
