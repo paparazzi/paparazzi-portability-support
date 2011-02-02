@@ -1,0 +1,11 @@
+--- lib/stm32/Makefile.orig	2011-01-31 22:12:45.000000000 +1100
++++ lib/stm32/Makefile	2011-01-31 22:12:56.000000000 +1100
+@@ -23,7 +23,7 @@
+ PREFIX		?= arm-elf
+ CC		= $(PREFIX)-gcc
+ AR		= $(PREFIX)-ar
+-CFLAGS		= -Os -g -Wall -Wextra -I../../include -fno-common \
++CFLAGS		= -g -Wall -Wextra -I../../include -fno-common \
+ 		  -mcpu=cortex-m3 -mthumb -Wstrict-prototypes \
+ 		  -ffunction-sections -fdata-sections
+ # ARFLAGS	= rcsv

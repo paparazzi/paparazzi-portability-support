@@ -11,8 +11,9 @@ description             libcmsis
 long_description        libcmsis
 fetch.type              git
 git.url                 git://git.open-bldc.org/libcmsis.git
-patchfiles              patch-include-cmsis-stm32-h.diff
-
+patchfiles              \
+                        patch-include-cmsis-stm32-h.diff \
+                        patch-src-Makefile.diff
 worksrcdir              ${name}
 use_configure           no
 use_parallel_build      no

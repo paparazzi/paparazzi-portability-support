@@ -1,0 +1,11 @@
+--- src/Makefile.orig	2011-01-31 21:45:35.000000000 +1100
++++ src/Makefile	2011-01-31 21:44:36.000000000 +1100
+@@ -28,7 +28,7 @@
+ CC=${compiler_prefix}gcc
+ AR=${compiler_prefix}ar
+ AS=${compiler_prefix}as
+-CFLAGS=-I../include -Wall -ansi -std=c99 -fno-common -Os -g -mcpu=cortex-m3 -mthumb -ffunction-sections -fdata-sections
++CFLAGS=-I../include -Wall -ansi -std=c99 -fno-common -g -mcpu=cortex-m3 -mthumb -ffunction-sections -fdata-sections
+ ARFLAGS=rcsv
+ ASFLAGS=-ahls -mapcs-32
+ 

@@ -5,7 +5,7 @@
  AR=${compiler_prefix}ar
  AS=${compiler_prefix}as
 -CFLAGS=-I../include -fno-common -Os -g -mcpu=cortex-m3 -mthumb -ffunction-sections -fdata-sections
-+CFLAGS=-I../include -Wall -fno-common -Os -g -mcpu=cortex-m3 -mthumb -ffunction-sections -fdata-sections -D'assert_param(_cond)={}'
++CFLAGS=-I../include -Wall -fno-common -g -mcpu=cortex-m3 -mthumb -ffunction-sections -fdata-sections -D'assert_param(_cond)={}'
  ARFLAGS=rcsv
  ASFLAGS=-ahls -mapcs-32
  
