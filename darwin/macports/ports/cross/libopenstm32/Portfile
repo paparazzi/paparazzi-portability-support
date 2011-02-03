@@ -11,12 +11,6 @@ description             libopenstm32
 long_description        libopenstm32
 fetch.type              git
 git.url                 git://libopenstm32.git.sourceforge.net/gitroot/libopenstm32/libopenstm32
-patchfiles              \
-                        patch-Makefile.diff \
-                        patch-examples-lpc13xx-Makefile-include.diff \
-                        patch-examples-stm32-Makefile-include.diff \
-                        patch-lib-lpc13cc-Makefile.diff \
-                        patch-lib-stm32-Makefile.diff
 
 #worksrcdir              ${name}
 use_configure           no

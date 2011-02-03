@@ -47,6 +47,10 @@ post-extract    {
         system "ln -s ${workpath}/newlib-${newlibversion}/newlib ${workpath}/gcc-linaro-${version}/"
 }
 
+patch.dir              ${workpath}/gcc-linaro-${version}
+patchfiles              \
+                        patch-gcc-config-arm-t-arm-elf.diff
+
 # Since we don't build gcc and binutils at the same time, gcc's Makefile will try to transform
 # program names as gcc's name (add -${version} with ${version} being the version of gcc).
 # But it won't work because binutils binaries don't have the ${version} suffix, and even if they
@@ -72,7 +76,7 @@ configure.cc                gcc
 configure.cxx               g++
 configure.cppflags
 configure.ldflags
-#configure.cc-append     -I${prefix}/include
+configure.cc-append     -I${prefix}/include
 configure.args          --target=${targetarch} \
                         --program-prefix=${targetarch}- \
                         --enable-interwork \
@@ -80,15 +84,25 @@ configure.args          --target=${targetarch} \
                         --enable-languages=c,c++ \
                         --with-newlib \
                         --disable-shared \
+                        --disable-threads \
+                        --disable-nls \
+                        --with-gcc \
                         --with-gnu-as \
                         --with-gnu-ld \
-                        --disable-nls \
+                        --with-dwarf2 \
+                        --with-headers=${workpath}/newlib-${newlibversion}/newlib/libc/include \
+                        --disable-libssp \
+                        --disable-libstdcxx-pch \
+                        --disable-libmudflap \
+                        --disable-libgomp \
                         --disable-werror \
                         --with-system-zlib \
                         --with-gmp=${prefix} \
                         --with-mpfr=${prefix} \
                         --with-mpc=${prefix} \
-                        --with-libiconv-prefix=${prefix}
+                        --with-libiconv-prefix=${prefix} \
+                        -v \
+                        --disable-newlib-supplied-syscalls
 configure.cc_archflags
 configure.cxx_archflags
 configure.objc_archflags

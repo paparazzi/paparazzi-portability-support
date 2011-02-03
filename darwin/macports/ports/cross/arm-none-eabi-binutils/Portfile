@@ -31,10 +31,13 @@ configure.ldflags
 configure.args              --target=${targetarch} \
                             --enable-interwork \
                             --enable-multilib \
+                            --disable-nls \
+                            --disable-shared \
+                            --disable-threads \
+                            --with-gcc \
                             --with-gnu-as \
                             --with-gnu-ld \
-                            --disable-nls \
-                            --disable-werror 
+                            --disable-werror
 post-destroot {
     file rename ${destroot}${prefix}/share/info/configure.info \
                 ${destroot}${prefix}/share/info/configure-mp-${version}-${name}.info
