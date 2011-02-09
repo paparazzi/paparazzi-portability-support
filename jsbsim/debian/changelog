@@ -1,0 +1,5 @@
+paparazzi-jsbsim (1.2) unstable; urgency=low
+
+  * Initial release of debian package for Paparazzi simulator
+
+ -- Gautier Hattenberger <gautier.hattenberger@enac.fr>  Sun, 10 Oct 2010 11:06:18 +0000
