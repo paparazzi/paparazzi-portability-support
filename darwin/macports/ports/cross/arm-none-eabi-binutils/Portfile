@@ -29,14 +29,12 @@ configure.cxx               g++
 configure.cppflags
 configure.ldflags
 configure.args              --target=${targetarch} \
+                            --prefix=${prefix} \
                             --enable-interwork \
                             --enable-multilib \
-                            --disable-nls \
-                            --disable-shared \
-                            --disable-threads \
-                            --with-gcc \
                             --with-gnu-as \
                             --with-gnu-ld \
+                            --disable-nls \
                             --disable-werror
 post-destroot {
     file rename ${destroot}${prefix}/share/info/configure.info \
