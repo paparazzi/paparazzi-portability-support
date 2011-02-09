@@ -61,9 +61,7 @@ set environment         [list AR_FOR_TARGET=${targetarch}-ar \
                         AS_FOR_TARGET=${targetarch}-as \
                         LD_FOR_TARGET=${targetarch}-ld \
                         NM_FOR_TARGET=${targetarch}-nm \
-                        RANLIB_FOR_TARGET=${targetarch}-ranlib \
-                        CFLAGS_FOR_TARGET=-msoft-float \
-                        CCASFLAGS=-msoft-float]
+                        RANLIB_FOR_TARGET=${targetarch}-ranlib ]
 
 pre-configure {
     file mkdir ${worksrcpath}
