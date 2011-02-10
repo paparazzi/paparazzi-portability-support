@@ -47,9 +47,9 @@ post-extract    {
         system "ln -s ${workpath}/newlib-${newlibversion}/newlib ${workpath}/gcc-linaro-${version}/"
 }
 
-#patch.dir              ${workpath}/gcc-linaro-${version}
-#patchfiles              \
-#                        patch-gcc-config-arm-t-arm-elf.diff
+patch.dir              ${workpath}/gcc-linaro-${version}
+patchfiles              \
+                        patch-gcc-config-arm-t-arm-elf.diff
 
 # Since we don't build gcc and binutils at the same time, gcc's Makefile will try to transform
 # program names as gcc's name (add -${version} with ${version} being the version of gcc).
@@ -84,11 +84,7 @@ configure.args          --target=${targetarch} \
                         --enable-multilib \
                         --enable-languages="c" \
                         --with-newlib \
-                        --with-cpu=cortex-m3 \
-                        --with-tune=cortex-m3 \
-                        --with-mode=thumb \
-                        --with-float=soft \
-                       --with-gnu-as \
+                        --with-gnu-as \
                         --with-gnu-ld \
                         --disable-nls \
                         --disable-shared \
@@ -105,6 +101,12 @@ configure.args          --target=${targetarch} \
                         --with-mpc=${prefix} \
                         --with-libiconv-prefix=${prefix} \
                         --disable-newlib-supplied-syscalls
+
+if {${os.platform} == "darwin" && ($build_arch == "x86_64" || $build_arch == "ppc64")} {
+	    configure.args-append --build=${build_arch}-apple-darwin${os.version} \
+	                          --host=${build_arch}-apple-darwin${os.version}
+}
+                        
 configure.cc_archflags
 configure.cxx_archflags
 configure.objc_archflags

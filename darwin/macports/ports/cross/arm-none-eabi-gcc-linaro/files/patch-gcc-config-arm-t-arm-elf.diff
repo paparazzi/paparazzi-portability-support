@@ -11,16 +11,16 @@
 +#  ./            (default)
 +#  thumb/        -mthumb
 +#  thumb2/       -mthumb -march=armv7
-+#  armv6-m/      -mthumb -march=armv6-m
++#  armv4t/      -mthumb -march=armv4t
 +
 +MULTILIB_OPTIONS     = mthumb
 +MULTILIB_DIRNAMES    = thumb
 +MULTILIB_EXCEPTIONS  =
  MULTILIB_MATCHES     =
-+MULTILIB_ALIASES     =
++MULTILIB_EXTRA_OPTS  += msoft-float
 +
-+MULTILIB_OPTIONS      += march=armv7/march=armv6-m
-+MULTILIB_DIRNAMES     += v7 v6-m
++MULTILIB_OPTIONS      += march=armv7/march=armv4t
++MULTILIB_DIRNAMES     += v7 v4t
 +MULTILIB_EXCEPTIONS   += march=armv7*
 +MULTILIB_MATCHES      += march?armv7=march?armv7-a
 +MULTILIB_MATCHES      += march?armv7=march?armv7-r
@@ -34,9 +34,9 @@
 +MULTILIB_MATCHES      += march?armv7=mcpu?cortex-m4
 +MULTILIB_MATCHES      += march?armv7=mcpu?cortex-m3
 +
-+MULTILIB_EXCEPTIONS   += march=armv6-m
-+MULTILIB_MATCHES      += march?armv6-m=mcpu?cortex-m1
-+MULTILIB_MATCHES      += march?armv6-m=mcpu?cortex-m0
++MULTILIB_EXCEPTIONS   += march=armv4t
++MULTILIB_MATCHES      += march?armv4t=mcpu?arm7tdmi-s
++#MULTILIB_MATCHES      +=
 +
 +# FIXME: We need a sane way of doing this.
 +# This isn't really a multilib, it's a hack to add an extra option
@@ -46,7 +46,7 @@
 +
 +MULTILIB_EXCEPTIONS   += mfix-cortex-m3-ldrd
 +MULTILIB_EXCEPTIONS   += mthumb/mfix-cortex-m3-ldrd
-+MULTILIB_EXCEPTIONS   += *march=armv6-m*mfix-cortex-m3-ldrd
++MULTILIB_EXCEPTIONS   += *march=armv4t*mfix-cortex-m3-ldrd
 +
 +MULTILIB_ALIASES      += mthumb/march?armv7/mfix-cortex-m3-ldrd=mthumb/march?armv7
 +
@@ -54,7 +54,7 @@
 +# omitted from MULTILIB_OSDIRNAMES
 +MULTILIB_OSDIRNAMES    = mthumb=!thumb
 +MULTILIB_OSDIRNAMES   += mthumb/march.armv7/mfix-cortex-m3-ldrd=!thumb2
-+MULTILIB_OSDIRNAMES   += mthumb/march.armv6-m=!armv6-m
++MULTILIB_OSDIRNAMES   += mthumb/march.armv4t=!armv4t
 +
  
  #MULTILIB_OPTIONS      += march=armv7
