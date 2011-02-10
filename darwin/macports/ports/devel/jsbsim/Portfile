@@ -2,7 +2,7 @@
 # $Id$
 PortSystem              1.0
 name                    jsbsim
-version                 0.1
+version                 trunk-2011.02.10.01
 categories              devel
 platforms               darwin
 maintainers             nomaintainer
@@ -42,7 +42,4 @@ pre-configure {
 
 configure.args          --enable-libraries \
                         --enable-shared \
-                        --prefix=${prefix}
-
-
 
