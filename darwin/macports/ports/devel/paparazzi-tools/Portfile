@@ -24,7 +24,6 @@ depends_lib         port:git-core \
                     port:mpfr \
                     port:libmpc \
                     port:wget \
-                    port:py26-scipy \
                     port:ivy-c \
                     port:ivy-ocaml \
                     port:arm-none-eabi-binutils \

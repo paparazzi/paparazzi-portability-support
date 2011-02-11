@@ -10,5 +10,6 @@ ivy-c 3192
 ivy-ocaml 3553
 jsbsim 3951
 paparazzi 4373
-paparazzi-tools 4768
-ivy-python 5531
+paparazzi-extras 4768
+paparazzi-tools 5213
+ivy-python 5976
