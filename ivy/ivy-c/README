@@ -1,0 +1,6 @@
+Local changes to build ivy-c debian package from the Ivy svn repository
+
+- Update changelog and control files (needed to remove an unwanted dependency)
+- If needed, select by hand the tcl-dev version you want to use in src/Makefile
+- Build package with dpkg-buildpackage -b
+

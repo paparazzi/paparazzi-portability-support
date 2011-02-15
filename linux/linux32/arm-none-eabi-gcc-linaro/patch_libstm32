@@ -1,0 +1,12 @@
+diff -uNr libstm32-v3.0.0-1.orig/src/Makefile libstm32-v3.0.0-1/src/Makefile
+--- libstm32-v3.0.0-1.patched/src/Makefile	2010-08-08 02:25:03.000000000 +0200
++++ libstm32-v3.0.0-1/src/Makefile	2009-05-14 02:20:13.000000000 +0200
+@@ -25,7 +25,7 @@
+ CC=${compiler_prefix}gcc
+ AR=${compiler_prefix}ar
+ AS=${compiler_prefix}as
+-CFLAGS=-I../include -fno-common -Os -g -mcpu=cortex-m3 -mthumb -ffunction-sections -fdata-sections
++CFLAGS=-I../include -Wall  -fno-common -Os -g -mcpu=cortex-m3 -mthumb -ffunction-sections -fdata-sections -D'assert_param(_cond)={}'
+ ARFLAGS=rcsv
+ ASFLAGS=-ahls -mapcs-32
+ 
