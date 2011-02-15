@@ -1,0 +1,13 @@
+diff -uNr paparazzi.orig/stm32/arm-none-eabi/include/cmsis/stm32.h paparazzi/stm32/arm-none-eabi/include/cmsis/stm32.h
+--- paparazzi.orig/stm32/arm-none-eabi/include/cmsis/stm32.h	2010-04-22 00:16:55.000000000 +0200
++++ paparazzi/stm32/arm-none-eabi/include/cmsis/stm32.h	2010-04-22 00:15:30.000000000 +0200
+@@ -234,7 +234,9 @@
+ //typedef __I uint16_t vuc16;  /*!< Read Only */
+ //typedef __I uint8_t vuc8;   /*!< Read Only */
+ 
++#ifndef FALSE
+ typedef enum {FALSE = 0, TRUE = !FALSE} bool;
++#endif
+ 
+ typedef enum {RESET = 0, SET = !RESET} FlagStatus, ITStatus;
+ 

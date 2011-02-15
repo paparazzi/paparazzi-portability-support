@@ -1,0 +1,21 @@
+Source: paparazzi-stm32
+Section: embedded
+Priority: extra
+Maintainer: Antoine Drouin <poinix@gmail.com>
+Build-Depends: debhelper (>= 7), libmpfr-dev, libgmp3-dev, libftdi-dev
+Standards-Version: 3.8.1
+Homepage: http://paparazzi.enac.fr
+
+Package: paparazzi-stm32
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Paparazzi support for stm32 processors
+ This is a cross compilation toolchain for Paparazzi on stm32
+ It contains:
+	gcc
+	newlib
+	gdb
+	libstm32
+	openocd
+
+
