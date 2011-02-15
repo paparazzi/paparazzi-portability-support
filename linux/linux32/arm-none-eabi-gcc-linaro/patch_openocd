@@ -1,0 +1,129 @@
+diff --git a/src/jtag/drivers/ft2232.c b/src/jtag/drivers/ft2232.c
+index 1a0eb4b..7440f0c 100644
+--- a/src/jtag/drivers/ft2232.c
++++ b/src/jtag/drivers/ft2232.c
+@@ -188,6 +188,7 @@ static int signalyzer_init(void);
+ static int signalyzer_h_init(void);
+ static int ktlink_init(void);
+ static int redbee_init(void);
++static int lisa_l_init(void);
+ 
+ /* reset procedures for supported layouts */
+ static void ftx23_reset(int trst, int srst);
+@@ -210,6 +211,7 @@ static void flyswatter_jtag_blink(void);
+ static void turtle_jtag_blink(void);
+ static void signalyzer_h_blink(void);
+ static void ktlink_blink(void);
++static void lisa_l_blink(void);
+ 
+ /* common transport support options */
+ 
+@@ -303,6 +305,12 @@ static const struct ft2232_layout  ft2232_layouts[] =
+ 	        .reset = redbee_reset,
+     	        .channel = INTERFACE_B,
+ 	},
++	{ .name = "lisa-l",
++		.init = lisa_l_init,
++		.reset = ftx23_reset,
++		.blink = lisa_l_blink,
++		.channel = INTERFACE_B,
++	},
+ 	{ .name = NULL, /* END OF TABLE */ },
+ };
+ 
+@@ -3093,6 +3101,39 @@ static int cortino_jtag_init(void)
+ 	return ERROR_OK;
+ }
+ 
++static int lisa_l_init(void)
++{
++	uint8_t  buf[3];
++	uint32_t bytes_written;
++
++	/*
++	 * NOTE:  This is now _specific_ to the "usbjtag" layout.
++	 * Don't try cram any more layouts into this.
++	 */
++	ftx232_dbus_init();
++
++	nTRST    = 0x10;
++	nTRSTnOE = 0x10;
++	nSRST    = 0x40;
++	nSRSTnOE = 0x40;
++
++	high_output = 0x00;
++	high_direction = 0x18;
++
++	/* initialize high port */
++	buf[0] = 0x82; /* command "set data bits high byte" */
++	buf[1] = high_output;
++	buf[2] = high_direction;
++	LOG_DEBUG("%2.2x %2.2x %2.2x", buf[0], buf[1], buf[2]);
++
++	if (ft2232_write(buf, sizeof(buf), &bytes_written) != ERROR_OK)
++	{
++		LOG_ERROR("couldn't initialize FT2232 with 'lisa_l' layout");
++		return ERROR_JTAG_INIT_FAILED;
++	}
++
++	return ftx232_dbus_write();
++}
+ static void olimex_jtag_blink(void)
+ {
+ 	/* Olimex ARM-USB-OCD has a LED connected to ACBUS3
+@@ -3145,6 +3186,25 @@ static void turtle_jtag_blink(void)
+ 	buffer_write(high_direction);
+ }
+ 
++static void lisa_l_blink(void)
++{
++	/*
++	 * Lisa/L has two LEDs connected to BCBUS3 and ACBUS4
++	 */
++	if (high_output & 0x10)
++	{
++		high_output = 0x08;
++	}
++	else
++	{
++		high_output = 0x10;
++	}
++
++	buffer_write(0x82);
++	buffer_write(high_output);
++	buffer_write(high_direction);
++}
++
+ static int ft2232_quit(void)
+ {
+ #if BUILD_FT2232_FTD2XX == 1
+diff --git a/tcl/board/lisa-l.cfg b/tcl/board/lisa-l.cfg
+new file mode 100644
+index 0000000..00afa5e
+--- /dev/null
++++ b/tcl/board/lisa-l.cfg
+@@ -0,0 +1,7 @@
++# the Lost Illusions Serendipitous Autopilot
++# http://paparazzi.enac.fr/wiki/Lisa
++
++# Work-area size (RAM size) = 20kB for STM32F103RB device
++set WORKAREASIZE 0x5000
++
++source [find target/stm32.cfg]
+diff --git a/tcl/interface/lisa-l.cfg b/tcl/interface/lisa-l.cfg
+new file mode 100644
+index 0000000..cc7d6cc
+--- /dev/null
++++ b/tcl/interface/lisa-l.cfg
+@@ -0,0 +1,11 @@
++#
++# Lisa/L
++#
++# http://paparazzi.enac.fr/wiki/Lisa
++#
++
++interface ft2232
++ft2232_vid_pid 0x0403 0x6010
++ft2232_device_desc "Lisa/L"
++ft2232_layout "lisa-l"
++ft2232_latency 2

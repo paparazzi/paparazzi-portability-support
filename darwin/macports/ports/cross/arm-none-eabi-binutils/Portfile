@@ -29,7 +29,6 @@ configure.cxx               g++
 configure.cppflags
 configure.ldflags
 configure.args              --target=${targetarch} \
-                            --prefix=${prefix} \
                             --enable-interwork \
                             --enable-multilib \
                             --with-gnu-as \

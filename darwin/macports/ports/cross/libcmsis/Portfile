@@ -3,7 +3,7 @@
 PortSystem              1.0
 set targetarch          arm-none-eabi
 name                    libcmsis
-version                 master-2011.01.20.01
+version                 master-2011.02.10.01
 categories              cross devel
 platforms               darwin
 maintainers             nomaintainer
