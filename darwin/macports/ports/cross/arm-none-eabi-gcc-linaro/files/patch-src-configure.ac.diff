@@ -1,0 +1,11 @@
+--- /Users/eric/gcc-linaro-4.5-2011.01-1 2/configure.ac.orig	2011-02-16 19:05:59.000000000 +1030
++++ /Users/eric/gcc-linaro-4.5-2011.01-1 2/configure.ac	2011-02-16 19:11:56.000000000 +1030
+@@ -589,7 +589,7 @@
+     libgloss_dir=arm
+     ;;
+   arm-*-elf* | strongarm-*-elf* | xscale-*-elf* | arm*-*-eabi* )
+-    noconfigdirs="$noconfigdirs target-libffi target-qthreads"
++    noconfigdirs="$noconfigdirs target-libffi target-qthreads target-libgloss"
+     libgloss_dir=arm
+     ;;
+   arm*-*-linux-gnueabi)
