@@ -50,6 +50,7 @@ extract.only            gcc-linaro-${version}.tar.bz2
 post-extract    {
         system "cd ${workpath} && gzip -dc ${distpath}/newlib-${newlibversion}.tar.gz | tar -xf -"
         system "ln -s ${workpath}/newlib-${newlibversion}/newlib ${workpath}/gcc-linaro-${version}/"
+        system "ln -s ${workpath}/newlib-${newlibversion}/libgloss ${workpath}/gcc-linaro-${version}/"
 }
 
 patch.dir              ${workpath}/gcc-linaro-${version}
