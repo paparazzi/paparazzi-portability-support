@@ -34,7 +34,8 @@ depends_lib         port:git-core \
                     port:libcmsis \
                     port:libstm32 \
                     port:libstm32usb \
-                    port:libopenstm32
+                    port:libopenstm32 \
+                    port:jsbsim
 
 distfiles
 use_configure   no
