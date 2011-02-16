@@ -16,7 +16,7 @@ description             gcc cross-compilers for ${targetarch}, with newlib runti
 long_description        gnu compilers collection (including c and c++) for ${targetarch}, with newlib runtime library.
 homepage                http://gcc.gnu.org/
 master_sites            http://launchpad.net/gcc-linaro/4.5/${version}/+download/:gcc \
-                        http://download.paparazziuav.org/linux/source/newlib/:newlib \
+                        http://download.paparazziuav.org/linux/source/newlib/ \
                         ftp://sources.redhat.com/pub/newlib/:newlib
 distfiles               gcc-linaro-${version}.tar.bz2:gcc \
                         newlib-${newlibversion}.tar.gz:newlib
