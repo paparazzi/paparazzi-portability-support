@@ -3,7 +3,7 @@
 PortSystem              1.0
 set targetarch          arm-none-eabi
 name                    libcmsis
-version                 master-2011.02.10.01
+version                 master-2011.02.16.01
 categories              cross devel
 platforms               darwin
 maintainers             nomaintainer
@@ -11,8 +11,6 @@ description             libcmsis
 long_description        libcmsis
 fetch.type              git
 git.url                 git://git.open-bldc.org/libcmsis.git
-patchfiles              \
-                        patch-include-cmsis-stm32-h.diff
 worksrcdir              ${name}
 use_configure           no
 use_parallel_build      no
