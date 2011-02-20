@@ -115,7 +115,7 @@ NEWLIB=newlib-1.19.0
 GDB=gdb-7.2
 OOCD=master
 LIBCMSIS=v1.10-3
-LIBSTM32=v3.0.0-1
+LIBSTM32=v3.0.0-2
 LIBSTM32USB=v3.0.1-1
 LIBOPENSTM32=master
 
@@ -452,8 +452,6 @@ fi
 if [ ! -e ${STAMPS}/libstm32-${LIBSTM32}.build ]; then
     unpack libstm32-${LIBSTM32}
     cd libstm32-${LIBSTM32}
-    log "Patching libstm32 to build with correct compiler settings and to simplify assert"
-	  patch -p0 -i ../patches/patch-src-Makefile.diff
     log "Building libstm32-${LIBSTM32}"
     make arch_prefix=${TARGET} prefix=${PREFIX}
     install libstm32-${LIBSTM32} arch_prefix=${TARGET} prefix=${PREFIX} install
