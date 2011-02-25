@@ -26,7 +26,7 @@
 #
 
 all:
-	./summon-arm-toolchain LIBSTM32_EN=1 DESTDIR=~/sat PREFIX=/usr
+	./summon-arm-toolchain LIBSTM32_EN=1
 
 
 install:

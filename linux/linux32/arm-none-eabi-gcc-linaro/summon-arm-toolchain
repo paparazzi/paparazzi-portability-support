@@ -20,8 +20,7 @@ set -e
 # You can also pass them as parameters to the script
 ##############################################################################
 TARGET=arm-none-eabi		# Or: TARGET=arm-elf
-DESTDIR = ${HOME}
-PREFIX= /sat	# Install location of your final toolchain
+PREFIX=${HOME}/sat	# Install location of your final toolchain
 DARWIN_OPT_PATH=/opt/local	# Path in which MacPorts or Fink is installed
 # Set to 'sudo' if you need superuser privileges while installing
 SUDO=
@@ -46,9 +45,6 @@ while [ $# -gt 0 ]; do
 	case $1 in
 		TARGET=*)
 		TARGET=$(echo $1 | sed 's,^TARGET=,,')
-		;;
-		DESTDIR=*)
-		DESTDIR=$(echo $1 | sed 's,^DESTDIR=,,')
 		;;
 		PREFIX=*)
 		PREFIX=$(echo $1 | sed 's,^PREFIX=,,')
@@ -88,7 +84,6 @@ done
 
 echo "Settings used for this build are:"
 echo "TARGET=$TARGET"
-echo "DESTDIR=$DESTDIR"
 echo "PREFIX=$PREFIX"
 echo "DARWIN_OPT_PATH=$DARWIN_OPT_PATH"
 echo "SUDO=$SUDO"
@@ -159,7 +154,7 @@ if [ ${QUIET} != 0 ]; then
     MAKEFLAGS="${MAKEFLAGS} -s"
 fi
 
-export PATH="${DESTDIR}/${PREFIX}/bin:${PATH}"
+export PATH="${PREFIX}/bin:${PATH}"
 
 SUMMON_DIR=$(pwd)
 SOURCES=${SUMMON_DIR}/sources
@@ -338,7 +333,7 @@ if [ ! -e ${STAMPS}/${BINUTILS}.build ]; then
 			   ${BINUTILFLAGS}
     log "Building ${BINUTILS}"
     make ${MAKEFLAGS}
-    install ${BINUTILS} DESTDIR=${DESTDIR} install
+    install ${BINUTILS} install
     cd ..
     log "Cleaning up ${BINUTILS}"
     touch ${STAMPS}/${BINUTILS}.build
@@ -385,7 +380,7 @@ if [ ! -e ${STAMPS}/${GCC}-${NEWLIB}.build ]; then
 		      ${GCCFLAGS}
     log "Building ${GCC} and ${NEWLIB}"
     make ${MAKEFLAGS}
-    install ${GCC} DESTDIR=${DESTDIR} install
+    install ${GCC} install
     cd ..
     log "Cleaning up ${GCC} and ${NEWLIB}"
     touch ${STAMPS}/${GCC}-${NEWLIB}.build
@@ -404,7 +399,7 @@ if [ ! -e ${STAMPS}/${GDB}.build ]; then
 		      ${GDBFLAGS}
     log "Building ${GDB}"
     make ${MAKEFLAGS}
-    install ${GDB} DESTDIR=${DESTDIR} install
+    install ${GDB} install
     cd ..
     log "Cleaning up ${GDB}"
     touch ${STAMPS}/${GDB}.build
@@ -433,7 +428,7 @@ if [ ! -e ${STAMPS}/openocd-${OOCD}.build ]; then
 				 --enable-arm-jtag-ew
     log "Building openocd-${OOCD}"
     make ${MAKEFLAGS}
-    install openocd-${OOCD} DESTDIR=${DESTDIR} install
+    install openocd-${OOCD} install
     cd ..
     log "Cleaning up openocd-${OOCD}"
     touch ${STAMPS}/openocd-${OOCD}.build
@@ -447,7 +442,7 @@ if [ ! -e ${STAMPS}/libcmsis-${LIBCMSIS}.build ]; then
     cd libcmsis-${LIBCMSIS}
     log "Building libcmsis-${LIBCMSIS}"
     make arch_prefix=${TARGET} prefix=${PREFIX}
-    install libcmsis-${LIBCMSIS} arch_prefix=${TARGET} DESTDIR=${DESTDIR} prefix=${PREFIX} install
+    install libcmsis-${LIBCMSIS} arch_prefix=${TARGET} prefix=${PREFIX} install
     cd ..
     log "Cleaning up libcmsis-${LIBCMSIS}"
     touch ${STAMPS}/libcmsis-${LIBCMSIS}.build
@@ -459,7 +454,7 @@ if [ ! -e ${STAMPS}/libstm32-${LIBSTM32}.build ]; then
     cd libstm32-${LIBSTM32}
     log "Building libstm32-${LIBSTM32}"
     make arch_prefix=${TARGET} prefix=${PREFIX}
-    install libstm32-${LIBSTM32} arch_prefix=${TARGET} DESTDIR=${DESTDIR} prefix=${PREFIX} install
+    install libstm32-${LIBSTM32} arch_prefix=${TARGET} prefix=${PREFIX} install
     cd ..
     log "Cleaning up libstm32-${LIBSTM32}"
     touch ${STAMPS}/libstm32-${LIBSTM32}.build
@@ -471,7 +466,7 @@ if [ ! -e ${STAMPS}/libstm32usb-${LIBSTM32USB}.build ]; then
     cd libstm32usb-${LIBSTM32USB}
     log "Building libstm32usb-${LIBSTM32USB}"
     make arch_prefix=${TARGET} prefix=${PREFIX}
-    install libstm32usb-${LIBSTM32USB} arch_prefix=${TARGET} DESTDIR=${DESTDIR} prefix=${PREFIX} install
+    install libstm32usb-${LIBSTM32USB} arch_prefix=${TARGET} prefix=${PREFIX} install
     cd ..
     log "Cleaning up libstm32usb-${LIBSTM32USB}"
     touch ${STAMPS}/libstm32usb-${LIBSTM32USB}.build
