@@ -17,7 +17,7 @@ checksums               md5     64260e6c56979ee750a01055f16091a5 \
                         rmd160  2f2f5eb331593a276f1b7024ac35f7ca1520653d
 # All cross ports violate the mtree layout.
 destroot.violate_mtree  yes
-depends_lib-append      port:arm-none-eabi-gcc-linaro
+depends_lib-append      port:arm-none-eabi-gcc
 worksrcdir              build
 pre-configure {
     file mkdir ${worksrcpath}

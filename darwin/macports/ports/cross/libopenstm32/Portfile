@@ -15,7 +15,7 @@ git.url                 git://libopenstm32.git.sourceforge.net/gitroot/libopenst
 #worksrcdir              ${name}
 use_configure           no
 use_parallel_build      no
-depends_lib             port:${targetarch}-gcc-linaro
+depends_lib             port:${targetarch}-gcc
 set environment         [list PATH="${prefix}/${targetarch}/bin" LDFLAGS="-L${prefix}/${targetarch}/lib"]
 build.env               ${environment}
 build.args              PREFIX=${targetarch} Q="" -w
