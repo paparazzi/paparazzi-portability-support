@@ -1,6 +1,6 @@
 --- gcc/config/arm/t-arm-elf.orig	2011-03-10 00:41:18.000000000 +1030
-+++ gcc/config/arm/t-arm-elf	2011-03-10 00:42:07.000000000 +1030
-@@ -1,9 +1,27 @@
++++ gcc/config/arm/t-arm-elf	2011-03-10 22:00:26.000000000 +1030
+@@ -1,9 +1,28 @@
 -LIB1ASMSRC = arm/lib1funcs.asm
 +# Copyright (C) 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007,
 +# 2008 Free Software Foundation, Inc.
@@ -26,11 +26,12 @@
  # implementation.  The soft-fp code is only build for ARMv6M.  This pulls
  # in the asm implementation for other CPUs.
 -LIB1ASMFUNCS = _udivsi3 _divsi3 _umodsi3 _modsi3 _dvmd_tls _bb_init_func \
++LIB1ASMSRC = arm/lib1funcs.asm
 +LIB1ASMFUNCS += _udivsi3 _divsi3 _umodsi3 _modsi3 _dvmd_tls _bb_init_func \
  	_call_via_rX _interwork_call_via_rX \
  	_lshrdi3 _ashrdi3 _ashldi3 \
  	_arm_negdf2 _arm_addsubdf3 _arm_muldivdf3 _arm_cmpdf2 _arm_unorddf2 \
-@@ -11,12 +29,57 @@
+@@ -11,12 +30,57 @@
  	_arm_truncdfsf2 _arm_negsf2 _arm_addsubsf3 _arm_muldivsf3 \
  	_arm_cmpsf2 _arm_unordsf2 _arm_fixsfsi _arm_fixunssfsi \
  	_arm_floatdidf _arm_floatdisf _arm_floatundidf _arm_floatundisf \
@@ -92,7 +93,7 @@
  
  #MULTILIB_OPTIONS      += march=armv7
  #MULTILIB_DIRNAMES     += thumb2
-@@ -28,6 +91,13 @@
+@@ -28,6 +92,13 @@
  #MULTILIB_MATCHES      += march?armv7=mcpu?cortex-r4
  #MULTILIB_MATCHES      += march?armv7=mcpu?cortex-m3
  
