@@ -1,5 +1,5 @@
---- gcc/config/arm/t-arm-elf.orig	2011-03-10 00:41:18.000000000 +1030
-+++ gcc/config/arm/t-arm-elf	2011-03-10 22:00:26.000000000 +1030
+--- gcc/config/arm/t-arm-elf.orig	2011-03-13 21:15:28.000000000 +1030
++++ gcc/config/arm/t-arm-elf	2011-03-14 02:39:21.000000000 +1030
 @@ -1,9 +1,28 @@
 -LIB1ASMSRC = arm/lib1funcs.asm
 +# Copyright (C) 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007,
@@ -107,3 +107,13 @@
  # MULTILIB_OPTIONS    += mcpu=ep9312
  # MULTILIB_DIRNAMES   += ep9312
  # MULTILIB_EXCEPTIONS += *mthumb/*mcpu=ep9312*
+@@ -84,7 +155,8 @@
+ # Currently there is a bug somewhere in GCC's alias analysis
+ # or scheduling code that is breaking _fpmul_parts in fp-bit.c.
+ # Disabling function inlining is a workaround for this problem.
+-TARGET_LIBGCC2_CFLAGS = -fno-inline
++# also we don't want unwind tables in libgcc
++TARGET_LIBGCC2_CFLAGS = -fno-inline -fno-unwind-tables
+ 
+ # Assemble startup files.
+ $(T)crti.o: $(srcdir)/config/arm/crti.asm $(GCC_PASSES)
