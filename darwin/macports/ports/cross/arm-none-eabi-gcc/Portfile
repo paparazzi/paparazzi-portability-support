@@ -25,9 +25,9 @@ distfiles               gcc-${version}.tar.bz2:gcc \
                         newlib-${newlibversion}.tar.gz:newlib
 use_bzip2               yes
 checksums               gcc-${version}.tar.bz2 \
-                        md5     44b3192c4c584b9be5243d9e8e7e0ed1 \
-                        sha1    2b1427a932a620c909d74f1e4821ed90c90fd350 \
-                        rmd160  87d6fa77d50f23a3359e24bf5b0ddfafa7088478 \
+                        md5     d6559145853fbaaa0fd7556ed93bce9a \
+                        sha1    ad5c440526c98fd17a74eab80c031af6b64d9c90 \
+                        rmd160  e1e9f590f5cf5f7029f1941328529a22919ee609 \
                         newlib-1.19.0.tar.gz \
                         md5     0966e19f03217db9e9076894b47e6601 \
                         sha1    b2269d30ce7b93b7c714b90ef2f40221c2df0fcd \
