@@ -5,7 +5,7 @@
 PortSystem              1.0
 set targetarch          arm-none-eabi
 name                    ${targetarch}-gcc-linaro
-version                 4.5-2011.01-1
+version                 4.4-2011.02-0
 
 set branch              [join [lrange [split ${version} .] 0 1] .]
 set newlibversion       1.19.0
@@ -15,7 +15,7 @@ maintainers             nomaintainer
 description             gcc cross-compilers for ${targetarch}, with newlib runtime library.
 long_description        gnu compilers collection (including c and c++) for ${targetarch}, with newlib runtime library.
 homepage                http://gcc.gnu.org/
-master_sites            http://launchpad.net/gcc-linaro/4.5/${version}/+download/:gcc \
+master_sites            http://launchpad.net/gcc-linaro/4.4/${version}/+download/:gcc \
                         http://download.paparazziuav.org/linux/source/newlib/:newlib \
                         ftp://ftp.mirror.ac.uk/sites/sources.redhat.com/pub/newlib/:newlib \
                         http://www.mirrorservice.org/sites/sourceware.org/pub/newlib/:newlib \
@@ -25,10 +25,10 @@ master_sites            http://launchpad.net/gcc-linaro/4.5/${version}/+download
 distfiles               gcc-linaro-${version}.tar.bz2:gcc \
                         newlib-${newlibversion}.tar.gz:newlib
 use_bzip2               yes
-checksums               gcc-linaro-4.5-2011.01-1.tar.bz2 \
-                        md5     82d9719082edbbfa1baaae590add19a1 \
-                        sha1    8112f919c324324b62510af92c40511694bfe626 \
-                        rmd160  a35f1f0e93f65c2f807326b07fa24a098fe12ef9 \
+checksums               gcc-linaro-4.4-2011.02-0.tar.bz2 \
+                        md5    98e3dd40f474ef6a9c0fa8c4e0e4d258 \
+                        sha1   8582637d950d4792d85ff8b905b394e7d331cd5f \
+                        rmd160 da600525eab572f0508ab8ad310355debe8d9f6a \
                         newlib-1.19.0.tar.gz \
                         md5     0966e19f03217db9e9076894b47e6601 \
                         sha1    b2269d30ce7b93b7c714b90ef2f40221c2df0fcd \
