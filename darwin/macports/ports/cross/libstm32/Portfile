@@ -16,7 +16,7 @@ worksrcdir              ${name}
 use_configure           no
 use_parallel_build      no
 depends_lib             \
-                        port:arm-none-eabi-gcc \
+                        port:arm-none-eabi-gcc-linaro \
                         port:libcmsis
 set environment         [list PATH="${prefix}/${targetarch}/bin"]
 build.env               ${environment}

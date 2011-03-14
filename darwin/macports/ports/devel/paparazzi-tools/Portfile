@@ -27,7 +27,7 @@ depends_lib         port:git-core \
                     port:ivy-c \
                     port:ivy-ocaml \
                     port:arm-none-eabi-binutils \
-                    port:arm-none-eabi-gcc \
+                    port:arm-none-eabi-gcc-linaro \
                     port:arm-none-eabi-gdb \
                     port:openocd \
                     port:libcmsis \
