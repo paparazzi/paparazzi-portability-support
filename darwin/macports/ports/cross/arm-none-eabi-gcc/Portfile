@@ -4,10 +4,9 @@
 # like including newlib, and a lot of the build options
 PortSystem              1.0
 set targetarch          arm-none-eabi
-name                    ${targetarch}-gcc-linaro
-version                 4.4-2011.02-0
+name                    ${targetarch}-gcc
+version                 4.5.2
 
-set branch              [join [lrange [split ${version} .] 0 1] .]
 set newlibversion       1.19.0
 categories              cross devel
 platforms               darwin
@@ -15,20 +14,20 @@ maintainers             nomaintainer
 description             gcc cross-compilers for ${targetarch}, with newlib runtime library.
 long_description        gnu compilers collection (including c and c++) for ${targetarch}, with newlib runtime library.
 homepage                http://gcc.gnu.org/
-master_sites            http://launchpad.net/gcc-linaro/4.4/${version}/+download/:gcc \
+master_sites            http://ftp.gnu.org/gnu/gcc/gcc-${version}/:gcc \
                         http://download.paparazziuav.org/linux/source/newlib/:newlib \
                         ftp://ftp.mirror.ac.uk/sites/sources.redhat.com/pub/newlib/:newlib \
                         http://www.mirrorservice.org/sites/sourceware.org/pub/newlib/:newlib \
                         http://bernard.gondwana.com.au/files/:newlib \
                         ftp://sources.redhat.com/pub/newlib/:newlib
 
-distfiles               gcc-linaro-${version}.tar.bz2:gcc \
+distfiles               gcc-${version}.tar.bz2:gcc \
                         newlib-${newlibversion}.tar.gz:newlib
 use_bzip2               yes
-checksums               gcc-linaro-4.4-2011.02-0.tar.bz2 \
-                        md5    98e3dd40f474ef6a9c0fa8c4e0e4d258 \
-                        sha1   8582637d950d4792d85ff8b905b394e7d331cd5f \
-                        rmd160 da600525eab572f0508ab8ad310355debe8d9f6a \
+checksums               gcc-${version}.tar.bz2 \
+                        md5     d6559145853fbaaa0fd7556ed93bce9a \
+                        sha1    ad5c440526c98fd17a74eab80c031af6b64d9c90 \
+                        rmd160  e1e9f590f5cf5f7029f1941328529a22919ee609 \
                         newlib-1.19.0.tar.gz \
                         md5     0966e19f03217db9e9076894b47e6601 \
                         sha1    b2269d30ce7b93b7c714b90ef2f40221c2df0fcd \
@@ -45,15 +44,15 @@ depends_lib-append      port:gmp \
 # gmp and mpfr are not universal
 universal_variant	no
 worksrcdir              build
-extract.only            gcc-linaro-${version}.tar.bz2
+extract.only            gcc-${version}.tar.bz2
 # Extract newlib and create a symlink of newlib/newlib in gcc directory.
 post-extract    {
         system "cd ${workpath} && gzip -dc ${distpath}/newlib-${newlibversion}.tar.gz | tar -xf -"
-        system "ln -s ${workpath}/newlib-${newlibversion}/newlib ${workpath}/gcc-linaro-${version}/"
-        system "ln -s ${workpath}/newlib-${newlibversion}/libgloss ${workpath}/gcc-linaro-${version}/"
+        system "ln -s ${workpath}/newlib-${newlibversion}/newlib ${workpath}/gcc-${version}/"
+        system "ln -s ${workpath}/newlib-${newlibversion}/libgloss ${workpath}/gcc-${version}/"
 }
 
-patch.dir              ${workpath}/gcc-linaro-${version}
+patch.dir              ${workpath}/gcc-${version}
 patchfiles              \
                         patch-gcc-config-arm-t-arm-elf.diff
 
@@ -73,7 +72,7 @@ pre-configure {
     file mkdir ${worksrcpath}
 }
 configure.env           ${environment}
-configure.cmd           ../gcc-linaro-${version}/configure
+configure.cmd           ../gcc-${version}/configure
 configure.optflags-delete   -O2
 configure.pipe
 configure.cc                gcc
