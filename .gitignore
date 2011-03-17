@@ -3,3 +3,6 @@
 linux/linux32/arm-none-eabi-gcc-linaro/openocd-master
 linux/linux32/arm-none-eabi-gcc-linaro/sources
 linux/linux32/arm-none-eabi-gcc-linaro/stamps
+linux/linux32/arm-none-eabi-gcc-linaro/build
+linux/linux32/arm-none-eabi-gcc-linaro/gcc-linaro-*
+linux/linux32/arm-none-eabi-gcc-linaro/newlib-*
