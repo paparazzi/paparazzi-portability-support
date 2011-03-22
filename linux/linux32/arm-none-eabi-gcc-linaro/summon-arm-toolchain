@@ -99,15 +99,15 @@ echo "DEFAULT_TO_CORTEX_M3=$DEFAULT_TO_CORTEX_M3"
 ##############################################################################
 if [ ${USE_LINARO} == 0 ] ; then
 	# For FSF GCC:
-	GCCVERSION=4.5.2
+	GCCVERSION=4.4.5
 	GCC=gcc-${GCCVERSION}
 	GCCURL=http://ftp.gnu.org/gnu/gcc/${GCC}/${GCC}.tar.gz
 else
 	# For the Linaro GCC:
-	GCCRELEASE=4.5-2011.02-0
-	GCCVERSION=4.5-2011.02-0
+	GCCRELEASE=4.4-2011.02-0
+	GCCVERSION=4.4-2011.02-0
 	GCC=gcc-linaro-${GCCVERSION}
-	GCCURL=http://launchpad.net/gcc-linaro/4.5/${GCCRELEASE}/+download/${GCC}.tar.bz2
+	GCCURL=http://launchpad.net/gcc-linaro/4.4/${GCCRELEASE}/+download/${GCC}.tar.bz2
 fi
 
 BINUTILS=binutils-2.21
