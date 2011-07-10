@@ -14,8 +14,8 @@ master_sites
 platforms           darwin
 
 depends_lib         port:ocaml \
-                    port:caml-findlib \ 
-                    port:caml-pcre \  
+                    port:caml-findlib \
+                    port:caml-pcre \
                     port:git-core \
                     port:xml-light \
                     port:caml-ocamlnet \
