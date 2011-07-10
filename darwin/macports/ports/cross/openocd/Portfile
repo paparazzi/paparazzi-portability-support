@@ -3,7 +3,7 @@
 PortSystem              1.0
 set crossgcc-target     arm-none-eabi
 name                    openocd
-version                 master-2011.02.10.01
+version                 master-2011.07.10.01
 categories              cross devel
 platforms               darwin
 license                 GPL
@@ -33,29 +33,30 @@ configure.args          --enable-maintainer-mode \
                         --disable-werror \
                         --prefix=${prefix}
 
-post-destroot {
-    file rename ${destroot}/bin/jimsh \
-       ${destroot}${prefix}/bin/jimsh
-    file mkdir ${destroot}${prefix}/share/doc/jim
-    file rename ${destroot}/doc/jim/Tcl.html \
-       ${destroot}${prefix}/share/doc/jim/Tcl.html
-    file rename ${destroot}/include/jim-config.h \
-       ${destroot}${prefix}/include/jim-config.h
-    file rename ${destroot}/include/jim-eventloop.h \
-       ${destroot}${prefix}/include/jim-eventloop.h
-    file rename ${destroot}/include/jim-nvp.h \
-       ${destroot}${prefix}/include/jim-nvp.h
-    file rename ${destroot}/include/jim-signal.h \
-       ${destroot}${prefix}/include/jim-signal.h
-    file rename ${destroot}/include/jim-subcmd.h \
-       ${destroot}${prefix}/include/jim-subcmd.h
-    file rename ${destroot}/include/jim-win32compat.h \
-       ${destroot}${prefix}/include/jim-win32compat.h
-    file rename ${destroot}/include/jim.h \
-       ${destroot}${prefix}/include/jim.h
-    file mkdir ${destroot}${prefix}/lib/jim
-    file rename ${destroot}/lib/jim/README.extensions \
-       ${destroot}${prefix}/lib/jim/README.extensions
-    file rename ${destroot}/lib/libjim.a \
-       ${destroot}${prefix}/lib/libjim.a
-}
+# looks like openocd devs have moved these files to better places
+#post-destroot {
+#    file rename ${destroot}/bin/jimsh \
+#       ${destroot}${prefix}/bin/jimsh
+#    file mkdir ${destroot}${prefix}/share/doc/jim
+#    file rename ${destroot}/doc/jim/Tcl.html \
+#       ${destroot}${prefix}/share/doc/jim/Tcl.html
+#    file rename ${destroot}/include/jim-config.h \
+#       ${destroot}${prefix}/include/jim-config.h
+#    file rename ${destroot}/include/jim-eventloop.h \
+#       ${destroot}${prefix}/include/jim-eventloop.h
+#    file rename ${destroot}/include/jim-nvp.h \
+#       ${destroot}${prefix}/include/jim-nvp.h
+#    file rename ${destroot}/include/jim-signal.h \
+#       ${destroot}${prefix}/include/jim-signal.h
+#    file rename ${destroot}/include/jim-subcmd.h \
+#       ${destroot}${prefix}/include/jim-subcmd.h
+#    file rename ${destroot}/include/jim-win32compat.h \
+#       ${destroot}${prefix}/include/jim-win32compat.h
+#    file rename ${destroot}/include/jim.h \
+#       ${destroot}${prefix}/include/jim.h
+#    file mkdir ${destroot}${prefix}/lib/jim
+#    file rename ${destroot}/lib/jim/README.extensions \
+#       ${destroot}${prefix}/lib/jim/README.extensions
+#    file rename ${destroot}/lib/libjim.a \
+#       ${destroot}${prefix}/lib/libjim.a
+#}
