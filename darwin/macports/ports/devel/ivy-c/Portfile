@@ -2,7 +2,7 @@
 # $Id$
 PortSystem              1.0
 name                    ivy-c
-version                 r3459
+version                 r3459-20110723
 categories              devel
 platforms               darwin
 maintainers             nomaintainer
@@ -15,7 +15,10 @@ svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-c/trunk
 svn.post_args-append    -r ${svn.revision}
 svn.method              checkout
 use_configure           no
-depends_lib-append      port:glib2
+depends_lib-append      \
+			port:glib2 \
+			port:pcre \
+			port:pkgconfig
 
 build.args              -C src -f Makefile.osx PREFIX=${prefix}
 destroot.args           -C src -f Makefile.osx PREFIX=${prefix}
