@@ -1,0 +1,5 @@
+--- configure.orig	2011-03-21 23:07:07.000000000 +1100
++++ configure	2011-03-21 23:07:47.000000000 +1100
+@@ -1 +1 @@
+-cmake . -DCMAKE_BUILD_TYPE=Release
++cmake . -DCMAKE_BUILD_TYPE=Release $@
