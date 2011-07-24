@@ -3,7 +3,7 @@
 PortSystem              1.0
 PortGroup               python27 1.0
 name                    ivy-python
-version                 trunk-2011.02.10.01
+version                 trunk-2011.07.23.01
 categories              python
 platforms               darwin
 maintainers             nomaintainer
@@ -17,8 +17,9 @@ svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-python/trunk
 svn.post_args-append    ${worksrcdir}
 use_configure           no
 build.args              
-#depends_lib-append      port:caml-ocamlnet \
-#                        port:ivy-c
+depends_lib-append      \
+                        port:caml-ocamlnet \
+                        port:ivy-c
 
 build.env               LDFLAGS=-L${prefix}/lib
 

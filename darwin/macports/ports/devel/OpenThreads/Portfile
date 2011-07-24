@@ -1,0 +1,34 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+PortSystem              1.0
+name                    OpenThreads
+version                 2.1.0-2011.07.23.01
+categories              devel
+platforms               darwin
+maintainers             nomaintainer
+description             OpenThreads
+long_description        OpenThreads is a cross platform, object orientated threading library.
+homepage                http://www.openscenegraph.org/projects/osg/wiki/Support/KnowledgeBase/OpenThreads
+master_sites            http://www.openscenegraph.org/svn/osg/OpenSceneGraph/developer_releases/OpenSceneGraph-${version}/
+distfiles               OpenSceneGraph-${version}.zip
+use_zip                 yes
+checksums               md5     8f1f39d9c373253ec6715056b8264b20 \
+                        sha1    0501fb7120e83ada6c45b3b4cab7288ca8176d9c \
+                        rmd160  2b261a49ee7feeb1c4ad30ee237e345d7ca8bae7
+
+depends_lib-append      \
+                        port:cmake
+
+patch.dir               ${workpath}/OpenSceneGraph
+patchfiles              \
+                        patch-configure.diff
+
+destroot.args           CMAKE_INSTALL_PREFIX=${prefix}
+configure.dir           ${workpath}/OpenSceneGraph
+configure.pre_args      
+configure.args          -DCMAKE_INSTALL_PREFIX="${prefix}"
+#patchfiles              patch-src-Makefile.osx.diff
+
+build.dir               ${workpath}/OpenSceneGraph/src/OpenThreads
+destroot.dir            ${workpath}/OpenSceneGraph/src/OpenThreads
+

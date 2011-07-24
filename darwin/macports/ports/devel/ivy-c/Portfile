@@ -2,7 +2,7 @@
 # $Id$
 PortSystem              1.0
 name                    ivy-c
-version                 r3459-20110723
+version                 r3459-2011.07.23.01
 categories              devel
 platforms               darwin
 maintainers             nomaintainer
