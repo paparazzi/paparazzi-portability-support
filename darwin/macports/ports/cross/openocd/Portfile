@@ -3,7 +3,7 @@
 PortSystem              1.0
 set crossgcc-target     arm-none-eabi
 name                    openocd
-version                 master-2011.07.10.01
+version                 master-2011.07.23.01
 categories              cross devel
 platforms               darwin
 license                 GPL
@@ -14,7 +14,8 @@ homepage                http://openocd.berlios.de/
 fetch.type              git
 git.url                 git://openocd.git.sourceforge.net/gitroot/openocd/openocd
 
-depends_lib             port:libftdi
+depends_lib-append      \
+                        port:libftdi
 
 configure.optflags-delete    -O2
 configure.cmd           ./bootstrap && ./configure

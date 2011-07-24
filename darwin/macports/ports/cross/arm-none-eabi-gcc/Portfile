@@ -34,7 +34,8 @@ checksums               gcc-${version}.tar.bz2 \
                         rmd160  a28bd656ec895da0738dac3fb367851a2992d724
 # All cross ports violate the mtree layout.
 destroot.violate_mtree  yes
-depends_lib-append      port:gmp \
+depends_lib-append      \
+                        port:gmp \
                         port:mpfr \
                         port:mpc \
                         port:libmpc\

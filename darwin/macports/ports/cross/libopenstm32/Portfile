@@ -3,7 +3,7 @@
 PortSystem              1.0
 set targetarch          arm-none-eabi
 name                    libopenstm32
-version                 master-2011.02.10.01
+version                 master-2011.07.23.01
 categories              cross devel
 platforms               darwin
 maintainers             nomaintainer
@@ -15,7 +15,8 @@ git.url                 git://libopenstm32.git.sourceforge.net/gitroot/libopenst
 #worksrcdir              ${name}
 use_configure           no
 use_parallel_build      no
-depends_lib             port:${targetarch}-gcc-linaro
+depends_lib-append      \
+                        port:${targetarch}-gcc-linaro
 set environment         [list PATH="${prefix}/${targetarch}/bin" LDFLAGS="-L${prefix}/${targetarch}/lib"]
 build.env               ${environment}
 build.args              PREFIX=${targetarch} Q="" -w
