@@ -2,7 +2,7 @@
 # $Id$
 PortSystem              1.0
 name                    ivy-ocaml
-version                 r3443
+version                 r3443-2011.07.23.01
 categories              devel
 platforms               darwin
 maintainers             nomaintainer
@@ -15,6 +15,7 @@ svn.revision            3443
 svn.post_args-append    -r ${svn.revision} ${worksrcdir}
 use_configure           no
 build.args              
-depends_lib-append      port:caml-ocamlnet \
+depends_lib-append      \
+			port:caml-ocamlnet \
                         port:ivy-c
 

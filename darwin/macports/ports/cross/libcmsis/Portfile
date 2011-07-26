@@ -3,7 +3,7 @@
 PortSystem              1.0
 set targetarch          arm-none-eabi
 name                    libcmsis
-version                 master-2011.02.16.01
+version                 master-2011.07.23.01
 categories              cross devel
 platforms               darwin
 maintainers             nomaintainer
@@ -14,7 +14,8 @@ git.url                 git://git.open-bldc.org/libcmsis.git
 worksrcdir              ${name}
 use_configure           no
 use_parallel_build      no
-depends_lib             port:arm-none-eabi-gcc-linaro
+depends_lib-append      \
+                        port:arm-none-eabi-gcc-linaro
 #set environment         [list PATH="${prefix}/${targetarch}/bin"]
 #build.env               ${environment}
 build.args              arch_prefix=${targetarch} prefix=${prefix}

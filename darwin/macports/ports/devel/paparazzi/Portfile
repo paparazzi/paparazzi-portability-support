@@ -2,14 +2,15 @@
 # $Id$
 PortSystem          1.0
 name                paparazzi
-version             master-2011.02.10.01
+version             master-2011.07.23.01
 categories          devel
 platforms           darwin
 maintainers         nomaintainer
 description         Paparazzi source code
 long_description    The requirements for building and developing with Paparazzi.
 homepage            http://paparazzi.enac.fr/Wiki
-depends_lib         port:paparazzi-tools
+depends_lib-append  \
+                    port:paparazzi-tools
 fetch.type          git
 git.url             git://github.com/paparazzi/paparazzi.git
 use_configure       no

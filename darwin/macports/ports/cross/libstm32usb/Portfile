@@ -3,7 +3,7 @@
 PortSystem              1.0
 set targetarch          arm-none-eabi
 name                    libstm32usb
-version                 master-2011.02.10.01
+version                 master-2011.07.23.01
 categories              cross devel
 platforms               darwin
 maintainers             nomaintainer
@@ -15,7 +15,7 @@ git.url                 git://git.open-bldc.org/libstm32usb.git
 worksrcdir              ${name}
 use_configure           no
 use_parallel_build      no
-depends_lib             \
+depends_lib-append      \
                         port:arm-none-eabi-gcc-linaro \
                         port:libstm32
 set environment         [list PATH="${prefix}/${targetarch}/bin"]
