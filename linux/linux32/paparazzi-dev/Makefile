@@ -1,0 +1,2 @@
+all:
+	dpkg-buildpackage -b
