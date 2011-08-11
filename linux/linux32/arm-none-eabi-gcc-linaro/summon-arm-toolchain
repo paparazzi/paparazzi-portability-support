@@ -502,7 +502,7 @@ if [ ! -e ${STAMPS}/libopenstm32-${LIBOPENSTM32}.build ]; then
     unpack libopenstm32-${LIBOPENSTM32}
     cd libopenstm32-${LIBOPENSTM32}
     log "Building libopenstm32-${LIBOPENSTM32}"
-    make PREFIX=${TARGET} DESTDIR=${PREFIX}
+    make lib PREFIX=${TARGET} DESTDIR=${PREFIX}
     install libopenstm32-${LIBOPENSTM32} PREFIX=${TARGET} DESTDIR=${PREFIX} install
     cd ..
     log "Cleaning up libopenstm32-${LIBOPENSTM32}"
