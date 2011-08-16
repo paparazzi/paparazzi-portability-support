@@ -6,7 +6,7 @@ Standards-Version: 3.4
 
 Package: paparazzi-dev
 Architecture: any
-Suggests: paparazzi-avr, paparazzi-arm7, eagle, gs-common, tetex-extra, dia-gnome, boa, gitk
+Suggests: paparazzi-arm7, paparazzi-jsbsim, eagle, gs-common, tetex-extra, dia-gnome, boa, gitk
 Depends: ivy-c-dev, ivy-c, ivy-ocaml, libxml-light-ocaml-dev, liblablgtk2-ocaml-dev, make, gcc, gnuplot, libgnomecanvas2-dev, bzip2, git-core, liblablgtk2-gnome-ocaml-dev, libusb-dev, speech-dispatcher, glade, gedit, imagemagick, libpcre3-dev, libocamlnet-ocaml-dev, ivy-python, gpsd, libgps-dev, python-lxml, python-wxgtk2.8, python-scipy, python-matplotlib, libocamlgsl-ocaml-dev, libsdl-ocaml-dev
 Description: Paparazzi Meta Package : common support
 
