@@ -1,3 +1,9 @@
+paparazzi-dev (3.4-1) natty; urgency=low
+
+  * Add dependency to g++
+
+ -- Gautier Hattenberger <gautier.hattenberger@enac.fr>  Wed, 17 Aug 2011 17:36:10 +0200
+
 paparazzi-dev (3.4) natty; urgency=low
 
   * Add some dependency (gsl, sdl + ocaml bindings)
