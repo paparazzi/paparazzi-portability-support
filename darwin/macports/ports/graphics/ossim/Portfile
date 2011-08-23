@@ -1,0 +1,61 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+PortSystem              1.0
+name                    ossim
+version                 trunk-2011.07.23.01
+categories              graphics
+platforms               darwin
+maintainers             nomaintainer
+description             OSSIM
+long_description        OSSIM - Open Source Software Image Map
+homepage                http://www.ossim.org/
+fetch.type              svn
+#svn.revision            3459
+svn.url                 http://svn.osgeo.org/ossim/trunk
+#svn.post_args-append    -r ${svn.revision}
+svn.method              checkout
+svn.post_args-append    ${name}-${version}
+patchfiles              patch-src-ossim_package_support-cmake-build_scripts-mac-mac-basic-sh.diff
+depends_lib-append      \
+                        port:curl \
+                        port:expat \
+                        port:tiff \
+                        port:libgeotiff \
+                        port:jpeg \
+                        port:freetype \
+                        port:zlib \
+                        port:libpng \
+                        port:ffmpeg \
+                        port:cmake \
+                        port:openjpeg \
+                        port:gdal \
+                        port:OpenThreads \
+                        port:qt4-mac \
+
+set environment         [list CMAKE_BUILD_TYPE=Release \
+                        CMAKE_INSTALL_PREFIX=${prefix} \
+                        CMAKE_OSSIMPNG_PLUGIN=ON \
+                        CMAKE_OSSIMGDAL_PLUGIN=ON \
+                        CMAKE_OSSIM_PLUGIN=ON \
+                        CMAKE_OSSIMRAW_PLUGIN=ON \
+                        CMAKE_OSSIMCSM_PLUGIN=ON \
+                        CMAKE_OSSIM_PLUGIN=ON \
+                        ]
+worksrcdir              ${name}-${version}
+pre-configure {
+    file mkdir "${workpath}/${name}-${version}/ossim_package_support/cmake/build"
+}
+#use_configure           no
+configure.env           ${environment}
+configure.dir           ${workpath}/${name}-${version}/ossim_package_support/cmake/build
+configure.cmd           ../build_scripts/mac/mac-basic.sh
+configure.pre_args      
+configure.args          .. -G \"Unix Makefiles\" -DOSSIM_DEV_HOME=${workpath}/${name}-${version} -DCMAKE_INSTALL_PREFIX=${prefix} -DBUILD_OSSIMPLANET=off -DCSMAPI_INCLUDE_DIRS=csmApi/include
+
+pre-build {
+}
+
+build.dir               ${workpath}/${name}-${version}/ossim_package_support/cmake/build
+#build.args              -C src -ffmpegf Makefile.osx PREFIX=${prefix}
+#destroot.args           -C src -f Makefile.osx PREFIX=${prefix}
+
