@@ -105,20 +105,20 @@ echo "CPUS=$CPUS"
 ##############################################################################
 if [ ${USE_LINARO} == 0 ] ; then
 	# For FSF GCC:
-	GCCVERSION=4.4.5
+	GCCVERSION=4.5.2
 	GCC=gcc-${GCCVERSION}
 	GCCURL=http://ftp.gnu.org/gnu/gcc/${GCC}/${GCC}.tar.gz
 else
 	# For the Linaro GCC:
-	GCCRELEASE=4.4-2011.02-0
-	GCCVERSION=4.4-2011.02-0
+	GCCRELEASE=4.5-2011.02-0
+	GCCVERSION=4.5-2011.02-0
 	GCC=gcc-linaro-${GCCVERSION}
-	GCCURL=http://launchpad.net/gcc-linaro/4.4/${GCCRELEASE}/+download/${GCC}.tar.bz2
+	GCCURL=http://launchpad.net/gcc-linaro/4.5/${GCCRELEASE}/+download/${GCC}.tar.bz2
 fi
 
-BINUTILS=binutils-2.21
+BINUTILS=binutils-2.21.1
 NEWLIB=newlib-1.19.0
-GDB=gdb-7.2
+GDB=gdb-7.3.1
 OOCD=master
 LIBCMSIS=v1.10-3
 LIBSTM32=v3.0.0-2
@@ -130,15 +130,17 @@ LIBOPENSTM32=master
 ##############################################################################
 
 if [ "x${CPUS}" == "x" ]; then
-if which getconf > /dev/null; then
-	CPUS=$(getconf _NPROCESSORS_ONLN)
-else
-	CPUS=1
-fi
-PARALLEL=-j$((CPUS + 1))
+	if which getconf > /dev/null; then
+		CPUS=$(getconf _NPROCESSORS_ONLN)
+	else
+		CPUS=1
+	fi
+
+	PARALLEL=-j$((CPUS + 1))
 else
 	PARALLEL=-j${CPUS}
 fi
+
 echo "${CPUS} cpu's detected running make with '${PARALLEL}' flag"
 
 GDBFLAGS=
@@ -336,14 +338,14 @@ if [ ! -e ${STAMPS}/${BINUTILS}.build ]; then
     cd build
     log "Configuring ${BINUTILS}"
     ../${BINUTILS}/configure --target=${TARGET} \
-                           --prefix=${PREFIX} \
-                           --enable-interwork \
-                           --enable-multilib \
-                           --with-gnu-as \
-                           --with-gnu-ld \
-                           --disable-nls \
-                           --disable-werror \
-			   ${BINUTILFLAGS}
+                             --prefix=${PREFIX} \
+                             --enable-interwork \
+                             --enable-multilib \
+                             --with-gnu-as \
+                             --with-gnu-ld \
+                             --disable-nls \
+                             --disable-werror \
+                             ${BINUTILFLAGS}
     log "Building ${BINUTILS}"
     make ${MAKEFLAGS}
     install ${BINUTILS} install
@@ -375,6 +377,7 @@ if [ ! -e ${STAMPS}/${GCC}-${NEWLIB}.build ]; then
 	    log "Overriding the default compiler with: \"${GCC_CC}\""
 	    export CC=${GCC_CC}
     fi
+
     log "Configuring ${GCC} and ${NEWLIB}"
     ../${GCC}/configure --target=${TARGET} \
                       --prefix=${PREFIX} \
@@ -401,11 +404,13 @@ if [ ! -e ${STAMPS}/${GCC}-${NEWLIB}.build ]; then
     install ${GCC} install
     cd ..
     log "Cleaning up ${GCC} and ${NEWLIB}"
+
     if [ "X${GCC_CC}" != "X" ] ; then
 	    unset CC
 	    CC=${GLOBAL_CC}
 	    unset GLOBAL_CC
     fi
+
     touch ${STAMPS}/${GCC}-${NEWLIB}.build
     rm -rf build/* ${GCC} ${NEWLIB}
 fi
@@ -437,6 +442,7 @@ if [ ! -e ${STAMPS}/openocd-${OOCD}.build ]; then
     CFLAGS="${CFLAGS} ${OOCD_CFLAGS}" \
     LDFLAGS="${LDFLAGS} ${OOCD_LDFLAGS}" \
     ../openocd-${OOCD}/configure --enable-maintainer-mode \
+				 --disable-werror \
 				 --prefix=${PREFIX} \
 				 --enable-dummy \
 				 --enable-ft2232_libftdi \
@@ -502,7 +508,7 @@ if [ ! -e ${STAMPS}/libopenstm32-${LIBOPENSTM32}.build ]; then
     unpack libopenstm32-${LIBOPENSTM32}
     cd libopenstm32-${LIBOPENSTM32}
     log "Building libopenstm32-${LIBOPENSTM32}"
-    make lib PREFIX=${TARGET} DESTDIR=${PREFIX}
+    make PREFIX=${TARGET} DESTDIR=${PREFIX}
     install libopenstm32-${LIBOPENSTM32} PREFIX=${TARGET} DESTDIR=${PREFIX} install
     cd ..
     log "Cleaning up libopenstm32-${LIBOPENSTM32}"
