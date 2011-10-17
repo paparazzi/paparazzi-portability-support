@@ -1,28 +1,9 @@
-paparazzi-stm32 (1.0.0-5) unstable; urgency=low
+paparazzi-arm-multilib (1.0.0-1) unstable; urgency=low
 
-  * fix broken openocd confg files in previous version
+  * upgraded to gcc linaro 4.5-2011.02-0
+  * upgraded to binutils 2.21.1
+  * upgraded to gdb 7.3.1
+  * upgraded to newlib 1.19.0
+  * multilib support
 
- -- Antoine Drouin <poinix@gmail.com>  Thu, 8 September 2010 02:58:18 +0000
-paparazzi-stm32 (1.0.0-4) unstable; urgency=low
-
-  * removed assert_param calls from libstm32
-
- -- Antoine Drouin <poinix@gmail.com>  Thu, 7 September 2010 02:58:18 +0000
-
-paparazzi-stm32 (1.0.0-3) unstable; urgency=low
-
-  * better patch to openocd
-
- -- Antoine Drouin <poinix@gmail.com>  Thu, 5 August 2010 02:58:18 +0000
-
-paparazzi-stm32 (1.0.0-2) unstable; urgency=low
-
-  * upgraded to gcc 4.4.3, patch to libstm32 header, patch to openocd
-
- -- Antoine Drouin <poinix@gmail.com>  Thu, 22 Apr 2010 02:58:18 +0000
-
-paparazzi-stm32 (1.0.0-1) unstable; urgency=low
-
-  * Initial release
-
- -- Antoine Drouin <poinix@gmail.com>  Tue, 23 Mar 2010 11:06:18 -0700
+ -- Felix Ruess <felix.ruess@gmail.com>  Mon, 17 Oct 2011 15:25:41 +0200
