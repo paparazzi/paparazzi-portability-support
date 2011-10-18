@@ -1,0 +1,29 @@
+This work was packaged for Debian by:
+
+    Felix Ruess <felix.ruess@gmail.com> on Tue, 18 Oct 2011 15:20:19 +0200
+
+It was downloaded from:
+
+    url://http://sourceforge.net/projects/lpc21isp/
+
+Upstream Author(s):
+
+    Martin Maurer (Martin.Maurer@clibb.de)
+
+Copyright:
+
+    Copyright (C) 2008 Martin Maurer
+    Copyright (C) 2004 Aeolus Development
+
+License:
+
+    GPL-3
+
+The Debian packaging is:
+
+    Copyright (C) 2011 Felix Ruess <felix.ruess@gmail.com>
+
+
+and is licensed under the GPL version 3,
+see "/usr/share/common-licenses/GPL-3".
+

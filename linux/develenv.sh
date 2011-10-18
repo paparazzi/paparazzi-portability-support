@@ -16,13 +16,18 @@ case `lsb_release -si` in
 		libncurses5-dev \
 		libtool \
 		texinfo \
-		asciidoc
+		quilt \
+		asciidoc \
+		devscripts
     ;;
     Ubuntu)
 	aptitude -y install \
 		libmpfr-dev \
 		libtool \
 		texinfo \
+		quilt \
+		debhelper \
+		devscripts \
 		asciidoc
     ;;
     *)

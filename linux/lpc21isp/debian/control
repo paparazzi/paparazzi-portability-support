@@ -1,0 +1,15 @@
+Source: lpc21isp
+Section: embedded
+Priority: extra
+Maintainer: Felix Ruess <felix.ruess@gmail.com>
+Build-Depends: debhelper (>= 7.0.50~)
+Standards-Version: 3.8.4
+Homepage: http://sourceforge.net/projects/lpc21isp/
+
+Package: lpc21isp
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: ISP for ARM
+ In-circuit programming (ISP) tool for the 
+ NXP (Philips) LPC1100 / LPC1300 / LPC1700 / LPC2000
+ series ARM7 / Cortex-M0 / Cortex-M3 microcontrollers
