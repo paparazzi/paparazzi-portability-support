@@ -34,6 +34,6 @@ install:
 	cp -a /opt/paparazzi/arm-multilib $(DESTDIR)/opt/paparazzi
 
 clean:
-	rm -rf *~ build binutils* gcc* gdb* libcmsis* libstm32* newlib* openocd* build-arch-stamp build-indep-stamp configure-stamp
+	rm -rf *~ build binutils* gcc* gdb* libcmsis* libstm32* newlib* openocd*
 # comment the next line out if you don't want to rebuild everything, but make sure the stamps are ok
 	rm -rf stamps sources
