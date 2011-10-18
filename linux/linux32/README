@@ -1,0 +1,13 @@
+This directory holds files used to create toolchains and packages used in the Paparazzi project
+
+How to build
+-------------
+cd arm-none-eabi
+sudo dpkg -P paparazzi-arm-multilib
+sudo mkdir -p /opt/paparazzi
+sudo chown <username>:<username> /opt/paparazzi
+dpkg-buildpackage -b -uc
+
+once the package is build remove /opt/paparazzi/arm-multilib
+and the package will install there in place
+
