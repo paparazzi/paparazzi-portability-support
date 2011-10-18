@@ -2,7 +2,7 @@ This directory holds files used to create toolchains and packages used in the Pa
 
 How to build
 -------------
-cd arm-none-eabi
+cd arm-none-eabi-gcc-linaro
 sudo dpkg -P paparazzi-arm-multilib
 sudo mkdir -p /opt/paparazzi
 sudo chown <username>:<username> /opt/paparazzi

@@ -31,7 +31,7 @@ USE_LINARO=1
 # Set to 1 to enable building of OpenOCD
 OOCD_EN=1
 # Set to 1 to build libstm32 provided by ST
-LIBSTM32_EN=0
+LIBSTM32_EN=1
 # Set to 1 to build libopenstm32 an open source library for stm32
 LIBOPENSTM32_EN=1
 # Make the gcc default to Cortex-M3

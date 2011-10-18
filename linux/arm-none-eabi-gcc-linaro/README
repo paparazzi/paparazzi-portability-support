@@ -1,3 +1,14 @@
+Paparazzi specifics to build a toolchain debian package:
+
+sudo dpkg -P paparazzi-arm-multilib
+sudo mkdir -p /opt/paparazzi
+sudo chown <username>:<username> /opt/paparazzi
+dpkg-buildpackage -rfakeroot -b -uc
+
+ 
+Otherwise to build a local toolchain that will reside in ~/sat follow the instructions below
+
+
 REMEMBER!
 =========
 THE RESULTING TOOLCHAIN IS FOR BARE BONE ARM PROCESSOR SOFTWARE. NOT FOR USE
