@@ -3,8 +3,8 @@
 version=1.83
 version_nodot=183
 
-export DEBEMAIL="felix.ruess@gmail.com"
-export DEBFULLNAME="Felix Ruess"
+#export DEBEMAIL="felix.ruess@gmail.com"
+#export DEBFULLNAME="Felix Ruess"
 
 # Log a message out to the console
 function log {
@@ -36,7 +36,8 @@ cd lpc21isp-${version}
 log Copying debian files into source folder
 cp -r ../debian .
 log Building packages
-debuild -us -uc 
+debuild -S
+sudo pbuilder build ../*.dsc
 
 
 # for updating to a new upstream version
