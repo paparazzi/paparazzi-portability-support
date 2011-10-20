@@ -1,0 +1,16 @@
+This directory holds files used to create toolchains and packages used in the Paparazzi project
+
+How to build
+-------------
+cd arm-none-eabi-gcc-linaro
+sudo dpkg -P paparazzi-arm-multilib
+sudo mkdir -p /opt/paparazzi
+sudo chown <username>:<username> /opt/paparazzi
+dpkg-buildpackage -rfakeroot -b -uc
+
+For testing purposes, you can make a .deb file without rebuilding the sources like this
+fakeroot debian/rules binary
+
+once the package is build remove /opt/paparazzi/arm-multilib
+and the package will install there in place
+

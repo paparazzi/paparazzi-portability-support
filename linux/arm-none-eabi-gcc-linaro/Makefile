@@ -26,12 +26,14 @@
 #
 
 all:
-	./summon-arm-toolchain LIBSTM32_EN=1
+	@LANG=C ./summon-arm-toolchain LIBSTM32_EN=1 PREFIX=/opt/paparazzi/arm-multilib
 
 
 install:
 	mkdir -p $(DESTDIR)/opt/paparazzi
-	cp -a /opt/paparazzi/stm32 $(DESTDIR)/opt/paparazzi
+	cp -a /opt/paparazzi/arm-multilib $(DESTDIR)/opt/paparazzi
 
 clean:
-	rm -rf *~ sources build .binutils* .gcc* .gdb* .libcmsis* .libstm32* .newlib* .openocd* build-arch-stamp build-indep-stamp configure-stamp
+	rm -rf *~ build binutils* gcc* gdb* libcmsis* libstm32* newlib* openocd*
+# comment the next line out if you don't want to rebuild everything, but make sure the stamps are ok
+	rm -rf stamps sources

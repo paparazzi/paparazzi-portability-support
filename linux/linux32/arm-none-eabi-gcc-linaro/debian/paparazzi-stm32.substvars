@@ -1,2 +1,0 @@
-shlibs:Depends=libc6 (>= 2.11), libexpat1 (>= 1.95.8), libftdi1 (>= 0.17), libgmp3c2, libmpfr1ldbl, libncurses5 (>= 5.6+20071006-3), libpython2.6 (>= 2.6), libusb-0.1-4 (>= 2:0.1.12), zlib1g (>= 1:1.1.4)
-misc:Depends=
