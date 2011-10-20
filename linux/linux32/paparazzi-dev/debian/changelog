@@ -1,3 +1,10 @@
+paparazzi-dev (3.4-2) oneiric; urgency=low
+
+  * Suggest paparazzi-arm-multilib and libgtkdatabox
+  * Architecture: all
+
+ -- Gautier Hattenberger <gautier.hattenberger@enac.fr>  Thu, 20 Oct 2011 14:01:10 +0100
+
 paparazzi-dev (3.4-1) natty; urgency=low
 
   * Add dependency to g++
