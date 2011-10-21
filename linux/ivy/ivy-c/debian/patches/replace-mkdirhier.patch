@@ -1,0 +1,144 @@
+## Description: add some description
+## Origin/Author: add some origin or author
+## Bug: bug URL
+Index: ivy-c-3.11.8/src/Makefile
+===================================================================
+--- ivy-c-3.11.8.orig/src/Makefile	2011-10-21 16:00:06.568752836 +0200
++++ ivy-c-3.11.8/src/Makefile	2011-10-21 15:59:56.696612218 +0200
+@@ -247,8 +247,8 @@
+ 
+ 
+ installlibs: static-libs shared-libs
+-	test -d $(DESTDIR)$(PREFIX)$(LIB)  || mkdirhier $(DESTDIR)$(PREFIX)$(LIB)
+-	-test -d $(DESTDIR)$(X11_PREFIX)$(LIB)  || mkdirhier $(DESTDIR)$(X11_PREFIX)$(LIB)
++	test -d $(DESTDIR)$(PREFIX)$(LIB)  || mkdir -p $(DESTDIR)$(PREFIX)$(LIB)
++	-test -d $(DESTDIR)$(X11_PREFIX)$(LIB)  || mkdir -p $(DESTDIR)$(X11_PREFIX)$(LIB)
+ 
+ 	install -m644 libivy.a						$(DESTDIR)$(PREFIX)$(LIB)
+ 	install -m644 libgivy.a						$(DESTDIR)$(PREFIX)$(LIB)
+@@ -263,14 +263,14 @@
+ 	install -m644 libglibivy.so.$(MAJOR).$(MINOR)			$(DESTDIR)$(PREFIX)$(LIB)
+ 
+ installlibs_omp: static-libs shared-libs
+-	test -d $(DESTDIR)$(PREFIX)$(LIB)  || mkdirhier $(DESTDIR)$(PREFIX)$(LIB)
+-	-test -d $(DESTDIR)$(X11_PREFIX)$(LIB)  || mkdirhier $(DESTDIR)$(X11_PREFIX)$(LIB)
++	test -d $(DESTDIR)$(PREFIX)$(LIB)  || mkdir -p $(DESTDIR)$(PREFIX)$(LIB)
++	-test -d $(DESTDIR)$(X11_PREFIX)$(LIB)  || mkdir -p $(DESTDIR)$(X11_PREFIX)$(LIB)
+ 
+ 	install -m644 libivy_omp.a					$(DESTDIR)$(PREFIX)$(LIB)
+ 	install -m644 libivy_omp.so.$(MAJOR).$(MINOR)			$(DESTDIR)$(PREFIX)$(LIB)
+ 
+ includes:
+-	test -d $(DESTDIR)$(PREFIX)/include/Ivy || mkdirhier $(DESTDIR)$(PREFIX)/include/Ivy
++	test -d $(DESTDIR)$(PREFIX)/include/Ivy || mkdir -p $(DESTDIR)$(PREFIX)/include/Ivy
+ 	install -m644 ivy.h						$(DESTDIR)$(PREFIX)/include/Ivy/
+ 	install -m644 ivybind.h						$(DESTDIR)$(PREFIX)/include/Ivy/
+ 	install -m644 ivybuffer.h					$(DESTDIR)$(PREFIX)/include/Ivy/
+@@ -306,15 +306,15 @@
+ 
+ 
+ installdocs:
+-	test -d $(DESTDIR)$(PREFIX)/share/doc/ivy-c || mkdirhier $(DESTDIR)$(PREFIX)/share/doc/ivy-c
++	test -d $(DESTDIR)$(PREFIX)/share/doc/ivy-c || mkdir -p $(DESTDIR)$(PREFIX)/share/doc/ivy-c
+ 	for f in `find	../doc/*.html -type f -maxdepth 1`; do \
+ 		install -m 644 $$f					$(DESTDIR)$(PREFIX)/share/doc/ivy-c; \
+ 	done
+-	test -d $(DESTDIR)$(PREFIX)/man/man1 || mkdirhier $(DESTDIR)$(PREFIX)/man/man1
++	test -d $(DESTDIR)$(PREFIX)/man/man1 || mkdir -p $(DESTDIR)$(PREFIX)/man/man1
+ 	for f in `find	../doc/*.1 -type f -maxdepth 1`; do \
+ 		install -m 644 $$f					$(DESTDIR)$(PREFIX)/man/man1; \
+ 	done
+-	test -d $(DESTDIR)$(PREFIX)/share/doc/ivy-c/examples || mkdirhier $(DESTDIR)$(PREFIX)/share/doc/ivy-c/examples
++	test -d $(DESTDIR)$(PREFIX)/share/doc/ivy-c/examples || mkdir -p $(DESTDIR)$(PREFIX)/share/doc/ivy-c/examples
+ 	install -m 644 version.h					$(DESTDIR)$(PREFIX)/share/doc/ivy-c/copyright
+ 	install -m 644 ../examples/motifButtonIvy.c			$(DESTDIR)$(PREFIX)/share/doc/ivy-c/examples
+ 	install -m 644 ../examples/testUnbind.c				$(DESTDIR)$(PREFIX)/share/doc/ivy-c/examples
+@@ -335,5 +335,5 @@
+ 	sed -e 's,@PREFIX@,$(PREFIX),; s,@DESTDIR@,$(DESTDIR),; s,@MAJOR@,$(MAJOR),; s,@MINOR@,$(MINOR),; s,@PCREINC@,$(PCREINC),; s,@REGEXP@,$(REGEXP),; s,@PCRELIB@,$(PCRELIB),; s,@EXTRALIB@,$(EXTRALIB),' ivy-glib.pc.in > ivy-glib.pc
+ 
+ installpkgconf:
+-	test -d $(DESTDIR)$(PREFIX)/lib/pkgconfig || mkdirhier $(DESTDIR)$(PREFIX)/lib/pkgconfig
++	test -d $(DESTDIR)$(PREFIX)/lib/pkgconfig || mkdir -p $(DESTDIR)$(PREFIX)/lib/pkgconfig
+ 	install -m 644 ivy-glib.pc						$(DESTDIR)$(PREFIX)/lib/pkgconfig
+Index: ivy-c-3.11.8/src/Makefile.mingw
+===================================================================
+--- ivy-c-3.11.8.orig/src/Makefile.mingw	2011-10-21 16:00:06.736755630 +0200
++++ ivy-c-3.11.8/src/Makefile.mingw	2011-10-21 15:59:56.700612293 +0200
+@@ -142,9 +142,9 @@
+ 	@(cd $(TOOLS_DIR) && $(MAKE) -f Makefile.mingw clean)
+ 
+ installlibs: static-libs shared-libs
+-	test -d $(PREFIX)/usr/lib || mkdirhier $(PREFIX)/usr/lib
+-	test -d $(PREFIX)/usr/X11R6/lib || mkdirhier $(PREFIX)/usr/X11R6/lib
+-	test -d $(PREFIX)/usr/include || mkdirhier $(PREFIX)/usr/include
++	test -d $(PREFIX)/usr/lib || mkdir -p $(PREFIX)/usr/lib
++	test -d $(PREFIX)/usr/X11R6/lib || mkdir -p $(PREFIX)/usr/X11R6/lib
++	test -d $(PREFIX)/usr/include || mkdir -p $(PREFIX)/usr/include
+ 	install -m644 libivy.a $(PREFIX)/usr/lib
+ 	install -m644 libgivy.a $(PREFIX)/usr/lib
+ 	install -m644 libxtivy.a $(PREFIX)/usr/X11R6/lib
+@@ -177,11 +177,11 @@
+ 	@(cd $(TOOLS_DIR) && $(MAKE) -f Makefile.mingw install)
+ 
+ installdocs:
+-	test -d $(PREFIX)/usr/doc/ivy-c || mkdirhier $(PREFIX)/usr/doc/ivy-c
++	test -d $(PREFIX)/usr/doc/ivy-c || mkdir -p $(PREFIX)/usr/doc/ivy-c
+ 	for f in `find  ../doc/*.html -type f -maxdepth 1`; do \
+                 install -m 644 $$f $(PREFIX)/usr/doc/ivy-c; \
+         done
+-	test -d $(PREFIX)/usr/man/man1 || mkdirhier $(PREFIX)/usr/man/man1
++	test -d $(PREFIX)/usr/man/man1 || mkdir -p $(PREFIX)/usr/man/man1
+ 	for f in `find  ../doc/*.1 -type f -maxdepth 1`; do \
+                 install -m 644 $$f $(PREFIX)/usr/man/man1; \
+         done
+Index: ivy-c-3.11.8/tools/Makefile
+===================================================================
+--- ivy-c-3.11.8.orig/tools/Makefile	2011-10-21 16:00:06.280748047 +0200
++++ ivy-c-3.11.8/tools/Makefile	2011-10-21 15:59:56.676611943 +0200
+@@ -61,11 +61,11 @@
+ 	$(CC) -o ivyglutprobe ivyglutprobe.o -L. $(GLUTLIB) -lglutivy $(PCRELIB) $(EXTRALIB
+ 
+ installbins: $(TARGETS)
+-	test -d $(DESTDIR)$(PREFIX)/bin || mkdirhier $(DESTDIR)$(PREFIX)/bin
++	test -d $(DESTDIR)$(PREFIX)/bin || mkdir -p $(DESTDIR)$(PREFIX)/bin
+ 	install -m755 ivyprobe $(DESTDIR)$(PREFIX)/bin
+ 
+ installbins_omp:  $(OMP_TARGET)
+-	test -d $(DESTDIR)$(PREFIX)/bin || mkdirhier $(DESTDIR)$(PREFIX)/bin
++	test -d $(DESTDIR)$(PREFIX)/bin || mkdir -p $(DESTDIR)$(PREFIX)/bin
+ 	install -m755 ivyprobe_omp $(DESTDIR)$(PREFIX)/bin
+ 
+ install: installbins 
+Index: ivy-c-3.11.8/tools/Makefile.mingw
+===================================================================
+--- ivy-c-3.11.8.orig/tools/Makefile.mingw	2011-10-21 16:00:06.508751846 +0200
++++ ivy-c-3.11.8/tools/Makefile.mingw	2011-10-21 15:59:56.684612062 +0200
+@@ -51,8 +51,8 @@
+ install: installbins 
+ 
+ installbins: commands
+-	test -d $(PREFIX)/usr/bin || mkdirhier $(PREFIX)/usr/bin
+-	test -d $(PREFIX)/usr/X11R6/bin || mkdirhier $(PREFIX)/usr/X11R6/bin
++	test -d $(PREFIX)/usr/bin || mkdir -p $(PREFIX)/usr/bin
++	test -d $(PREFIX)/usr/X11R6/bin || mkdir -p $(PREFIX)/usr/X11R6/bin
+ 	install -m755 ivyprobe $(PREFIX)/usr/bin
+ #	install -m755 ivyglutprobe $(PREFIX)/usr/X11R6/bin
+ 
+Index: ivy-c-3.11.8/tools/Makefile.osx
+===================================================================
+--- ivy-c-3.11.8.orig/tools/Makefile.osx	2011-10-21 16:00:06.352749247 +0200
++++ ivy-c-3.11.8/tools/Makefile.osx	2011-10-21 15:59:56.676611943 +0200
+@@ -49,11 +49,11 @@
+ 
+ 
+ installbins: $(TARGETS)
+-	test -d $(DESTDIR)$(PREFIX)/bin || mkdirhier $(DESTDIR)$(PREFIX)/bin
++	test -d $(DESTDIR)$(PREFIX)/bin || mkdir -p $(DESTDIR)$(PREFIX)/bin
+ 	install -m755 ivyprobe $(DESTDIR)$(PREFIX)/bin
+ 
+ installbins_omp:  $(OMP_TARGET)
+-	test -d $(DESTDIR)$(PREFIX)/bin || mkdirhier $(DESTDIR)$(PREFIX)/bin
++	test -d $(DESTDIR)$(PREFIX)/bin || mkdir -p $(DESTDIR)$(PREFIX)/bin
+ 	install -m755 ivyprobe_omp $(DESTDIR)$(PREFIX)/bin
+ 
+ install: installbins 
