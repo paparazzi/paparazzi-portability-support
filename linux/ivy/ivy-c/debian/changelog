@@ -1,3 +1,9 @@
+ivy-c (3.12.0-1ubuntu1) oneiric; urgency=low
+
+  * updated for ocamlc 3.12.0
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Fri, 21 Oct 2011 18:05:03 +0200
+
 ivy-c (3.11.8-2ubuntu2) natty; urgency=low
 
   * debian/patches/fix_ivy_includes.patch: fixed includes of ivy libs when building ivytestready

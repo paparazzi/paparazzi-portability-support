@@ -1,8 +1,9 @@
 Building a debian package:
 
 * fakeroot debian/rules get-orig-source
-* tar -xvzf ivy-c_3.11.8.orig.tar.gz
-* cp -r debian ivy-c_3.11.8
-* cd ivy-c_3.11.8
-* sudo pbuilder update 
+* tar -xvzf <version>.orig.tar.gz
+* cd ivy-c_<version>
+* rm -rf debian
+* cp -r ../debian .
+* sudo pbuilder update --distribution DIST-NAME --override-config
 * pdebuild
