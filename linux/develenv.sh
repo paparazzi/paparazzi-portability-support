@@ -7,7 +7,7 @@
 case `lsb_release -si` in
     Debian)
 	aptitude -y install \
-		autoconf \
+		automake \
 		debhelper \
 		git \
 		libftdi-dev \
@@ -18,17 +18,22 @@ case `lsb_release -si` in
 		texinfo \
 		quilt \
 		asciidoc \
-		devscripts
+		devscripts \
+		pbuilder \
+		fakeroot
     ;;
     Ubuntu)
 	aptitude -y install \
+		automake \
 		libmpfr-dev \
 		libtool \
 		texinfo \
 		quilt \
 		debhelper \
-		devscripts \
-		asciidoc
+		ubuntu-dev-tools \
+		asciidoc \
+		pbuilder \
+		fakeroot
     ;;
     *)
 	echo "Which Linux you are using ?"
