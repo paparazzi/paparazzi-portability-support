@@ -1,8 +1,7 @@
-ivy-ocaml (3.11.8-1.1) unstable; urgency=low
+ivy-ocaml (1.1-12.1) unstable; urgency=low
 
   * Non-maintainer upload
-  * Updated version number according to ocaml version
-  * Updated all debian files to use dh (7)
+  * Updated all debian files to use dh (debhelper 7)
 
  -- Felix Ruess <felix.ruess@gmail.com>  Fri, 21 Oct 2011 19:47:25 +0200
 
