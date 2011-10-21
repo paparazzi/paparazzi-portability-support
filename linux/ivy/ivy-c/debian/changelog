@@ -1,3 +1,10 @@
+ivy-c (3.11.8-2) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * updated debian packaging
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Fri, 21 Oct 2011 13:46:57 +0200
+
 ivy-c (3.11.8-1) unstable; urgency=low
 
   * ivy-c for paparazzi
@@ -11,20 +18,20 @@ ivy-c (3.11.8) unstable; urgency=low
   * correct OSX Makefile to set correct dylib path on executable at install
   * make ivy-c compilable by a c++ compiler
   * add fixes to remove all gcc warning message
-	
- -- Alexandre Bustico <bustico@cena.fr>  Mon, 27 Janury 2010 13:43:00 +0100
+
+ -- Alexandre Bustico <bustico@cena.fr>  Mon, 27 Jan 2010 13:43:00 +0100
 
 ivy-c (3.11.7) unstable; urgency=low
 
   * copy string buffer for message ready instead of referencing it since we have no clue if this buffer will remain valid atfer the caller calls init
   * function ivyTerminate dealloc allocated string
-	
+
  -- Alexandre Bustico <bustico@cena.fr>  Mon, 6 Jul 2009 16:43:00 +0200
 
 ivy-c (3.11.6-1) unstable; urgency=low
 
   * remove dependency over libgtk1.2-dev
-	
+
  -- Gautier Hattenberger <gautier.hattenberger@enac.fr>  Tue, 30 Nov 2010 16:43:00 +0200
  
 ivy-c (3.11.6) unstable; urgency=low
@@ -32,13 +39,13 @@ ivy-c (3.11.6) unstable; urgency=low
   * desactivation of the nagle buffering for TCP sockets, 
   since ivy is most of the time used to send events, we will priviligiate 
   lag over throughtput
-	
+
  -- Alexandre Bustico <bustico@cena.fr>  Mon, 6 Jul 2009 16:43:00 +0200
  
 ivy-c (3.11.5) unstable; urgency=low
 
   * fix double free error in delAllRegexpsFromDictionary
-	
+
  -- Alexandre Bustico <bustico@cena.fr>  Mon, 16 Oct 2008 12:30:00 +0200
 
 ivy-c (3.11.4) unstable; urgency=low
@@ -46,7 +53,7 @@ ivy-c (3.11.4) unstable; urgency=low
   * fix again timer.c (thanks again to brno ivy dev team) so that timer	could be removed within the callback 
   * make the lib and api more robust by adding const where they should be
   * compile with -Wall and eliminate remaining warnings
-	
+
  -- Alexandre Bustico <bustico@cena.fr>  Mon, 19 May 2008 17:30:00 +0200
 
 ivy-c (3.11.3) unstable; urgency=low
@@ -54,41 +61,41 @@ ivy-c (3.11.3) unstable; urgency=low
   * fix timer.c (thanks to brno ivy dev team), and ivydebug.h 
   * add __attribute__ gcc hooks which permit to emit warning when format
     and arguments of bindmessage and sendmessage aren't concordant.
-	
+
  -- Alexandre Bustico <bustico@cena.fr>  Tue, 14 May 2008 11:00:00 +0200
-	
+
 ivy-c (3.11.2) unstable; urgency=low
 
   * fix makefile for openmp lib and tools
-	
+
  -- Alexandre Bustico <bustico@cena.fr>  Tue, 6 May 2008 15:32:54 +0100
 
 ivy-c (3.11.1) unstable; urgency=low
 
   * fix a bug with the behavior of send system call in non blocking mode in some rare case
   * simplify ivythroutput and his fileset
-	
+
  -- Alexandre Bustico <bustico@cena.fr>  Wed, 8 Apr 2008 15:32:54 +0100
 
 ivy-c (3.11.0) unstable; urgency=low
 
   * change socket behavior to non blocking, with local management of a
-	fifo, this fix some deadlock problems when lot of agents with numerous regexp binding are on the same bus.
+    fifo, this fix some deadlock problems when lot of agents with numerous regexp binding are on the same bus.
   * little (ascendant compatible) api change
   * fix for numerous bugs
-	
+
  -- Alexandre Bustico <bustico@cena.fr>  Wed, 26 Mar 2008 15:32:54 +0100
 
 ivy-c (3.10.0-3) unstable; urgency=low
 
   * revert accidentally commited modif
-	
+
  -- Alexandre Bustico <bustico@cena.fr>  Wed, 08 Feb 2008 10:32:54 +0100
 
 ivy-c (3.10.0-2) unstable; urgency=low
 
   * fix makefile for non omp target
-	
+
  -- Alexandre Bustico <bustico@cena.fr>  Wed, 08 Feb 2008 10:32:54 +0100
 
 ivy-c (3.10.0-1) unstable; urgency=low
@@ -96,7 +103,7 @@ ivy-c (3.10.0-1) unstable; urgency=low
   * change Makefile to get around a debian Bug : debian pcrecpp 
   	package is broken, (as debian itself)
   * a repertory testivy with test file for the ivythroughput test tool
-	
+
  -- Alexandre Bustico <bustico@cena.fr>  Wed, 06 Feb 2008 17:17:54 +0100
 
 ivy-c (3.10.0) unstable; urgency=low
@@ -104,9 +111,9 @@ ivy-c (3.10.0) unstable; urgency=low
   * fix realloc buffer size when big message
   * complete change of internal structures for performance optimisation
   * experimental parralelized version for performance optimisation (use
-	and need openmp) which scale well for regexp matching on 
-	multicore/multi processor gear.
-	
+    and need openmp) which scale well for regexp matching on
+    multicore/multi processor gear.
+
 
  -- Alexandre Bustico <bustico@cena.fr>  Wed, 06 Feb 2008 17:17:54 +0100
 

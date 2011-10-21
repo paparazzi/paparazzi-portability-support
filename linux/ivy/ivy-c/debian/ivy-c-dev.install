@@ -1,0 +1,4 @@
+usr/lib/*.so
+usr/lib/*.a
+usr/include/Ivy/*.h
+usr/lib/pkgconfig/*

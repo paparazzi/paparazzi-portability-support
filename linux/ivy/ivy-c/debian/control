@@ -2,13 +2,14 @@ Source: ivy-c
 Priority: extra
 Section: devel
 Maintainer: Alexandre Bustico <alexandre.bustico@cena.fr>
-Build-Depends: debhelper (>> 4.0.0), libc6-dev, xlibs-dev | libx11-dev | xorg-dev, tcl8.4-dev, libglib2.0-dev, libpcre3-dev
-Standards-Version: 3.6.1
+Build-Depends: debhelper (>= 7.0.50~), libc6-dev, xlibs-dev | libx11-dev | xorg-dev, tcl8.4-dev, libglib2.0-dev, libpcre3-dev
+Standards-Version: 3.8.4
+Homepage: http://www2.tls.cena.fr/products/ivy/
 
 Package: ivy-c-dev
 Section: libdevel
 Architecture: any
-Depends: ivy-c (= ${Source-Version}), libc6-dev, xlibs-dev | libx11-dev | xorg-dev, libglib2.0-dev
+Depends: ivy-c (= ${Source-Version}), ${misc:Depends}, libc6-dev, xlibs-dev | libx11-dev | xorg-dev, libglib2.0-dev
 Suggests: tclsh, wish
 Description: Ivy software bus. development Package
  This package is needed for compiling applications using ivy-c.
@@ -19,7 +20,7 @@ Description: Ivy software bus. development Package
 Package: ivy-c
 Section: libs
 Architecture: any
-Depends: ${shlibs:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Suggests: tclsh, wish
 Conflicts: ivy-tcl
 Description: Ivy software bus. runtime Package

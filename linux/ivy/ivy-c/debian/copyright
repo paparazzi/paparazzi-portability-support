@@ -1,0 +1,27 @@
+This work was packaged for Debian by:
+
+    Felix Ruess <felix.ruess@gmail.com> on Fri, 21 Oct 2011 13:37:29 +0200
+
+It was downloaded from:
+
+    http://www2.tls.cena.fr/products/ivy/
+
+Upstream Author(s):
+
+    Francois-Regis Colin <colin@cena.dgac.fr>
+    Stephane Chatty <chatty@cena.dgac.fr>
+    Alexandre Bustico <bustico@cena.fr>
+
+Copyright:
+
+    Copyright (C) 2010 Alexandre Bustico
+    Copyright (C) 2010 Stephane Chatty
+    Copyright (C) 2010 Francois-Regis Colin
+
+License:
+
+    LGPL (see also http://www2.tls.cena.fr/products/ivy/download/legalissues.html)
+
+The Debian packaging is:
+
+    Copyright (C) 2011 Felix Ruess <felix.ruess@gmail.com>

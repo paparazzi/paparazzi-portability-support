@@ -1,0 +1,42 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+%:
+	dh $@
+
+
+REV=$(shell dpkg-parsechangelog | sed -rne 's,^Version: .*[+~]svn([0-9]+).*,\1,p')
+VER=$(shell dpkg-parsechangelog | sed -rne 's,^Version: ([^-]+).*,\1,p')
+
+get-orig-source:
+	rm -rf ivy-c-$(VER)
+	svn -q export http://svn.tls.cena.fr/svn/ivy/ivy-c/trunk ivy-c-$(VER)
+	GZIP='--best --no-name' tar -cz --owner root --group root --mode a+rX -f ivy-c_$(VER).orig.tar.gz ivy-c-$(VER)
+	rm -r ivy-c-$(VER)
+
+
+SED_COMMAND='s/.*(\([^)]*\)).*/\1/p'
+MAJOR := $(shell sed -n $(SED_COMMAND) debian/changelog | head -1 | sed -n 's/\([0-9]*\)\..*/\1/p')
+MINOR := $(shell sed -n $(SED_COMMAND) debian/changelog | head -1 | sed -n 's/[0-9]*\.\([0-9\.]*\).*/\1/p')
+
+override_dh_auto_build :
+	cd src && $(MAKE) all MAJOR=$(MAJOR) MINOR=$(MINOR) TCLINC=$(-I/usr/include/tcl8.4/) TCLLIB=$(-ltcl8.4) CFLAGS="-g -fPIC -D_REENTRANT" LDFLAGS="-L/usr/X11R6/lib"
+
+override_dh_auto_clean :
+	cd src && $(MAKE) clean
+
+override_dh_auto_install :
+	cd src && $(MAKE) install DESTDIR=$(CURDIR)/debian/tmp PREFIX=/usr LIB=/lib
+
+override_dh_auto_binary-arch:
+	dh_install --source=$(CURDIR)/debian/tmp
+
+#.PHONY: get-orig-source build binary-arch binary install
