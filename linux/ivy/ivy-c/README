@@ -4,5 +4,5 @@ Building a debian package:
 * tar -xvzf ivy-c_3.11.8.orig.tar.gz
 * cp -r debian ivy-c_3.11.8
 * cd ivy-c_3.11.8
-* debuild -S -sa
-* sudo pbuilder build ../*.dsc
+* sudo pbuilder update 
+* pdebuild
