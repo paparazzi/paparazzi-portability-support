@@ -1,6 +1,5 @@
 ivy-ocaml (1.1-12.1ubuntu1) natty; urgency=low
 
-  * Non-maintainer upload
   * updated for ubuntu natty ppa build
 
  -- Felix Ruess <felix.ruess@gmail.com>  Fri, 21 Oct 2011 23:53:48 +0200
