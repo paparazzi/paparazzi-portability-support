@@ -1,0 +1,19 @@
+ivy-python (2.2-3~ppa1) oneiric; urgency=low
+
+  * updated for ppa build 
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Sat, 05 Nov 2011 16:16:01 +0100
+
+ivy-python (2.2-2) unstable; urgency=low
+
+  * debian/patches/send_msg_on_multiple_matches.patch:
+    Fix send_msg to send on each regexp match in case of multiple matches
+    instead of only the first one.
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Sat, 05 Nov 2011 16:12:24 +0100
+
+ivy-python (2.2-1) unstable; urgency=low
+
+  * Initial release
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Sat, 05 Nov 2011 15:40:45 +0100

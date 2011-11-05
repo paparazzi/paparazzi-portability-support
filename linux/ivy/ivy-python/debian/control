@@ -1,0 +1,16 @@
+Source: ivy-python
+Section: python
+Priority: optional
+Maintainer: Felix Ruess <felix.ruess@gmail.com>
+Build-Depends: debhelper (>= 8.0.0), python (>= 2.6.6-3~)
+Standards-Version: 3.9.2
+Homepage: http://www2.tls.cena.fr/products/ivy/
+
+Package: ivy-python
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends}
+Description: Ivy: a lightweight software bus (Python bindings)
+ Ivy is a lightweight software bus for quick-prototyping protocols. It allows
+ applications to broadcast information through text messages, with a
+ subscription mechanism based on regular expressions. This package provides
+ Python bindings for Ivy.
