@@ -1,6 +1,5 @@
 # Hey Emacs, this is a -*- makefile -*-
 #
-#   $Id$
 #   Copyright (C) 2009 Antoine Drouin
 #
 # This file is part of paparazzi.
@@ -18,20 +17,32 @@
 # You should have received a copy of the GNU General Public License
 # along with paparazzi; see the file COPYING.  If not, write to
 # the Free Software Foundation, 59 Temple Place - Suite 330,
-# Boston, MA 02111-1307, USA.  
-# 
+# Boston, MA 02111-1307, USA.
+#
 
 #
-# Crappy makefile to build a loosy stm32 toolchain package
+# makefile to build an arm cross-toolchain package
 #
+
+PREFIX=/opt/paparazzi/arm-multilib
+
+CURDIR := $(shell pwd)
+BUILDSYSROOT = $(CURDIR)/build-sysroot
+
 
 all:
-	@LANG=C ./summon-arm-toolchain LIBSTM32_EN=1 PREFIX=/opt/paparazzi/arm-multilib
+	@LANG=C ./summon-arm-toolchain LIBSTM32_EN=1 PREFIX=$(PREFIX) DESTDIR=$(BUILDSYSROOT)
 
+init-dirs:
+	mkdir -p stamps build sources
+	touch -t 9001010000 stamps build sources
+
+fetch_sources:
+	@LANG=C ./summon-arm-toolchain LIBSTM32_EN=1 PREFIX=/opt/paparazzi/arm-multilib FETCH_ONLY=1
 
 install:
-	mkdir -p $(DESTDIR)/opt/paparazzi
-	cp -a /opt/paparazzi/arm-multilib $(DESTDIR)/opt/paparazzi
+	mkdir -p $(DESTDIR)$(PREFIX)
+	cp -a $(BUILDSYSROOT)$(PREFIX) $(DESTDIR)$(PREFIX)
 
 clean:
 	rm -rf *~ build binutils* gcc* gdb* libcmsis* libstm32* newlib* openocd*

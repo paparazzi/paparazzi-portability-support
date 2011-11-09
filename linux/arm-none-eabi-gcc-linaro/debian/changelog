@@ -1,3 +1,11 @@
+paparazzi-arm-multilib (1.0.0-2) unstable; urgency=low
+
+  * updated debian files
+  * added build dependencies to run in pbuilder chroot
+  * added seed dir with tarballs to skip downloading sources
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Wed, 09 Nov 2011 19:06:17 +0100
+
 paparazzi-arm-multilib (1.0.0-1) unstable; urgency=low
 
   * upgraded to gcc linaro 4.5-2011.02-0
