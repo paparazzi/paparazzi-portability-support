@@ -21,7 +21,7 @@ set -e
 ##############################################################################
 TARGET=arm-none-eabi		# Or: TARGET=arm-elf
 PREFIX=${HOME}/sat	# Install location of your final toolchain
-DESTDIR=${PREFIX}   # overwrite the install dir, e.g. for building packages
+DESTDIR=   # temporary install location (e.g. used when building package in a chroot)
 DARWIN_OPT_PATH=/opt/local	# Path in which MacPorts or Fink is installed
 # Set to 'sudo' if you need superuser privileges while installing
 SUDO=
@@ -177,7 +177,7 @@ if [ ${QUIET} != 0 ]; then
     MAKEFLAGS="${MAKEFLAGS} -s"
 fi
 
-export PATH="${DESTDIR}/bin:${PATH}"
+export PATH="${DESTDIR}${PREFIX}/bin:${PATH}"
 
 SUMMON_DIR=$(pwd)
 SOURCES=${SUMMON_DIR}/sources
@@ -494,7 +494,7 @@ if [ ! -e ${STAMPS}/libcmsis-${LIBCMSIS}.build ]; then
     cd libcmsis-${LIBCMSIS}
     log "Building libcmsis-${LIBCMSIS}"
     make arch_prefix=${TARGET} prefix=${PREFIX}
-    install libcmsis-${LIBCMSIS} arch_prefix=${TARGET} prefix=${PREFIX} install_dir=${DESTDIR}/${TARGET} install
+    install libcmsis-${LIBCMSIS} arch_prefix=${TARGET} prefix=${PREFIX} install_dir=${DESTDIR}${PREFIX}/${TARGET} install
     cd ..
     log "Cleaning up libcmsis-${LIBCMSIS}"
     touch ${STAMPS}/libcmsis-${LIBCMSIS}.build
@@ -506,7 +506,7 @@ if [ ! -e ${STAMPS}/libstm32-${LIBSTM32}.build ]; then
     cd libstm32-${LIBSTM32}
     log "Building libstm32-${LIBSTM32}"
     make arch_prefix=${TARGET} prefix=${PREFIX}
-    install libstm32-${LIBSTM32} arch_prefix=${TARGET} prefix=${PREFIX} install_dir=${DESTDIR}/${TARGET} install
+    install libstm32-${LIBSTM32} arch_prefix=${TARGET} prefix=${PREFIX} install_dir=${DESTDIR}${PREFIX}/${TARGET} install
     cd ..
     log "Cleaning up libstm32-${LIBSTM32}"
     touch ${STAMPS}/libstm32-${LIBSTM32}.build
@@ -518,7 +518,7 @@ if [ ! -e ${STAMPS}/libstm32usb-${LIBSTM32USB}.build ]; then
     cd libstm32usb-${LIBSTM32USB}
     log "Building libstm32usb-${LIBSTM32USB}"
     make arch_prefix=${TARGET} prefix=${PREFIX}
-    install libstm32usb-${LIBSTM32USB} arch_prefix=${TARGET} prefix=${PREFIX} install_dir=${DESTDIR}/${TARGET} install
+    install libstm32usb-${LIBSTM32USB} arch_prefix=${TARGET} prefix=${PREFIX} install_dir=${DESTDIR}${PREFIX}/${TARGET} install
     cd ..
     log "Cleaning up libstm32usb-${LIBSTM32USB}"
     touch ${STAMPS}/libstm32usb-${LIBSTM32USB}.build
