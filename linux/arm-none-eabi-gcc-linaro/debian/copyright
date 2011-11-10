@@ -1,28 +1,19 @@
-This package was debianized by Antoine Drouin <poinix@gmail.com> on
-Tue, 23 Mar 2010 11:06:18 -0700.
+This work was packaged for Debian by:
 
-It was downloaded from <url://example.com>
+    Felix Ruess <felix.ruess@gmail.com> on Wed, 09 Nov 2011 17:54:28 +0200
 
-Upstream Author(s):
+It was downloaded from https://github.com/paparazi/paparazzi-portability-support
 
-    <put author's name and email here>
-    <likewise for another author>
+This package includes newlib, binutils, and gcc.  Please see the
+corresponding Debian or source packages for the copyright information:
 
-Copyright:
-
-    <Copyright (C) YYYY Name OfAuthor>
-    <likewise for another author>
-
-License:
-
-    <Put the license of the package here indented by 4 spaces>
+ /usr/share/doc/newlib-source/copyright
+ /usr/share/doc/binutils/copyright
+ /usr/share/doc/gcc/copyright
 
 The Debian packaging is:
 
-    Copyright (C) 2010 Antoine Drouin <poinix@gmail.com>
+    Copyright (C) 2011 Felix Ruess <felix.ruess@gmail.com>
 
-and is licensed under the GPL version 3, 
-see `/usr/share/common-licenses/GPL-3'.
-
-# Please also look if there are files or directories which have a
-# different copyright/license attached and list them here.
+and is licensed under the GPL version 3,
+see "/usr/share/common-licenses/GPL-3".
