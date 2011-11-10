@@ -20,7 +20,8 @@ case `lsb_release -si` in
 		asciidoc \
 		devscripts \
 		pbuilder \
-		fakeroot
+		fakeroot \
+		debootstrap
     ;;
     Ubuntu)
 	aptitude -y install \
@@ -33,7 +34,9 @@ case `lsb_release -si` in
 		ubuntu-dev-tools \
 		asciidoc \
 		pbuilder \
-		fakeroot
+		fakeroot \
+		debootstrap \
+		debian-archive-keyring
     ;;
     *)
 	echo "Which Linux you are using ?"
