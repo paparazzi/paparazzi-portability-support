@@ -267,10 +267,12 @@ function unpack {
 # Install a build
 function install {
     log $1
-    ${SUDO} make ${MAKEFLAGS} DESTDIR=${DESTDIR} $2 $3 $4 $5 $6 $7 $8
-    #${SUDO} make ${MAKEFLAGS} $2 $3 $4 $5 $6 $7 $8
+    if [ ${DESTDIR} != '' ]; then
+        ${SUDO} make ${MAKEFLAGS} DESTDIR=${DESTDIR} $2 $3 $4 $5 $6 $7 $8
+    else
+        ${SUDO} make ${MAKEFLAGS} $2 $3 $4 $5 $6 $7 $8
+    fi
 }
-
 
 ##############################################################################
 # Fetching of sources
@@ -532,8 +534,11 @@ if [ ! -e ${STAMPS}/libopenstm32-${LIBOPENSTM32}.build ]; then
     cd libopenstm32-${LIBOPENSTM32}
     log "Building libopenstm32-${LIBOPENSTM32}"
     make lib PREFIX=${TARGET} DESTDIR=${PREFIX}
-    install libopenstm32-${LIBOPENSTM32} PREFIX=${TARGET} install
-    #install libopenstm32-${LIBOPENSTM32} PREFIX=${TARGET} DESTDIR=${PREFIX} install
+    if [ ${DESTDIR} != '' ]; then
+        install libopenstm32-${LIBOPENSTM32} PREFIX=${TARGET} install
+    else
+        install libopenstm32-${LIBOPENSTM32} PREFIX=${TARGET} DESTDIR=${PREFIX} install
+    fi
     cd ..
     log "Cleaning up libopenstm32-${LIBOPENSTM32}"
     touch ${STAMPS}/libopenstm32-${LIBOPENSTM32}.build
