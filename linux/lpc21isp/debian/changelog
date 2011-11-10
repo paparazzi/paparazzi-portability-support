@@ -1,10 +1,10 @@
-lpc21isp (1.83-1ubuntu1) oneiric; urgency=low
+lpc21isp (1.83-2) unstable; urgency=low
 
   * debian/patches/add-install-to-makefile.patch: fix makefile with quilt patch
 
  -- Felix Ruess <felix.ruess@gmail.com>  Thu, 20 Oct 2011 22:46:09 +0200
 
-lpc21isp (1.83-1) natty; urgency=low
+lpc21isp (1.83-1) unstable; urgency=low
 
   * Initial release
 
