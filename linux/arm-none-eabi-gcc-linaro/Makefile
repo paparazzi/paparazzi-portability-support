@@ -42,7 +42,7 @@ fetch_sources:
 
 install:
 	mkdir -p $(DESTDIR)$(PREFIX)
-	cp -a $(BUILDSYSROOT)$(PREFIX) $(DESTDIR)$(PREFIX)
+	tar cf - -C $(BUILDSYSROOT)$(PREFIX) . | tar xf - -C $(DESTDIR)$(PREFIX)
 
 clean:
 	rm -rf *~ build binutils* gcc* gdb* libcmsis* libstm32* newlib* openocd*
