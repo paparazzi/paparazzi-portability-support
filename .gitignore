@@ -13,8 +13,12 @@ linux/arm-none-eabi-gcc-linaro/debian/files
 linux/arm-none-eabi-gcc-linaro/debian/paparazzi-arm-multilib/
 linux/arm-none-eabi-gcc-linaro/debian/paparazzi-arm-multilib.debhelper.log
 
+linux/paparazzi-arm-multilib_*
+
 linux/ivy/ivy-c/ivy-c*
 
 linux/ivy/ivy-ocaml/ivy-ocaml*
+
+linux/ivy/ivy-python/ivy-python*
 
 linux/lpc21isp/lpc21isp*
