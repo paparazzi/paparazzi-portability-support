@@ -31,7 +31,7 @@ BUILDSYSROOT = $(CURDIR)/build-sysroot
 
 
 all:
-	@LANG=C ./summon-arm-toolchain LIBSTM32_EN=1 PREFIX=$(PREFIX) DESTDIR=$(BUILDSYSROOT)
+	@LANG=C ./summon-arm-toolchain LIBSTM32_EN=1 CPUS=1 PREFIX=$(PREFIX) DESTDIR=$(BUILDSYSROOT)
 
 init-dirs:
 	mkdir -p stamps build sources

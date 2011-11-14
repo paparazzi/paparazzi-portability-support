@@ -178,6 +178,7 @@ if [ ${QUIET} != 0 ]; then
 fi
 
 export PATH="${DESTDIR}${PREFIX}/bin:${PATH}"
+echo PATH: $PATH
 
 SUMMON_DIR=$(pwd)
 SOURCES=${SUMMON_DIR}/sources
@@ -267,7 +268,7 @@ function unpack {
 # Install a build
 function install {
     log $1
-    if [ ${DESTDIR} != '' ]; then
+    if [ "x${DESTDIR}" != "x" ]; then
         ${SUDO} make ${MAKEFLAGS} DESTDIR=${DESTDIR} $2 $3 $4 $5 $6 $7 $8
     else
         ${SUDO} make ${MAKEFLAGS} $2 $3 $4 $5 $6 $7 $8
@@ -404,6 +405,8 @@ if [ ! -e ${STAMPS}/${GCC}-${NEWLIB}.build ]; then
     fi
 
     log "Configuring ${GCC} and ${NEWLIB}"
+    log "PATH before configuring: ${PATH}"
+    export PATH="${DESTDIR}${PREFIX}/bin:${PATH}" && \
     ../${GCC}/configure --target=${TARGET} \
                       --prefix=${PREFIX} \
                       --enable-interwork \
@@ -425,7 +428,9 @@ if [ ! -e ${STAMPS}/${GCC}-${NEWLIB}.build ]; then
 		      --disable-newlib-supplied-syscalls \
 		      ${GCCFLAGS}
     log "Building ${GCC} and ${NEWLIB}"
-    make ${MAKEFLAGS}
+    log "PATH befor building: ${PATH}"
+    export PATH="${DESTDIR}${PREFIX}/bin:${PATH}" && \
+    make ${MAKEFLAGS} && \
     install ${GCC} install
     cd ..
     log "Cleaning up ${GCC} and ${NEWLIB}"
@@ -534,7 +539,7 @@ if [ ! -e ${STAMPS}/libopenstm32-${LIBOPENSTM32}.build ]; then
     cd libopenstm32-${LIBOPENSTM32}
     log "Building libopenstm32-${LIBOPENSTM32}"
     make lib PREFIX=${TARGET} DESTDIR=${PREFIX}
-    if [ ${DESTDIR} != '' ]; then
+    if [ "x${DESTDIR}" != "x" ]; then
         install libopenstm32-${LIBOPENSTM32} PREFIX=${TARGET} install
     else
         install libopenstm32-${LIBOPENSTM32} PREFIX=${TARGET} DESTDIR=${PREFIX} install
