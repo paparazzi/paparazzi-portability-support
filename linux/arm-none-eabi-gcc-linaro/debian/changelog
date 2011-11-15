@@ -1,9 +1,11 @@
 paparazzi-arm-multilib (1.0.0-4) unstable; urgency=low
 
   * fixed check for DESTDIR
+  * added patch for binutils2.21.1: allow svn instruction on cortex-m3
+    - See http://sourceware.org/bugzilla/show_bug.cgi?id=12296
   * attempt to fix building libs with wrong arch by setting PATH explicitly again
 
- -- Felix Ruess <felix.ruess@gmail.com>  Mon, 14 Nov 2011 22:41:09 +0100
+ -- Felix Ruess <felix.ruess@gmail.com>  Mon, 14 Nov 2011 23:20:55 +0100
 
 paparazzi-arm-multilib (1.0.0-3) unstable; urgency=low
 

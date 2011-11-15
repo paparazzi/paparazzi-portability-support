@@ -45,6 +45,6 @@ install:
 	tar cf - -C $(BUILDSYSROOT)$(PREFIX) . | tar xf - -C $(DESTDIR)$(PREFIX)
 
 clean:
-	rm -rf *~ build binutils* gcc* gdb* libcmsis* libstm32* newlib* openocd*
+	rm -rf *~ build build-sysroot binutils* gcc* gdb* libcmsis* libstm32* newlib* openocd* libopenstm32*
 # comment the next line out if you don't want to rebuild everything, but make sure the stamps are ok
 	rm -rf stamps sources
