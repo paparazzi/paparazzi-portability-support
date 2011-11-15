@@ -542,12 +542,9 @@ if [ ! -e ${STAMPS}/libopenstm32-${LIBOPENSTM32}.build ]; then
     unpack libopenstm32-${LIBOPENSTM32}
     cd libopenstm32-${LIBOPENSTM32}
     log "Building libopenstm32-${LIBOPENSTM32}"
-    make lib PREFIX=${TARGET} DESTDIR=${PREFIX}
-    if [ "x${DESTDIR}" != "x" ]; then
-        install libopenstm32-${LIBOPENSTM32} PREFIX=${TARGET} install
-    else
-        install libopenstm32-${LIBOPENSTM32} PREFIX=${TARGET} DESTDIR=${PREFIX} install
-    fi
+    make lib PREFIX=${TARGET} DESTDIR=${DESTDIR}${PREFIX}
+    log "Installing libopenstm32-${LIBOPENSTM32}"
+    ${SUDO} make install ${MAKEFLAGS} PREFIX=${TARGET} DESTDIR=${DESTDIR}${PREFIX}
     cd ..
     log "Cleaning up libopenstm32-${LIBOPENSTM32}"
     touch ${STAMPS}/libopenstm32-${LIBOPENSTM32}.build
