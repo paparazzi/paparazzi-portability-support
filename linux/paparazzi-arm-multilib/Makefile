@@ -30,14 +30,14 @@ GCCFLAGS ?=
 # Sources:
 
 # The binutils version to build
-BINUTILSURL = http://sourceware.mirrors.tds.net/pub/sourceware.org/binutils/snapshots/binutils-2.21.53.tar.bz2
+BINUTILSURL = http://sourceware.mirrors.tds.net/pub/sourceware.org/binutils/releases/binutils-2.21.tar.bz2
 
 # The version of Newlib to use as a C library
 NEWLIBURL = http://sourceware.mirrors.tds.net/pub/sourceware.org/newlib/newlib-1.19.0.tar.gz
 
 # The Linaro GCC version to build.  Check out
 # https://launchpad.net/gcc-linaro/+download for the latest link.
-GCCURL = http://launchpad.net/gcc-linaro/4.5/4.5-2011.02-0/+download/gcc-linaro-4.5-2011.02-0.tar.bz2
+GCCURL = http://launchpad.net/gcc-linaro/4.4/4.4-2011.02-0/+download/gcc-linaro-4.4-2011.02-0.tar.bz2
 
 #libstm32 git branch/tag
 LIBCMSIS = v1.10-3
