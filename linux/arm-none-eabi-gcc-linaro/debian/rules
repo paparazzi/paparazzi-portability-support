@@ -25,8 +25,10 @@ override_dh_auto_configure:
 	-cp -au seed/* sources
 	-cp -au seed-stamps/* stamps
 
-override_dh_auto_install:
-	$(MAKE) DESTDIR=$$(pwd)/debian/paparazzi-arm-multilib install
+# don't strip, if the libs are stripped with the normal strip (instead of arm-none-eabi-strip),
+# the first object in the archive gets messed up so the lib is unusable and will be skipped later
+override_dh_strip:
+	@echo 'strip:' do nothing
 
 # Fill up the seed.  ppa builds must be self contained
 reseed:
