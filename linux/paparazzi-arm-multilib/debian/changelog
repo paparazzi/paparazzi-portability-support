@@ -1,6 +1,6 @@
 paparazzi-arm-multilib (1.0.1-1) unstable; urgency=low
 
-  * test build without stm32 libs, gdb, openocd
+  * removed gdb and openocd from package
   * not using summon-arm-toolchain anymore, adapted linaro makefile instead
   * use binutils snapshot instead of patching to allow svc instruction
 

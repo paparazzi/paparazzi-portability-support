@@ -13,6 +13,12 @@
 # Uncomment this to turn on verbose mode.
 export DH_VERBOSE=1
 
+# Change the default prefix
+export PREFIX=/opt/paparazzi/arm-multilib
+
+# this should actually work as well, instead of overriding dh_strip
+#export DEB_BUILD_OPTIONS:="$(DEB_BUILD_OPTIONS) nostrip"
+
 %:
 	dh $@
 
@@ -20,6 +26,9 @@ export DH_VERBOSE=1
 override_dh_auto_configure:
 	make stamp/init-dirs
 	-cp -au seed/* downloads
+
+override_dh_strip:
+	@echo 'strip:' do nothing
 
 # Fill up the seed.  ppa builds must be self contained
 reseed:

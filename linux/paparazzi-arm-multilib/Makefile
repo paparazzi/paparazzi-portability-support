@@ -16,7 +16,7 @@ TARGET ?= arm-none-eabi
 
 # Where to install resulting tarball.  Doesn't need to be writable
 # during build.
-PREFIX ?= /opt/paparazzi/arm-multilib
+PREFIX ?= $(HOME)/opt/paparazzi/arm-multilib
 
 # What languages to build
 LANGUAGES ?= c,c++
