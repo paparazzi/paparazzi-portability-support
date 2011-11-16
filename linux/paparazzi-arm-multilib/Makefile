@@ -39,14 +39,27 @@ NEWLIBURL = http://sourceware.mirrors.tds.net/pub/sourceware.org/newlib/newlib-1
 # https://launchpad.net/gcc-linaro/+download for the latest link.
 GCCURL = http://launchpad.net/gcc-linaro/4.5/4.5-2011.02-0/+download/gcc-linaro-4.5-2011.02-0.tar.bz2
 
-#TODO: download and tar libstm32 and libopencm3
+#libstm32 git branch/tag
+LIBCMSIS = v1.10-3
+LIBSTM32 = v3.0.0-2
+LIBSTM32USB = v3.0.1-1
 
+#libopenstm32 git branch
+LIBOPENSTM32 = master
 
+#
 # The rest should be fine...
+#
 CURDIR := $(shell pwd)
 GCCSRC = downloads/$(notdir $(GCCURL))
 BINUTILSSRC = downloads/$(notdir $(BINUTILSURL))
 NEWLIBSRC = downloads/$(notdir $(NEWLIBURL))
+
+LIBCMSISSRC = downloads/libcmsis-$(LIBCMSIS).tar.bz2
+LIBSTM32SRC = downloads/libstm32-$(LIBSTM32).tar.bz2
+LIBSTM32USBSRC = downloads/libstm32usb-$(LIBSTM32USB).tar.bz2
+LIBOPENSTM32SRC = downloads/libopenstm32-$(LIBOPENSTM32).tar.bz2
+
 BUILDSYSROOT = $(CURDIR)/build/sysroot
 
 # Turns gcc-linaro-4.5.2.tar.xz into gcc-linaro, 4.5.2
@@ -61,10 +74,10 @@ CURLFLAGS = -L
 
 -include local.mk
 
-all: gcc
+all: gcc stmlibs
 
 # Install into the configured directory
-install: gcc
+install: gcc stmlibs
 	mkdir -p $(DESTDIR)$(PREFIX)
 	tar cf - -C $(BUILDSYSROOT)$(PREFIX) . | tar xf - -C $(DESTDIR)$(PREFIX)
 
@@ -163,7 +176,7 @@ $(stamp)gcc-configure: $(stamp)binutils-install $(stamp)newlib-extract $(stamp)g
 	--disable-libssp \
 	--disable-libstdcxx-pch \
 	--disable-libmudflap \
-	--disable-werror
+	--disable-werror \
 	$(GCCFLAGS)
 	touch $@
 
@@ -173,6 +186,81 @@ $(stamp)gcc-install: $(stamp)gcc-configure
 	$(MAKE) -C build/gcc && \
 	$(MAKE) -C build/gcc install DESTDIR=$(BUILDSYSROOT)
 	touch $@
+
+# Build stm32 and libopenstm32
+stmlibs: $(stamp)libcmsis-install $(stamp)libstm32-install $(stamp)libstm32usb-install $(stamp)libopenstm32-install
+
+# Fetch
+$(LIBCMSISSRC): $(stamp)init-dirs
+	@echo 'TODO:' clone libcmsis from git and export to tarball
+
+# Extract
+$(stamp)libcmsis-extract: $(LIBCMSISSRC) $(stamp)init-dirs
+	tar xaf $< -C src
+	touch $@
+
+# Build and install
+$(stamp)libcmsis-install: $(stamp)gcc-install $(stamp)libcmsis-extract
+	export PATH=$(BUILDSYSROOT)$(PREFIX)/bin:$(PATH) && \
+	cd src/libcmsis* && \
+	$(MAKE) arch_prefix=$(TARGET) prefix=$(PREFIX) && \
+	$(MAKE) install arch_prefix=$(TARGET) prefix=$(PREFIX) install_dir=$(BUILDSYSROOT)$(PREFIX)/$(TARGET)
+	touch $@
+
+
+# Fetch
+$(LIBSTM32SRC): $(stamp)init-dirs
+	@echo 'TODO:' clone libstm32 from git and export to tarball
+
+# Extract
+$(stamp)libstm32-extract: $(LIBSTM32SRC) $(stamp)init-dirs
+	tar xaf $< -C src
+	touch $@
+
+# Build and install
+$(stamp)libstm32-install: $(stamp)gcc-install $(stamp)libstm32-extract
+	export PATH=$(BUILDSYSROOT)$(PREFIX)/bin:$(PATH) && \
+	cd src/libstm32* && \
+	$(MAKE) arch_prefix=$(TARGET) prefix=$(PREFIX) && \
+	$(MAKE) install arch_prefix=$(TARGET) prefix=$(PREFIX) install_dir=$(BUILDSYSROOT)$(PREFIX)/$(TARGET)
+	touch $@
+
+
+# Fetch
+$(LIBSTM32USBSRC): $(stamp)init-dirs
+	@echo 'TODO:' clone libstm32usb from git and export to tarball
+
+# Extract
+$(stamp)libstm32usb-extract: $(LIBSTM32USBSRC) $(stamp)init-dirs
+	tar xaf $< -C src
+	touch $@
+
+# Build and install
+$(stamp)libstm32usb-install: $(stamp)gcc-install $(stamp)libstm32usb-extract
+	export PATH=$(BUILDSYSROOT)$(PREFIX)/bin:$(PATH) && \
+	cd src/libstm32usb* && \
+	$(MAKE) arch_prefix=$(TARGET) prefix=$(PREFIX) && \
+	$(MAKE) install arch_prefix=$(TARGET) prefix=$(PREFIX) install_dir=$(BUILDSYSROOT)$(PREFIX)/$(TARGET)
+	touch $@
+
+
+# Fetch
+$(LIBOPENSTM32SRC): $(stamp)init-dirs
+	@echo 'TODO:' clone libopenstm32 from git and export to tarball
+
+# Extract
+$(stamp)libopenstm32-extract: $(LIBOPENSTM32SRC) $(stamp)init-dirs
+	tar xaf $< -C src
+	touch $@
+
+# Build and install
+$(stamp)libopenstm32-install: $(stamp)gcc-install $(stamp)libopenstm32-extract
+	export PATH=$(BUILDSYSROOT)$(PREFIX)/bin:$(PATH) && \
+	cd src/libopenstm32* && \
+	$(MAKE) PREFIX=$(TARGET) DESTDIR=$(BUILDSYSROOT)$(PREFIX) && \
+	$(MAKE) install PREFIX=$(TARGET) DESTDIR=$(BUILDSYSROOT)$(PREFIX)
+	touch $@
+
 
 # Remove all temporary files
 clean:
