@@ -1,0 +1,29 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+#
+# build and package a multilib baremetal compiler
+#
+# Usage:
+#  make -f debian/rules reseed
+#  debuild -S
+#  cd ..
+#  sudo pbuilder build paparazzi-arm-multilib*.dsc
+#
+
+# Uncomment this to turn on verbose mode.
+export DH_VERBOSE=1
+
+%:
+	dh $@
+
+# A little hack to skip downloading if the files are already present.
+override_dh_auto_configure:
+	make stamp/init-dirs
+	-cp -au seed/* downloads
+
+# Fill up the seed.  ppa builds must be self contained
+reseed:
+	rm -rf seed stamp
+	mkdir -p seed
+	$(MAKE) -j3 stamp/newlib-extract stamp/binutils-extract stamp/gcc-extract
+	cp -a downloads/* seed
