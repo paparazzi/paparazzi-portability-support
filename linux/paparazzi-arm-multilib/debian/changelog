@@ -1,3 +1,9 @@
+paparazzi-arm-multilib (1.1.0-1) unstable; urgency=low
+
+  * only package version bump for gcc-4.5 to be higher than gcc-4.4
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Thu, 17 Nov 2011 19:53:19 +0100
+
 paparazzi-arm-multilib (1.0.1-1) unstable; urgency=low
 
   * removed gdb and openocd from package
