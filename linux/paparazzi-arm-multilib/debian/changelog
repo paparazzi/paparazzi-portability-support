@@ -1,8 +1,8 @@
 paparazzi-arm-multilib (1.0.1-1) unstable; urgency=low
 
-  * removed gdb and openocd from package
+  * removed gdb and openocd
   * not using summon-arm-toolchain anymore, adapted linaro makefile instead
-  * use binutils snapshot instead of patching to allow svc instruction
+  * back to binutils-2.21 and gcc-linaro-4.4-2011.02-0
 
  -- Felix Ruess <felix.ruess@gmail.com>  Tue, 15 Nov 2011 18:00:10 +0100
 
