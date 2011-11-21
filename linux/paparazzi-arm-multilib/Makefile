@@ -1,7 +1,5 @@
 # Makefile that builds a multilib cross compiler for a bare metal ARM system.
 #
-# Tested on Ubuntu Natty.  It should work on any recent Linux
-# distribution.
 #
 # Copyright (c) 2011 Linaro
 # Contributors:
@@ -37,7 +35,9 @@ NEWLIBURL = http://sourceware.mirrors.tds.net/pub/sourceware.org/newlib/newlib-1
 
 # The Linaro GCC version to build.  Check out
 # https://launchpad.net/gcc-linaro/+download for the latest link.
-GCCURL = http://launchpad.net/gcc-linaro/4.5/4.5-2011.02-0/+download/gcc-linaro-4.5-2011.02-0.tar.bz2
+GCCURL = http://launchpad.net/gcc-linaro/4.6/4.6-2011.09/+download/gcc-linaro-4.6-2011.09-1.tar.bz2
+
+GDBURL = http://launchpad.net/gdb-linaro/7.3/7.3-2011.10/+download/gdb-linaro-7.3-2011.10.tar.bz2
 
 #libstm32 git branch/tag
 LIBCMSIS = v1.10-3
@@ -54,6 +54,7 @@ CURDIR := $(shell pwd)
 GCCSRC = downloads/$(notdir $(GCCURL))
 BINUTILSSRC = downloads/$(notdir $(BINUTILSURL))
 NEWLIBSRC = downloads/$(notdir $(NEWLIBURL))
+GDBSRC = downloads/$(notdir $(GDBURL))
 
 LIBCMSISSRC = downloads/libcmsis-$(LIBCMSIS).tar.bz2
 LIBSTM32SRC = downloads/libstm32-$(LIBSTM32).tar.bz2
@@ -74,7 +75,7 @@ CURLFLAGS = -L
 
 -include local.mk
 
-all: gcc stmlibs
+all: gcc stmlibs gdb
 
 # Install into the configured directory
 install: gcc stmlibs
@@ -259,6 +260,37 @@ $(stamp)libopenstm32-install: $(stamp)gcc-install $(stamp)libopenstm32-extract
 	cd src/libopenstm32* && \
 	$(MAKE) PREFIX=$(TARGET) DESTDIR=$(BUILDSYSROOT)$(PREFIX) && \
 	$(MAKE) install PREFIX=$(TARGET) DESTDIR=$(BUILDSYSROOT)$(PREFIX)
+	touch $@
+
+
+# build gdb
+gdb: $(stamp)gdb-install
+
+# Fetch
+$(GDBSRC): $(stamp)init-dirs
+	curl $(CURLFLAGS) -o $@ $(GDBURL)
+
+# Extract
+$(stamp)gdb-extract: $(GDBSRC) $(stamp)init-dirs
+	tar xaf $< -C src
+	touch $@
+
+# Configure
+$(stamp)gdb-configure: $(stamp)gdb-extract
+	install -d build/gdb
+	cd build/gdb && ../../src/gdb-*/configure \
+	--target=$(TARGET) \
+	--prefix=$(PREFIX) \
+	--enable-interwork \
+	--enable-multilib \
+	--disable-werror
+
+# Build and install
+$(stamp)gdb-install: $(stamp)gdb-configure
+	export PATH=$(BUILDSYSROOT)$(PREFIX)/bin:$(PATH) && \
+	cd src/gdb* && \
+	$(MAKE) -C build/gcc && \
+	$(MAKE) -C build/gcc install DESTDIR=$(BUILDSYSROOT)
 	touch $@
 
 
