@@ -3,7 +3,7 @@
 PortSystem                  1.0
 set targetarch              arm-none-eabi
 name                        ${targetarch}-binutils
-version                     2.21
+version                     2.21.1
 categories                  cross devel
 platforms                   darwin
 maintainers                 nomaintainer
@@ -12,9 +12,12 @@ long_description            binutils compiled for ${targetarch}
 master_sites                http://ftp.gnu.org/gnu/binutils/
 distfiles                   binutils-${version}.tar.bz2
 use_bzip2                   yes
-checksums                   md5     c84c5acc9d266f1a7044b51c85a823f5 \
-                            sha1    ef93235588eb443e4c4a77f229a8d131bccaecc6 \
-                            rmd160  8d2ebab3287a6283267879074b808d20fe9112b0
+checksums                   md5     bde820eac53fa3a8d8696667418557ad \
+                            sha1    525255ca6874b872540c9967a1d26acfbc7c8230 \
+                            rmd160  de5ce1d7cb0d44e3ec18c557beefb2a292d59a60
+patch.dir                   ${workpath}/binutils-${version}
+patchfiles                  \
+                            patch-binutils-2.21.1-svc-cortexm3.diff
 # All cross ports violate the mtree layout.
 destroot.violate_mtree  yes
 worksrcdir                  build
