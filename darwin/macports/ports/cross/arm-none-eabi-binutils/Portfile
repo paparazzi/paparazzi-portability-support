@@ -15,6 +15,9 @@ use_bzip2                   yes
 checksums                   md5     bde820eac53fa3a8d8696667418557ad \
                             sha1    525255ca6874b872540c9967a1d26acfbc7c8230 \
                             rmd160  de5ce1d7cb0d44e3ec18c557beefb2a292d59a60
+patch.dir                   ${workpath}/binutils-${version}
+patchfiles                  \
+                            patch-binutils-2.21.1-svc-cortexm3.diff
 # All cross ports violate the mtree layout.
 destroot.violate_mtree  yes
 worksrcdir                  build
