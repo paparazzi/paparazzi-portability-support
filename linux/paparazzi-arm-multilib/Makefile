@@ -75,7 +75,7 @@ CURLFLAGS = -L
 
 -include local.mk
 
-all: gcc stmlibs gdb
+all: gcc gdb
 
 # Install into the configured directory
 install: gcc stmlibs
