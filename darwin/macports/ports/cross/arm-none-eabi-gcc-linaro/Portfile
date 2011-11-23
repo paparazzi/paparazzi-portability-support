@@ -76,6 +76,7 @@ configure.env           ${environment}
 configure.cmd           ../gcc-linaro-${gccversion}/configure
 configure.optflags-delete   -O2
 configure.pipe
+configure.compiler      clang
 configure.cppflags
 configure.ldflags
 configure.cc-append     -I${prefix}/include
