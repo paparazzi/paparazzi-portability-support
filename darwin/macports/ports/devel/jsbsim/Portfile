@@ -2,7 +2,7 @@
 # $Id$
 PortSystem              1.0
 name                    jsbsim
-version                 trunk-2011.02.10.01
+version                 trunk-2011.11.23.01
 categories              devel
 platforms               darwin
 maintainers             nomaintainer
@@ -15,25 +15,19 @@ cvs.module 		JSBSim
 
 worksrcdir		JSBSim 
 
-patchfiles              patch-src-FGJSBBase-h.diff \
-                        patch-src-Makefile-am.diff \
+patchfiles              patch-src-Makefile-am.diff \
                         patch-src-initialization-Makefile-am.diff \
                         patch-src-input_output-Makefile-am.diff \
                         patch-src-math-Makefile-am.diff \
                         patch-src-models-Makefile-am.diff \
                         patch-src-models-atmosphere-Makefile-am.diff \
                         patch-src-models-flight_control-Makefile-am.diff \
-                        patch-src-models-propulsion-FGForce_h.diff \
-                        patch-src-models-propulsion-FGTank-cpp.diff \
-                        patch-src-models-propulsion-FGTank-h.diff \
-                        patch-src-models-propulsion-FGThruster-h.diff \
                         patch-src-models-propulsion-Makefile-am.diff \
                         patch-src-simgear-Makefile-am.diff \
                         patch-src-simgear-magvar-Makefile-am.diff \
                         patch-src-simgear-misc-Makefile-am.diff \
                         patch-src-simgear-props-Makefile-am.diff \
-                        patch-src-simgear-xml-Makefile-am.diff \
-                        patch-src-simgear-xml-easyxml-hxx.diff
+                        patch-src-simgear-xml-Makefile-am.diff
 
 use_configure           yes
 pre-configure {
