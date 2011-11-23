@@ -3,7 +3,7 @@
 PortSystem              1.0
 set targetarch          arm-none-eabi
 name                    ${targetarch}-gcc-linaro
-version                 4.6-2011.11-2011.11.23.01
+version                 4.6-2011.11-2011.11.23.02
 set gccversion          4.6-2011.11
 
 set branch              [join [lrange [split ${gccversion} .] 0 1] .]
@@ -76,7 +76,6 @@ configure.env           ${environment}
 configure.cmd           ../gcc-linaro-${gccversion}/configure
 configure.optflags-delete   -O2
 configure.pipe
-configure.compiler      gcc-4.2
 configure.cppflags
 configure.ldflags
 configure.cc-append     -I${prefix}/include
