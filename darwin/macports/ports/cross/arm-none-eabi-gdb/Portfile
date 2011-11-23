@@ -2,8 +2,8 @@
 # $Id$
 PortSystem              1.0
 name                    arm-none-eabi-gdb
-version                 7.2-2011.07.24.01
-set gdbversion          7.2
+version                 7.3a-2011.11.23.01
+set gdbversion          7.3a
 categories              cross devel
 platforms               darwin
 maintainers             nomaintainer
@@ -13,18 +13,22 @@ homepage                http://www.gnu.org/software/gdb/gdb.html
 master_sites            http://ftp.gnu.org/gnu/gdb/
 distfiles               gdb-${gdbversion}.tar.bz2
 use_bzip2               yes
-checksums               md5     64260e6c56979ee750a01055f16091a5 \
-                        sha1    cae138dee0c11778c471a1d5e4b09e0ae08f9e9d \
-                        rmd160  2f2f5eb331593a276f1b7024ac35f7ca1520653d
+checksums               md5     d69b0e57535df36fd33f967435a13ad9 \
+                        sha1    d68061206a3485bab32da3fb751c6c3b913c2b9c \
+                        rmd160  309d2d9a88e6fc0ec0a03fd2038c2d373b9253c3
+if {${configure.compiler} == "clang"} { 
+    configure.compiler llvm-gcc-4.2 
+} 
 # All cross ports violate the mtree layout.
 destroot.violate_mtree  yes
 depends_lib-append      \
                         port:arm-none-eabi-gcc-linaro
 worksrcdir              build
+build.jobs              1
 pre-configure {
     file mkdir ${worksrcpath}
 }
-configure.cmd           ../gdb-${gdbversion}/configure
+configure.cmd           ../gdb-7.3/configure
 configure.args          --target=arm-none-eabi \
                         --enable-interwork \
                         --enable-multilib \
@@ -37,13 +41,13 @@ post-destroot {
     }
 
     file rename ${destroot}${prefix}/share/info/configure.info \
-                ${destroot}${prefix}/share/info/configure-mp-${gdbversion}-gdb.info
+                ${destroot}${prefix}/share/info/configure-mp-7.3-gdb.info
     file rename ${destroot}${prefix}/share/info/bfd.info \
-                ${destroot}${prefix}/share/info/bfd-mp-${gdbversion}-gdb.info
+                ${destroot}${prefix}/share/info/bfd-mp-7.3-gdb.info
     file rename ${destroot}${prefix}/share/info/standards.info \
-                ${destroot}${prefix}/share/info/standards-mp-${gdbversion}-gdb.info
+                ${destroot}${prefix}/share/info/standards-mp-7.3-gdb.info
     file rename ${destroot}${prefix}/share/info/annotate.info \
-                ${destroot}${prefix}/share/info/annotate-mp-${gdbversion}-gdb.info
+                ${destroot}${prefix}/share/info/annotate-mp-7.3-gdb.info
     file rename ${destroot}${prefix}/share/info/stabs.info \
-                ${destroot}${prefix}/share/info/stabs-mp-${gdbversion}-gdb.info
+                ${destroot}${prefix}/share/info/stabs-mp-7.3-gdb.info
 }
