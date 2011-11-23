@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # $Id$
-# Maybe we should copy a lot of what the arm-elf-gcc Portfile does into this.
-# like including newlib, and a lot of the build options
 PortSystem              1.0
 set targetarch          arm-none-eabi
-name                    ${targetarch}-gcc
-version                 4.5.2
+name                    ${targetarch}-gcc-linaro
+version                 4.6.2-2011.11.23.01
+set gccversion          4.6.2
 
+set branch              [join [lrange [split ${gccversion} .] 0 1] .]
 set newlibversion       1.19.0
 categories              cross devel
 platforms               darwin
@@ -14,20 +14,20 @@ maintainers             nomaintainer
 description             gcc cross-compilers for ${targetarch}, with newlib runtime library.
 long_description        gnu compilers collection (including c and c++) for ${targetarch}, with newlib runtime library.
 homepage                http://gcc.gnu.org/
-master_sites            http://ftp.gnu.org/gnu/gcc/gcc-${version}/:gcc \
+master_sites            http://ftp.gnu.org/gnu/gcc/gcc-4.6.2/:gcc \
                         http://download.paparazziuav.org/linux/source/newlib/:newlib \
                         ftp://ftp.mirror.ac.uk/sites/sources.redhat.com/pub/newlib/:newlib \
                         http://www.mirrorservice.org/sites/sourceware.org/pub/newlib/:newlib \
                         http://bernard.gondwana.com.au/files/:newlib \
                         ftp://sources.redhat.com/pub/newlib/:newlib
 
-distfiles               gcc-${version}.tar.bz2:gcc \
+distfiles               gcc-${gccversion}.tar.gz:gcc \
                         newlib-${newlibversion}.tar.gz:newlib
-use_bzip2               yes
-checksums               gcc-${version}.tar.bz2 \
-                        md5     d6559145853fbaaa0fd7556ed93bce9a \
-                        sha1    ad5c440526c98fd17a74eab80c031af6b64d9c90 \
-                        rmd160  e1e9f590f5cf5f7029f1941328529a22919ee609 \
+#use_bzip2               yes
+checksums               gcc-4.6.2.tar.gz \
+                        md5     56c5b2a0ca0d4f27a827548ce5cf4203 \
+                        sha1    6b039f3ca843ac414aff2e125eeaa9d6097b2d08 \
+                        rmd160  a9f43670d0c2bf68cd5345aaa7fe385c143927f8 \
                         newlib-1.19.0.tar.gz \
                         md5     0966e19f03217db9e9076894b47e6601 \
                         sha1    b2269d30ce7b93b7c714b90ef2f40221c2df0fcd \
@@ -45,21 +45,21 @@ depends_lib-append      \
 # gmp and mpfr are not universal
 universal_variant	no
 worksrcdir              build
-extract.only            gcc-${version}.tar.bz2
+extract.only            gcc-${gccversion}.tar.gz
 # Extract newlib and create a symlink of newlib/newlib in gcc directory.
 post-extract    {
         system "cd ${workpath} && gzip -dc ${distpath}/newlib-${newlibversion}.tar.gz | tar -xf -"
-        system "ln -s ${workpath}/newlib-${newlibversion}/newlib ${workpath}/gcc-${version}/"
-        system "ln -s ${workpath}/newlib-${newlibversion}/libgloss ${workpath}/gcc-${version}/"
+        system "ln -s ${workpath}/newlib-${newlibversion}/newlib ${workpath}/gcc-${gccversion}/"
+        system "ln -s ${workpath}/newlib-${newlibversion}/libgloss ${workpath}/gcc-${gccversion}/"
 }
 
-patch.dir              ${workpath}/gcc-${version}
+patch.dir              ${workpath}/gcc-${gccversion}
 patchfiles              \
                         patch-gcc-config-arm-t-arm-elf.diff
 
 # Since we don't build gcc and binutils at the same time, gcc's Makefile will try to transform
-# program names as gcc's name (add -${version} with ${version} being the version of gcc).
-# But it won't work because binutils binaries don't have the ${version} suffix, and even if they
+# program names as gcc's name (add -${gccversion} with ${gccversion} being the version of gcc).
+# But it won't work because binutils binaries don't have the ${gccversion} suffix, and even if they
 # had, they would actually have the binutils' version suffix (and not gcc's version).
 # So let's tell gcc's Makefile not to do that mistake.
 
@@ -73,11 +73,10 @@ pre-configure {
     file mkdir ${worksrcpath}
 }
 configure.env           ${environment}
-configure.cmd           ../gcc-${version}/configure
+configure.cmd           ../gcc-${gccversion}/configure
 configure.optflags-delete   -O2
 configure.pipe
-configure.cc                gcc
-configure.cxx               g++
+configure.compiler      clang
 configure.cppflags
 configure.ldflags
 configure.cc-append     -I${prefix}/include
@@ -118,6 +117,7 @@ if {[info exists configure.ld_archflags]} {
 }
 
 build.args              ${environment}
+build.jobs              1
 destroot.args           ${environment}
 
 post-patch {
@@ -272,9 +272,9 @@ post-destroot {
 
         # There is a bug in gcc/Makefile::install-driver
         # For cross compilers, $(GCC_INSTALL_NAME) is equal to
-        # $(target_noncanonical)-gcc-$(version)
+        # $(target_noncanonical)-gcc-$(gccversion)
         # and hence the driver isn't installed.
         xinstall -c "${workpath}/build/gcc/xgcc" \
-            "${destroot}${prefix}/bin/${targetarch}-gcc-${version}"
+            "${destroot}${prefix}/bin/${targetarch}-gcc-${gccversion}"
 }
 
