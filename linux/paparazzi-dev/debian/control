@@ -1,12 +1,14 @@
 Source: paparazzi-dev
-Section: extra
-Priority: optional
-Maintainer: Gautier Hattenberger <gautier.hattenberger@enac.fr>
-Standards-Version: 3.4
+Section: embedded
+Priority: extra
+Maintainer: Felix Ruess <felix.ruess@gmail.com>
+Build-Depends: debhelper (>= 7.0.50~)
+Homepage: http://paparazzi.enac.fr
+Standards-Version: 3.9.2
 
 Package: paparazzi-dev
 Architecture: all
-Suggests: paparazzi-arm-multilib, paparazzi-jsbsim, libgtkdatabox-0.9.1-1-dev, eagle, gs-common, tetex-extra, dia-gnome, boa, gitk
-Depends: ivy-c-dev, ivy-c, ivy-ocaml, libxml-light-ocaml-dev, liblablgtk2-ocaml-dev, make, gcc, g++, gnuplot, libgnomecanvas2-dev, bzip2, git-core, liblablgtk2-gnome-ocaml-dev, libusb-dev, speech-dispatcher, glade, gedit, imagemagick, libpcre3-dev, libocamlnet-ocaml-dev, ivy-python, gpsd, libgps-dev, python-lxml, python-wxgtk2.8, python-scipy, python-matplotlib, libocamlgsl-ocaml-dev, libsdl-ocaml-dev
+Depends: ivy-c-dev, ivy-c, ivy-ocaml, libxml-light-ocaml-dev, liblablgtk2-ocaml-dev, make, gcc, g++, gnuplot, libgnomecanvas2-dev, bzip2, git-core, liblablgtk2-gnome-ocaml-dev, libusb-dev, speech-dispatcher, glade, imagemagick, libpcre3-dev, libocamlnet-ocaml-dev, ivy-python, python-lxml, python-wxgtk2.8, libocamlgsl-ocaml-dev, libsdl-ocaml-dev
+Recommends: paparazzi-arm-multilib, libgtkdatabox-0.9.1-1-dev, python-scipy, python-matplotlib, lpc21isp, openocd (>= 0.5.0)
+Suggests: paparazzi-jsbsim, eagle, gs-common, tetex-extra, dia-gnome, boa, gitk, gpsd, libgps-dev, gedit
 Description: Paparazzi Meta Package : common support
-
