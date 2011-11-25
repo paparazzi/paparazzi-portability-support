@@ -1,12 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # $Id$
-# Maybe we should copy a lot of what the arm-elf-gcc Portfile does into this.
-# like including newlib, and a lot of the build options
 PortSystem              1.0
 set targetarch          arm-none-eabi
 name                    ${targetarch}-gcc-linaro
-version                 4.4-2011.02-0-2011.08.23.01
-set gccversion          4.4-2011.02-0
+version                 4.6-2011.11-2011.11.23.02
+set gccversion          4.6-2011.11
 
 set branch              [join [lrange [split ${gccversion} .] 0 1] .]
 set newlibversion       1.19.0
@@ -16,7 +14,7 @@ maintainers             nomaintainer
 description             gcc cross-compilers for ${targetarch}, with newlib runtime library.
 long_description        gnu compilers collection (including c and c++) for ${targetarch}, with newlib runtime library.
 homepage                http://gcc.gnu.org/
-master_sites            http://launchpad.net/gcc-linaro/4.4/${gccversion}/+download/:gcc \
+master_sites            http://launchpad.net/gcc-linaro/4.6/${gccversion}/+download/:gcc \
                         http://download.paparazziuav.org/linux/source/newlib/:newlib \
                         ftp://ftp.mirror.ac.uk/sites/sources.redhat.com/pub/newlib/:newlib \
                         http://www.mirrorservice.org/sites/sourceware.org/pub/newlib/:newlib \
@@ -26,10 +24,10 @@ master_sites            http://launchpad.net/gcc-linaro/4.4/${gccversion}/+downl
 distfiles               gcc-linaro-${gccversion}.tar.bz2:gcc \
                         newlib-${newlibversion}.tar.gz:newlib
 use_bzip2               yes
-checksums               gcc-linaro-4.4-2011.02-0.tar.bz2 \
-                        md5    98e3dd40f474ef6a9c0fa8c4e0e4d258 \
-                        sha1   8582637d950d4792d85ff8b905b394e7d331cd5f \
-                        rmd160 da600525eab572f0508ab8ad310355debe8d9f6a \
+checksums               gcc-linaro-4.6-2011.11.tar.bz2 \
+                        md5     a832fd9d36d358e8cba428b3e71f226f \
+                        rmd160  351634f10acd16c6c34a6b474b037aa937f26375 \
+                        sha256  4c4288cc23bd435721c51b1aa9af6a09a581466206d5915c42889d18aa8f1f88 \
                         newlib-1.19.0.tar.gz \
                         md5     0966e19f03217db9e9076894b47e6601 \
                         sha1    b2269d30ce7b93b7c714b90ef2f40221c2df0fcd \
@@ -78,9 +76,7 @@ configure.env           ${environment}
 configure.cmd           ../gcc-linaro-${gccversion}/configure
 configure.optflags-delete   -O2
 configure.pipe
-configure.compiler          gcc-4.2
-configure.cc                gcc-4.2
-configure.cxx               g++-4.2
+configure.compiler      clang
 configure.cppflags
 configure.ldflags
 configure.cc-append     -I${prefix}/include
