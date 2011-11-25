@@ -1,8 +1,10 @@
-paparazzi-arm-multilib (1.1.0-1ppa1~oneiric) oneiric; urgency=low
+paparazzi-arm-multilib (1.2.0-1ppa1~oneiric) oneiric; urgency=low
 
-  * only package version bump for gcc-4.5 to be higher than gcc-4.4
+  * gcc-linaro-4.6-2011.09-1
+  * binutils snapshot 2.21.53 containing svc fixes
+  * added gdb-linaro-7.3-2011.10 
 
- -- Felix Ruess <felix.ruess@gmail.com>  Mon, 21 Nov 2011 22:52:05 +0100
+ -- Felix Ruess <felix.ruess@gmail.com>  Fri, 25 Nov 2011 15:14:40 +0100
 
 paparazzi-arm-multilib (1.0.1-1) unstable; urgency=low
 
