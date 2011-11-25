@@ -294,9 +294,8 @@ $(stamp)gdb-configure: $(stamp)gdb-extract
 # Build and install
 $(stamp)gdb-install: $(stamp)gdb-configure
 	export PATH=$(BUILDSYSROOT)$(PREFIX)/bin:$(PATH) && \
-	cd src/gdb* && \
-	$(MAKE) -C build/gcc && \
-	$(MAKE) -C build/gcc install DESTDIR=$(BUILDSYSROOT)
+	$(MAKE) -C build/gdb && \
+	$(MAKE) -C build/gdb install DESTDIR=$(BUILDSYSROOT)
 	touch $@
 
 
