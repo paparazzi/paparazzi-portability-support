@@ -1,3 +1,10 @@
+paparazzi-arm-multilib (1.2.1-1ppa1~oneiric) oneiric; urgency=low
+
+  * binutils 2.21.1
+  * patch with svc fixes
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Fri, 25 Nov 2011 19:08:17 +0100
+
 paparazzi-arm-multilib (1.2.0-1ppa1~oneiric) oneiric; urgency=low
 
   * gcc-linaro-4.6-2011.09-1
