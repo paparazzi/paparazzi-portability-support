@@ -75,10 +75,10 @@ CURLFLAGS = -L
 
 -include local.mk
 
-all: gcc gdb
+all: gcc stmlibs gdb
 
 # Install into the configured directory
-install: gcc stmlibs
+install: gcc stmlibs gdb
 	mkdir -p $(DESTDIR)$(PREFIX)
 	tar cf - -C $(BUILDSYSROOT)$(PREFIX) . | tar xf - -C $(DESTDIR)$(PREFIX)
 
