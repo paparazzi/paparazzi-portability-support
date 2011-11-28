@@ -2,7 +2,7 @@
 # $Id$
 PortSystem              1.0
 name                    jsbsim
-version                 trunk-2011.11.23.01
+version                 trunk-2011.11.28.01
 categories              devel
 platforms               darwin
 maintainers             nomaintainer
@@ -27,7 +27,8 @@ patchfiles              patch-src-Makefile-am.diff \
                         patch-src-simgear-magvar-Makefile-am.diff \
                         patch-src-simgear-misc-Makefile-am.diff \
                         patch-src-simgear-props-Makefile-am.diff \
-                        patch-src-simgear-xml-Makefile-am.diff
+                        patch-src-simgear-xml-Makefile-am.diff \
+                        patch-src-simgear-structure-Makefile-am.diff
 
 use_configure           yes
 pre-configure {
