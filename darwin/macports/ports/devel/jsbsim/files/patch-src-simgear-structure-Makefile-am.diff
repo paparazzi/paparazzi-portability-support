@@ -1,0 +1,8 @@
+--- src/simgear/structure/Makefile.am.orig	2011-11-28 21:54:02.000000000 +1100
++++ src/simgear/structure/Makefile.am	2011-11-28 21:54:17.000000000 +1100
+@@ -1,4 +1,4 @@
+-includedir = @includedir@/JSBSim/simgear/structure
++includedir = @includedir@/simgear/structure
+ 
+ LIBRARY_INCLUDES = SGReferenced.hxx SGSharedPtr.hxx
+ 
