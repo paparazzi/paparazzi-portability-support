@@ -10,10 +10,10 @@ openocd 3243
 openthreads 3776
 caml-ocamlnet 4235
 ivy-c 4928
-ivy-ocaml 5330
-jsbsim 5742
-paparazzi 6164
-paparazzi-extras 6559
-paparazzi-tools 7004
-ossim 7823
-ivy-python 8335
+ivy-ocaml 5247
+jsbsim 5659
+paparazzi 6081
+paparazzi-extras 6476
+paparazzi-tools 6921
+ossim 7740
+ivy-python 8252
