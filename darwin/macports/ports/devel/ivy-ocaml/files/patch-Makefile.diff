@@ -5,7 +5,7 @@
  UNAME = $(shell uname -s)
  
 +ifeq ("$(PREFIX)","")
-+PREFIX=/opt/local
++PREFIX=/opt/paparazzi
 +endif
 +
  ifeq ("$(UNAME)","Darwin")
