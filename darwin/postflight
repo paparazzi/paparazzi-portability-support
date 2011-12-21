@@ -1,0 +1,8 @@
+#!/bin/sh
+/opt/paparazzi/bin/gdk-pixbuf-query-loaders --update-cache
+/opt/paparazzi/bin/update-mime-database -V /opt/paparazzi/share/mime
+echo "/opt/paparazzi/lib/ocaml/site-lib/stublibs"  >> /opt/paparazzi/lib/ocaml/ld.conf
+echo 'export PATH=/opt/paparazzi/bin:/opt/paparazzi/sbin:$PATH' >> ~/.bash_profile
+
+
+
