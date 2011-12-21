@@ -2,7 +2,7 @@
 # $Id$
 PortSystem              1.0
 name                    ivy-ocaml
-version                 r3443-2011.12.21.01
+version                 r3443-2011.12.22.01
 categories              devel
 platforms               darwin
 maintainers             nomaintainer
