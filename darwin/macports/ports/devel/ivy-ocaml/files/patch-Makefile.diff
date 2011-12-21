@@ -1,0 +1,26 @@
+--- Makefile.orig	2011-12-21 23:21:33.000000000 +1100
++++ Makefile	2011-12-21 23:41:59.000000000 +1100
+@@ -49,8 +49,12 @@
+ 
+ UNAME = $(shell uname -s)
+ 
++ifeq ("$(PREFIX)","")
++PREFIX=/opt/paparazzi
++endif
++
+ ifeq ("$(UNAME)","Darwin")
+-  LIBRARYS = -L/opt/local/lib
++  LIBRARYS = -L$(PREFIX)/lib
+ endif
+ 
+ LIBS = ivy-ocaml.cma ivy-ocaml.cmxa glibivy-ocaml.cma glibivy-ocaml.cmxa
+@@ -102,8 +106,7 @@
+ .ml.cmo :
+ 	$(OCAMLC) $(OCAMLFLAGS) $(INCLUDES) -c $<
+ .c.o :
+-    
+-	$(CC) -Wall -c $(FPIC) -I /opt/local/include/  $(OCAMLINC) $(GLIBINC) $<
++	$(CC) -Wall -c $(FPIC) -I $(PREFIX)/include/  $(OCAMLINC) $(GLIBINC) $<
+ .mli.cmi :
+ 	$(OCAMLMLI) $(OCAMLFLAGS) -c $<
+ .ml.cmx :
