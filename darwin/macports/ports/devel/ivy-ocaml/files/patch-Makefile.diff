@@ -4,7 +4,7 @@
  
  UNAME = $(shell uname -s)
  
-+ifndef PREFIX
++ifeq ("$(PREFIX)","")
 +PREFIX=/opt/local
 +endif
 +
