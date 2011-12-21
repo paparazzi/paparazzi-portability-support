@@ -2,7 +2,7 @@
 # $Id$
 PortSystem              1.0
 name                    ivy-ocaml
-version                 r3443-2011.12.20.01
+version                 r3443-2011.12.21.01
 categories              devel
 platforms               darwin
 maintainers             nomaintainer
@@ -14,6 +14,9 @@ distfiles               ${name}-r3443.tar.gz
 checksums               md5     dc73898fbc9ffe305f7b0b437a847a39 \
                         rmd160  c90cd5fdb4f1362f0571228ba1e8ca34af5f9999 \
                         sha256  e2a6f0538f729c50af247358d7bd281b8a92794227b279987fa3417bbf21055f
+patchfiles              \
+                        patch-Makefile.diff
+
 worksrcdir              ${name}-r3443
 #fetch.type              svn
 #svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-ocaml/trunk
