@@ -36,14 +36,19 @@ chmod 755 ~/.bash_profile
 user="$(who am i)"
 set -- $user
 owner=$1
-chown $owner: ~/.bash_profile 
+
+grp="$(id -gn $owner)" 
+echo $owner
+echo $grp
+
+chown $owner:$grp ~/.bash_profile 
 
 
 # check to see if they have a clone of the source for paparazzi if not get them one
 if [ ! -d ~/paparazzi ]; then
     # use the git we just installed with paparazzi just in case they haven't got Xcode yet
     /opt/paparazzi/bin/git clone git://github.com/paparazzi/paparazzi.git ~/paparazzi
-    chown -R $owner: ~/paparazzi
+    chown -R $owner:$grp ~/paparazzi
 fi
 
 
