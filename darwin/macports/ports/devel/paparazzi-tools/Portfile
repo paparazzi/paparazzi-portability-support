@@ -3,7 +3,7 @@
 PortSystem          1.0
 
 name                paparazzi-tools
-version             master-2011.07.23.01
+version             master-2011.12.23.01
 categories          devel
 maintainers         nomaintainer
 description         Paparazzi Developer Tools
@@ -38,7 +38,9 @@ depends_lib-append  \
                     port:libstm32 \
                     port:libstm32usb \
                     port:libopenstm32 \
-                    port:jsbsim
+                    port:jsbsim \
+                    port:tkdiff \
+                    port:gmake
 
 #needs added        port:py26-scipy \
 
