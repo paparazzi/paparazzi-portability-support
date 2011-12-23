@@ -1,8 +1,55 @@
 #!/bin/sh
+#
+#   Copyright (C) 2011 Eric Parsonage
+#
+# This file is part of paparazzi.
+#
+# paparazzi is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# paparazzi is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with paparazzi; see the file COPYING.  If not, write to
+# the Free Software Foundation, 59 Temple Place - Suite 330,
+# Boston, MA 02111-1307, USA.
+
+
+
+# creating pkg files stops macports from being able to do any post activate work 
+# so we have to do it here
 /opt/paparazzi/bin/gdk-pixbuf-query-loaders --update-cache
 /opt/paparazzi/bin/update-mime-database -V /opt/paparazzi/share/mime
 echo "/opt/paparazzi/lib/ocaml/site-lib/stublibs"  >> /opt/paparazzi/lib/ocaml/ld.conf
+
+# set a nice theme for gtk to use so users not scared of by the ugly default
+/opt/paparazzi/bin/switch2 /opt/paparazzi/share/themes/ClearlooksClassic
+
+# create or modify .bash_profile to include path to the paparazzi tools. We will be running as root so we need to change the ownership and permissions
 echo 'export PATH=/opt/paparazzi/bin:/opt/paparazzi/sbin:$PATH' >> ~/.bash_profile
+chmod 755 ~/.bash_profile
+usr=`ls -l /dev/console | awk '/dev/ {print $3}'`
+grp="$(id -gn $usr)" 
+echo $usr
+echo $grp
+chown $usr:$grp ~/.bash_profile 
+
+
+# check to see if they have a clone of the source for paparazzi if not get them one
+if [ ! -d ~/paparazzi ]; then
+    # use the git we just installed with paparazzi just in case they haven't got Xcode yet
+    /opt/paparazzi/bin/git clone git://github.com/paparazzi/paparazzi.git ~/paparazzi
+    chown -R $usr:$grp ~/paparazzi
+fi
+
+
+
+
 
 
 
