@@ -1,0 +1,29 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+PortSystem              1.0
+set targetarch          arm-none-eabi
+name                    libopencm3
+version                 master-2011.12.23.01
+categories              cross devel
+platforms               darwin
+maintainers             nomaintainer
+description             libopencm3
+long_description        libopencm3
+fetch.type              git
+git.url                 git://libopencm3.git.sourceforge.net/gitroot/libopencm3/libopencm3
+
+#worksrcdir              ${name}
+use_configure           no
+use_parallel_build      no
+depends_lib-append      \
+                        port:${targetarch}-gcc-linaro
+set environment         [list PATH="${prefix}/${targetarch}/bin" LDFLAGS="-L${prefix}/${targetarch}/lib"]
+build.env               ${environment}
+build.args              PREFIX=${targetarch} Q="" -w
+build.target            lib
+
+# All cross ports violate the mtree layout.
+destroot.violate_mtree  yes
+destroot.args           PREFIX=${targetarch} Q="" -w install
+destroot.destdir        DESTDIR=${destroot}${prefix}
+
