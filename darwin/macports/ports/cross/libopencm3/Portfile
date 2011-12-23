@@ -11,7 +11,7 @@ description             libopencm3
 long_description        libopencm3
 fetch.type              git
 git.url                 git://libopencm3.git.sourceforge.net/gitroot/libopencm3/libopencm3
-
+git.branch              d630d8397236b50ef68653b71348f39c1c48ce0b
 #worksrcdir              ${name}
 use_configure           no
 use_parallel_build      no
