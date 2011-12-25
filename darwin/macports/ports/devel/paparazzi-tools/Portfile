@@ -38,9 +38,11 @@ depends_lib-append  \
                     port:libstm32 \
                     port:libstm32usb \
                     port:libopencm3 \
-                    port:jsbsim \
-                    port:tkdiff
-   
+                    port:jsbsim 
+
+# removed as won't build with +quartz +nox11 -x11   port:tkdiff
+# perhaps there is a better diff with a guy we can use on mac 
+# bernard suggested the one that comes with Xcode    
 
 #needs added        port:py26-scipy \
 
