@@ -1,3 +1,9 @@
+paparazzi-arm-multilib (1.1.1-1ubuntu1~natty) natty; urgency=low
+
+  * added gdb 7.3 
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Wed, 28 Dec 2011 00:02:57 +0100
+
 paparazzi-arm-multilib (1.0.1-1) unstable; urgency=low
 
   * removed gdb and openocd
