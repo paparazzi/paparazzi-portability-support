@@ -34,6 +34,12 @@ configure.args          --enable-maintainer-mode \
                         --disable-werror \
                         --prefix=${prefix}
 
+# opened currently when talking to gdb 7.3 we need a file installed that describes how gdb talks to arm targets via openocd  
+post-destroot {
+	   xinstall -m 755 -d ${destroot}${prefix}/share/openocd
+	   xinstall -m 644 -W ${filespath} target.xml ${destroot}${prefix}/share/openocd	
+}
+
 # looks like openocd devs have moved these files to better places
 #post-destroot {
 #    file rename ${destroot}/bin/jimsh \
