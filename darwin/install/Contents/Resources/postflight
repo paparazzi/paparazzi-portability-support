@@ -33,11 +33,17 @@ echo "/opt/paparazzi/lib/ocaml/site-lib/stublibs"  >> /opt/paparazzi/lib/ocaml/l
 # create or modify .bash_profile to include path to the paparazzi tools. We will be running as root so we need to change the ownership and permissions
 echo 'export PATH=/opt/paparazzi/bin:/opt/paparazzi/sbin:$PATH' >> ~/.bash_profile
 chmod 755 ~/.bash_profile
+
+# create or modify .gdbinit to include path to target.xml. We will be running as root so we need to change the ownership and permissions
+echo 'set tdesc filename /opt/paparazzi/share/openocd/target.xml' >> ~/.gdbinit
+chmod 755 ~/.gdbinit
+
 usr=`ls -l /dev/console | awk '/dev/ {print $3}'`
 grp="$(id -gn $usr)" 
 echo $usr
 echo $grp
 chown $usr:$grp ~/.bash_profile 
+chown $usr:$grp ~/.gdbinit 
 
 
 # check to see if they have a clone of the source for paparazzi if not get them one
