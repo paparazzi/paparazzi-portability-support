@@ -1,3 +1,11 @@
+paparazzi-arm-multilib (1.1.1-2ubuntu1~natty) natty; urgency=low
+
+  * compile gdb with xml support
+    - added libexpat1-dev to build dependencies
+    - configure gdb with --with-expat=yes to make sure
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Wed, 28 Dec 2011 22:38:04 +0100
+
 paparazzi-arm-multilib (1.1.1-1ubuntu1~natty) natty; urgency=low
 
   * added gdb 7.3 

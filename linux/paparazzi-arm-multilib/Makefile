@@ -283,7 +283,8 @@ $(stamp)gdb-configure: $(stamp)gdb-extract
 	--prefix=$(PREFIX) \
 	--enable-interwork \
 	--enable-multilib \
-	--disable-werror
+	--disable-werror \
+	--with-expat=yes
 
 # Build and install
 $(stamp)gdb-install: $(stamp)gdb-configure
