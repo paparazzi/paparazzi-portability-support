@@ -35,7 +35,7 @@ echo 'export PATH=/opt/paparazzi/bin:/opt/paparazzi/sbin:$PATH' >> ~/.bash_profi
 chmod 755 ~/.bash_profile
 
 # create or modify .gdbinit to include path to target.xml. We will be running as root so we need to change the ownership and permissions
-echo 'set tdesc filename /opt/paparazzi/share/openocd/target.xml' >> ~/.gdbinit
+echo 'set tdesc filename /opt/paparazzi/share/openocd/target.xml' > ~/.gdbinit
 chmod 755 ~/.gdbinit
 
 usr=`ls -l /dev/console | awk '/dev/ {print $3}'`
