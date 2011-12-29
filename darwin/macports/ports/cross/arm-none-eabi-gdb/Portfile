@@ -22,7 +22,9 @@ if {${configure.compiler} == "clang"} {
 # All cross ports violate the mtree layout.
 destroot.violate_mtree  yes
 depends_lib-append      \
-                        port:arm-none-eabi-gcc-linaro
+                        port:arm-none-eabi-gcc-linaro \
+                        port:expat
+
 worksrcdir              build
 build.jobs              1
 pre-configure {
