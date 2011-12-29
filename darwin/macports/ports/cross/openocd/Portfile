@@ -3,28 +3,24 @@
 PortSystem              1.0
 set crossgcc-target     arm-none-eabi
 name                    openocd
-version                 master-2011.12.29.01
+version                 master-2011.12.30.01 
+
+# we are now building openocd 0.5.0 release
+
 categories              cross devel
 platforms               darwin
 license                 GPL
-maintainers             snc openmaintainer
+maintainers             nomaintainer
 description             Open On-Chip Debugger
 long_description        The Open On-Chip Debugger (OpenOCD) aims to provide debugging, in-system programming and boundary-scan testing for embedded target devices. Built with support for FT2232 based devices.
-homepage                http://openocd.berlios.de/
-fetch.type              git
-git.url                 git://openocd.git.sourceforge.net/gitroot/openocd/openocd
 
-# get the 0.5 release
-git.branch              2fced63147fdd867ea8980d719c2b9ac2ced2010
+master_sites        sourceforge:openocd
 
-depends_lib-append      \
-                        port:libftdi
+checksums           sha256  efb99e0394249cbd518b51b052eea150d5f14557e9a2e0ddfae198792dca51c6
 
-configure.optflags-delete    -O2
-configure.cmd           ./bootstrap && ./configure
-configure.args          --enable-maintainer-mode=yes \
-                        --enable-dummy=yes \
-                        --enable-ft2232_libftdi=yes \
+depends_lib-append      port:libftdi
+
+configure.args-append   --enable-ft2232_libftdi=yes \
                         --enable-usb_blaster_libftdi=yes \
                         --enable-ep93xx=yes \
                         --enable-at91rm9200=yes \
@@ -34,39 +30,16 @@ configure.args          --enable-maintainer-mode=yes \
                         --enable-vsllink=yes \
                         --enable-rlink=yes \
                         --enable-arm-jtag-ew=yes \
-                        --disable-werror \
-                        --prefix=${prefix}
+                        --disable-werror 
+ 
 
-# opened currently when talking to gdb 7.3 we need a file installed that describes how gdb talks to arm targets via openocd  
+livecheck.url       http://openocd.git.sourceforge.net/git/gitweb.cgi?p=openocd/openocd\;a=tags
+livecheck.type      regex
+livecheck.regex     v(\\d+(\\.\\d+)+)<
+
+# currently when talking to gdb 7.3 we need a file installed that describes how gdb talks to arm targets via openocd  
 post-destroot {
 	   xinstall -m 755 -d ${destroot}${prefix}/share/openocd
 	   xinstall -m 644 -W ${filespath} target.xml ${destroot}${prefix}/share/openocd	
 }
 
-# looks like openocd devs have moved these files to better places
-#post-destroot {
-#    file rename ${destroot}/bin/jimsh \
-#       ${destroot}${prefix}/bin/jimsh
-#    file mkdir ${destroot}${prefix}/share/doc/jim
-#    file rename ${destroot}/doc/jim/Tcl.html \
-#       ${destroot}${prefix}/share/doc/jim/Tcl.html
-#    file rename ${destroot}/include/jim-config.h \
-#       ${destroot}${prefix}/include/jim-config.h
-#    file rename ${destroot}/include/jim-eventloop.h \
-#       ${destroot}${prefix}/include/jim-eventloop.h
-#    file rename ${destroot}/include/jim-nvp.h \
-#       ${destroot}${prefix}/include/jim-nvp.h
-#    file rename ${destroot}/include/jim-signal.h \
-#       ${destroot}${prefix}/include/jim-signal.h
-#    file rename ${destroot}/include/jim-subcmd.h \
-#       ${destroot}${prefix}/include/jim-subcmd.h
-#    file rename ${destroot}/include/jim-win32compat.h \
-#       ${destroot}${prefix}/include/jim-win32compat.h
-#    file rename ${destroot}/include/jim.h \
-#       ${destroot}${prefix}/include/jim.h
-#    file mkdir ${destroot}${prefix}/lib/jim
-#    file rename ${destroot}/lib/jim/README.extensions \
-#       ${destroot}${prefix}/lib/jim/README.extensions
-#    file rename ${destroot}/lib/libjim.a \
-#       ${destroot}${prefix}/lib/libjim.a
-#}
