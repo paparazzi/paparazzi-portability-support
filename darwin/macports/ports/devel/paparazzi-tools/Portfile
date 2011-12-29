@@ -39,8 +39,8 @@ depends_lib-append  \
                     port:libstm32usb \
                     port:libopencm3 \
                     port:jsbsim \
-                    port:tkdiff \
-                    port:py26-scipy
+                    port:tkdiff
+#found in paparazzi extras port:py26-scipy
 
 distfiles
 use_configure   no

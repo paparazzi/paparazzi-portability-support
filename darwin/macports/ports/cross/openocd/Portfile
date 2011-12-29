@@ -15,7 +15,8 @@ fetch.type              git
 git.url                 git://openocd.git.sourceforge.net/gitroot/openocd/openocd
 
 depends_lib-append      \
-                        port:libftdi
+                        port:libftdi \
+                        port:libstm32usb  
 
 configure.optflags-delete    -O2
 configure.cmd           ./bootstrap && ./configure

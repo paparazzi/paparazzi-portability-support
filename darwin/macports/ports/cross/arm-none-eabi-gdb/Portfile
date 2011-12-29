@@ -32,7 +32,8 @@ configure.cmd           ../gdb-7.3/configure
 configure.args          --target=arm-none-eabi \
                         --enable-interwork \
                         --enable-multilib \
-                        --disable-werror
+                        --disable-werror \
+                        --with-expat=yes 
 
 post-destroot {
     # (host) libiberty
