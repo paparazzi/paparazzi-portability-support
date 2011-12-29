@@ -22,18 +22,18 @@ depends_lib-append      \
 
 configure.optflags-delete    -O2
 configure.cmd           ./bootstrap && ./configure
-configure.args          --enable-maintainer-mode \
-                        --enable-dummy \
-                        --enable-ft2232_libftdi \
-                        --enable-usb_blaster_libftdi \
-                        --enable-ep93xx \
-                        --enable-at91rm9200 \
-                        --enable-presto_libftdi \
-                        --enable-usbprog \
-                        --enable-jlink \
-                        --enable-vsllink \
-                        --enable-rlink \
-                        --enable-arm-jtag-ew \
+configure.args          --enable-maintainer-mode=yes \
+                        --enable-dummy=yes \
+                        --enable-ft2232_libftdi=yes \
+                        --enable-usb_blaster_libftdi=yes \
+                        --enable-ep93xx=yes \
+                        --enable-at91rm9200=yes \
+                        --enable-presto_libftdi=yes \
+                        --enable-usbprog=yes \
+                        --enable-jlink=yes \
+                        --enable-vsllink=yes \
+                        --enable-rlink=yes \
+                        --enable-arm-jtag-ew=yes \
                         --disable-werror \
                         --prefix=${prefix}
 
