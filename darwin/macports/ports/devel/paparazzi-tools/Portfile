@@ -36,7 +36,6 @@ depends_lib-append  \
                     port:openocd \
                     port:libcmsis \
                     port:libstm32 \
-                    port:libstm32usb \
                     port:libopencm3 \
                     port:jsbsim \
                     port:tkdiff
