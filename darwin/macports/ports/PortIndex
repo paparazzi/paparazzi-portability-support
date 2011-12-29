@@ -1,7 +1,7 @@
 arm-none-eabi-binutils 297
 variants universal portdir cross/arm-none-eabi-binutils description {binutils for arm-none-eabi} epoch 0 platforms darwin name arm-none-eabi-binutils license unknown maintainers nomaintainer long_description {binutils compiled for arm-none-eabi} categories {cross devel} version 2.21.1 revision 0
 arm-none-eabi-gcc-linaro 526
-portdir cross/arm-none-eabi-gcc description {gcc cross-compilers for arm-none-eabi, with newlib runtime library.} homepage http://gcc.gnu.org/ epoch 0 platforms darwin name arm-none-eabi-gcc-linaro depends_lib {port:gmp port:mpfr port:mpc port:libmpc port:gettext port:libiconv port:arm-none-eabi-binutils} license unknown maintainers nomaintainer long_description {gnu compilers collection (including c and c++) for arm-none-eabi, with newlib runtime library.} categories {cross devel} version 4.6.2-2011.11.27.01 revision 0
+portdir cross/arm-none-eabi-gcc description {gcc cross-compilers for arm-none-eabi, with newlib runtime library.} homepage http://gcc.gnu.org/ epoch 0 platforms darwin name arm-none-eabi-gcc-linaro depends_lib {port:gmp port:mpfr port:mpc port:libmpc port:gettext port:libiconv port:arm-none-eabi-binutils} license unknown maintainers nomaintainer long_description {gnu compilers collection (including c and c++) for arm-none-eabi, with newlib runtime library.} categories {cross devel} version 4.6.2-2011.11.23.01 revision 0
 arm-none-eabi-gcc-linaro 539
 portdir cross/arm-none-eabi-gcc-linaro description {gcc cross-compilers for arm-none-eabi, with newlib runtime library.} homepage http://gcc.gnu.org/ epoch 0 platforms darwin name arm-none-eabi-gcc-linaro depends_lib {port:gmp port:mpfr port:mpc port:libmpc port:gettext port:libiconv port:arm-none-eabi-binutils} license unknown maintainers nomaintainer long_description {gnu compilers collection (including c and c++) for arm-none-eabi, with newlib runtime library.} categories {cross devel} version 4.6-2011.11-2011.11.27.01 revision 0
 arm-none-eabi-gdb 509
@@ -12,8 +12,6 @@ libopencm3 296
 portdir cross/libopencm3 description libopencm3 depends_fetch bin:git:git-core epoch 0 platforms darwin name libopencm3 depends_lib port:arm-none-eabi-gcc-linaro license unknown maintainers nomaintainer long_description libopencm3 categories {cross devel} version master-2011.12.23.01 revision 0
 libstm32 304
 portdir cross/libstm32 description libstm32 depends_fetch bin:git:git-core epoch 0 platforms darwin name libstm32 depends_lib {port:arm-none-eabi-gcc-linaro port:libcmsis} license unknown maintainers nomaintainer long_description libstm32 categories {cross devel} version master-2011.07.23.01 revision 0
-libstm32usb 310
-portdir cross/libstm32usb description libstm32 depends_fetch bin:git:git-core epoch 0 platforms darwin name libstm32usb depends_lib {port:arm-none-eabi-gcc-linaro port:libstm32} license unknown maintainers nomaintainer long_description libstm32 categories {cross devel} version master-2011.07.23.01 revision 0
 openocd 521
 variants universal portdir cross/openocd description {Open On-Chip Debugger} depends_fetch bin:git:git-core homepage http://openocd.berlios.de/ epoch 0 platforms darwin depends_lib port:libftdi name openocd long_description {The Open On-Chip Debugger (OpenOCD) aims to provide debugging, in-system programming and boundary-scan testing for embedded target devices. Built with support for FT2232 based devices.} maintainers {snc openmaintainer} license GPL categories {cross devel} version master-2011.07.23.01 revision 0
 OpenThreads 443
