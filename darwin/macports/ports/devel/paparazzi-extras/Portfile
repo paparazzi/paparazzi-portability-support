@@ -3,7 +3,7 @@
 PortSystem          1.0
 
 name                paparazzi-extras
-version             master-2011.07.23.01
+version             master-2011.12.30.01
 categories          devel
 maintainers         nomaintainer
 description         Paparazzi Extra Developer Tools
@@ -14,7 +14,7 @@ master_sites
 platforms           darwin
 
 depends_lib-append  \
-                    port:py26-scipy
+                    port:py27-scipy
 
 distfiles
 use_configure   no
