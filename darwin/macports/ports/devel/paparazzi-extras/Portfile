@@ -14,7 +14,8 @@ master_sites
 platforms           darwin
 
 depends_lib-append  \
-                    port:py27-scipy
+                    port:py27-scipy \
+                    port:python_Select
 
 distfiles
 use_configure   no
