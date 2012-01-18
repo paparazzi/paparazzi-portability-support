@@ -1,3 +1,11 @@
+paparazzi-arm-multilib (1.2.2-1ppa1~oneiric) oneiric; urgency=low
+
+  * compile gdb with xml support
+    - added libexpat1-dev to build dependencies
+    - configure gdb with --with-expat=yes to make sure
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Wed, 18 Jan 2012 18:28:05 +0100
+
 paparazzi-arm-multilib (1.2.1-1ppa1~oneiric) oneiric; urgency=low
 
   * binutils 2.21.1
