@@ -27,8 +27,8 @@ checksums           md5     920414f896af983e7458c03a492f7c62 \
 
 
 depends_lib         port:ocaml \
-                    port:caml-findlib \
-                    port:caml-pcre
+                    port:ocaml-findlib \
+                    port:ocaml-pcre
 
 # ocaml is not universal
 universal_variant   no
