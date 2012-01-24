@@ -3,7 +3,7 @@
 PortSystem          1.0
 
 name                paparazzi-tools
-version             master-2011.12.23.01
+version             master-2012.01.24.01
 categories          devel
 maintainers         nomaintainer
 description         Paparazzi Developer Tools
@@ -15,7 +15,7 @@ platforms           darwin
 
 depends_lib-append  \
                     port:ocaml \
-                    port:caml-findlib \
+                    port:ocaml-findlib \
                     port:caml-pcre \
                     port:git-core \
                     port:xml-light \
