@@ -10,7 +10,7 @@
 +
  ifeq ("$(UNAME)","Darwin")
 -  LIBRARYS = -L/opt/local/lib
-+  LIBRARYS = -L$(PREFIX)/lib
++  LIBRARYS = -L$(PREFIX)/lib -L/opt/local/lib
  endif
  
  LIBS = ivy-ocaml.cma ivy-ocaml.cmxa glibivy-ocaml.cma glibivy-ocaml.cmxa
@@ -20,7 +20,7 @@
  .c.o :
 -    
 -	$(CC) -Wall -c $(FPIC) -I /opt/local/include/  $(OCAMLINC) $(GLIBINC) $<
-+	$(CC) -Wall -c $(FPIC) -I $(PREFIX)/include/  $(OCAMLINC) $(GLIBINC) $<
++	$(CC) -Wall -c $(FPIC) -I $(PREFIX)/include/ -I /opt/local/include/ $(OCAMLINC) $(GLIBINC) $<
  .mli.cmi :
  	$(OCAMLMLI) $(OCAMLFLAGS) -c $<
  .ml.cmx :
