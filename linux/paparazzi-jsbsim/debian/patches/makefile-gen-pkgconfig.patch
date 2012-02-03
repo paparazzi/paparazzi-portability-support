@@ -1,0 +1,17 @@
+## Description: add some description
+## Origin/Author: add some origin or author
+## Bug: bug URL
+Index: paparazzi-jsbsim-1.3/Makefile.am
+===================================================================
+--- paparazzi-jsbsim-1.3.orig/Makefile.am	2012-02-03 21:38:39.437567187 +0100
++++ paparazzi-jsbsim-1.3/Makefile.am	2012-02-03 21:38:37.849567149 +0100
+@@ -3,6 +3,9 @@
+ 
+ SUBDIRS	= src systems aircraft engine scripts data_output data_plot check_cases examples
+ 
++pkgconfigdir = $(libdir)/pkgconfig
++pkgconfig_DATA = JSBSim.pc
++
+ dist-hook:
+ 	(cd $(top_srcdir))
+ 

@@ -1,0 +1,17 @@
+## Description: add some description
+## Origin/Author: add some origin or author
+## Bug: bug URL
+Index: paparazzi-jsbsim-1.3/JSBSim.pc.in
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ paparazzi-jsbsim-1.3/JSBSim.pc.in	2012-02-03 21:35:19.285562544 +0100
+@@ -0,0 +1,9 @@
++prefix=@prefix@
++exec_prefix=@exec_prefix@
++libdir=@libdir@
++includedir=@includedir@
++Name: JSBSim
++Description: JSBSim (Paparazzi version)
++Version: @VERSION@
++Libs: -L${libdir} -lJSBSim
++Cflags: -I${includedir}/JSBSim

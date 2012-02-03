@@ -1,9 +1,0 @@
-DEB package instruction
-
-* Add debian folder to jsbsim sources
-* Add JSBSim.pc.in to jsbsim sources
-* Merge Makefile.am (in order to generate JSBSim.pc)
-* Apply jsbsim_silent.patch (if it is still up-to-date...)
-
-* Run dpkg-buildpackage -b
-

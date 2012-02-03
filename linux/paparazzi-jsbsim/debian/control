@@ -1,0 +1,14 @@
+Source: paparazzi-jsbsim
+Section: unknown
+Priority: extra
+Maintainer: Felix Ruess <felix.ruess@gmail.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.2
+Homepage: jsbsim.sourceforge.net
+
+Package: paparazzi-jsbsim
+Architecture: any
+Depends: ${misc:Depends}
+Description: JSBSim support for Paparazzi
+ JSBSim shared libraries package (jsbsim.sourceforge.net)
+ Package made for the Paparazzi project (paparazzi.enac.fr)

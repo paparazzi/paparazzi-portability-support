@@ -1,7 +1,0 @@
-#!/usr/bin/make -f
-
-DEB_CONFIGURE_USER_FLAGS = --enable-libraries --enable-shared --disable-static 
-
-include /usr/share/cdbs/1/rules/debhelper.mk
-include /usr/share/cdbs/1/class/autotools.mk
-

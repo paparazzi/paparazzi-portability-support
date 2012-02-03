@@ -1,9 +1,0 @@
-prefix=@prefix@
-exec_prefix=@exec_prefix@
-libdir=@libdir@
-includedir=@includedir@
-Name: JSBSim
-Description: JSBSim (Paparazzi version)
-Version: @VERSION@
-Libs: -L${libdir} -lJSBSim
-Cflags: -I${includedir}/JSBSim
