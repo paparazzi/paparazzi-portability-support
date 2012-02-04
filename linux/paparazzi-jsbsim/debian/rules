@@ -24,5 +24,5 @@ get-orig-source:
 
 
 override_dh_auto_configure:
-	dh_auto_configure -- --enable-libraries --enable-shared --disable-static
+	./autogen.sh --enable-libraries --enable-shared --disable-static --prefix=/usr
 

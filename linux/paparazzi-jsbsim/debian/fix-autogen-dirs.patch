@@ -1,0 +1,16 @@
+## Description: add some description
+## Origin/Author: add some origin or author
+## Bug: bug URL
+Index: paparazzi-jsbsim-1.3/autogen.sh
+===================================================================
+--- paparazzi-jsbsim-1.3.orig/autogen.sh	2012-02-04 19:22:12.543094537 +0100
++++ paparazzi-jsbsim-1.3/autogen.sh	2012-02-04 19:21:59.599094237 +0100
+@@ -84,7 +84,7 @@
+   am_opt=--include-deps;;
+ esac
+ 
+-for coin in `find . -name configure.in -print`
++for coin in `find . \( -path \*/.pc \) -prune -o -name configure.in -print`
+ do 
+   dr=`dirname $coin`
+   if test -f $dr/NO-AUTO-GEN; then

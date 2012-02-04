@@ -2,9 +2,9 @@ Source: paparazzi-jsbsim
 Section: devel
 Priority: optional
 Maintainer: Felix Ruess <felix.ruess@gmail.com>
-Build-Depends: debhelper (>= 8.0.0)
+Build-Depends: debhelper (>= 8.0.0), autoconf, automake, libtool, pkg-config
 Standards-Version: 3.9.2
-Homepage: jsbsim.sourceforge.net
+Homepage: http://jsbsim.sourceforge.net
 
 Package: paparazzi-jsbsim
 Architecture: any

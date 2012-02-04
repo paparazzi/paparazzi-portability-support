@@ -1,2 +1,4 @@
-add-pkg-config.patch
-makefile-gen-pkgconfig.patch
+add-pkgconfig-in.patch
+makefile-add-pkgconfig.patch
+gen-pkgconfig.patch
+fix-autogen-dirs.patch
