@@ -1,6 +1,6 @@
 Source: paparazzi-jsbsim
-Section: unknown
-Priority: extra
+Section: devel
+Priority: optional
 Maintainer: Felix Ruess <felix.ruess@gmail.com>
 Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 3.9.2
