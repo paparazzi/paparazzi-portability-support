@@ -30,9 +30,9 @@ echo "/opt/paparazzi/lib/ocaml/site-lib/stublibs"  >> /opt/paparazzi/lib/ocaml/l
 # set a nice theme for gtk to use so users not scared of by the ugly default
 /opt/paparazzi/bin/switch2 /opt/paparazzi/share/themes/ClearlooksClassic
 
-# create or modify .bash_profile to include path to the paparazzi tools. We will be running as root so we need to change the ownership and permissions
-echo 'export PATH=/opt/paparazzi/bin:/opt/paparazzi/sbin:$PATH' >> ~/.bash_profile
-chmod 755 ~/.bash_profile
+# create or modify pathshelper to include path to the paparazzi tools.
+echo '/opt/paparazzi/bin' > /etc/paths.d/paparazzi
+echo '/opt/paparazzi/sbin' >> /etc/paths.d/paparazzi
 
 # create or modify .gdbinit to include path to target.xml. We will be running as root so we need to change the ownership and permissions
 echo 'set tdesc filename /opt/paparazzi/share/openocd/target.xml' > ~/.gdbinit
@@ -42,7 +42,6 @@ usr=`ls -l /dev/console | awk '/dev/ {print $3}'`
 grp="$(id -gn $usr)" 
 echo $usr
 echo $grp
-chown $usr:$grp ~/.bash_profile 
 chown $usr:$grp ~/.gdbinit 
 
 
