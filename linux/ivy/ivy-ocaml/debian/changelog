@@ -1,20 +1,8 @@
-ivy-ocaml (1.1-13~ppa1) oneiric; urgency=low
+ivy-ocaml (1.1-14~precise) precise; urgency=low
 
-  * only a version bump
+  * updated version for ubuntu precise ppa build
 
- -- Felix Ruess <felix.ruess@gmail.com>  Sat, 05 Nov 2011 13:41:34 +0100
-
-ivy-ocaml (1.1-12.1ubuntu2) oneiric; urgency=low
-
-  * updated for ubuntu oneiric
-
- -- Felix Ruess <felix.ruess@gmail.com>  Sat, 22 Oct 2011 00:33:20 +0200
-
-ivy-ocaml (1.1-12.1ubuntu1) natty; urgency=low
-
-  * updated for ubuntu natty ppa build
-
- -- Felix Ruess <felix.ruess@gmail.com>  Fri, 21 Oct 2011 23:53:48 +0200
+ -- Felix Ruess <felix.ruess@gmail.com>  Wed, 04 Apr 2012 15:27:59 +0200
 
 ivy-ocaml (1.1-12.1) unstable; urgency=low
 
