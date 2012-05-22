@@ -38,7 +38,8 @@ depends_lib-append  \
                     port:libstm32 \
                     port:libopencm3 \
                     port:jsbsim \
-                    port:tkdiff
+                    port:tkdiff \
+                    port:gsl
 #found in paparazzi extras port:py26-scipy
 
 distfiles
