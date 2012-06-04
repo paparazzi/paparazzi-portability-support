@@ -34,6 +34,7 @@ depends_lib-append  \
                     port:arm-none-eabi-gcc-linaro \
                     port:arm-none-eabi-gdb \
                     port:openocd \
+                    port:libcmsis \
                     port:libstm32 \
                     port:libopencm3 \
                     port:jsbsim \
