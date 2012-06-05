@@ -3,7 +3,7 @@
 PortSystem          1.0
 
 name                paparazzi-tools
-version             master-2012.06.05.01
+version             master-2012.06.06.01
 categories          devel
 maintainers         nomaintainer
 description         Paparazzi Developer Tools
@@ -40,8 +40,8 @@ depends_lib-append  \
                     port:jsbsim \
                     port:tkdiff \
                     port:ocaml-gsl \
-                    port:py26-pyusb \
-                    port:py26-scipy \
+                    port:py27-pyusb-devel \
+                    port:py27-scipy \
                     port:python_Select
 #found in paparazzi extras port:py26-scipy
 
