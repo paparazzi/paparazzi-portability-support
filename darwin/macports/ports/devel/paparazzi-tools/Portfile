@@ -3,7 +3,7 @@
 PortSystem          1.0
 
 name                paparazzi-tools
-version             master-2012.05.25.01
+version             master-2012.06.05.01
 categories          devel
 maintainers         nomaintainer
 description         Paparazzi Developer Tools
