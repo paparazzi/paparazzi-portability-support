@@ -10,7 +10,7 @@ maintainers             nomaintainer
 description             libstm32
 long_description        libstm32
 fetch.type              git
-git.url                 git://git.open-bldc.org/libstm32.git
+git.url                 git://github.com/esden/libstm32.git
 
 worksrcdir              ${name}
 use_configure           no

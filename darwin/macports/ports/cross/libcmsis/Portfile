@@ -10,7 +10,7 @@ maintainers             nomaintainer
 description             libcmsis
 long_description        libcmsis
 fetch.type              git
-git.url                 git://git.open-bldc.org/libcmsis.git
+git.url                 git://github.com/esden/libcmsis.git
 worksrcdir              ${name}
 use_configure           no
 use_parallel_build      no
