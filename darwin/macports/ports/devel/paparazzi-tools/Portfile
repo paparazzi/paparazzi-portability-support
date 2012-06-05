@@ -40,8 +40,8 @@ depends_lib-append  \
                     port:jsbsim \
                     port:tkdiff \
                     port:ocaml-gsl \
-                    port:py-usb \
-                    port:py27-scipy \
+                    port:py26-pyusb \
+                    port:py26-scipy \
                     port:python_Select
 #found in paparazzi extras port:py26-scipy
 
