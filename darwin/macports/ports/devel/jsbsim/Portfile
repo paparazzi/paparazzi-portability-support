@@ -2,7 +2,7 @@
 # $Id$
 PortSystem              1.0
 name                    jsbsim
-version                 trunk-2011.07.15.01
+version                 trunk-2012.06.12.01
 categories              devel
 platforms               darwin
 maintainers             nomaintainer
@@ -11,7 +11,7 @@ long_description        An open source, platform-independent, flight dynamics & 
 homepage                http://jsbsim.sourceforge.net/
 fetch.type              cvs
 cvs.root                :pserver:anonymous@jsbsim.cvs.sourceforge.net:/cvsroot/jsbsim
-cvs.date                "15-July-2011"
+cvs.date                "12-June-2012"
 cvs.module 		JSBSim
 
 worksrcdir		JSBSim 
