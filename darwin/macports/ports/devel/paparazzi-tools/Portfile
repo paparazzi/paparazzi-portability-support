@@ -58,3 +58,6 @@ destroot {
     puts $docfile "${long_description}\n"
     close $docfile
 }
+
+package.flat    no
+
