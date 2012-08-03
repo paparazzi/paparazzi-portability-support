@@ -1,3 +1,9 @@
+paparazzi-dev (3.6-1ubuntu1) precise; urgency=low
+
+  * Added python-usb dependency (needed for flashing via luftboot )
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Fri, 03 Aug 2012 16:53:42 +0200
+
 paparazzi-dev (3.5-1ubuntu2) oneiric; urgency=low
 
   * Added lpc21isp and openocd to Recommends
