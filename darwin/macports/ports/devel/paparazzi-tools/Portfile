@@ -3,7 +3,7 @@
 PortSystem          1.0
 
 name                paparazzi-tools
-version             2012.07.05.01
+version             2012.08.22.01
 categories          devel
 maintainers         nomaintainer
 description         Paparazzi Developer Tools
@@ -19,7 +19,7 @@ depends_lib-append  \
                     port:ocaml-pcre \
                     port:git-core \
                     port:xml-light \
-                    port:caml-ocamlnet \
+                    port:ocaml-ocamlnet \
                     port:libftdi \
                     port:lablgtk2 \
                     port:gtk-theme-switch \
