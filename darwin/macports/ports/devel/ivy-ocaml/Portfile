@@ -26,6 +26,6 @@ worksrcdir              ${name}-r3443
 use_configure           no
 build.args              
 depends_lib-append      \
-                        port:caml-ocamlnet \
+                        port:ocaml-ocamlnet \
                         port:ivy-c
 
