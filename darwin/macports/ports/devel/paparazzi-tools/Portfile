@@ -3,7 +3,7 @@
 PortSystem          1.0
 
 name                paparazzi-tools
-version             2012.10.03.01
+version             2012.10.03.02
 categories          devel
 maintainers         nomaintainer
 description         Paparazzi Developer Tools
@@ -34,6 +34,7 @@ depends_lib-append  \
                     port:arm-none-eabi-gcc-linaro \
                     port:arm-none-eabi-gdb \
                     port:openocd \
+                    port:libcmsis \
                     port:libstm32 \
                     port:libopencm3 \
                     port:jsbsim \
