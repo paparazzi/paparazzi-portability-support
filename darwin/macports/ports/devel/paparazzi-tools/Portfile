@@ -43,7 +43,8 @@ depends_lib-append  \
                     port:libsdl \
                     port:py27-pyusb-devel \
                     port:py27-scipy \
-                    port:python_Select
+                    port:python_Select \
+		    port:py27-yaml
 
 distfiles
 use_configure   no
