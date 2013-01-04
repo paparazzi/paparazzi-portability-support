@@ -10,7 +10,8 @@ Vcs-Browser: http://svn.tls.cena.fr/wsvn/ivy/ivy-ocaml/trunk/#_ivy-ocaml_trunk_
 
 Package: ivy-ocaml
 Architecture: any
-Depends: ocaml-findlib, ${ocaml:Depends}, ${shlibs:Depends}, ${misc:Depends}, ivy-c(>= 3.11)
+Depends: ${ocaml:Depends}, ${shlibs:Depends}, ${misc:Depends}, ivy-c(>= 3.11)
+Suggests: ocaml-findlib
 Provides: ${ocaml:Provides}
 Description: Ocaml binding for the Ivy software bus
  This package provides the bindings for the Ivy software bus. Standalone
