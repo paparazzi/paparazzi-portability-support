@@ -2,7 +2,7 @@ Source: paparazzi-arm-multilib
 Section: embedded
 Priority: extra
 Maintainer: Felix Ruess <felix.ruess@gmail.com>
-Build-Depends: debhelper (>= 7.0.50~), libmpfr-dev, libgmp3-dev, libmpc-dev, flex, bison, autoconf, automake, autogen, gettext, texinfo, procps, sharutils, libcloog-ppl-dev, libncurses5-dev, zlib1g-dev, gawk, xz-utils, patchutils, gperf, m4, libtool, libelfg0-dev, dejagnu, realpath, chrpath, curl, libexpat1-dev
+Build-Depends: debhelper (>= 7.0.50~), libmpfr-dev, libgmp3-dev, libmpc-dev, flex, bison, autoconf, automake, autogen, gettext, texinfo, procps, sharutils, libcloog-ppl-dev, libncurses5-dev, zlib1g-dev, gawk, xz-utils, patchutils, gperf, m4, libtool, libelfg0-dev, dejagnu, realpath, chrpath, curl, libexpat1-dev, python-dev
 Standards-Version: 3.9.2
 Homepage: http://paparazzi.enac.fr
 

@@ -290,7 +290,8 @@ $(stamp)gdb-configure: $(stamp)gdb-extract
 	--enable-interwork \
 	--enable-multilib \
 	--disable-werror \
-	--with-expat=yes
+	--with-expat=yes \
+	--with-python=yes
 
 # Build and install
 $(stamp)gdb-install: $(stamp)gdb-configure

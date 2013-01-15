@@ -1,3 +1,11 @@
+paparazzi-arm-multilib (1.2.3-1) unstable; urgency=low
+
+  * compile gdb with python support
+    - added python-dev to build dependencies
+    - configure gdb with --with-python=yes to make sure 
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Tue, 15 Jan 2013 11:51:05 +0100
+
 paparazzi-arm-multilib (1.2.2-1ppa1~oneiric) oneiric; urgency=low
 
   * compile gdb with xml support
