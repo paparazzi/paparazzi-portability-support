@@ -2,7 +2,7 @@ Source: ivy-c
 Priority: extra
 Section: devel
 Maintainer: Alexandre Bustico <alexandre.bustico@cena.fr>
-Build-Depends: debhelper (>= 7.0.50~), libxt-dev, libx11-dev, tcl8.4-dev, libglib2.0-dev, libpcre3-dev
+Build-Depends: debhelper (>= 7.0.50~), libxt-dev, libx11-dev, tcl-dev, libglib2.0-dev, libpcre3-dev
 Standards-Version: 3.9.2
 Homepage: http://www2.tls.cena.fr/products/ivy/
 
