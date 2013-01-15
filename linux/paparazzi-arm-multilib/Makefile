@@ -264,7 +264,7 @@ $(stamp)libopenstm32-extract: $(LIBOPENSTM32SRC) $(stamp)init-dirs
 $(stamp)libopenstm32-install: $(stamp)gcc-install $(stamp)libopenstm32-extract
 	export PATH=$(BUILDSYSROOT)$(PREFIX)/bin:$(PATH) && \
 	cd src/libopenstm32* && \
-	$(MAKE) PREFIX=$(TARGET) DESTDIR=$(BUILDSYSROOT)$(PREFIX) && \
+	$(MAKE) lib PREFIX=$(TARGET) DESTDIR=$(BUILDSYSROOT)$(PREFIX) && \
 	$(MAKE) install PREFIX=$(TARGET) DESTDIR=$(BUILDSYSROOT)$(PREFIX)
 	touch $@
 
