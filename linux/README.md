@@ -1,7 +1,7 @@
 This directory holds files used to create toolchains and packages used in the Paparazzi project
 
-Install packages neede for building
-===================================
+Install packages needed for building
+====================================
         $ ./develenv.sh
 
 
@@ -34,3 +34,12 @@ Build the debian package
         $ pbuilder-dist precise build ../<package>.dsc
 
 You will find the finished packages in ~/pbuilder/
+
+
+Building the binary package directly without pbuilder
+=====================================================
+
+Quickly build an usigned binary package:
+
+        $ cd package
+        $ debuild -i -us -uc -b
