@@ -21,7 +21,8 @@ case `lsb_release -si` in
 		devscripts \
 		pbuilder \
 		fakeroot \
-		debootstrap
+		debootstrap \
+		dh-ocaml
     ;;
     Ubuntu)
 	aptitude -y install \
