@@ -1,5 +1,13 @@
 .DS_Store
 *~
+
+# ignore built debian packages stuff
+*.build
+*.changes
+*.deb
+*.ppa.upload
+*.dsc
+
 linux/arm-none-eabi-gcc-linaro/openocd-master
 linux/arm-none-eabi-gcc-linaro/sources
 linux/arm-none-eabi-gcc-linaro/stamps
@@ -22,3 +30,4 @@ linux/ivy/ivy-ocaml/ivy-ocaml*
 linux/ivy/ivy-python/ivy-python*
 
 linux/lpc21isp/lpc21isp*
+
