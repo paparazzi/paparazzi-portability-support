@@ -3,4 +3,4 @@ This repository contains scripts, documentation and tools used by maintainers of
 Contents
 ========
 * darwin - Supportfiles for the darwin (aka. Mac OS X) platform
-* linux - debian packaging (see [linux/README.md](paparazzi-portability-support/blob/master/linux/README.md))
+* linux - debian packaging (see [linux/README.md](linux/README.md))
