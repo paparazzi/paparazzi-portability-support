@@ -8,7 +8,7 @@ Standards-Version: 3.9.2
 
 Package: paparazzi-dev
 Architecture: all
-Depends: ivy-c-dev, ivy-c, ivy-ocaml, libxml-light-ocaml-dev, liblablgtk2-ocaml-dev, make, gcc, g++, gnuplot, libgnomecanvas2-dev, bzip2, git-core, liblablgtk2-gnome-ocaml-dev, libusb-dev, speech-dispatcher, glade, imagemagick, libpcre3-dev, libocamlnet-ocaml-dev, ivy-python, python-lxml, python-wxgtk2.8, libocamlgsl-ocaml-dev, libsdl-ocaml-dev, python-usb, python-yaml
+Depends: ivy-c-dev, ivy-c, ivy-ocaml, ocaml-findlib, libxml-light-ocaml-dev, liblablgtk2-ocaml-dev, liblablgtk2-gnome-ocaml-dev, libocamlnet-ocaml-dev, libsdl-ocaml-dev, libpcre-ocaml-dev, make, gcc, g++, gnuplot, libgnomecanvas2-dev, bzip2, git, libusb-dev, speech-dispatcher, glade, imagemagick, libpcre3-dev, ivy-python, python-lxml, python-wxgtk2.8, python-usb, python-yaml
 Recommends: paparazzi-arm-multilib, libgtkdatabox-0.9.1-1-dev, python-scipy, python-matplotlib, lpc21isp, openocd (>= 0.5.0)
 Suggests: paparazzi-jsbsim, eagle, gs-common, tetex-extra, dia-gnome, boa, gitk, gpsd, libgps-dev, gedit
 Description: Paparazzi Meta Package : common support

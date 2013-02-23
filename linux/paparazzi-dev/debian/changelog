@@ -1,3 +1,13 @@
+paparazzi-dev (3.8) precise; urgency=low
+
+  * updated ocaml dependencies
+    * added libpcre-ocaml-dev
+    * added ocaml-findlib
+    * removed unused libocamlgsl-ocaml-dev
+  * replaced transitional package git-core with git
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Sat, 23 Feb 2013 15:57:48 +0100
+
 paparazzi-dev (3.7) precise; urgency=low
 
   * Added python-yaml dependency (needed for libopencm3)
