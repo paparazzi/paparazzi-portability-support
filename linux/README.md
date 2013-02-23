@@ -1,37 +1,55 @@
-This directory holds files used to create toolchains and packages used in the Paparazzi project
+This directory holds files/scripts used to create Debian/Ubuntu packages used in the Paparazzi project
 
 Install packages needed for building
 ====================================
         $ ./develenv.sh
 
 
-Building on Ubuntu with pbuilder-dist
-=====================================
-pbuilder-dist is a multi-distribution pbuilder wrapper
+Building with pbuilder
+======================
+pbuilder lets you easily create and use a chroot to build debian packages.
 See https://wiki.ubuntu.com/PbuilderHowto
+
+- Create a pbuilder chroot-tarball
+
+        sudo pbuilder create --debootstrapopts --variant=buildd
+
+- Build package using debuild
+
+		cd package
+		pdebuild
+
+
+Building with pbuilder-dist
+===========================
+pbuilder-dist is a wrapper that makes it easy to use pbuilder with many
+different versions of Ubuntu and/or Debian.
+You can also easily create i386 packages on your amd64 machine.
 
 Setup pbuilder-dist
 -------------------
-- Create the pbuilder environment for your desired distributions and architectures:
+- Create the pbuilder environment for your desired distributions and architectures, e.g.:
 
-        $ pbuilder-dist wheezy i386 create
-        $ pbuilder-dist precise create
+        pbuilder-dist wheezy i386 create
+        pbuilder-dist precise create
 
 - To update a pbuilder environment:
 
-        $ pbuilder-dist wheezy i386 update --override-config --release-only
+        pbuilder-dist wheezy i386 update --override-config --release-only
 
 Build the debian package
 ------------------------
-- first build a source package:
+See the respective package directory on how the get the source.
 
-        $ cd package
-        $ debuild -S
+- First build a source package if not already available:
 
-- then the binary package:
+		cd package
+        debuild -S
 
-        $ pbuilder-dist wheezy i386 build ../<package>.dsc
-        $ pbuilder-dist precise build ../<package>.dsc
+- Build the binary package from the source package:
+
+        pbuilder-dist wheezy i386 build ../<package>.dsc
+        pbuilder-dist precise build ../<package>.dsc
 
 You will find the finished packages in ~/pbuilder/
 
@@ -39,7 +57,7 @@ You will find the finished packages in ~/pbuilder/
 Building the binary package directly without pbuilder
 =====================================================
 
-Quickly build an usigned binary package:
+Quickly build an unsigned binary package:
 
-        $ cd package
-        $ debuild -i -us -uc -b
+    cd package
+    debuild -i -us -uc -b

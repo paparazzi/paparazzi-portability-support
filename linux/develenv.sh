@@ -1,44 +1,23 @@
 #/bin/sh
 
 #
-# installing needed debian/ubuntu packages
+# installing debian/ubuntu packages to help building new packages
 #
+
+DEBIAN_DEVEL="devscripts debhelper quilt pbuilder fakeroot dh-ocaml automake git subversion"
+UBUNTU_EXTRAS="ubuntu-dev-tools"
+
+# some dev packages needed to build some paparazzi packages...
+# incomplete and only needed if not using pbuilder
+LIB_DEV_DEPS="libftdi-dev libgmp-dev libmpfr-dev libncurses5-dev"
+#libtool texinfo asctidoc
 
 case `lsb_release -si` in
     Debian)
-	aptitude -y install \
-		automake \
-		debhelper \
-		git \
-		libftdi-dev \
-		libgmp3-dev \
-		libmpfr-dev \
-		libncurses5-dev \
-		libtool \
-		texinfo \
-		quilt \
-		asciidoc \
-		devscripts \
-		pbuilder \
-		fakeroot \
-		debootstrap \
-		dh-ocaml
+	apt-get -ys install $DEBIAN_DEVEL
     ;;
     Ubuntu)
-	aptitude -y install \
-		automake \
-		libmpfr-dev \
-		libtool \
-		texinfo \
-		quilt \
-		debhelper \
-		ubuntu-dev-tools \
-		asciidoc \
-		pbuilder \
-		fakeroot \
-		debootstrap \
-		debian-archive-keyring \
-		dh-ocaml
+	apt-get -ys install $DEBIAN_DEVEL $UBUNTU_EXTRAS
     ;;
     *)
 	echo "Which Linux you are using ?"
