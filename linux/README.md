@@ -2,7 +2,7 @@ This directory holds files/scripts used to create Debian/Ubuntu packages used in
 
 Install packages needed for building
 ====================================
-        sudo ./develenv.sh
+    sudo ./develenv.sh
 
 
 Building with pbuilder
