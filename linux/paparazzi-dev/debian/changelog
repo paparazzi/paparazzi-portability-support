@@ -1,3 +1,10 @@
+paparazzi-dev (3.9) precise; urgency=low
+
+  * added libgsl0-dev, needed for NPS
+    this was previouly automatically installed with libocamlgsl-ocaml-dev
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Sat, 23 Feb 2013 23:36:40 +0100
+
 paparazzi-dev (3.8) precise; urgency=low
 
   * updated ocaml dependencies
