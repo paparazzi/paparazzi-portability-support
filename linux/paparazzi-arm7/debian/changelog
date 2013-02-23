@@ -1,5 +1,0 @@
-paparazzi-arm7 (3.4) natty; urgency=low
-
-  * Separate package build paparrazzi-arm7
-
- -- Gautier Hattenberger <gautier.hattenberger@enac.fr>  Fri, 05 Aug 2011 21:44:33 +0200
