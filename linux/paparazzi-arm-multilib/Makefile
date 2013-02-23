@@ -151,10 +151,12 @@ $(stamp)gcc-extract: $(GCCSRC) $(stamp)init-dirs
 	tar xaf $< -C src
 	touch $@
 
-# Patch to add multilib support
+# Patch to add multilib support and fix gengtype subscripted value error
 $(stamp)gcc-patch: $(stamp)gcc-extract
 	cd src/gcc-* && \
 	patch -p0 -i ../../patches/patch-gcc-config-arm-t-arm-elf.diff
+	cd src/gcc-* && \
+	patch -p1 -i ../../patches/patch-gcc-gengtype-fix.diff
 	touch $@
 
 # Configure
