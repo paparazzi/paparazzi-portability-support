@@ -3,7 +3,8 @@
 PortSystem              1.0
 set targetarch          arm-none-eabi
 name                    libstm32
-version                 master-2012.06.05.01
+version                 master-2012.06.05
+revision				2
 categories              cross devel
 platforms               darwin
 maintainers             nomaintainer
@@ -15,9 +16,11 @@ git.url                 git://github.com/esden/libstm32.git
 worksrcdir              ${name}
 use_configure           no
 use_parallel_build      no
+
 depends_lib-append      \
-                        port:arm-none-eabi-gcc-linaro \
+                        port:gcc-arm-embedded \
                         port:libcmsis
+
 set environment         [list PATH="${prefix}/${targetarch}/bin"]
 build.env               ${environment}
 build.args              arch_prefix=${targetarch} prefix=${prefix}

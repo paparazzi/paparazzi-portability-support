@@ -3,7 +3,8 @@
 PortSystem          1.0
 
 name                paparazzi-tools
-version             2012.10.03.02
+version             2013.03.06
+revision            1
 categories          devel
 maintainers         nomaintainer
 description         Paparazzi Developer Tools
@@ -20,7 +21,7 @@ depends_lib-append  \
                     port:git-core \
                     port:xml-light \
                     port:ocaml-ocamlnet \
-                    port:libftdi \
+                    port:libftdi0 \
                     port:lablgtk2 \
                     port:gtk-theme-switch \
                     port:gnome-themes \
@@ -30,13 +31,8 @@ depends_lib-append  \
                     port:wget \
                     port:ivy-c \
                     port:ivy-ocaml \
-                    port:arm-none-eabi-binutils \
-                    port:arm-none-eabi-gcc-linaro \
-                    port:arm-none-eabi-gdb \
+                    port:gcc-arm-embedded \
                     port:openocd \
-                    port:libcmsis \
-                    port:libstm32 \
-                    port:libopencm3 \
                     port:jsbsim \
                     port:tkdiff \
                     port:ocaml-gsl \
@@ -44,12 +40,20 @@ depends_lib-append  \
                     port:py27-pyusb-devel \
                     port:py27-scipy \
                     port:python_Select \
-		    port:py27-yaml
+                    port:py27-yaml
 
 distfiles
 use_configure   no
 build           { }
 livecheck.type  none
+
+default_variants    +pprz_v4
+
+variant pprz_v4 description {Support STM32 on v4.2 and older} {
+    depends_lib-append port:libcmsis \
+                       port:libstm32 \
+                       port:libopencm3
+}
 
 destroot {
     # Create a dummy file so the port can be successfully activated
