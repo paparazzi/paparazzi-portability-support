@@ -2,30 +2,37 @@
 # $Id$
 PortSystem              1.0
 name                    ivy-ocaml
-version                 r3443-2012.08.23.01
+version                 r3570-2013.02.28
+revision				1
 categories              devel
 platforms               darwin
 maintainers             nomaintainer
 description             Ivy bus ocaml library
 long_description        Ivy is the software bus that will creep over your network!
 homepage                http://www.tls.cena.fr/products/ivy/
-master_sites            http://bernard.gondwana.com.au/files/
-distfiles               ${name}-r3443.tar.gz
-checksums               md5     dc73898fbc9ffe305f7b0b437a847a39 \
-                        rmd160  c90cd5fdb4f1362f0571228ba1e8ca34af5f9999 \
-                        sha256  e2a6f0538f729c50af247358d7bd281b8a92794227b279987fa3417bbf21055f
-patchfiles              \
-                        patch-Makefile.diff
 
-worksrcdir              ${name}-r3443
-#fetch.type              svn
-#svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-ocaml/trunk
-#svn.revision            3443
-#svn.post_args-append    -r ${svn.revision} ${worksrcdir}
-
-use_configure           no
-build.args              
-depends_lib-append      \
-                        port:ocaml-ocamlnet \
+depends_lib-append      port:ocaml-ocamlnet \
                         port:ivy-c
 
+worksrcdir              ${name}-r3570
+fetch.type              svn
+svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-ocaml/trunk
+svn.revision            3570
+svn.post_args-append    -r ${svn.revision} ${worksrcdir}
+
+use_configure           no
+#Need to prevent simultaneous targets building, error with -j4 default
+use_parallel_build      no
+
+pre-destroot {
+        # ocamlfind needs the ocaml directory structure to be present
+        # in order to fill it during installation.
+        file mkdir "${destroot}${prefix}/lib/ocaml"
+        file mkdir "${destroot}${prefix}/lib/ocaml/site-lib"
+        file mkdir "${destroot}${prefix}/lib/ocaml/site-lib/stublibs"
+        #file mkdir "${destroot}${prefix}/lib/ocaml/stublibs"
+}
+
+# Prepend the env var for use by makefile
+destroot.cmd	      OCAMLFIND_DESTDIR="${destroot}`ocamlc -where`/site-lib" ${build.cmd}
+destroot.post_args    DESTDIR=${destroot} COMPAT_SYMLINK_SRCMOD=site-lib/

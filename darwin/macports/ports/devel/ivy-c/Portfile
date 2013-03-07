@@ -2,34 +2,30 @@
 # $Id$
 PortSystem              1.0
 name                    ivy-c
-version                 r3459-2011.12.20.01
+version                 r3517-2011.12.21
+revision				1
 categories              devel
 platforms               darwin
 maintainers             nomaintainer
 description             Ivy bus C library
 long_description        Ivy is the software bus that will creep over your network!
 homepage                http://www.tls.cena.fr/products/ivy/
-master_sites            http://bernard.gondwana.com.au/files/
-distfiles               ${name}-r3459.tar.gz
-checksums               md5     c4cde1eaa58b5413210e13e9271eca96 \
-                        rmd160  347c83f9dfc3e23f206d5fa1230166dbd6b4d1e5 \
-                        sha256  de7011edf9f8dbd9c79141961bc9eba4d4484535a9e9ea0bfcd32231ccedd8a5
-worksrcdir              ${name}-r3459
 
-#fetch.type              svn
-#svn.revision            3459
-#svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-c/trunk
-#svn.post_args-append    -r ${svn.revision}
-#svn.method              checkout
-#svn.post_args-append    ${worksrcdir}
+worksrcdir              ${name}-r3517
+
+fetch.type              svn
+svn.revision            3517
+svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-c/trunk
+svn.post_args-append    -r ${svn.revision}
+svn.method              checkout
+svn.post_args-append    ${worksrcdir}
 
 use_configure           no
-depends_lib-append      \
-                        port:glib2 \
+
+depends_lib-append      port:glib2 \
                         port:pcre \
                         port:pkgconfig
 
 build.args              -C src -f Makefile.osx PREFIX=${prefix}
 destroot.args           -C src -f Makefile.osx PREFIX=${prefix}
 patchfiles              patch-src-Makefile.osx.diff
-
