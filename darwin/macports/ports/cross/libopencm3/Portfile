@@ -3,7 +3,8 @@
 PortSystem              1.0
 set targetarch          arm-none-eabi
 name                    libopencm3
-version                 master-2012.10.03.01
+version                 master-2012.10.03
+revision				1
 categories              cross devel
 platforms               darwin
 maintainers             nomaintainer
@@ -17,7 +18,7 @@ use_configure           no
 use_parallel_build      no
 depends_lib-append      \
                         port:libmpc \
-                        port:${targetarch}-gcc-linaro
+                        port:gcc-arm-embedded
 set environment         [list PATH="${prefix}/${targetarch}/bin" LDFLAGS="-L${prefix}/${targetarch}/lib"]
 build.env               ${environment}
 build.args              PREFIX=${targetarch} Q="" -w

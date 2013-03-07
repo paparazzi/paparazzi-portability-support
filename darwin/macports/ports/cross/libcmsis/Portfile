@@ -3,7 +3,8 @@
 PortSystem              1.0
 set targetarch          arm-none-eabi
 name                    libcmsis
-version                 master-2012.10.03.01
+version                 master-2012.10.03
+revision				1
 categories              cross devel
 platforms               darwin
 maintainers             nomaintainer
@@ -16,7 +17,7 @@ use_configure           no
 use_parallel_build      no
 depends_lib-append      \
                         port:libmpc \
-                        port:arm-none-eabi-gcc-linaro
+                        port:gcc-arm-embedded
 #set environment         [list PATH="${prefix}/${targetarch}/bin"]
 #build.env               ${environment}
 build.args              arch_prefix=${targetarch} prefix=${prefix}
