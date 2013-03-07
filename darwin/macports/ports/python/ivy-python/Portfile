@@ -3,7 +3,8 @@
 PortSystem              1.0
 PortGroup               python27 1.0
 name                    ivy-python
-version                 trunk-2012.08.23.01
+version                 trunk-2012.08.23
+revision				1
 categories              python
 platforms               darwin
 maintainers             nomaintainer

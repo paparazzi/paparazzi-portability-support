@@ -2,7 +2,8 @@
 # $Id$
 PortSystem              1.0
 name                    OpenThreads
-version                 2.1.0-2011.07.23.01
+version                 2.1.0-2011.07.23
+revision				1
 categories              devel
 platforms               darwin
 maintainers             nomaintainer

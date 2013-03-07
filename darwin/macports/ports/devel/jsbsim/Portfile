@@ -2,7 +2,8 @@
 # $Id$
 PortSystem              1.0
 name                    jsbsim
-version                 trunk-2012.06.12.01
+version                 trunk-2012.06.12
+revision                1
 categories              devel
 platforms               darwin
 maintainers             nomaintainer

@@ -3,7 +3,8 @@
 PortSystem              1.0
 set targetarch          arm-none-eabi
 name                    ${targetarch}-gcc-linaro
-version                 4.6-2011.11-2011.11.27.01
+version                 4.6-2011.11-2011.11.27
+revision                1
 set gccversion          4.6-2011.11
 
 set branch              [join [lrange [split ${gccversion} .] 0 1] .]
