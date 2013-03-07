@@ -2,7 +2,8 @@
 # $Id$
 PortSystem              1.0
 name                    arm-none-eabi-gdb
-version                 7.3a-2011.11.23.01
+version                 7.3a-2011.11.23
+revision                1
 set gdbversion          7.3a
 categories              cross devel
 platforms               darwin

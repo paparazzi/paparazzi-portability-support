@@ -4,6 +4,7 @@ PortSystem                  1.0
 set targetarch              arm-none-eabi
 name                        ${targetarch}-binutils
 version                     2.21.1
+revision                    1
 categories                  cross devel
 platforms                   darwin
 maintainers                 nomaintainer
