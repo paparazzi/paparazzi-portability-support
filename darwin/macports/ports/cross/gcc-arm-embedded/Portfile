@@ -1,0 +1,38 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+PortSystem              1.0
+name                    gcc-arm-embedded
+version                 4.7-2012-q4-major
+revision                1
+set distfilename        gcc-arm-none-eabi-4_7-2012q4
+set distfilenamedate    20121208
+categories              cross devel
+platforms               darwin
+maintainers             nomaintainer
+description             arm-none-eabi compiler for arm cortex-m/r
+long_description        gcc-arm-embedded provides arm-none-eabi tools for \
+                        arm cortex-m and cortex-r processors
+homepage                https://launchpad.net/gcc-arm-embedded
+
+#master_sites            file:///Users/stephendwyer/build
+master_sites            https://launchpad.net/gcc-arm-embedded/4.7/4.7-2012-q4-major/+download/
+distfiles               ${distfilename}-${distfilenamedate}-mac.tar.bz2
+use_bzip2               yes
+checksums               md5     fcfe3aecbfe77c1e5985845fbe722aac
+
+# All cross ports violate the mtree layout.
+destroot.violate_mtree  yes
+
+# FIXME somehow
+post-extract    {
+        file rename ${workpath}/${distfilename} ${worksrcpath}
+}
+
+use_configure       no
+
+build		{ }
+
+destroot	{
+        # Should use xinstall instead
+        system "cp -rf ${worksrcpath}/ ${destroot}${prefix}"
+}
