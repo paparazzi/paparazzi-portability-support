@@ -13,9 +13,12 @@ homepage                http://jsbsim.sourceforge.net/
 fetch.type              cvs
 cvs.root                :pserver:anonymous@jsbsim.cvs.sourceforge.net:/cvsroot/jsbsim
 cvs.date                "12-June-2012"
-cvs.module 		JSBSim
+cvs.module 		      JSBSim
 
-worksrcdir		JSBSim 
+depends_lib-append      port:autoconf \
+                        port:automake
+
+worksrcdir		      JSBSim 
 
 patchfiles              patch-src-Makefile-am.diff \
                         patch-src-initialization-Makefile-am.diff \
