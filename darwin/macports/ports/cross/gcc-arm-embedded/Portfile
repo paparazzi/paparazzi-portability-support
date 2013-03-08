@@ -20,6 +20,12 @@ distfiles               ${distfilename}-${distfilenamedate}-mac.tar.bz2
 use_bzip2               yes
 checksums               md5     fcfe3aecbfe77c1e5985845fbe722aac
 
+# Uses the same directory names
+conflicts               arm-none-eabi-binutils \
+                        arm-none-eabi-gcc \
+                        arm-none-eabi-gcc-linaro \
+                        arm-none-eabi-gdb
+
 # All cross ports violate the mtree layout.
 destroot.violate_mtree  yes
 
