@@ -2,7 +2,7 @@
 # $Id$
 PortSystem              1.0
 name                    ivy-ocaml
-version                 r3570-2013.02.28
+version                 r3571-2013.03.12
 revision				1
 categories              devel
 platforms               darwin
@@ -14,10 +14,10 @@ homepage                http://www.tls.cena.fr/products/ivy/
 depends_lib-append      port:ocaml-ocamlnet \
                         port:ivy-c
 
-worksrcdir              ${name}-r3570
+worksrcdir              ${name}-r3571
 fetch.type              svn
 svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-ocaml/trunk
-svn.revision            3570
+svn.revision            3571
 svn.post_args-append    -r ${svn.revision} ${worksrcdir}
 
 use_configure           no
@@ -34,5 +34,5 @@ pre-destroot {
 }
 
 # Prepend the env var for use by makefile
-destroot.cmd	      OCAMLFIND_DESTDIR="${destroot}`ocamlc -where`/site-lib" ${build.cmd}
-destroot.post_args    DESTDIR=${destroot} COMPAT_SYMLINK_SRCMOD=site-lib/
+destroot.cmd	      OCAMLFIND_DESTDIR="${destroot}`${prefix}/bin/ocamlc -where`/site-lib" ${build.cmd}
+destroot.post_args    DESTDIR=${destroot} COMPAT_SYMLINK_SRCMOD=site-lib/ OSX_MACPORTS_PREFIX=${prefix}
