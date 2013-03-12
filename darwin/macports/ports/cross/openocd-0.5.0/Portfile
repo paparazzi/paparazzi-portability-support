@@ -3,7 +3,7 @@
 PortSystem              1.0
 set crossgcc-target     arm-none-eabi
 
-name                openocd
+name                openocd-0.5.0
 version             0.5.0
 revision            1
 
