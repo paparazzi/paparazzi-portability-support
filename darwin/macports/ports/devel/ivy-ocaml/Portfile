@@ -24,6 +24,8 @@ use_configure           no
 #Need to prevent simultaneous targets building, error with -j4 default
 use_parallel_build      no
 
+build.post_args 		OSX_MACPORTS_PREFIX=${prefix}
+
 pre-destroot {
         # ocamlfind needs the ocaml directory structure to be present
         # in order to fill it during installation.
