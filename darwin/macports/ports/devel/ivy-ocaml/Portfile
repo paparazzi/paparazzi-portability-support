@@ -3,7 +3,7 @@
 PortSystem              1.0
 name                    ivy-ocaml
 version                 r3571-2013.03.12
-revision				1
+revision				2
 categories              devel
 platforms               darwin
 maintainers             nomaintainer
@@ -11,7 +11,8 @@ description             Ivy bus ocaml library
 long_description        Ivy is the software bus that will creep over your network!
 homepage                http://www.tls.cena.fr/products/ivy/
 
-depends_lib-append      port:ocaml-ocamlnet \
+depends_lib-append      port:ocaml-findlib \
+						port:ocaml-ocamlnet \
                         port:ivy-c
 
 worksrcdir              ${name}-r3571
@@ -29,12 +30,16 @@ build.post_args 		OSX_MACPORTS_PREFIX=${prefix}
 pre-destroot {
         # ocamlfind needs the ocaml directory structure to be present
         # in order to fill it during installation.
-        file mkdir "${destroot}${prefix}/lib/ocaml"
-        file mkdir "${destroot}${prefix}/lib/ocaml/site-lib"
-        file mkdir "${destroot}${prefix}/lib/ocaml/site-lib/stublibs"
-        #file mkdir "${destroot}${prefix}/lib/ocaml/stublibs"
+        #xinstall -d ${destroot}${prefix}/lib/ocaml/site-lib/stublibs
+        #system "export OCAMLFIND_DESTDIR=${destroot}`${prefix}/bin/ocamlc -where`/site-lib"
+        #reinplace "s|#OCAMLFINDFLAGS += -destdir $(DESTDIR)|OCAMLFIND_DESTDIR=|g" ${worksrcpath}/Makefile
+        set ocaml_site_path [exec ocamlfind printconf destdir]
+	    xinstall -d ${destroot}${ocaml_site_path}/stublibs
+	    destroot.args DESTDIR="${destroot}" OCAMLFIND_DESTDIR="${destroot}${ocaml_site_path}" COMPAT_SYMLINK_SRCMOD=site-lib/ OSX_MACPORTS_PREFIX=${prefix}
 }
 
 # Prepend the env var for use by makefile
-destroot.cmd	      OCAMLFIND_DESTDIR="${destroot}`${prefix}/bin/ocamlc -where`/site-lib" ${build.cmd}
-destroot.post_args    DESTDIR=${destroot} COMPAT_SYMLINK_SRCMOD=site-lib/ OSX_MACPORTS_PREFIX=${prefix}
+#destroot.cmd	      export OCAMLFIND_DESTDIR="${destroot}`${prefix}/bin/ocamlfind -where`/site-lib"; ${build.cmd}
+#destroot.post_args    DESTDIR=${destroot} OCAMLFIND_DESTDIR="${destroot}`${prefix}/bin/ocamlfind printconf destdir`" COMPAT_SYMLINK_SRCMOD=site-lib/ OSX_MACPORTS_PREFIX=${prefix}
+
+#destroot.post_args    DESTDIR=${destroot} COMPAT_SYMLINK_SRCMOD=site-lib/ OSX_MACPORTS_PREFIX=${prefix}
