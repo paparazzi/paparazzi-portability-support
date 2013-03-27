@@ -2,8 +2,8 @@
 # $Id$
 PortSystem              1.0
 name                    ivy-ocaml
-version                 r3571-2013.03.12
-revision				2
+version                 r3577-2013.03.27
+revision				1
 categories              devel
 platforms               darwin
 maintainers             nomaintainer
@@ -15,10 +15,10 @@ depends_lib-append      port:ocaml-findlib \
 						port:ocaml-ocamlnet \
                         port:ivy-c
 
-worksrcdir              ${name}-r3571
+worksrcdir              ${name}-r3577
 fetch.type              svn
 svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-ocaml/trunk
-svn.revision            3571
+svn.revision            3577
 svn.post_args-append    -r ${svn.revision} ${worksrcdir}
 
 use_configure           no
@@ -30,16 +30,7 @@ build.post_args 		OSX_MACPORTS_PREFIX=${prefix}
 pre-destroot {
         # ocamlfind needs the ocaml directory structure to be present
         # in order to fill it during installation.
-        #xinstall -d ${destroot}${prefix}/lib/ocaml/site-lib/stublibs
-        #system "export OCAMLFIND_DESTDIR=${destroot}`${prefix}/bin/ocamlc -where`/site-lib"
-        #reinplace "s|#OCAMLFINDFLAGS += -destdir $(DESTDIR)|OCAMLFIND_DESTDIR=|g" ${worksrcpath}/Makefile
         set ocaml_site_path [exec ocamlfind printconf destdir]
 	    xinstall -d ${destroot}${ocaml_site_path}/stublibs
-	    destroot.args DESTDIR="${destroot}" OCAMLFIND_DESTDIR="${destroot}${ocaml_site_path}" COMPAT_SYMLINK_SRCMOD=site-lib/ OSX_MACPORTS_PREFIX=${prefix}
+	    destroot.args DESTDIR="${destroot}" COMPAT_SYMLINK_SRCMOD=site-lib/ OSX_MACPORTS_PREFIX=${prefix} COMPAT_SYMLINK_CREATE=y
 }
-
-# Prepend the env var for use by makefile
-#destroot.cmd	      export OCAMLFIND_DESTDIR="${destroot}`${prefix}/bin/ocamlfind -where`/site-lib"; ${build.cmd}
-#destroot.post_args    DESTDIR=${destroot} OCAMLFIND_DESTDIR="${destroot}`${prefix}/bin/ocamlfind printconf destdir`" COMPAT_SYMLINK_SRCMOD=site-lib/ OSX_MACPORTS_PREFIX=${prefix}
-
-#destroot.post_args    DESTDIR=${destroot} COMPAT_SYMLINK_SRCMOD=site-lib/ OSX_MACPORTS_PREFIX=${prefix}

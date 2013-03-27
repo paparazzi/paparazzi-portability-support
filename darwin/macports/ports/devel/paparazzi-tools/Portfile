@@ -3,7 +3,7 @@
 PortSystem          1.0
 
 name                paparazzi-tools
-version             2013.03.06
+version             2013.03.26
 revision            1
 categories          devel
 maintainers         nomaintainer
@@ -15,6 +15,7 @@ master_sites
 platforms           darwin
 
 depends_lib-append  \
+                    port:coreutils \
                     port:ocaml \
                     port:ocaml-findlib \
                     port:ocaml-pcre \
@@ -37,6 +38,7 @@ depends_lib-append  \
                     port:tkdiff \
                     port:ocaml-gsl \
                     port:libsdl \
+                    port:ocamlsdl \
                     port:py27-pyusb-devel \
                     port:py27-scipy \
                     port:python_Select \
