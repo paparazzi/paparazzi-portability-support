@@ -4,7 +4,7 @@ PortSystem              1.0
 PortGroup               python27 1.0
 name                    ivy-python
 version                 trunk-2012.08.23
-revision				1
+revision				2
 categories              python
 platforms               darwin
 maintainers             nomaintainer
@@ -18,9 +18,8 @@ svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-python/trunk
 svn.post_args-append    ${worksrcdir}
 use_configure           no
 build.args              
-depends_lib-append      \
-                        port:ocaml-ocamlnet \
-                        port:ivy-c
+# You obviously need a python installed, 2.6 or 2.7 should be fine (already on OS X)
+#depends_lib-append		none
 
 build.env               LDFLAGS=-L${prefix}/lib
 
