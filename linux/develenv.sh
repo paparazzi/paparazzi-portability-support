@@ -19,6 +19,9 @@ case `lsb_release -si` in
     Ubuntu)
 	apt-get -ys install $DEBIAN_DEVEL $UBUNTU_EXTRAS
     ;;
+    Linaro)
+	apt-get -ys install $DEBIAN_DEVEL $UBUNTU_EXTRAS
+    ;;
     *)
 	echo "Which Linux you are using ?"
 	exit 1
