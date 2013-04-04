@@ -3,7 +3,7 @@
 PortSystem              1.0
 name                    jsbsim
 version                 trunk-2012.06.12
-revision                1
+revision                2
 categories              devel
 platforms               darwin
 maintainers             nomaintainer
@@ -16,7 +16,9 @@ cvs.date                "12-June-2012"
 cvs.module 		      JSBSim
 
 depends_lib-append      port:autoconf \
-                        port:automake
+                        port:automake \
+                        port:libtool  \
+                        port:tcl
 
 worksrcdir		      JSBSim 
 

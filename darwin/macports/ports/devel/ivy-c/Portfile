@@ -2,7 +2,7 @@
 # $Id$
 PortSystem              1.0
 name                    ivy-c
-version                 r3517-2011.12.21
+version                 r3572-2013.03.20
 revision				1
 categories              devel
 platforms               darwin
@@ -11,10 +11,10 @@ description             Ivy bus C library
 long_description        Ivy is the software bus that will creep over your network!
 homepage                http://www.tls.cena.fr/products/ivy/
 
-worksrcdir              ${name}-r3517
+worksrcdir              ${name}-r3572
 
 fetch.type              svn
-svn.revision            3517
+svn.revision            3572
 svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-c/trunk
 svn.post_args-append    -r ${svn.revision}
 svn.method              checkout
