@@ -1,3 +1,9 @@
+paparazzi-dev (3.12) precise; urgency=low
+
+  * add ocaml-native-compilers to recommends
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Tue, 23 Apr 2013 23:34:44 +0200
+
 paparazzi-dev (3.11) precise; urgency=low
 
   * add meld to recommends
