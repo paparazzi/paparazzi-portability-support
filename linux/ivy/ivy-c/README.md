@@ -1,10 +1,7 @@
-Building a debian package:
+The upstream ivy-c repository can now be directly used to build debian packages.
 
-* fakeroot debian/rules get-orig-source
-* tar -xvzf <version>.orig.tar.gz
-* cd ivy-c_<version>
-* rm -rf debian
-* cp -r ../debian .
+* svn checkout http://svn.tls.cena.fr/svn/ivy/ivy-c/trunk ivy-c
+* cd ivy-c
 
 Build using pbuilder:
 * sudo pbuilder update --distribution DIST-NAME --override-config
@@ -12,3 +9,4 @@ Build using pbuilder:
 
 or build a unsigned binary package if you don't want to use pbuilder:
 * debuild -i -us -uc -b
+
