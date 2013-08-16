@@ -144,8 +144,13 @@ if [ ! -d "$DATA_DIR" ]; then
 	mkdir -v $DATA_DIR
 fi
 
-# Update the macports sources
+# Update the macports sources (twice in case a base update occurs)
 echo "********************UPDATING MACPORTS SOURCES"
+$PORTCMD selfupdate
+if [[ $? != 0 ]]; then
+	echo "Error running PORT selfupdate!"
+	exit 1
+fi
 $PORTCMD selfupdate
 if [[ $? != 0 ]]; then
 	echo "Error running PORT selfupdate!"
@@ -184,7 +189,7 @@ echo "********************CLONING FRESH paparazzi-portability-support FROM GITHU
 if [ ! -d "paparazzi-portability-support" ]; then
 	rm -rf ./paparazzi-portability-support
 fi
-$GITCMD git@github.com:paparazzi/paparazzi-portability-support.git --branch $GITBRANCH
+$GITCMD clone git@github.com:paparazzi/paparazzi-portability-support.git --branch $GITBRANCH
 if [[ $? != 0 ]]; then
 	echo "Error cloning source directory!"
 	exit 1
