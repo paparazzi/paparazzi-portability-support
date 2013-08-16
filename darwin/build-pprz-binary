@@ -189,7 +189,7 @@ echo "********************CLONING FRESH paparazzi-portability-support FROM GITHU
 if [ ! -d "paparazzi-portability-support" ]; then
 	rm -rf ./paparazzi-portability-support
 fi
-$GITCMD clone git@github.com:paparazzi/paparazzi-portability-support.git --branch $GITBRANCH
+$GITCMD clone https://github.com/scdwyer/paparazzi-portability-support.git --branch $GITBRANCH
 if [[ $? != 0 ]]; then
 	echo "Error cloning source directory!"
 	exit 1
