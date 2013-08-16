@@ -84,8 +84,7 @@
 
 # Variables
 ###########
-#PORTCMD="/opt/paparazzi/bin/port -v"
-PORTCMD="echo"
+PORTCMD="/opt/paparazzi/bin/port -v"
 GITCMD="/opt/paparazzi/bin/git"
 
 # Which branch we want to clone from the repo
