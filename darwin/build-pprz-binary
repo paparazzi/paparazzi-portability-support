@@ -116,7 +116,7 @@ platform='unknown'
 unamestr=`uname`
 if [[ "$unamestr" != 'Darwin' ]]; then
    echo "Platform $unamestr is NOT SUPPORTED - OS X Only!"
-   exit
+   exit 1
 fi
 
 # Test for which version of OS X - some minor changes depending on version
@@ -131,6 +131,7 @@ esac
 
 if [[ $OSX_VERSION == 'NotSupported' ]]; then
 	echo "OS X Version is NOT SUPPORTED - Version $OSX_VERSION_NUM"
+	exit 1
 fi
 
 echo "Running on OS X $OSX_VERSION"
@@ -146,17 +147,37 @@ fi
 # Update the macports sources
 echo "********************UPDATING MACPORTS SOURCES"
 $PORTCMD selfupdate
+if [[ $? != 0 ]]; then
+	echo "Error running PORT selfupdate!"
+	exit 1
+fi
 
 # Uninstall all ports
 echo "********************UNINSTALLING AND CLEANING ALL INSTALLED PORTS"
 #Install expat so that the "port -f uninstall installed" will always have something to uninstall and expat is small
 $PORTCMD install expat
+if [[ $? != 0 ]]; then
+	echo "Error running PORT install expat!"
+	exit 1
+fi
 $PORTCMD -f uninstall installed
+if [[ $? != 0 ]]; then
+	echo "Error running PORT uninstall!"
+	exit 1
+fi
 $PORTCMD clean --all uninstalled
+if [[ $? != 0 ]]; then
+	echo "Error running PORT clean!"
+	exit 1
+fi
 
 # Install git from macports
 echo "********************INSTALLING GIT FROM MACPORTS"
 $PORTCMD install git-core
+if [[ $? != 0 ]]; then
+	echo "Error running PORT install git-core!"
+	exit 1
+fi
 
 # Clone the source from GitHub after deleting any existing
 echo "********************CLONING FRESH paparazzi-portability-support FROM GITHUB"
@@ -164,6 +185,10 @@ if [ ! -d "paparazzi-portability-support" ]; then
 	rm -rf ./paparazzi-portability-support
 fi
 $GITCMD git@github.com:paparazzi/paparazzi-portability-support.git --branch $GITBRANCH
+if [[ $? != 0 ]]; then
+	echo "Error cloning source directory!"
+	exit 1
+fi
 
 # Add the new portability directory to the sources of macports and update macports sources again
 # Make sure to backup sources conf file for macports
@@ -171,26 +196,50 @@ echo "********************ADDING paparazzi-portability-support DIRECTORY TO MACP
 if [ ! -f "$PORT_SOURCES_CONF_PATH.orig" ]; then
 	echo "********************BACKING UP MACPORTS SOURCES.CONF"
 	cp $PORT_SOURCES_CONF_PATH $PORT_SOURCES_CONF_PATH.orig
+	if [[ $? != 0 ]]; then
+		echo "Error backing up macports sources.conf!"
+		exit 1
+	fi
 fi
 
 POST_LINE_NUM=`sed -n '/^rsync:/=' $PORT_SOURCES_CONF_PATH | sed q`
+if [[ $? != 0 ]]; then
+	echo "Error running sed on sources.conf!"
+	exit 1
+fi
 ADD_LINE="file://$CURR_DIR/darwin/macports/ports"
 
 sed ''"$POST_LINE_NUM"' c\
        '"$ADD_LINE"'
        ' $PORT_SOURCES_CONF_PATH.orig > $PORT_SOURCES_CONF_PATH
+if [[ $? != 0 ]]; then
+	echo "Error running sed to update sources.conf!"
+	exit 1
+fi
 
 # Print any sources.conf lines starting with f (for file) or r (for rsync)
 echo "********************CURRENT MACPORTS SOURCES"
 sed -n '/^[fr]/p' /opt/local/etc/macports/sources.conf
+if [[ $? != 0 ]]; then
+	echo "Error printing sources.conf entries with sed!"
+	exit 1
+fi
 
 # Update the sources with the new local ports
 echo "********************UPDATING MACPORTS SOURCES"
 $PORTCMD selfupdate
+if [[ $? != 0 ]]; then
+	echo "Error running PORT selfupdate for the second time!"
+	exit 1
+fi
 
 # Build the paparazzi-tools mpkg
 echo "********************BUILDING THE paparazzi-tools PACKAGE"
 $PORTCMD -k mpkg paparazzi-tools
+if [[ $? != 0 ]]; then
+	echo "Error building the mpkg!"
+	exit 1
+fi
 
 
 # Copy the mpkg to the build directory so we can make an artifact of it
@@ -199,18 +248,34 @@ if [ ! -d "$DMG_DIR" ]; then
 	mkdir -v $DMG_DIR
 fi
 cp -r `find /opt/paparazzi/var/macports/build/* -name paparazzi-tools-*.mpkg` $DMG_DIR
+if [[ $? != 0 ]]; then
+	echo "Error copying the mpkg!"
+	exit 1
+fi
 
 # Copy the resources
 echo "********************COPYING THE paparazzi-tools RESOURCES TO THE DATA_DIR"
 cp -r darwin/install/Contents/* $DMG_DIR/paparazzi-tools*.mpkg/Contents/
+if [[ $? != 0 ]]; then
+	echo "Error copying the resources!"
+	exit 1
+fi
 
 # Change file permissions of postflight script
 echo "********************CHANGING THE POSTFLIGHT SCRIPT PERMISSIONS"
 chmod 777 DMG_DIR/paparazzi-tools*.mpkg/Contents/Resources/postflight
+if [[ $? != 0 ]]; then
+	echo "Error changing postflight file permissions!"
+	exit 1
+fi
 
 # Change owner of postflight script
 echo "********************CHANGING THE POSTFLIGHT SCRIPT OWNER"
 chown root:admin DMG_DIR/paparazzi-tools*.mpkg/Contents/Resources/postflight
+if [[ $? != 0 ]]; then
+	echo "Error changing postflight file ownership!"
+	exit 1
+fi
 
 # Track build dates
 echo "********************TRACKING MPKG BUILD DATE AND TIME"
@@ -219,3 +284,12 @@ echo $CURR_DATETIME >> $DATA_DIR/pprzbininstaller_build_date_list.txt
 
 # Build to .dmg file
 ./darwin/create-dmg --window-size 500 200 --background darwin/background.png --icon-size 96 --volname Paparazzi\ Tools --icon `ls -1 $DMG_DIR` 300 70 paparazzi-tools-"$OSX_VERSION"_"$CURR_DATETIME".dmg $DATA_DIR
+if [[ $? != 0 ]]; then
+	echo "Error building DMG file!"
+	exit 1
+fi
+
+FINISH_DATETIME=`date -u +%Y-%m-%d_%H-%M-%SGMT`
+echo "********************FINISHED BUILDING BINARY INSTALLER AT $FINISH_DATETIME"
+
+exit 0
