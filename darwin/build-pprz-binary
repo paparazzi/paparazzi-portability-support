@@ -145,25 +145,25 @@ fi
 
 # Update the macports sources
 echo "********************UPDATING MACPORTS SOURCES"
-PORTCMD selfupdate
+$PORTCMD selfupdate
 
 # Uninstall all ports
 echo "********************UNINSTALLING AND CLEANING ALL INSTALLED PORTS"
 #Install expat so that the "port -f uninstall installed" will always have something to uninstall and expat is small
-PORTCMD install expat
-PORTCMD -f uninstall installed
-PORTCMD clean --all uninstalled
+$PORTCMD install expat
+$PORTCMD -f uninstall installed
+$PORTCMD clean --all uninstalled
 
 # Install git from macports
 echo "********************INSTALLING GIT FROM MACPORTS"
-PORTCMD install git-core
+$PORTCMD install git-core
 
 # Clone the source from GitHub after deleting any existing
 echo "********************CLONING FRESH paparazzi-portability-support FROM GITHUB"
 if [ ! -d "paparazzi-portability-support" ]; then
 	rm -rf ./paparazzi-portability-support
 fi
-GITCMD git@github.com:paparazzi/paparazzi-portability-support.git --branch $GITBRANCH
+$GITCMD git@github.com:paparazzi/paparazzi-portability-support.git --branch $GITBRANCH
 
 # Add the new portability directory to the sources of macports and update macports sources again
 # Make sure to backup sources conf file for macports
@@ -186,11 +186,11 @@ sed -n '/^[fr]/p' /opt/local/etc/macports/sources.conf
 
 # Update the sources with the new local ports
 echo "********************UPDATING MACPORTS SOURCES"
-PORTCMD selfupdate
+$PORTCMD selfupdate
 
 # Build the paparazzi-tools mpkg
 echo "********************BUILDING THE paparazzi-tools PACKAGE"
-PORTCMD -k mpkg paparazzi-tools
+$PORTCMD -k mpkg paparazzi-tools
 
 
 # Copy the mpkg to the build directory so we can make an artifact of it
@@ -219,5 +219,3 @@ echo $CURR_DATETIME >> $DATA_DIR/pprzbininstaller_build_date_list.txt
 
 # Build to .dmg file
 ./darwin/create-dmg --window-size 500 200 --background darwin/background.png --icon-size 96 --volname Paparazzi\ Tools --icon `ls -1 $DMG_DIR` 300 70 paparazzi-tools-"$OSX_VERSION"_"$CURR_DATETIME".dmg $DATA_DIR
-
-
