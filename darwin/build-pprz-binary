@@ -1,0 +1,224 @@
+#! /bin/bash
+
+# Paparazzi OS X Binary Installer Build Script
+# Prerequisites:
+# - XCode with cmd line tools and macports installed to /opt/paparazzi
+# - See Steps 1 and 2 here: http://paparazzi.enac.fr/wiki/Installation/MacOSX#Basic_Install
+# To use:
+# - First, create a working directory:
+#	- cd ~; mkdir pprz-binary-working
+# - Make sure you have sufficient space on your drive, each binary can take several gigabytes
+# - Change to this new directory. Since we have a chicken/egg problem, get this script manually
+#	- cd ~/pprz-binary-working
+#	- curl https://raw.github.com/paparazzi/paparazzi-portability-support/master/darwin/build-pprz-binary > build-pprz-binary
+# - Change permissions to allow it to run:
+#	- chmod 755 build-pprz-binary
+# - Run the script:
+#	- ./build-pprz-binary
+# - If it completes successfully, upload the new binary to the server
+#	- cd ~/pprz-binary-working/paparazzi-portability-support/darwin
+#	- chmod 755 upload-pprz-binary
+#	- ./upload-pprz-binary
+# - Log file is stored in /tmp/build-pprz-binary.log
+###################################
+#
+# - Test for actually running on OS X
+# - Test for which version of OS X
+# - Test that Macports is installed properly, show instructions on how to
+# - Update Macports Sources
+# 	- port -v selfupdate
+# - Uninstall all
+# 	- port install expat so that the "port -f uninstall installed" will always have something to uninstall and expat is small
+#	- port -f uninstall installed
+#	- port clean --all uninstalled
+# - Install git from macports
+#   - port install git-core
+# - Source Code Checkout
+# 	- clean existing source dir first by deleting, get it fresh?
+#   - git checkout paparazzi-portability-support
+# - Update Macports Sources
+#	- add the new portability directory to the sources of macports... see script below
+# 	- port -v selfupdate
+# - build pkg
+#	- export PATH=$PATH:/opt/paparazzi/bin
+#	- Might need to fix one of the finicky ports??????????????
+#	- port -k mpkg paparazzi-tools
+# - Copy the mpkg to the build directory so we can make an artifact of it
+# 	- bash: -c "mkdir dmg;cp -r `find /opt/paparazzi/var/macports/build/* -name paparazzi-tools-*.mpkg` dmg/"
+# - Copy the resources
+# 	- bash: -c "cp -r darwin/install/Contents/* dmg/paparazzi-tools*.mpkg/Contents/"
+# - Change file permissions of postflight script
+#	- bash: -c "chmod 777 dmg/paparazzi-tools*.mpkg/Contents/Resources/postflight"
+# - Change owner of postflight script
+# 	- bash: -c "chown root:admin dmg/paparazzi-tools*.mpkg/Contents/Resources/postflight"
+# - Track build dates
+######################
+# CURR_DATE=`date -u +%Y-%m-%d`
+# echo $CURR_DATE > /opt/paparazzi/pprzbininstaller_build_date_current.txt
+# echo $CURR_DATE >> /opt/paparazzi/pprzbininstaller_build_date_list.txt
+############################
+# - Build to .dmg file
+#	- bash: -c "darwin/create-dmg --window-size 500 200 --background darwin/background.png --icon-size 96 --volname Paparazzi\ Tools --icon `ls -1 dmg` 300 70 paparazzi-tools-Lion_`cat /opt/paparazzi/pprzbininstaller_build_date_current.txt`.dmg dmg"
+# - Copy the DMG to upload location
+#	- -c "cp paparazzi-tools-Lion_`cat /opt/paparazzi/pprzbininstaller_build_date_current.txt`.dmg /Users/Shared/Paparazzi-Tools/Dropbox/Public/paparazzi-tools-Lion-new.dmg"
+
+#######################################################################
+# SOURCES_CONF_PATH=/opt/paparazzi/etc/macports/sources.conf
+# CURR_DIR=`pwd`
+#FIGURE OUT HOW TO MAKE THIS LOCAL, NOT GRABBING FROM MY SITE
+# curl http://www.ualberta.ca/~scdwyer/downloads/sources.conf > $SOURCES_CONF_PATH
+
+# POST_LINE_NUM=`sed -n '/^rsync:/=' $SOURCES_CONF_PATH | sed q`
+# ADD_LINE="file://$CURR_DIR/darwin/macports/ports"
+
+# cp $SOURCES_CONF_PATH $SOURCES_CONF_PATH.orig
+
+# sed ''"$POST_LINE_NUM"' c\
+#        '"$ADD_LINE"'
+#        ' $SOURCES_CONF_PATH.orig > $SOURCES_CONF_PATH
+
+# echo "Added path" $ADD_LINE "to file" $SOURCES_CONF_PATH
+
+# cat /opt/paparazzi/etc/macports/macports.conf | grep prefix
+#######################################################################
+
+# Variables
+###########
+#PORTCMD="/opt/paparazzi/bin/port -v"
+PORTCMD="echo"
+GITCMD="/opt/paparazzi/bin/git"
+
+# Which branch we want to clone from the repo
+GITBRANCH=master
+
+PORT_SOURCES_CONF_PATH=/opt/paparazzi/etc/macports/sources.conf
+# For storing a list of build dates and DMGs
+DATA_DIR=~/pprz-binary-data
+DMG_DIR=$DATA_DIR/dmg
+typeset BUILD_DATETIME_LOG_FILE="$DATA_DIR/${0##*/}-build_dates.log"
+
+CURR_DATETIME=`date -u +%Y-%m-%d_%H-%M-%SGMT`
+CURR_DIR=`pwd`
+
+# Script
+########
+# Send all output to a logfile and suppress input
+typeset LOG="/tmp/${0##*/}.log"
+mv $LOG ${LOG}.old >/dev/null 2>&1
+[[ -t 1 ]] && echo "Writing to logfile '$LOG'."
+exec > $LOG 2>&1
+exec < /dev/null 2<&1
+
+echo "********************STARTING PAPARAZZI BUILD SCRIPT"
+
+# Test for which OS we are on - valid only on OS X
+echo "********************CHECKING FOR SUPPORTED OS"
+platform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" != 'Darwin' ]]; then
+   echo "Platform $unamestr is NOT SUPPORTED - OS X Only!"
+   exit
+fi
+
+# Test for which version of OS X - some minor changes depending on version
+OSX_VERSION_NUM=`sw_vers | sed -n 's/ProductVersion:[[:space:]]10.\([0-9]*\).[0-9]*/\1/p'`
+
+case "$OSX_VERSION_NUM" in
+	'6'	) OSX_VERSION="SnowLeopard";;
+	'7' ) OSX_VERSION="Lion";;
+	'8'	) OSX_VERSION="MountainLion";;
+	*	) OSX_VERSION="NotSupported";;
+esac
+
+if [[ $OSX_VERSION == 'NotSupported' ]]; then
+	echo "OS X Version is NOT SUPPORTED - Version $OSX_VERSION_NUM"
+fi
+
+echo "Running on OS X $OSX_VERSION"
+
+# Verify Macports is installed correctly - check the install dir - print instructions if required
+# TODO
+
+echo "********************CREATING DATA DIRECTORY IF REQUIRED"
+if [ ! -d "$DATA_DIR" ]; then
+	mkdir -v $DATA_DIR
+fi
+
+# Update the macports sources
+echo "********************UPDATING MACPORTS SOURCES"
+PORTCMD selfupdate
+
+# Uninstall all ports
+echo "********************UNINSTALLING AND CLEANING ALL INSTALLED PORTS"
+#Install expat so that the "port -f uninstall installed" will always have something to uninstall and expat is small
+PORTCMD install expat
+PORTCMD -f uninstall installed
+PORTCMD clean --all uninstalled
+
+# Install git from macports
+echo "********************INSTALLING GIT FROM MACPORTS"
+PORTCMD install git-core
+
+# Clone the source from GitHub after deleting any existing
+echo "********************CLONING FRESH paparazzi-portability-support FROM GITHUB"
+if [ ! -d "paparazzi-portability-support" ]; then
+	rm -rf ./paparazzi-portability-support
+fi
+GITCMD git@github.com:paparazzi/paparazzi-portability-support.git --branch $GITBRANCH
+
+# Add the new portability directory to the sources of macports and update macports sources again
+# Make sure to backup sources conf file for macports
+echo "********************ADDING paparazzi-portability-support DIRECTORY TO MACPORTS SOURCES"
+if [ ! -f "$PORT_SOURCES_CONF_PATH.orig" ]; then
+	echo "********************BACKING UP MACPORTS SOURCES.CONF"
+	cp $PORT_SOURCES_CONF_PATH $PORT_SOURCES_CONF_PATH.orig
+fi
+
+POST_LINE_NUM=`sed -n '/^rsync:/=' $PORT_SOURCES_CONF_PATH | sed q`
+ADD_LINE="file://$CURR_DIR/darwin/macports/ports"
+
+sed ''"$POST_LINE_NUM"' c\
+       '"$ADD_LINE"'
+       ' $PORT_SOURCES_CONF_PATH.orig > $PORT_SOURCES_CONF_PATH
+
+# Print any sources.conf lines starting with f (for file) or r (for rsync)
+echo "********************CURRENT MACPORTS SOURCES"
+sed -n '/^[fr]/p' /opt/local/etc/macports/sources.conf
+
+# Update the sources with the new local ports
+echo "********************UPDATING MACPORTS SOURCES"
+PORTCMD selfupdate
+
+# Build the paparazzi-tools mpkg
+echo "********************BUILDING THE paparazzi-tools PACKAGE"
+PORTCMD -k mpkg paparazzi-tools
+
+
+# Copy the mpkg to the build directory so we can make an artifact of it
+echo "********************COPYING THE paparazzi-tools PACKAGE TO THE DMG_DIR"
+if [ ! -d "$DMG_DIR" ]; then
+	mkdir -v $DMG_DIR
+fi
+cp -r `find /opt/paparazzi/var/macports/build/* -name paparazzi-tools-*.mpkg` $DMG_DIR
+
+# Copy the resources
+echo "********************COPYING THE paparazzi-tools RESOURCES TO THE DATA_DIR"
+cp -r darwin/install/Contents/* $DMG_DIR/paparazzi-tools*.mpkg/Contents/
+
+# Change file permissions of postflight script
+echo "********************CHANGING THE POSTFLIGHT SCRIPT PERMISSIONS"
+chmod 777 DMG_DIR/paparazzi-tools*.mpkg/Contents/Resources/postflight
+
+# Change owner of postflight script
+echo "********************CHANGING THE POSTFLIGHT SCRIPT OWNER"
+chown root:admin DMG_DIR/paparazzi-tools*.mpkg/Contents/Resources/postflight
+
+# Track build dates
+echo "********************TRACKING MPKG BUILD DATE AND TIME"
+# echo $CURR_DATETIME > $DATA_DIR/pprzbininstaller_build_date_current.txt
+echo $CURR_DATETIME >> $DATA_DIR/pprzbininstaller_build_date_list.txt
+
+# Build to .dmg file
+./darwin/create-dmg --window-size 500 200 --background darwin/background.png --icon-size 96 --volname Paparazzi\ Tools --icon `ls -1 $DMG_DIR` 300 70 paparazzi-tools-"$OSX_VERSION"_"$CURR_DATETIME".dmg $DATA_DIR
+
+
