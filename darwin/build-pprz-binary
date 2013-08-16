@@ -224,7 +224,7 @@ fi
 
 # Print any sources.conf lines starting with f (for file) or r (for rsync)
 echo "********************CURRENT MACPORTS SOURCES"
-sed -n '/^[fr]/p' /opt/local/etc/macports/sources.conf
+sed -n '/^[fr]/p' $PORT_SOURCES_CONF_PATH
 if [[ $? != 0 ]]; then
 	echo "Error printing sources.conf entries with sed!"
 	exit 1
