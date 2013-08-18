@@ -186,7 +186,8 @@ fi
 
 # Clone the source from GitHub after deleting any existing
 echo "********************CLONING FRESH paparazzi-portability-support FROM GITHUB"
-if [ ! -d "paparazzi-portability-support" ]; then
+if [ -d "paparazzi-portability-support" ]; then
+	echo "Removing existing paparazzi-portability-support directory"
 	rm -rf ./paparazzi-portability-support
 fi
 $GITCMD clone https://github.com/scdwyer/paparazzi-portability-support.git --branch $GITBRANCH
@@ -196,16 +197,9 @@ if [[ $? != 0 ]]; then
 fi
 
 # Add the new portability directory to the sources of macports and update macports sources again
-# Make sure to backup sources conf file for macports
+# Use the default source.conf every time to start fresh
 echo "********************ADDING paparazzi-portability-support DIRECTORY TO MACPORTS SOURCES"
-if [ ! -f "$PORT_SOURCES_CONF_PATH.orig" ]; then
-	echo "********************BACKING UP MACPORTS SOURCES.CONF"
-	cp $PORT_SOURCES_CONF_PATH $PORT_SOURCES_CONF_PATH.orig
-	if [[ $? != 0 ]]; then
-		echo "Error backing up macports sources.conf!"
-		exit 1
-	fi
-fi
+cp $PORT_SOURCES_CONF_PATH.default $PORT_SOURCES_CONF_PATH
 
 POST_LINE_NUM=`sed -n '/^rsync:/=' $PORT_SOURCES_CONF_PATH | sed q`
 if [[ $? != 0 ]]; then
