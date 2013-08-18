@@ -201,14 +201,14 @@ fi
 # Use the default source.conf every time to start fresh
 echo "********************ADDING paparazzi-portability-support DIRECTORY TO MACPORTS SOURCES"
 
-POST_LINE_NUM=`sed -n '/^rsync:/=' $PORT_SOURCES_CONF_PATH | sed q`
+POST_LINE_NUM=`sed -n '/^rsync:/=' $PORT_SOURCES_CONF_PATH.default | sed q`
 if [[ $? != 0 ]]; then
 	echo "Error running sed on sources.conf!"
 	exit 1
 fi
 ADD_LINE="file://$CURR_DIR/paparazzi-portability-support/darwin/macports/ports"
 
-sed ''"$POST_LINE_NUM"' c\
+sed ''"$POST_LINE_NUM"' i\
        '"$ADD_LINE"'
        ' $PORT_SOURCES_CONF_PATH.default > $PORT_SOURCES_CONF_PATH
 if [[ $? != 0 ]]; then
@@ -234,6 +234,7 @@ fi
 
 # Build the paparazzi-tools mpkg
 echo "********************BUILDING THE paparazzi-tools PACKAGE"
+export PATH=$PATH:/opt/paparazzi/bin
 $PORTCMD -k mpkg paparazzi-tools
 if [[ $? != 0 ]]; then
 	echo "Error building the mpkg!"
