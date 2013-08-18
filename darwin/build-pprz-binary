@@ -245,8 +245,12 @@ fi
 
 
 # Copy the mpkg to the build directory so we can make an artifact of it
+# Make sure dmg directory is fresh
 echo "********************COPYING THE paparazzi-tools PACKAGE TO THE DMG_DIR"
 if [ ! -d "$DMG_DIR" ]; then
+	mkdir -v $DMG_DIR
+else
+	rm -rf $DMG_DIR
 	mkdir -v $DMG_DIR
 fi
 cp -r `find /opt/paparazzi/var/macports/build/* -name paparazzi-tools-*.mpkg` $DMG_DIR
