@@ -2,8 +2,9 @@
 
 # Paparazzi OS X Binary Installer Upload Script (Upload to esden's server)
 
-# You need to have the public ssh key to run this script, otherwise manual upload
-# is required! Contact scdwyer@ualberta.ca for more information.
+# You need to have your public ssh key on esden's server to run this script,
+# otherwise manual upload is required! Contact scdwyer@ualberta.ca for
+# more information.
 
 cd ~
 
