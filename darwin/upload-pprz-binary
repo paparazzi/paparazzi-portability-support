@@ -8,7 +8,7 @@
 cd ~
 
 HOMEDIR=`pwd`
-echo $HOMEDIR
+echo "Current home directory: $HOMEDIR"
 
 if [ -f .ssh/id_rsa.pub ]
 then
@@ -31,8 +31,8 @@ if [[ $rc != 0 ]] ; then
     exit $rc
 fi
 
-LASTBUILDDATE=`tail /opt/paparazzi/pprzbininstaller_build_date_current.txt`
-UPLOADFILE=`find /Users -iname "paparazzi-tools-Lion_$LASTBUILDDATE.dmg"`
+LASTBUILDDATE=`tail pprzbininstaller_build_date_current.txt`
+UPLOADFILE=`find $HOMEDIR -iname "paparazzi-tools-Lion_$LASTBUILDDATE.dmg"`
 HOSTDIR="download-paparazziuav/darwin"
 
 echo "Uploading..."

@@ -92,8 +92,7 @@ GITBRANCH=master
 
 PORT_SOURCES_CONF_PATH=/opt/paparazzi/etc/macports/sources.conf
 # For storing a list of build dates and DMGs
-WORK_DIR=`pwd`
-DATA_DIR=$WORK_DIR
+DATA_DIR=`pwd`
 DMG_DIR=$DATA_DIR/dmg
 typeset BUILD_DATETIME_LOG_FILE="$DATA_DIR/${0##*/}-build_dates.log"
 
@@ -207,7 +206,7 @@ if [[ $? != 0 ]]; then
 	echo "Error running sed on sources.conf!"
 	exit 1
 fi
-ADD_LINE="file://$WORK_DIR/paparazzi-portability-support/darwin/macports/ports"
+ADD_LINE="file://$DATA_DIR/paparazzi-portability-support/darwin/macports/ports"
 
 sed ''"$POST_LINE_NUM"' i\
        '"$ADD_LINE"'
@@ -286,7 +285,7 @@ echo "********************TRACKING MPKG BUILD DATE AND TIME"
 echo $CURR_DATETIME >> $DATA_DIR/pprzbininstaller_build_date_list.txt
 
 # Build to .dmg file
-$WORK_DIR/paparazzi-portability-support/darwin/create-dmg --window-size 500 200 --background paparazzi-portability-support/darwin/background.png --icon-size 96 --volname Paparazzi\ Tools --icon `ls -1 $DMG_DIR` 300 70 paparazzi-tools-"$OSX_VERSION"_"$CURR_DATETIME".dmg $DATA_DIR
+$DATA_DIR/paparazzi-portability-support/darwin/create-dmg --window-size 500 200 --background paparazzi-portability-support/darwin/background.png --icon-size 96 --volname Paparazzi\ Tools --icon `ls -1 $DMG_DIR` 300 70 paparazzi-tools-"$OSX_VERSION"_"$CURR_DATETIME".dmg $DATA_DIR
 if [[ $? != 0 ]]; then
 	echo "Error building DMG file!"
 	exit 1
