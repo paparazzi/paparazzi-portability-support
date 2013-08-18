@@ -13,8 +13,8 @@
 #	- curl https://raw.github.com/paparazzi/paparazzi-portability-support/master/darwin/build-pprz-binary > build-pprz-binary
 # - Change permissions to allow it to run:
 #	- chmod 755 build-pprz-binary
-# - Run the script:
-#	- ./build-pprz-binary
+# - Run the script (with privileges):
+#	- sudo ./build-pprz-binary
 # - If it completes successfully, upload the new binary to the server
 #	- cd ~/pprz-binary-working/paparazzi-portability-support/darwin
 #	- chmod 755 upload-pprz-binary
@@ -109,6 +109,7 @@ exec > $LOG 2>&1
 exec < /dev/null 2<&1
 
 echo "********************STARTING PAPARAZZI BUILD SCRIPT"
+echo "********************DATE TIME: $CURR_DATETIME"
 
 # Test for which OS we are on - valid only on OS X
 echo "********************CHECKING FOR SUPPORTED OS"
@@ -199,18 +200,17 @@ fi
 # Add the new portability directory to the sources of macports and update macports sources again
 # Use the default source.conf every time to start fresh
 echo "********************ADDING paparazzi-portability-support DIRECTORY TO MACPORTS SOURCES"
-cp $PORT_SOURCES_CONF_PATH.default $PORT_SOURCES_CONF_PATH
 
 POST_LINE_NUM=`sed -n '/^rsync:/=' $PORT_SOURCES_CONF_PATH | sed q`
 if [[ $? != 0 ]]; then
 	echo "Error running sed on sources.conf!"
 	exit 1
 fi
-ADD_LINE="file://$CURR_DIR/darwin/macports/ports"
+ADD_LINE="file://$CURR_DIR/paparazzi-portability-support/darwin/macports/ports"
 
 sed ''"$POST_LINE_NUM"' c\
        '"$ADD_LINE"'
-       ' $PORT_SOURCES_CONF_PATH.orig > $PORT_SOURCES_CONF_PATH
+       ' $PORT_SOURCES_CONF_PATH.default > $PORT_SOURCES_CONF_PATH
 if [[ $? != 0 ]]; then
 	echo "Error running sed to update sources.conf!"
 	exit 1
