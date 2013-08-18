@@ -31,7 +31,7 @@ if [[ $rc != 0 ]] ; then
     exit $rc
 fi
 
-LASTBUILDDATE=`tail pprzbininstaller_build_date_current.txt`
+LASTBUILDDATE=`tail pprzbininstaller_build_date_list.txt`
 UPLOADFILE=`find $HOMEDIR -iname "paparazzi-tools-Lion_$LASTBUILDDATE.dmg"`
 HOSTDIR="download-paparazziuav/darwin"
 
