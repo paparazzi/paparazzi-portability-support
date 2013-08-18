@@ -31,11 +31,12 @@ if [[ $rc != 0 ]] ; then
     exit $rc
 fi
 
-LASTBUILDDATE=`tail pprzbininstaller_build_date_list.txt`
+BUILDDATELIST=`find $HOMEDIR -iname "pprzbininstaller_build_date_list.txt"`
+LASTBUILDDATE=`tail $BUILDDATELIST`
 UPLOADFILE=`find $HOMEDIR -iname "paparazzi-tools-Lion_$LASTBUILDDATE.dmg"`
 HOSTDIR="download-paparazziuav/darwin"
 
-echo "Uploading..."
+echo "Uploading file $UPLOADFILE..."
 scp -B -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $UPLOADFILE $HOST:$HOSTDIR
 echo "Upload completed."
 
