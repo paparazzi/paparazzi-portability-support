@@ -92,12 +92,13 @@ GITBRANCH=master
 
 PORT_SOURCES_CONF_PATH=/opt/paparazzi/etc/macports/sources.conf
 # For storing a list of build dates and DMGs
-DATA_DIR=~/pprz-binary-data
+WORK_DIR=`pwd`
+DATA_DIR=$WORK_DIR
 DMG_DIR=$DATA_DIR/dmg
 typeset BUILD_DATETIME_LOG_FILE="$DATA_DIR/${0##*/}-build_dates.log"
 
 CURR_DATETIME=`date -u +%Y-%m-%d_%H-%M-%SGMT`
-CURR_DIR=`pwd`
+
 
 # Script
 ########
@@ -206,7 +207,7 @@ if [[ $? != 0 ]]; then
 	echo "Error running sed on sources.conf!"
 	exit 1
 fi
-ADD_LINE="file://$CURR_DIR/paparazzi-portability-support/darwin/macports/ports"
+ADD_LINE="file://$WORK_DIR/paparazzi-portability-support/darwin/macports/ports"
 
 sed ''"$POST_LINE_NUM"' i\
        '"$ADD_LINE"'
@@ -238,6 +239,8 @@ export PATH=$PATH:/opt/paparazzi/bin
 $PORTCMD -k mpkg paparazzi-tools
 if [[ $? != 0 ]]; then
 	echo "Error building the mpkg!"
+	# Maybe attempt to do a few manual installs here
+	# find what failed, clean it, get list of dependencies, install all but the one that failed, try mpkg again
 	exit 1
 fi
 
@@ -254,8 +257,8 @@ if [[ $? != 0 ]]; then
 fi
 
 # Copy the resources
-echo "********************COPYING THE paparazzi-tools RESOURCES TO THE DATA_DIR"
-cp -r darwin/install/Contents/* $DMG_DIR/paparazzi-tools*.mpkg/Contents/
+echo "********************COPYING THE paparazzi-tools RESOURCES TO THE DMG_DIR"
+cp -r ./paparazzi-portability-support/darwin/install/Contents/* $DMG_DIR/paparazzi-tools*.mpkg/Contents/
 if [[ $? != 0 ]]; then
 	echo "Error copying the resources!"
 	exit 1
@@ -263,7 +266,7 @@ fi
 
 # Change file permissions of postflight script
 echo "********************CHANGING THE POSTFLIGHT SCRIPT PERMISSIONS"
-chmod 777 DMG_DIR/paparazzi-tools*.mpkg/Contents/Resources/postflight
+chmod 777 $DMG_DIR/paparazzi-tools*.mpkg/Contents/Resources/postflight
 if [[ $? != 0 ]]; then
 	echo "Error changing postflight file permissions!"
 	exit 1
@@ -271,7 +274,7 @@ fi
 
 # Change owner of postflight script
 echo "********************CHANGING THE POSTFLIGHT SCRIPT OWNER"
-chown root:admin DMG_DIR/paparazzi-tools*.mpkg/Contents/Resources/postflight
+chown root:admin $DMG_DIR/paparazzi-tools*.mpkg/Contents/Resources/postflight
 if [[ $? != 0 ]]; then
 	echo "Error changing postflight file ownership!"
 	exit 1
@@ -283,7 +286,7 @@ echo "********************TRACKING MPKG BUILD DATE AND TIME"
 echo $CURR_DATETIME >> $DATA_DIR/pprzbininstaller_build_date_list.txt
 
 # Build to .dmg file
-./darwin/create-dmg --window-size 500 200 --background darwin/background.png --icon-size 96 --volname Paparazzi\ Tools --icon `ls -1 $DMG_DIR` 300 70 paparazzi-tools-"$OSX_VERSION"_"$CURR_DATETIME".dmg $DATA_DIR
+$WORK_DIR/paparazzi-portability-support/darwin/create-dmg --window-size 500 200 --background paparazzi-portability-support/darwin/background.png --icon-size 96 --volname Paparazzi\ Tools --icon `ls -1 $DMG_DIR` 300 70 paparazzi-tools-"$OSX_VERSION"_"$CURR_DATETIME".dmg $DATA_DIR
 if [[ $? != 0 ]]; then
 	echo "Error building DMG file!"
 	exit 1
