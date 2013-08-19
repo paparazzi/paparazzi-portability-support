@@ -250,14 +250,17 @@ if [[ $? != 0 ]]; then
 	if [[ $? != 0 ]]; then
 		echo "build-pprz-binary: Error trying to recover from the failed mpkg build...trying again with reduced dependencies."
 		# Find what port failed to install
-		FAILEDPORT=`cat $LOG | sed -n 's/Error: Failed to install \(.*\)/\1/p' | tail -1`
-		echo "build-pprz-binary: The port $FAILEDPORT was the last port that failed to install..."
-		REMAININGDEPS=`cat $LOG | sed -n 's/Error: The following dependencies were not installed: \(.*\)/\1/p' | tail -1`
-		DEPSTOINSTALL=`echo $REMAININGDEPS | sed -n "s/^[-_a-zA-Z0-9]* $FAILEDPORT [-_a-zA-Z0-9]*//p"`
-		echo "build-pprz-binary: Will attempt to install the other dependencies manually after cleaning $FAILEDPORT"
-		echo "build-pprz-binary: The remaining dependencies minus the failed one and the two surrounding are: $DEPSTOINSTALL"
-		$PORTCMD clean $FAILEDPORT
-		$PORTCMD install $DEPSTOINSTALL
+		# This sed expression should return just the text listed behind the error message i.e. the failed port name
+		FAILEDPORT2=`cat $LOG | sed -n 's/Error: Failed to install \(.*\)/\1/p' | tail -1`
+		echo "build-pprz-binary: The port $FAILEDPORT2 was the last port that failed to install..."
+		# This sed expression should return the list of dependencies not installed, they are all on one line
+		REMAININGDEPS2=`cat $LOG | sed -n 's/Error: The following dependencies were not installed: \(.*\)/\1/p' | tail -1`
+		# This sed expression should remove all ports preceding the failed port in the list, and the one immediately following it
+		DEPSTOINSTALL2=`echo $REMAININGDEPS2 | sed -n "s/^[-_a-zA-Z0-9 ]*$FAILEDPORT2 [-_a-zA-Z0-9]*//p"`
+		echo "build-pprz-binary: Will attempt to install the other dependencies manually after cleaning $FAILEDPORT2"
+		echo "build-pprz-binary: The remaining dependencies minus the failed one and the two surrounding are: $DEPSTOINSTALL2"
+		$PORTCMD clean $FAILEDPORT2
+		$PORTCMD install $DEPSTOINSTALL2
 		if [[ $? != 0 ]]; then
 			echo "build-pprz-binary: Error trying to recover from the failed mpkg build a second time. Exiting."
 			exit 1
