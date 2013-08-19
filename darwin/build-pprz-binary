@@ -5,7 +5,7 @@
 # - XCode with cmd line tools and macports installed to /opt/paparazzi
 # - See Steps 1 and 2 here: http://paparazzi.enac.fr/wiki/Installation/MacOSX#Basic_Install
 # To use:
-# - First, create a working directory:
+# - First, create a working directory (only do this the first time):
 #	- cd ~; mkdir pprz-binary-working
 # - Make sure you have sufficient space on your drive, each binary can take several gigabytes
 # - Change to this new directory. Since we have a chicken/egg problem, get this script manually
@@ -237,10 +237,26 @@ echo "********************BUILDING THE paparazzi-tools PACKAGE"
 export PATH=$PATH:/opt/paparazzi/bin
 $PORTCMD -k mpkg paparazzi-tools
 if [[ $? != 0 ]]; then
-	echo "Error building the mpkg!"
-	# Maybe attempt to do a few manual installs here
-	# find what failed, clean it, get list of dependencies, install all but the one that failed, try mpkg again
-	exit 1
+	echo "Error building the mpkg! Trying to recover..."
+	# Find what port failed to install
+	$FAILEDPORT=`cat $LOG | sed -n 's/Error: Failed to install \(.*\)/\1/p'`
+	echo "The port $FAILEDPORT failed to install..."
+	$REMAININGDEPS=`cat $LOG | sed -n 's/Error: The following dependencies were not installed: \(.*\)/\1/p'`
+	$DEPSTOINSTALL=`echo $REMAININGDEPS | sed -n 's/$FAILEDPORT//p'`
+	echo "Will attempt to install the other dependencies manually after cleaning $FAILEDPORT"
+	echo "The remaining dependencies minus the failed one are: $DEPSTOINSTALL"
+	$PORTCMD clean $FAILEDPORT
+	$PORTCMD install $DEPSTOINSTALL
+	if [[ $? != 0 ]]; then
+		echo "Error trying to recover from the failed mpkg build...Exiting."
+		exit 1
+	fi
+	# Try the mpkg again
+	$PORTCMD -k mpkg paparazzi-tools
+	if [[ $? != 0 ]]; then
+		echo "Error trying to build the mpkg the second time...Exiting."
+		exit 1
+	fi
 fi
 
 
