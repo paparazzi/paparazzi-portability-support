@@ -82,6 +82,45 @@
 # cat /opt/paparazzi/etc/macports/macports.conf | grep prefix
 #######################################################################
 
+function usage() {
+  echo "Build a paparazzi-tools binary installer dmg."
+  echo "Usage:  $(basename $0) options..."
+  echo "Options:"
+  echo "  --continue, -c"
+  echo "      Do not uninstall all existing ports to start fresh. Use when"
+  echo "      the script failed and you want to try and continue at the"
+  echo "      current point of progress."
+  echo "  -h, --help        display this help"
+  exit 0
+}
+
+UNINSTALL=1
+
+# Arguments
+while test "${1:0:1}" = "-"; do
+  case $1 in
+    -c | --continue)
+      UNINSTALL=0
+      shift; shift;;
+    -h | --help)
+      usage;;
+    -*)
+      echo "Unknown option $1. Run with --help for help."
+      exit 1;;
+  esac
+done
+
+# test -z "$2" && {
+#   echo "Not enough arguments. Invoke with --help for help."
+#   exit 1
+# }
+
+if [ $UNINSTALL != 1 ]; then
+	echo "Attempting to continue a failed installation..."
+else
+	echo "Using a fresh install of all ports..."
+fi
+
 # Variables
 ###########
 PORTCMD="/opt/paparazzi/bin/port -v"
@@ -158,23 +197,29 @@ if [[ $? != 0 ]]; then
 	exit 1
 fi
 
-# Uninstall all ports
-echo "********************UNINSTALLING AND CLEANING ALL INSTALLED PORTS"
-#Install expat so that the "port -f uninstall installed" will always have something to uninstall and expat is small
-$PORTCMD install expat
-if [[ $? != 0 ]]; then
-	echo "build-pprz-binary: Error running PORT install expat!"
-	exit 1
-fi
-$PORTCMD -f uninstall installed
-if [[ $? != 0 ]]; then
-	echo "build-pprz-binary: Error running PORT uninstall!"
-	exit 1
-fi
-$PORTCMD clean --all uninstalled
-if [[ $? != 0 ]]; then
-	echo "build-pprz-binary: Error running PORT clean!"
-	exit 1
+
+if [ $UNINSTALL != 1 ]; then
+	echo "********************SKIPPING UNINSTALL STEP TO CONTINUE A FAILED INSTALLATION"
+else
+	# Uninstall all ports
+	echo "********************UNINSTALLING AND CLEANING ALL INSTALLED PORTS"
+	MAKE THIS OPTIONAL!!!
+	#Install expat so that the "port -f uninstall installed" will always have something to uninstall and expat is small
+	$PORTCMD install expat
+	if [[ $? != 0 ]]; then
+		echo "build-pprz-binary: Error running PORT install expat!"
+		exit 1
+	fi
+	$PORTCMD -f uninstall installed
+	if [[ $? != 0 ]]; then
+		echo "build-pprz-binary: Error running PORT uninstall!"
+		exit 1
+	fi
+	$PORTCMD clean --all uninstalled
+	if [[ $? != 0 ]]; then
+		echo "build-pprz-binary: Error running PORT clean!"
+		exit 1
+	fi
 fi
 
 # Install git from macports
@@ -321,7 +366,7 @@ echo "********************TRACKING MPKG BUILD DATE AND TIME"
 echo $CURR_DATETIME >> $DATA_DIR/pprzbininstaller_build_date_list.txt
 
 # Build to .dmg file
-$DATA_DIR/paparazzi-portability-support/darwin/create-dmg --window-size 500 200 --background paparazzi-portability-support/darwin/background.png --icon-size 96 --volname Paparazzi\ Tools --icon `ls -1 $DMG_DIR` 300 70 paparazzi-tools-"$OSX_VERSION"_"$CURR_DATETIME".dmg $DATA_DIR
+$DATA_DIR/paparazzi-portability-support/darwin/create-dmg --window-size 500 200 --background $DATA_DIR/paparazzi-portability-support/darwin/background.png --icon-size 96 --volname Paparazzi\ Tools --icon `ls -1 $DMG_DIR` 300 70 paparazzi-tools-"$OSX_VERSION"_"$CURR_DATETIME".dmg $DATA_DIR
 if [[ $? != 0 ]]; then
 	echo "build-pprz-binary: Error building DMG file!"
 	exit 1
