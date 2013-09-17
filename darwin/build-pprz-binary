@@ -366,7 +366,7 @@ echo "********************TRACKING MPKG BUILD DATE AND TIME"
 echo $CURR_DATETIME >> $DATA_DIR/pprzbininstaller_build_date_list.txt
 
 # Build to .dmg file
-$DATA_DIR/paparazzi-portability-support/darwin/create-dmg --window-size 500 200 --background $DATA_DIR/paparazzi-portability-support/darwin/background.png --icon-size 96 --volname Paparazzi\ Tools --icon `ls -1 $DMG_DIR` 300 70 paparazzi-tools-"$OSX_VERSION"_"$CURR_DATETIME".dmg $DATA_DIR
+$DATA_DIR/paparazzi-portability-support/darwin/create-dmg --window-size 500 200 --background $DATA_DIR/paparazzi-portability-support/darwin/background.png --icon-size 96 --volname Paparazzi\ Tools --icon `ls -1 $DMG_DIR` 300 70 paparazzi-tools-"$OSX_VERSION"_"$CURR_DATETIME".dmg $DMG_DIR
 if [[ $? != 0 ]]; then
 	echo "build-pprz-binary: Error building DMG file!"
 	exit 1
