@@ -1,0 +1,36 @@
+gcc-arm-none-eabi (4-7-2013q3-0precise6) precise; urgency=low
+
+  * Upgrade to 4.7 2013Q3 release.
+
+ -- Terry Guo <terry.guo@arm.com>  Mon, 16 Sep 2013 16:15:43 +0800
+
+gcc-arm-none-eabi (4-7-2013q2-0precise5) precise; urgency=low
+
+  * Upgrade to 4.7 2013Q2 release.
+
+ -- Terry Guo <terry.guo@arm.com>  Mon, 17 Jun 2013 10:58:53 +0800
+
+gcc-arm-none-eabi (4-7-2013q1-0precise4) precise; urgency=low
+
+  * No source changes. Just have to re-upload after admin enable build for
+    armhf.
+
+ -- Terry Guo <terry.guo@arm.com>  Thu, 23 May 2013 10:00:46 +0800
+
+gcc-arm-none-eabi (4-7-2013q1-0precise3) precise; urgency=low
+
+  * Build tool chain for armel and armhf.
+
+ -- Terry Guo <terry.guo@arm.com>  Wed, 22 May 2013 16:59:39 +0800
+
+gcc-arm-none-eabi (4-7-2013q1-0precise2) precise; urgency=low
+
+  * Add missed libexpat1-dev to support XML.
+
+ -- Terry Guo <terry.guo@arm.com>  Mon, 22 Apr 2013 11:41:30 +0800
+
+gcc-arm-none-eabi (4-7-2013q1-0precise1) precise; urgency=low
+
+  * Initial release.
+
+ -- Terry Guo <terry.guo@arm.com>  Wed, 13 Mar 2013 08:10:50 +0800

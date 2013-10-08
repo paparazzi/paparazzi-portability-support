@@ -1,0 +1,14 @@
+Source: gcc-arm-none-eabi
+Section: devel
+Priority: extra
+Maintainer: Terry Guo <terry.guo@arm.com>
+Build-Depends: debhelper (>= 5.0.62), gawk, gzip (>=1.3.12), autoconf, m4, automake, libtool, gettext, autogen, flex, bison, texlive, texinfo, texlive-extra-utils, g++ (>= 4.4.3), gcc-multilib, texlive-font-utils, texlive-latex-base, ghostscript, texlive-latex-recommended, texlive-generic-recommended, libncurses5-dev, zlib1g-dev, libmpfr-dev (>= 2.3.1), libmpc-dev (>= 0.8.0), libexpat1-dev
+Standards-Version: 3.8.3
+Homepage: https://launchpad.net/~terry.guo
+
+Package: gcc-arm-none-eabi
+Architecture: i386 amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: A GNU-based tool chain for arm embedded processors
+ Besides this PPA based release, there are other formats for various
+ platforms which can be found at https://launchpad.net/gcc-arm-embedded.

@@ -1,0 +1,5 @@
+install-native/bin/*  /usr/bin/
+install-native/arm-none-eabi/*  /usr/arm-none-eabi/
+install-native/lib/*  /usr/lib/
+install-native/share/*  /usr/share/
+src/samples/* /usr/share/gcc-arm-none-eabi/samples/
