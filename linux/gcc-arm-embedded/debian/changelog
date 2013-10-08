@@ -1,3 +1,10 @@
+gcc-arm-none-eabi (4-7-2013q3-0precise6ppa1) precise; urgency=low
+
+  * Non-maintainer upload.
+  * Build gdb --with-python 
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Tue, 08 Oct 2013 17:13:44 +0200
+
 gcc-arm-none-eabi (4-7-2013q3-0precise6) precise; urgency=low
 
   * Upgrade to 4.7 2013Q3 release.

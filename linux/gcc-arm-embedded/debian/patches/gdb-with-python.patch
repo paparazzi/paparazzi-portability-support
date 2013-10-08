@@ -1,0 +1,14 @@
+Description: Build gdb with python support
+Index: gcc-arm-none-eabi-4_7-2013q3/build-toolchain.sh
+===================================================================
+--- gcc-arm-none-eabi-4_7-2013q3.orig/build-toolchain.sh	2013-09-16 10:13:08.000000000 +0200
++++ gcc-arm-none-eabi-4_7-2013q3/build-toolchain.sh	2013-10-08 14:23:16.914357862 +0200
+@@ -366,7 +366,7 @@
+     --disable-nls \
+     --disable-sim \
+     --with-libexpat \
+-    --with-python=no \
++    --with-python=yes \
+     --with-system-gdbinit=$INSTALLDIR_NATIVE/$HOST_NATIVE/arm-none-eabi/lib/gdbinit \
+     $GDB_CONFIG_OPTS \
+     '--with-gdb-datadir='\''${prefix}'\''/arm-none-eabi/share/gdb' \
