@@ -18,7 +18,7 @@ depends_lib-append      port:ocaml-findlib \
 
 worksrcdir              ${name}-r3577
 fetch.type              svn
-svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-ocaml/trunk
+svn.url                 https://svn.tls.cena.fr/svn/ivy/ivy-ocaml/trunk
 svn.revision            3577
 svn.post_args-append    -r ${svn.revision} ${worksrcdir}
 
