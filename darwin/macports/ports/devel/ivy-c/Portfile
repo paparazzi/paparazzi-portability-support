@@ -15,7 +15,7 @@ worksrcdir              ${name}-r3572
 
 fetch.type              svn
 svn.revision            3572
-svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-c/trunk
+svn.url                 https://svn.tls.cena.fr/svn/ivy/ivy-c/trunk
 svn.post_args-append    -r ${svn.revision}
 svn.method              checkout
 svn.post_args-append    ${worksrcdir}
