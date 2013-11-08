@@ -20,6 +20,10 @@
 #	- chmod 755 upload-pprz-binary
 #	- ./upload-pprz-binary
 # - Log file is stored in /tmp/build-pprz-binary.log
+# - If it does not complete successfully, you can check the error, make any changes
+#   if required, and then run again with '-c' to avoid having to build all macports again
+# - The build takes a long time - probably good to use screen or something especially
+#   if building over ssh, so you can detach and not kill something accidentally
 ###################################
 #
 # - Test for actually running on OS X
