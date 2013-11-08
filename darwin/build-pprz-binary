@@ -1,0 +1,382 @@
+#! /bin/bash
+
+# Paparazzi OS X Binary Installer Build Script
+# Prerequisites:
+# - XCode with cmd line tools and macports installed to /opt/paparazzi
+# - See Steps 1 and 2 here: http://paparazzi.enac.fr/wiki/Installation/MacOSX#Basic_Install
+# To use:
+# - First, create a working directory (only do this the first time):
+#	- cd ~; mkdir pprz-binary-working
+# - Make sure you have sufficient space on your drive, each binary can take several gigabytes
+# - Change to this new directory. Since we have a chicken/egg problem, get this script manually
+#	- cd ~/pprz-binary-working
+#	- curl https://raw.github.com/paparazzi/paparazzi-portability-support/master/darwin/build-pprz-binary > build-pprz-binary
+# - Change permissions to allow it to run:
+#	- chmod 755 build-pprz-binary
+# - Run the script (with privileges):
+#	- sudo ./build-pprz-binary
+# - If it completes successfully, upload the new binary to the server
+#	- cd ~/pprz-binary-working/paparazzi-portability-support/darwin
+#	- chmod 755 upload-pprz-binary
+#	- ./upload-pprz-binary
+# - Log file is stored in /tmp/build-pprz-binary.log
+# - If it does not complete successfully, you can check the error, make any changes
+#   if required, and then run again with '-c' to avoid having to build all macports again
+# - The build takes a long time - probably good to use screen or something especially
+#   if building over ssh, so you can detach and not kill something accidentally
+###################################
+#
+# - Test for actually running on OS X
+# - Test for which version of OS X
+# - Test that Macports is installed properly, show instructions on how to
+# - Update Macports Sources
+# 	- port -v selfupdate
+# - Uninstall all
+# 	- port install expat so that the "port -f uninstall installed" will always have something to uninstall and expat is small
+#	- port -f uninstall installed
+#	- port clean --all uninstalled
+# - Install git from macports
+#   - port install git-core
+# - Source Code Checkout
+# 	- clean existing source dir first by deleting, get it fresh?
+#   - git checkout paparazzi-portability-support
+# - Update Macports Sources
+#	- add the new portability directory to the sources of macports... see script below
+# 	- port -v selfupdate
+# - build pkg
+#	- export PATH=$PATH:/opt/paparazzi/bin
+#	- Might need to fix one of the finicky ports??????????????
+#	- port -k mpkg paparazzi-tools
+# - Copy the mpkg to the build directory so we can make an artifact of it
+# 	- bash: -c "mkdir dmg;cp -r `find /opt/paparazzi/var/macports/build/* -name paparazzi-tools-*.mpkg` dmg/"
+# - Copy the resources
+# 	- bash: -c "cp -r darwin/install/Contents/* dmg/paparazzi-tools*.mpkg/Contents/"
+# - Change file permissions of postflight script
+#	- bash: -c "chmod 777 dmg/paparazzi-tools*.mpkg/Contents/Resources/postflight"
+# - Change owner of postflight script
+# 	- bash: -c "chown root:admin dmg/paparazzi-tools*.mpkg/Contents/Resources/postflight"
+# - Track build dates
+######################
+# CURR_DATE=`date -u +%Y-%m-%d`
+# echo $CURR_DATE > /opt/paparazzi/pprzbininstaller_build_date_current.txt
+# echo $CURR_DATE >> /opt/paparazzi/pprzbininstaller_build_date_list.txt
+############################
+# - Build to .dmg file
+#	- bash: -c "darwin/create-dmg --window-size 500 200 --background darwin/background.png --icon-size 96 --volname Paparazzi\ Tools --icon `ls -1 dmg` 300 70 paparazzi-tools-Lion_`cat /opt/paparazzi/pprzbininstaller_build_date_current.txt`.dmg dmg"
+# - Copy the DMG to upload location
+#	- -c "cp paparazzi-tools-Lion_`cat /opt/paparazzi/pprzbininstaller_build_date_current.txt`.dmg /Users/Shared/Paparazzi-Tools/Dropbox/Public/paparazzi-tools-Lion-new.dmg"
+
+#######################################################################
+# SOURCES_CONF_PATH=/opt/paparazzi/etc/macports/sources.conf
+# CURR_DIR=`pwd`
+#FIGURE OUT HOW TO MAKE THIS LOCAL, NOT GRABBING FROM MY SITE
+# curl http://www.ualberta.ca/~scdwyer/downloads/sources.conf > $SOURCES_CONF_PATH
+
+# POST_LINE_NUM=`sed -n '/^rsync:/=' $SOURCES_CONF_PATH | sed q`
+# ADD_LINE="file://$CURR_DIR/darwin/macports/ports"
+
+# cp $SOURCES_CONF_PATH $SOURCES_CONF_PATH.orig
+
+# sed ''"$POST_LINE_NUM"' c\
+#        '"$ADD_LINE"'
+#        ' $SOURCES_CONF_PATH.orig > $SOURCES_CONF_PATH
+
+# echo "Added path" $ADD_LINE "to file" $SOURCES_CONF_PATH
+
+# cat /opt/paparazzi/etc/macports/macports.conf | grep prefix
+#######################################################################
+
+function usage() {
+  echo "Build a paparazzi-tools binary installer dmg."
+  echo "Usage:  $(basename $0) options..."
+  echo "Options:"
+  echo "  --continue, -c"
+  echo "      Do not uninstall all existing ports to start fresh. Use when"
+  echo "      the script failed and you want to try and continue at the"
+  echo "      current point of progress."
+  echo "  -h, --help        display this help"
+  exit 0
+}
+
+UNINSTALL=1
+
+# Arguments
+while test "${1:0:1}" = "-"; do
+  case $1 in
+    -c | --continue)
+      UNINSTALL=0
+      shift; shift;;
+    -h | --help)
+      usage;;
+    -*)
+      echo "Unknown option $1. Run with --help for help."
+      exit 1;;
+  esac
+done
+
+# test -z "$2" && {
+#   echo "Not enough arguments. Invoke with --help for help."
+#   exit 1
+# }
+
+if [ $UNINSTALL != 1 ]; then
+	echo "Attempting to continue a failed installation..."
+else
+	echo "Using a fresh install of all ports..."
+fi
+
+# Variables
+###########
+PORTCMD="/opt/paparazzi/bin/port -v"
+GITCMD="/opt/paparazzi/bin/git"
+
+# Which branch we want to clone from the repo
+GITBRANCH=master
+
+PORT_SOURCES_CONF_PATH=/opt/paparazzi/etc/macports/sources.conf
+# For storing a list of build dates and DMGs
+DATA_DIR=`pwd`
+DMG_DIR=$DATA_DIR/dmg
+typeset BUILD_DATETIME_LOG_FILE="$DATA_DIR/${0##*/}-build_dates.log"
+
+CURR_DATETIME=`date -u +%Y-%m-%d_%H-%M-%SGMT`
+
+
+# Script
+########
+# Send all output to a logfile and suppress input
+typeset LOG="/tmp/${0##*/}.log"
+mv $LOG ${LOG}.old >/dev/null 2>&1
+[[ -t 1 ]] && echo "Writing to logfile '$LOG'."
+exec > $LOG 2>&1
+exec < /dev/null 2<&1
+
+echo "********************STARTING PAPARAZZI BUILD SCRIPT"
+echo "********************DATE TIME: $CURR_DATETIME"
+
+# Test for which OS we are on - valid only on OS X
+echo "********************CHECKING FOR SUPPORTED OS"
+platform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" != 'Darwin' ]]; then
+   echo "build-pprz-binary: Platform $unamestr is NOT SUPPORTED - OS X Only!"
+   exit 1
+fi
+
+# Test for which version of OS X - some minor changes depending on version
+OSX_VERSION_NUM=`sw_vers | sed -n 's/ProductVersion:[[:space:]]10.\([0-9]*\).[0-9]*/\1/p'`
+
+case "$OSX_VERSION_NUM" in
+	'6'	) OSX_VERSION="SnowLeopard";;
+	'7' ) OSX_VERSION="Lion";;
+	'8'	) OSX_VERSION="MountainLion";;
+	*	) OSX_VERSION="NotSupported";;
+esac
+
+if [[ $OSX_VERSION == 'NotSupported' ]]; then
+	echo "build-pprz-binary: OS X Version is NOT SUPPORTED - Version $OSX_VERSION_NUM"
+	exit 1
+fi
+
+echo "build-pprz-binary: Running on OS X $OSX_VERSION"
+
+# Verify Macports is installed correctly - check the install dir - print instructions if required
+# TODO
+
+echo "********************CREATING DATA DIRECTORY IF REQUIRED"
+if [ ! -d "$DATA_DIR" ]; then
+	mkdir -v $DATA_DIR
+fi
+
+# Update the macports sources (twice in case a base update occurs)
+echo "********************UPDATING MACPORTS SOURCES"
+$PORTCMD selfupdate
+if [[ $? != 0 ]]; then
+	echo "build-pprz-binary: Error running PORT selfupdate!"
+	exit 1
+fi
+$PORTCMD selfupdate
+if [[ $? != 0 ]]; then
+	echo "build-pprz-binary: Error running PORT selfupdate!"
+	exit 1
+fi
+
+
+if [ $UNINSTALL != 1 ]; then
+	echo "********************SKIPPING UNINSTALL STEP TO CONTINUE A FAILED INSTALLATION"
+else
+	# Uninstall all ports
+	echo "********************UNINSTALLING AND CLEANING ALL INSTALLED PORTS"
+	MAKE THIS OPTIONAL!!!
+	#Install expat so that the "port -f uninstall installed" will always have something to uninstall and expat is small
+	$PORTCMD install expat
+	if [[ $? != 0 ]]; then
+		echo "build-pprz-binary: Error running PORT install expat!"
+		exit 1
+	fi
+	$PORTCMD -f uninstall installed
+	if [[ $? != 0 ]]; then
+		echo "build-pprz-binary: Error running PORT uninstall!"
+		exit 1
+	fi
+	$PORTCMD clean --all uninstalled
+	if [[ $? != 0 ]]; then
+		echo "build-pprz-binary: Error running PORT clean!"
+		exit 1
+	fi
+fi
+
+# Install git from macports
+echo "********************INSTALLING GIT FROM MACPORTS"
+$PORTCMD install git-core
+if [[ $? != 0 ]]; then
+	echo "build-pprz-binary: Error running PORT install git-core!"
+	exit 1
+fi
+
+# Clone the source from GitHub after deleting any existing
+echo "********************CLONING FRESH paparazzi-portability-support FROM GITHUB"
+if [ -d "paparazzi-portability-support" ]; then
+	echo "build-pprz-binary: Removing existing paparazzi-portability-support directory"
+	rm -rf ./paparazzi-portability-support
+fi
+$GITCMD clone https://github.com/scdwyer/paparazzi-portability-support.git --branch $GITBRANCH
+if [[ $? != 0 ]]; then
+	echo "build-pprz-binary: Error cloning source directory!"
+	exit 1
+fi
+
+# Add the new portability directory to the sources of macports and update macports sources again
+# Use the default source.conf every time to start fresh
+echo "********************ADDING paparazzi-portability-support DIRECTORY TO MACPORTS SOURCES"
+
+POST_LINE_NUM=`sed -n '/^rsync:/=' $PORT_SOURCES_CONF_PATH.default | sed q`
+if [[ $? != 0 ]]; then
+	echo "build-pprz-binary: Error running sed on sources.conf!"
+	exit 1
+fi
+ADD_LINE="file://$DATA_DIR/paparazzi-portability-support/darwin/macports/ports"
+
+sed ''"$POST_LINE_NUM"' i\
+       '"$ADD_LINE"'
+       ' $PORT_SOURCES_CONF_PATH.default > $PORT_SOURCES_CONF_PATH
+if [[ $? != 0 ]]; then
+	echo "build-pprz-binary: Error running sed to update sources.conf!"
+	exit 1
+fi
+
+# Print any sources.conf lines starting with f (for file) or r (for rsync)
+echo "********************CURRENT MACPORTS SOURCES"
+sed -n '/^[fr]/p' $PORT_SOURCES_CONF_PATH
+if [[ $? != 0 ]]; then
+	echo "build-pprz-binary: Error printing sources.conf entries with sed!"
+	exit 1
+fi
+
+# Update the sources with the new local ports
+echo "********************UPDATING MACPORTS SOURCES"
+$PORTCMD selfupdate
+if [[ $? != 0 ]]; then
+	echo "build-pprz-binary: Error running PORT selfupdate for the second time!"
+	exit 1
+fi
+
+# Build the paparazzi-tools mpkg
+echo "********************BUILDING THE paparazzi-tools PACKAGE"
+export PATH=$PATH:/opt/paparazzi/bin
+$PORTCMD -k mpkg paparazzi-tools
+if [[ $? != 0 ]]; then
+	echo "build-pprz-binary: Error building the mpkg! Trying to recover..."
+	# Find what port failed to install
+	FAILEDPORT=`cat $LOG | sed -n 's/Error: Failed to install \(.*\)/\1/p' | tail -1`
+	echo "build-pprz-binary: The port $FAILEDPORT was the last port that failed to install..."
+	REMAININGDEPS=`cat $LOG | sed -n 's/Error: The following dependencies were not installed: \(.*\)/\1/p' | tail -1`
+	DEPSTOINSTALL=`echo $REMAININGDEPS | sed -n "s/$FAILEDPORT//p"`
+	echo "build-pprz-binary: Will attempt to install the other dependencies manually after cleaning $FAILEDPORT"
+	echo "build-pprz-binary: The remaining dependencies minus the failed one are: $DEPSTOINSTALL"
+	$PORTCMD clean $FAILEDPORT
+	$PORTCMD install $DEPSTOINSTALL
+	if [[ $? != 0 ]]; then
+		echo "build-pprz-binary: Error trying to recover from the failed mpkg build...trying again with reduced dependencies."
+		# Find what port failed to install
+		# This sed expression should return just the text listed behind the error message i.e. the failed port name
+		FAILEDPORT2=`cat $LOG | sed -n 's/Error: Failed to install \(.*\)/\1/p' | tail -1`
+		echo "build-pprz-binary: The port $FAILEDPORT2 was the last port that failed to install..."
+		# This sed expression should return the list of dependencies not installed, they are all on one line
+		REMAININGDEPS2=`cat $LOG | sed -n 's/Error: The following dependencies were not installed: \(.*\)/\1/p' | tail -1`
+		# This sed expression should remove all ports preceding the failed port in the list, and the one immediately following it
+		DEPSTOINSTALL2=`echo $REMAININGDEPS2 | sed -n "s/^[-_a-zA-Z0-9 ]*$FAILEDPORT2 [-_a-zA-Z0-9]*//p"`
+		echo "build-pprz-binary: Will attempt to install the other dependencies manually after cleaning $FAILEDPORT2"
+		echo "build-pprz-binary: The remaining dependencies minus the failed one and the two surrounding are: $DEPSTOINSTALL2"
+		$PORTCMD clean $FAILEDPORT2
+		$PORTCMD install $DEPSTOINSTALL2
+		if [[ $? != 0 ]]; then
+			echo "build-pprz-binary: Error trying to recover from the failed mpkg build a second time. Exiting."
+			exit 1
+		fi
+	fi
+
+	# Try the mpkg again
+	$PORTCMD -k mpkg paparazzi-tools
+	if [[ $? != 0 ]]; then
+		echo "build-pprz-binary: Error trying to build the mpkg the second time...Exiting."
+		exit 1
+	fi
+fi
+
+
+# Copy the mpkg to the build directory so we can make an artifact of it
+# Make sure dmg directory is fresh
+echo "********************COPYING THE paparazzi-tools PACKAGE TO THE DMG_DIR"
+if [ ! -d "$DMG_DIR" ]; then
+	mkdir -v $DMG_DIR
+else
+	rm -rf $DMG_DIR
+	mkdir -v $DMG_DIR
+fi
+cp -r `find /opt/paparazzi/var/macports/build/* -name paparazzi-tools-*.mpkg` $DMG_DIR
+if [[ $? != 0 ]]; then
+	echo "build-pprz-binary: Error copying the mpkg!"
+	exit 1
+fi
+
+# Copy the resources
+echo "********************COPYING THE paparazzi-tools RESOURCES TO THE DMG_DIR"
+cp -r ./paparazzi-portability-support/darwin/install/Contents/* $DMG_DIR/paparazzi-tools*.mpkg/Contents/
+if [[ $? != 0 ]]; then
+	echo "build-pprz-binary: Error copying the resources!"
+	exit 1
+fi
+
+# Change file permissions of postflight script
+echo "********************CHANGING THE POSTFLIGHT SCRIPT PERMISSIONS"
+chmod 777 $DMG_DIR/paparazzi-tools*.mpkg/Contents/Resources/postflight
+if [[ $? != 0 ]]; then
+	echo "build-pprz-binary: Error changing postflight file permissions!"
+	exit 1
+fi
+
+# Change owner of postflight script
+echo "********************CHANGING THE POSTFLIGHT SCRIPT OWNER"
+chown root:admin $DMG_DIR/paparazzi-tools*.mpkg/Contents/Resources/postflight
+if [[ $? != 0 ]]; then
+	echo "build-pprz-binary: Error changing postflight file ownership!"
+	exit 1
+fi
+
+# Track build dates
+echo "********************TRACKING MPKG BUILD DATE AND TIME"
+# echo $CURR_DATETIME > $DATA_DIR/pprzbininstaller_build_date_current.txt
+echo $CURR_DATETIME >> $DATA_DIR/pprzbininstaller_build_date_list.txt
+
+# Build to .dmg file
+$DATA_DIR/paparazzi-portability-support/darwin/create-dmg --window-size 500 200 --background $DATA_DIR/paparazzi-portability-support/darwin/background.png --icon-size 96 --volname Paparazzi\ Tools --icon `ls -1 $DMG_DIR` 300 70 paparazzi-tools-"$OSX_VERSION"_"$CURR_DATETIME".dmg $DMG_DIR
+if [[ $? != 0 ]]; then
+	echo "build-pprz-binary: Error building DMG file!"
+	exit 1
+fi
+
+FINISH_DATETIME=`date -u +%Y-%m-%d_%H-%M-%SGMT`
+echo "********************FINISHED BUILDING BINARY INSTALLER AT $FINISH_DATETIME"
+
+exit 0

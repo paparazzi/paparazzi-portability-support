@@ -1,0 +1,47 @@
+#! /bin/bash
+
+# Paparazzi OS X Binary Installer Upload Script (Upload to esden's server)
+
+# You need to have your public ssh key on esden's server to run this script,
+# otherwise manual upload is required! Contact scdwyer@ualberta.ca for
+# more information.
+
+cd ~
+
+HOMEDIR=`pwd`
+echo "Current home directory: $HOMEDIR"
+
+if [ -f .ssh/id_rsa.pub ]
+then
+    #echo "File ~/.ssh/id_rsa.pub exists"
+    echo "SSH config should still be valid."
+else
+    #generate ssh keys
+    #echo "Generating SSH keys..."
+    echo "Lost SSH keys!!!!!! Exiting."
+    exit 1
+#    mkdir ~/.ssh
+#    ssh-keygen -q -N "" -f ~/.ssh/id_rsa
+fi
+
+HOST="scdwyer@repl.esden.net"
+ssh -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $HOST "echo 2>&1"
+rc=$?
+if [[ $rc != 0 ]] ; then
+    echo "SSH Connection Failure. Check configuration. Exiting."
+    exit $rc
+fi
+
+BUILDDATELIST=`find $HOMEDIR -iname "pprzbininstaller_build_date_list.txt"`
+LASTBUILDDATE=`tail -1 $BUILDDATELIST`
+UPLOADFILE=`find $HOMEDIR -iname "paparazzi-tools-Lion_$LASTBUILDDATE.dmg"`
+HOSTDIR="download-paparazziuav/darwin"
+
+echo "Uploading file $UPLOADFILE..."
+scp -B -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $UPLOADFILE $HOST:$HOSTDIR
+echo "Upload completed."
+
+echo "Generating and uploading md5 checksum..."
+md5 $UPLOADFILE > $UPLOADFILE.md5
+scp -B -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $UPLOADFILE.md5 $HOST:$HOSTDIR
+echo "Finished md5 upload."
