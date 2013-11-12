@@ -3,7 +3,7 @@
 PortSystem              1.0
 name                    jsbsim
 version                 trunk-2012.06.12
-revision                2
+revision                3
 categories              devel
 platforms               darwin
 maintainers             nomaintainer
@@ -35,7 +35,8 @@ patchfiles              patch-src-Makefile-am.diff \
                         patch-src-simgear-misc-Makefile-am.diff \
                         patch-src-simgear-props-Makefile-am.diff \
                         patch-src-simgear-xml-Makefile-am.diff \
-                        patch-src-simgear-structure-Makefile-am.diff
+                        patch-src-simgear-structure-Makefile-am.diff \
+			patch-src-input_output-string_utilities-h.diff
 
 use_configure           yes
 pre-configure {
