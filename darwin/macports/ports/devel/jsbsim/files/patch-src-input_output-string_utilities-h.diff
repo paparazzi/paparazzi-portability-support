@@ -1,10 +1,15 @@
 --- src/input_output/string_utilities.h-orig	2013-11-11 16:40:33.000000000 -0800
 +++ src/input_output/string_utilities.h	2013-11-11 16:40:44.000000000 -0800
-@@ -70,7 +70,6 @@
+@@ -70,7 +70,11 @@
    extern std::string& to_lower(std::string& str);
    extern bool is_number(const std::string& str);
    std::vector <std::string> split(std::string str, char d);
 -  extern std::string to_string(int);
++#if __clang__ == 1
++#if ( defined __clang_major__ ) && ( __clang_major__ < 5 )
++  extern std::string to_string(int);
++#endif
++#endif
    extern std::string replace(std::string str, const std::string& old, const std::string& newstr);
  #else
    #include <cctype>
