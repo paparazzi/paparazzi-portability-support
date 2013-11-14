@@ -1,6 +1,7 @@
 #!/bin/sh
 #
 #   Copyright (C) 2011 Eric Parsonage
+#   Copyright (C) 2013 Stephen Dwyer <scdwyer@ualberta.ca>
 #
 # This file is part of paparazzi.
 #
@@ -31,8 +32,9 @@ echo "/opt/paparazzi/lib/ocaml/site-lib/stublibs"  >> /opt/paparazzi/lib/ocaml/l
 /opt/paparazzi/bin/switch2 /opt/paparazzi/share/themes/ClearlooksClassic
 
 # create or modify pathshelper to include path to the paparazzi tools.
-echo '/opt/paparazzi/bin' > /etc/paths.d/paparazzi
-echo '/opt/paparazzi/sbin' >> /etc/paths.d/paparazzi
+# echo '/opt/paparazzi/bin' > /etc/paths.d/paparazzi
+# echo '/opt/paparazzi/sbin' >> /etc/paths.d/paparazzi
+# SEE BELOW
 
 # create or modify .gdbinit to include path to target.xml. We will be running as root so we need to change the ownership and permissions
 echo 'set tdesc filename /opt/paparazzi/share/openocd/target.xml' > ~/.gdbinit
@@ -44,6 +46,14 @@ echo $usr
 echo $grp
 chown $usr:$grp ~/.gdbinit 
 
+# We don't want to use pathshelper any more since is appends instead of prepends the path,
+# and we need the paparazzi python to be found BEFORE the system python
+# Instead, use a helper script to set up the env for paparazzi, or unset at uninstall
+cp ./pprz-env-set /opt/paparazzi/bin/pprz-env-set
+chmod 755 /opt/paparazzi/bin/pprz-env-set
+chown $usr:$grp /opt/paparazzi/bin/pprz-env-set
+# Run it
+/opt/paparazzi/bin/pprz-env-set
 
 # check to see if they have a clone of the source for paparazzi if not get them one
 if [ ! -d ~/paparazzi ]; then

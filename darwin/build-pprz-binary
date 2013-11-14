@@ -170,11 +170,12 @@ case "$OSX_VERSION_NUM" in
 	'6'	) OSX_VERSION="SnowLeopard";;
 	'7' ) OSX_VERSION="Lion";;
 	'8'	) OSX_VERSION="MountainLion";;
+	'9'	) OSX_VERSION="Mavericks";;
 	*	) OSX_VERSION="NotSupported";;
 esac
 
 if [[ $OSX_VERSION == 'NotSupported' ]]; then
-	echo "build-pprz-binary: OS X Version is NOT SUPPORTED - Version $OSX_VERSION_NUM"
+	echo "build-pprz-binary: OS X Version is NOT SUPPORTED - Version 10.$OSX_VERSION_NUM"
 	exit 1
 fi
 

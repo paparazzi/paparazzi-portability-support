@@ -1,0 +1,112 @@
+#!/bin/sh
+#
+#   Copyright (C) 2013 Stephen Dwyer <scdwyer@ualberta.ca>
+#
+# This file is part of paparazzi.
+#
+# paparazzi is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# paparazzi is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with paparazzi; see the file COPYING.  If not, write to
+# the Free Software Foundation, 59 Temple Place - Suite 330,
+# Boston, MA 02111-1307, USA.
+
+# Get options
+function usage() {
+  echo "Setup OS X environment for using paparazzi-tools binary installer dmg."
+  echo "Usage:  $(basename $0) options..."
+  echo "Options:"
+  echo "  --unset, -u"
+  echo "      Reverse any setup that occurred to help with uninstalling."
+  echo "  --python, -p"
+  echo "      Set up Python only."
+  echo "  -h, --help        display this help"
+  exit 0
+}
+
+UNSET=0
+PYTHONONLY=0
+
+# Arguments
+while test "${1:0:1}" = "-"; do
+  case $1 in
+    -u | --unset)
+      UNSET=1
+      shift;;
+    -p | --python)
+      PYTHONONLY=1
+      shift;;
+    -h | --help)
+      usage;;
+    -*)
+      echo "Unknown option $1. Run with --help for help."
+      exit 1;;
+  esac
+done
+
+if [ $PYTHONONLY == 0 ]; then
+	if [ $UNSET == 1 ]; then
+		echo "Attempting to reverse any previous setup changes..."
+	else
+		echo "Setting up OS X for use with paparazzi-tools binary installer dmg..."
+	fi
+else
+	if [ $UNSET == 1 ]; then
+		echo "Attempting to reverse any previous Python setup..."
+	else
+		echo "Setting up Python for use with paparazzi-tools binary installer dmg..."
+	fi
+fi
+
+CURR_DATETIME=`date -u +%Y-%m-%d_%H-%M-%SGMT`
+
+# Manage .profile
+if [ $PYTHONONLY == 0 ]; then
+	# We always attempt to clear a previous addition
+	echo "Clearing additions from ~/.profile..."
+	sed '/# Paparazzi pprz-set-env addition on/,/# Paparazzi pprz-set-env addition finished./d' $HOME/.profile > $HOME/.profile-pprz
+	mv $HOME/.profile-pprz $HOME/.profile
+
+	if [ $UNSET == 0 ]; then
+		if [ -e "$HOME/.profile" ]
+			# Backup existing .profile
+			echo "Backup existing ~/.profile..."
+			cp $HOME/.profile $HOME/.profile-bkup-pprz-$CURR_DATETIME
+		fi
+		# Change the PATH variable of terminal to search /opt/paparazzi first
+		echo "Updating PATH environment variable in ~/.profile..."
+		echo "# Paparazzi pprz-set-env addition on $CURR_DATETIME." >> $HOME/.profile
+		echo "# Your previous .profile was backed up to: $HOME/.profile-bkup-pprz-$CURR_DATETIME" >> $HOME/.profile
+		echo "export PATH=/opt/paparazzi/bin:/opt/paparazzi/sbin:$PATH" >> $HOME/.profile
+
+		# Add default paparazzi environment variables
+		echo "Exporting PAPARZZI_HOME and PAPARAZZI_SRC environment variables in ~/.profile..."
+		echo "# Required for running agents from the command line" >> $HOME/.profile
+		echo "export PAPARAZZI_HOME=$HOME/paparazzi" >> $HOME/.profile
+		echo "export PAPARAZZI_SRC=$HOME/paparazzi" >> $HOME/.profile
+
+		# Finish it off
+		echo "# Paparazzi pprz-set-env addition finished." >> $HOME/.profile
+	fi
+fi
+
+# Manage python: link python to python2.7 in /opt/paparazzi/bin
+if [ $UNSET == 0 ]; then
+	echo "Setting up the Python included with Paparazzi..."
+	ln -s /opt/paparazzi/bin/python2.7 /opt/paparazzi/bin/python
+else
+	echo "Restoring original configuration of Python included with Paparazzi..."
+	rm /opt/paparazzi/bin/python
+fi
+
+# Finished
+echo "All tasks completed successfully."
+exit 0
