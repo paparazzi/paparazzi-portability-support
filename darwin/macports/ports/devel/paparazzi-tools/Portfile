@@ -44,7 +44,8 @@ depends_lib-append  \
                     port:python_Select \
                     port:py27-yaml \
                     port:dfu-util \
-                    port:py27-opengl
+                    port:py27-opengl \
+                    port:ivy-python
 
 distfiles
 use_configure   no

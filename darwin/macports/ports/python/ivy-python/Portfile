@@ -12,7 +12,7 @@ description             Ivy bus python library
 long_description        Ivy is the software bus that will creep over your network!
 homepage                http://www.tls.cena.fr/products/ivy/
 fetch.type              svn
-svn.url                 http://svn.tls.cena.fr/svn/ivy/ivy-python/trunk
+svn.url                 https://svn.tls.cena.fr/svn/ivy/ivy-python/trunk
 #svn.revision            3443
 #svn.post_args-append    -r ${svn.revision} ${worksrcdir}
 svn.post_args-append    ${worksrcdir}
