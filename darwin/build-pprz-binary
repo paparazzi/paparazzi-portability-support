@@ -241,7 +241,7 @@ if [ -d "paparazzi-portability-support" ]; then
 	echo "build-pprz-binary: Removing existing paparazzi-portability-support directory"
 	rm -rf ./paparazzi-portability-support
 fi
-$GITCMD clone https://github.com/scdwyer/paparazzi-portability-support.git --branch $GITBRANCH
+$GITCMD clone https://github.com/paparazzi/paparazzi-portability-support.git --branch $GITBRANCH
 if [[ $? != 0 ]]; then
 	echo "build-pprz-binary: Error cloning source directory!"
 	exit 1
