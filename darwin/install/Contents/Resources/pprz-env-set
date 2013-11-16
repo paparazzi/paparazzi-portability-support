@@ -76,7 +76,7 @@ if [ $PYTHONONLY == 0 ]; then
 	mv $HOME/.profile-pprz $HOME/.profile
 
 	if [ $UNSET == 0 ]; then
-		if [ -e "$HOME/.profile" ]
+		if [ -e "$HOME/.profile" ]; then
 			# Backup existing .profile
 			echo "Backup existing ~/.profile..."
 			cp $HOME/.profile $HOME/.profile-bkup-pprz-$CURR_DATETIME
