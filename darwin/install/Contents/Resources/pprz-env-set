@@ -85,7 +85,7 @@ if [ $PYTHONONLY == 0 ]; then
 		echo "Updating PATH environment variable in ~/.profile..."
 		echo "# Paparazzi pprz-set-env addition on $CURR_DATETIME." >> $HOME/.profile
 		echo "# Your previous .profile was backed up to: $HOME/.profile-bkup-pprz-$CURR_DATETIME" >> $HOME/.profile
-		echo "export PATH=/opt/paparazzi/bin:/opt/paparazzi/sbin:$PATH" >> $HOME/.profile
+		echo "export PATH=/opt/paparazzi/bin:/opt/paparazzi/sbin:\$PATH" >> $HOME/.profile
 
 		# Add default paparazzi environment variables
 		echo "Exporting PAPARZZI_HOME and PAPARAZZI_SRC environment variables in ~/.profile..."
