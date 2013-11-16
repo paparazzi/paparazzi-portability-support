@@ -45,7 +45,8 @@ depends_lib-append  \
                     port:py27-yaml \
                     port:dfu-util \
                     port:py27-opengl \
-                    port:ivy-python
+                    port:ivy-python \
+                    port:py27-game
 
 distfiles
 use_configure   no
