@@ -18,7 +18,8 @@ cvs.module 		      JSBSim
 depends_lib-append      port:autoconf \
                         port:automake \
                         port:libtool  \
-                        port:tcl
+                        port:tcl \
+			port:pkgconfig
 
 worksrcdir		      JSBSim 
 
@@ -36,7 +37,10 @@ patchfiles              patch-src-Makefile-am.diff \
                         patch-src-simgear-props-Makefile-am.diff \
                         patch-src-simgear-xml-Makefile-am.diff \
                         patch-src-simgear-structure-Makefile-am.diff \
-			patch-src-input_output-string_utilities-h.diff
+			patch-src-input_output-string_utilities-h.diff \
+			patch-add-pkgconfig-in.diff \
+			patch-gen-pkgconfig.diff \
+			patch-makefile-add-pkgconfig.diff
 
 use_configure           yes
 pre-configure {
