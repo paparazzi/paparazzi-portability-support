@@ -49,7 +49,10 @@ chown $usr:$grp ~/.gdbinit
 # We don't want to use pathshelper any more since is appends instead of prepends the path,
 # and we need the paparazzi python to be found BEFORE the system python
 # Instead, use a helper script to set up the env for paparazzi, or unset at uninstall
-cp ./pprz-env-set /opt/paparazzi/bin/pprz-env-set
+
+SCRIPTPATH="$( dirname "$0" )"
+
+cp $SCRIPTPATH/pprz-env-set /opt/paparazzi/bin/pprz-env-set
 chmod 755 /opt/paparazzi/bin/pprz-env-set
 chown $usr:$grp /opt/paparazzi/bin/pprz-env-set
 # Run it
