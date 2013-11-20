@@ -8,6 +8,30 @@
 
 cd ~
 
+# Test for which OS we are on - valid only on OS X
+platform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" != 'Darwin' ]]; then
+   echo "upload-pprz-binary: Platform $unamestr is NOT SUPPORTED - OS X Only!"
+   exit 1
+fi
+
+# Test for which version of OS X - some minor changes depending on version
+OSX_VERSION_NUM=`sw_vers | sed -n 's/ProductVersion:[[:space:]]10.\([0-9]*\).[0-9]*/\1/p'`
+
+case "$OSX_VERSION_NUM" in
+	'6'	) OSXVERSION="SnowLeopard";;
+	'7' ) OSXVERSION="Lion";;
+	'8'	) OSXVERSION="MountainLion";;
+	'9'	) OSXVERSION="Mavericks";;
+	*	) OSXVERSION="NotSupported";;
+esac
+
+if [[ $OSXVERSION == 'NotSupported' ]]; then
+	echo "build-pprz-binary: OS X Version is NOT SUPPORTED - Version 10.$OSX_VERSION_NUM"
+	exit 1
+fi
+
 HOMEDIR=`pwd`
 echo "Current home directory: $HOMEDIR"
 
@@ -34,7 +58,10 @@ fi
 
 BUILDDATELIST=`find $HOMEDIR -iname "pprzbininstaller_build_date_list.txt"`
 LASTBUILDDATE=`tail -1 $BUILDDATELIST`
-UPLOADFILE=`find $HOMEDIR -iname "paparazzi-tools-Lion_$LASTBUILDDATE.dmg"`
+DMGFILENAME="paparazzi-tools-$OSXVERSION"
+DMGFILENAME+="_"
+DMGFILENAME+="$LASTBUILDDATE.dmg"
+UPLOADFILE=`find $HOMEDIR -iname "$DMGFILENAME"`
 HOSTDIR="download-paparazziuav/darwin"
 
 echo "Uploading file $UPLOADFILE..."
