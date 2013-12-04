@@ -164,7 +164,7 @@ if [[ "$unamestr" != 'Darwin' ]]; then
 fi
 
 # Test for which version of OS X - some minor changes depending on version
-OSX_VERSION_NUM=`sw_vers | sed -n 's/ProductVersion:[[:space:]]10.\([0-9]*\).[0-9]*/\1/p'`
+OSX_VERSION_NUM=`sw_vers | sed -n 's/ProductVersion:[[:space:]]10.\([0-9]*\)[.]*[0-9]*/\1/p'`
 
 case "$OSX_VERSION_NUM" in
 	'6'	) OSX_VERSION="SnowLeopard";;
