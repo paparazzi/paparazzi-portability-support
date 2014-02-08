@@ -2,13 +2,13 @@ Source: paparazzi-dev
 Section: embedded
 Priority: extra
 Maintainer: Felix Ruess <felix.ruess@gmail.com>
-Build-Depends: debhelper (>= 7.0.50~)
-Homepage: http://paparazzi.enac.fr
-Standards-Version: 3.9.2
+Build-Depends: debhelper (>= 8.0.0)
+Homepage: http://paparazziuav.org
+Standards-Version: 3.9.3
 
 Package: paparazzi-dev
 Architecture: all
-Depends: ivy-c-dev, ivy-c, ivy-ocaml, ocaml-findlib, libxml-light-ocaml-dev, liblablgtk2-ocaml-dev, liblablgtk2-gnome-ocaml-dev, libocamlnet-ocaml-dev, libsdl-ocaml-dev, libpcre-ocaml-dev, gtk2-engines-pixbuf, make, gcc, g++, libgsl0-dev, gnuplot, libgnomecanvas2-dev, bzip2, git, libusb-dev, speech-dispatcher, glade, imagemagick, libpcre3-dev, ivy-python, python-lxml, python-wxgtk2.8, python-usb, python-yaml
-Recommends: ocaml-native-compilers, paparazzi-arm-multilib, libgtkdatabox-0.9.1-1-dev, python-scipy, python-matplotlib, lpc21isp, openocd (>= 0.5.0), meld
-Suggests: paparazzi-jsbsim, eagle, gs-common, tetex-extra, dia-gnome, boa, gitk, gpsd, libgps-dev, gedit
+Depends: ivy-c-dev, ivy-c, ivy-ocaml, ocaml-findlib, libxml-light-ocaml-dev, liblablgtk2-ocaml-dev, liblablgtk2-gnome-ocaml-dev, libocamlnet-ocaml-dev, libsdl-ocaml-dev, libpcre-ocaml-dev, gtk2-engines-pixbuf, make, gcc, g++, libgsl0-dev, libgnomecanvas2-dev, bzip2, git, libusb-dev, speech-dispatcher, glade, libpcre3-dev, ivy-python, python-lxml, python-wxgtk2.8, python-usb, python-yaml
+Recommends: ocaml-native-compilers, libgtkdatabox-0.9.1-1-dev, python-scipy, python-matplotlib, lpc21isp, openocd (>= 0.5.0), gpsd, libgps-dev, meld, gitk, gnuplot, imagemagick
+Suggests: paparazzi-jsbsim, gs-common, tetex-extra, dia-gnome, gedit
 Description: Paparazzi Meta Package : common support

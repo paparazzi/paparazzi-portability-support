@@ -1,3 +1,11 @@
+paparazzi-dev (3.13) unstable; urgency=low
+
+  * removed deprecated paparazzi-arm-multilib from recommends
+  * moved gnuplot and imagemagick from depends to recommends
+  * moved gpsd and libgps-dev from suggests to recommends
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Sat, 08 Feb 2014 14:20:33 +0100
+
 paparazzi-dev (3.12) precise; urgency=low
 
   * add ocaml-native-compilers to recommends
