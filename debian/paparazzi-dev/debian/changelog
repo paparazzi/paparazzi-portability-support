@@ -1,10 +1,16 @@
-paparazzi-dev (3.13) unstable; urgency=low
+paparazzi-dev (3.14) precise; urgency=low
+
+  * added g++-arm-linux-gnueabi and gcc-arm-linux-gnueabi to recommends
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Sat, 08 Feb 2014 15:13:38 +0100
+
+paparazzi-dev (3.13) precise; urgency=low
 
   * removed deprecated paparazzi-arm-multilib from recommends
   * moved gnuplot and imagemagick from depends to recommends
   * moved gpsd and libgps-dev from suggests to recommends
 
- -- Felix Ruess <felix.ruess@gmail.com>  Sat, 08 Feb 2014 14:20:33 +0100
+ -- Felix Ruess <felix.ruess@gmail.com>  Sat, 08 Feb 2014 14:57:46 +0100
 
 paparazzi-dev (3.12) precise; urgency=low
 
