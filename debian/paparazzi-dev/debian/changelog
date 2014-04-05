@@ -1,3 +1,9 @@
+paparazzi-dev (3.15) precise; urgency=low
+
+  * add libxml2-dev dependency
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Sun, 06 Apr 2014 00:49:49 +0200
+
 paparazzi-dev (3.14) precise; urgency=low
 
   * added g++-arm-linux-gnueabi and gcc-arm-linux-gnueabi to recommends
