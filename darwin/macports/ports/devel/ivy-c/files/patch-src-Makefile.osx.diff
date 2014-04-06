@@ -1,8 +1,28 @@
 Index: src/Makefile.osx
 ===================================================================
---- src/Makefile.osx	(revision 3457)
+--- src/Makefile.osx	(revision 3601)
 +++ src/Makefile.osx	(working copy)
-@@ -90,20 +90,20 @@
+@@ -9,8 +9,8 @@
+     PREFIX=/opt/local
+ endif
+ 
+-PCREINC = `pcre-config --cflags`
+-PCRELIB = `pcre-config --libs`
++PCREINC = $(shell pcre-config --cflags)
++PCRELIB = $(shell pcre-config --libs)
+ CASESENSITIVE = "yes"
+ ifeq ($(CASESENSITIVE), "no")
+ 	PCRE_OPT=PCRE_CASELESS
+@@ -59,7 +59,7 @@
+ 	$(CPP) $(CFLAGS)  -c $*.cpp
+ 
+ 
+-all: static-libs  shared-libs tools 
++all: static-libs  shared-libs pkgconf tools
+ libomp: libivy_omp.a 
+ 
+ omp: libomp
+@@ -90,12 +90,12 @@
  	$(LIBTOOL) $@ $(OMPOBJ)
  
  libivy.dylib: $(OBJ)
@@ -19,6 +39,7 @@ Index: src/Makefile.osx
  	
  libglibivy.a: $(GLIBOBJ)
  	rm -f $@
+@@ -102,8 +102,8 @@
  	$(LIBTOOL) $@ $(GLIBOBJ)
  
  libglibivy.dylib: $(GLIBOBJ)
@@ -40,3 +61,25 @@ Index: src/Makefile.osx
  	install -m644 libivy.a		$(DESTDIR)$(PREFIX)/lib/
  	install -m644 libivy.dylib	$(DESTDIR)$(PREFIX)/lib/
  	install -m644 libglibivy.a	$(DESTDIR)$(PREFIX)/lib/
+@@ -143,10 +143,20 @@
+ tools: static-libs 
+ 	@(cd $(TOOLS_DIR) && $(MAKE) -f Makefile.osx)
+ 
+-install: installlibs installbins includes
++install: installlibs installbins includes installpkgconf
+ 
+ # ------------------------------------------------------------------------------------------
+ 
+ clean:
+ 	-rm -f  *.o *.a *.dylib *.dylib.* *~
++	-rm -f ivy-glib.pc
+ 	@(cd $(TOOLS_DIR) && $(MAKE) -f Makefile.osx clean)
++
++# ------------------------------------------------------------------------------------------
++
++pkgconf: 
++	sed -e 's,@PREFIX@,$(PREFIX),; s,@DESTDIR@,$(DESTDIR),; s,@MAJOR@,$(MAJOR),; s,@MINOR@,$(MINOR),; s,@PCREINC@,$(PCREINC),; s,@REGEXP@,$(REGEXP),; s,@PCRELIB@,$(PCRELIB),; s,@EXTRALIB@,$(EXTRALIB),' ivy-glib.pc.in > ivy-glib.pc
++
++installpkgconf:
++	test -d $(DESTDIR)$(PREFIX)/lib/pkgconfig || mkdir -p $(DESTDIR)$(PREFIX)/lib/pkgconfig
++	install -m 644 ivy-glib.pc						$(DESTDIR)$(PREFIX)/lib/pkgconfig
