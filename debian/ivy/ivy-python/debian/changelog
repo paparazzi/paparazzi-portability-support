@@ -1,6 +1,59 @@
+ivy-python (2.3~pre-2-0~ppa1) precise; urgency=low
+
+  * update to 2.3-pre-2:
+    v2.3-pre-2
+    ----------
+
+    * The serial number for PING/PONG messages is not exposed anymore in the API.
+      In fact, it is also not used anymore in the protocol.
+
+    * Removed the ability to mimic ivy-c behaviour.
+
+    v2.3-pre-1
+    ----------
+
+    * ping/pong: fully implemented
+
+    * Fixed: any error occurring when an agent tried to establish the
+      connection to a new client on the bus, triggered an AttributeError
+      exception within UDP_init_and_listen(): as a result, that agent was
+      not detecting any new clients on the bus afterwards.  Thanks to
+      Antoine Drouin for noticing it and proposing the patch.
+
+    * ivy-python agents now properly reply to ping requests, thanks to
+      Fabien André.  They cannot ping other agents yet.
+
+    * std_api.IvyMainLoop(): now honors SIGINT, thanks to Fabien André
+
+    * Fixed: when a message was sent on the bus matching two or more
+      subscriptions of an agent, only one message was actually sent to
+      this agent, meaning that only one of the corresponding callbacks was
+      called.  This is no longer the case, and ivy-python now behaves as
+      expected: all callbacks bound to subscriptions that a message posted
+      on the bus matches are now triggered, no matter how many such
+      subscriptions one agent has.
+
+      All credits go to Felix Ruess, member of the paparazzi UAV project's
+      team, who reported the bug and submitted the fix. Many thanks, Felix!
+
+    * Fixed: an exception was raised when trying to send a message
+      corresponding to a subscription in which an optional group is not
+      participating to the match (example: subscription regexp='MSG(.*)?',
+      msg='MSG'). Thanks to github user «alonsoac» for reporting the bug
+      and to Felix Ruess for telling me!
+
+    * IvyServer.send_direct_message(): new parameter 'stop_on_first' added
+
+    * Bohdan Mushkevych has done a lot of work on the source code to clean
+      it up, to correct misspellings, and to make it more "Pythonic"
+      (especially by following pep8 recommendations).
+      Great job, thanks a lot Dan!
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Tue, 16 Sep 2014 14:35:55 +0200
+
 ivy-python (2.2-3~ppa1) oneiric; urgency=low
 
-  * updated for ppa build 
+  * updated for ppa build
 
  -- Felix Ruess <felix.ruess@gmail.com>  Sat, 05 Nov 2011 16:16:01 +0100
 

@@ -5,4 +5,4 @@
 # Compulsory line, this is a version 3 file
 version=3
 
-http://www.tls.cena.fr/products/ivy/download/packages/ivy-python-(.*)\.tar\.gz
+https://pypi.python.org/packages/source/i/ivy-python/ivy-python-(.*)\.tar\.gz
