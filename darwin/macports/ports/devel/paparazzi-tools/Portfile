@@ -19,7 +19,7 @@ depends_lib-append  \
                     port:ocaml \
                     port:ocaml-findlib \
                     port:ocaml-pcre \
-                    port:git-core \
+                    port:git \
                     port:xml-light \
                     port:ocaml-ocamlnet \
                     port:libftdi0 \
