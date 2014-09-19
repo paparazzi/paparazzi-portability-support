@@ -53,7 +53,7 @@ use_configure   no
 build           { }
 livecheck.type  none
 
-default_variants    +pprz_v4
+#default_variants    +pprz_v4
 
 variant pprz_v4 description {Support STM32 on v4.2 and older} {
     depends_lib-append port:libcmsis \
