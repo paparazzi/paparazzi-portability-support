@@ -1,3 +1,10 @@
+paparazzi-dev (3.16) precise; urgency=low
+
+  * add libipc-run-perl to suggests
+    needed to run the perl test framework
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Thu, 13 Nov 2014 17:57:31 +0100
+
 paparazzi-dev (3.15) precise; urgency=low
 
   * add libxml2-dev dependency
