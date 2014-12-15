@@ -1,3 +1,9 @@
+paparazzi-dev (3.17) precise; urgency=low
+
+  * add python-pygame to recommends
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Tue, 16 Dec 2014 00:10:27 +0100
+
 paparazzi-dev (3.16) precise; urgency=low
 
   * add libipc-run-perl to suggests
