@@ -1,3 +1,9 @@
+paparazzi-dev (3.18) trusty; urgency=medium
+
+  * add astyle to recommends
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Wed, 07 Jan 2015 14:24:16 +0100
+
 paparazzi-dev (3.17) precise; urgency=low
 
   * add python-pygame to recommends
