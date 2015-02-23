@@ -15,7 +15,7 @@
 
 REV=$(shell dpkg-parsechangelog | sed -rne 's,^Version: .*[+~]svn([0-9]+).*,\1,p')
 VER=$(shell dpkg-parsechangelog | sed -rne 's,^Version: ([^-]+).*,\1,p')
-CVS_DATE="12 Jun 2012"
+CVS_DATE="23 Feb 2015"
 get-orig-source:
 	rm -rf paparazzi-jsbsim-$(VER)
 	cvs -z3 -d:pserver:anonymous@jsbsim.cvs.sourceforge.net:/cvsroot/jsbsim export -D $(CVS_DATE) -d paparazzi-jsbsim-$(VER) JSBSim
