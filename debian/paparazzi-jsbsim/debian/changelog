@@ -1,3 +1,9 @@
+paparazzi-jsbsim (1.5-1) unstable; urgency=medium
+
+  * updated to CVS version of 23 Feb 2015
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Sat, 28 Feb 2015 11:18:08 +0100
+
 paparazzi-jsbsim (1.4-1) precise; urgency=low
 
   * updated to cvs version of 12 Jun 2012
