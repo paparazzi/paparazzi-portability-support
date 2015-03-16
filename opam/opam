@@ -6,10 +6,9 @@ author: "Piotr Esden-Tempski <piotr@esden.net>"
 homepage: "http://paparazziuav.org"
 bug-reports: "https://github.com/paparazzi/paparazzi-portability-support/issues"
 dev-repo: "https://github.com/paparazzi/paparazzi-portability-support.git"
-available: [ ocaml-version = "4.01.0" ]
 depends: [ "xml-light"
 	   "conf-glade"
 	   "conf-gnomecanvas"
-	   "ocamlnet" {= "3.7.7" }
+	   "ocamlnet"
 	   "lablgtk" {= "2.16.0"}
 	   "ivy" {= "1.2.2"} ]
