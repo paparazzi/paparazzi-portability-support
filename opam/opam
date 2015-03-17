@@ -10,5 +10,5 @@ depends: [ "xml-light"
 	   "conf-glade"
 	   "conf-gnomecanvas"
 	   "ocamlnet"
-	   "lablgtk" {= "2.16.0"}
+	   "lablgtk"
 	   "ivy" {= "1.2.2"} ]
