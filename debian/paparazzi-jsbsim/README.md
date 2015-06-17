@@ -6,8 +6,8 @@ Get the sources and copy the debian dir into them
 * cd paparazzi-jsbsim-<version>
 * cp -r ../debian .
 
-to build a source package:
-* debuild -S
+to build a source package that includes the orig.tar.gz in upload:
+* debuild -S -sa
 
 or to build a binary package with pbuilder
 * sudo pbuilder update --distribution DIST-NAME --override-config
