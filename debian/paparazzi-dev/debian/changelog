@@ -1,3 +1,9 @@
+paparazzi-dev (3.20) trusty; urgency=medium
+
+  * add wget to depends
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Wed, 01 Jul 2015 11:49:48 +0200
+
 paparazzi-dev (3.19) trusty; urgency=medium
 
   * add bc to depends
