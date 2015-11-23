@@ -1,3 +1,10 @@
+paparazzi-dev (3.22) trusty; urgency=medium
+
+  * add python-opengl to recommends
+  * depend on python-wxgtk2.8 OR python-wxgtk3.0
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Mon, 23 Nov 2015 17:47:02 +0100
+
 paparazzi-dev (3.21) trusty; urgency=medium
 
   * add camlp4 to depends
