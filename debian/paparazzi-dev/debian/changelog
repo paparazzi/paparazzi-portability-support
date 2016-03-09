@@ -1,3 +1,9 @@
+paparazzi-dev (3.23) trusty; urgency=medium
+
+  * add g++-arm-linux-gnueabihf and gcc-arm-linux-gnueabihf to recommends
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Wed, 09 Mar 2016 23:23:25 +0100
+
 paparazzi-dev (3.22) trusty; urgency=medium
 
   * add python-opengl to recommends
