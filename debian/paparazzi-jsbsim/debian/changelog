@@ -1,3 +1,9 @@
+paparazzi-jsbsim (1.5-4) xenial; urgency=medium
+
+  * ppa build for xenial
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Thu, 17 Mar 2016 12:58:03 +0100
+
 paparazzi-jsbsim (1.5-2) unstable; urgency=medium
 
   * patch autogen.sh to check for libtoolize instead of libtool
