@@ -4,5 +4,5 @@
 
 # Compulsory line, this is a version 3 file
 version=3
-
-https://pypi.python.org/packages/source/i/ivy-python/ivy-python-(.*)\.tar\.gz
+opts=uversionmangle=s/(rc|a|b|c)/~$1/ \
+https://pypi.debian.net/ivy-python/ivy-python-(.+)\.(?:zip|tgz|tbz|txz|(?:tar\.(?:gz|bz2|xz)))

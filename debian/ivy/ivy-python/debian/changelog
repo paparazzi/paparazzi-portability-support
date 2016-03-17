@@ -1,3 +1,19 @@
+ivy-python (3.1-0) unstable; urgency=medium
+
+  * update to v3.1:
+    v3.1
+    ----
+    * code cleanup: removed unnecessary calls to list() --introduced by
+      the 2to3 tool. Thanks to Aurélien Pardon for noticing and reporting!
+
+    v3.0
+    ----
+    * Support for both python2.7+ and python 3.x
+    * Fix a bug in examples/ivyprobes where IvyServer.stop() was called
+      twice after the agent receives a "die" message.
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Thu, 17 Mar 2016 14:56:15 +0100
+
 ivy-python (2.3~pre-2-0~ppa1) precise; urgency=low
 
   * update to 2.3-pre-2:
