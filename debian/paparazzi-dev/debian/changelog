@@ -1,3 +1,9 @@
+paparazzi-dev (3.24) trusty; urgency=medium
+
+  * add libocamlnet-ssl-ocaml-dev dependency
+
+ -- Felix Ruess <felix.ruess@gmail.com>  Sat, 05 Aug 2017 19:15:32 +0200
+
 paparazzi-dev (3.23) trusty; urgency=medium
 
   * add g++-arm-linux-gnueabihf and gcc-arm-linux-gnueabihf to recommends
