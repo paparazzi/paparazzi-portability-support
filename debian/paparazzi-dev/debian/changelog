@@ -1,3 +1,12 @@
+paparazzi-dev (3.25) bionic; urgency=medium
+
+  * update dependencies for Ubuntu 18.04 LTS
+    * ocamlbuild is a separated package
+    * native compilers are integrated to ocaml-nox
+    * remove libgtkdatabox-0.9.1-1-dev
+
+ -- Gautier Hattenberger <gautier.hattenberger@enac.fr>  Mon, 21 May 2018 22:59:36 +0200
+
 paparazzi-dev (3.24) trusty; urgency=medium
 
   * add libocamlnet-ssl-ocaml-dev dependency
