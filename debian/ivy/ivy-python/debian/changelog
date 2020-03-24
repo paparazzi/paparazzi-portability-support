@@ -1,3 +1,15 @@
+ivy-python (3.2-0ppa2~focal) focal; urgency=medium
+
+  * ppa build for focal
+
+ -- Gautier Hattenberger <gautier.hattenberger@enac.fr>  Sun, 22 Mar 2020 16:41:23 +0100
+
+ivy-python (3.2-0) unstable; urgency=medium
+
+  * update to v3.2
+
+ -- Gautier Hattenberger <gautier.hattenberger@enac.fr>  Sun, 22 Mar 2020 16:35:51 +0100
+
 ivy-python (3.1-0) unstable; urgency=medium
 
   * update to v3.1:
