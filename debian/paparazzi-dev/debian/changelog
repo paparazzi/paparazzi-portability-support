@@ -1,3 +1,11 @@
+paparazzi-dev (3.27) focal; urgency=medium
+
+  * update all python tools to python3 version
+  * drop python-gtk2, use python3-gi and gtk3 instead
+  * drop some old dependencies mostly used to generate doc
+
+ -- Gautier Hattenberger <gautier.hattenberger@enac.fr>  Tue, 24 Mar 2020 12:52:15 +0100
+
 paparazzi-dev (3.26) bionic; urgency=medium
 
   * add dependency to python-gtk2

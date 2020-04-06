@@ -1,14 +1,14 @@
 Source: paparazzi-dev
 Section: embedded
-Priority: extra
-Maintainer: Felix Ruess <felix.ruess@gmail.com>
-Build-Depends: debhelper (>= 8.0.0)
+Priority: optional
+Maintainer: Gautier Hattenberger <gautier.hattenberger@enac.fr>
+Build-Depends: debhelper (>= 11.0.0)
 Homepage: http://paparazziuav.org
-Standards-Version: 3.9.3
+Standards-Version: 4.5.0
 
 Package: paparazzi-dev
 Architecture: all
-Depends: ivy-c-dev, ivy-c, ivy-ocaml, ocamlbuild, ocaml-findlib, libxml-light-ocaml-dev, liblablgtk2-ocaml-dev, liblablgtk2-gnome-ocaml-dev, libocamlnet-ocaml-dev, libocamlnet-ssl-ocaml-dev, libsdl-ocaml-dev, libpcre-ocaml-dev, camlp4, gtk2-engines-pixbuf, make, gcc, g++, libgsl0-dev, libgnomecanvas2-dev, bzip2, git, libusb-dev, speech-dispatcher, glade, libpcre3-dev, ivy-python, python-lxml, python-wxgtk2.8 | python-wxgtk3.0, python-gtk2, python-usb, python-yaml, libxml2-dev, bc, wget
-Recommends: g++-arm-linux-gnueabi, gcc-arm-linux-gnueabi, g++-arm-linux-gnueabihf, gcc-arm-linux-gnueabihf, python-scipy, python-matplotlib, python-pygame, lpc21isp, openocd (>= 0.5.0), gpsd, libgps-dev, meld, gitk, gnuplot, imagemagick, libipc-run-perl, astyle, python-opengl
-Suggests: paparazzi-jsbsim, gs-common, tetex-extra, dia-gnome, gedit
+Depends: ivy-c-dev, ivy-c, ivy-ocaml, ocamlbuild, ocaml-findlib, libxml-light-ocaml-dev, liblablgtk2-ocaml-dev, liblablgtk2-gnome-ocaml-dev, libocamlnet-ocaml-dev, libocamlnet-ssl-ocaml-dev, libsdl-ocaml-dev, libpcre-ocaml-dev, camlp4, gtk2-engines-pixbuf, make, gcc, g++, libgsl-dev, libgnomecanvas2-dev, bzip2, git, libusb-dev, speech-dispatcher, glade, libpcre3-dev, ivy-python, python3-lxml, python3-wxgtk4.0, python3-pyqt5, python3-gi, python3-usb, python3-yaml, libxml2-dev, bc, wget
+Recommends: g++-arm-linux-gnueabi, gcc-arm-linux-gnueabi, g++-arm-linux-gnueabihf, gcc-arm-linux-gnueabihf, python3-scipy, python3-matplotlib, python3-pygame, python3-unidecode, lpc21isp, openocd (>= 0.5.0), gpsd, libgps-dev, meld, gitk, gnuplot, imagemagick, libipc-run-perl, astyle, python3-opengl
+Suggests: paparazzi-jsbsim, gedit
 Description: Paparazzi Meta Package : common support
