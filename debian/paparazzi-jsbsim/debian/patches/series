@@ -1,5 +1,1 @@
-add-pkgconfig-in.patch
-makefile-add-pkgconfig.patch
-fix-autogen-dirs.patch
-gen-pkgconfig.patch
-fix-libtool-check.patch
+pprz_jsbsim.patch

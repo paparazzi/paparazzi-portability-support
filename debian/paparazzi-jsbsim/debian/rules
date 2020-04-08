@@ -13,16 +13,17 @@
 	dh $@
 
 
-REV=$(shell dpkg-parsechangelog | sed -rne 's,^Version: .*[+~]svn([0-9]+).*,\1,p')
+UPSTREAM_VER=Release_Candidate_v1.0.0
 VER=$(shell dpkg-parsechangelog | sed -rne 's,^Version: ([^-]+).*,\1,p')
-CVS_DATE="23 Feb 2015"
 get-orig-source:
 	rm -rf paparazzi-jsbsim-$(VER)
-	cvs -z3 -d:pserver:anonymous@jsbsim.cvs.sourceforge.net:/cvsroot/jsbsim export -D $(CVS_DATE) -d paparazzi-jsbsim-$(VER) JSBSim
+	wget https://github.com/JSBSim-Team/jsbsim/archive/$(UPSTREAM_VER).tar.gz
+	tar -xzf $(UPSTREAM_VER).tar.gz
+	mv jsbsim-${UPSTREAM_VER} paparazzi-jsbsim-$(VER)
 	GZIP='--best --no-name' tar -cz --owner root --group root --mode a+rX -f paparazzi-jsbsim_$(VER).orig.tar.gz paparazzi-jsbsim-$(VER)
 	rm -rf paparazzi-jsbsim-$(VER)
 
 
 override_dh_auto_configure:
-	./autogen.sh --enable-libraries --enable-shared --disable-static --prefix=/usr
+	cmake -DCMAKE_CXX_FLAGS_RELEASE="-O3 -march=native -mtune=native" -DCMAKE_C_FLAGS_RELEASE="-O3 -march=native -mtune=native" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=/usr .
 

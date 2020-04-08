@@ -1,3 +1,9 @@
+paparazzi-jsbsim (1.6) focal; urgency=medium
+
+  * build package with upstream version v1.0.0-rc1
+
+ -- Gautier Hattenberger <gautier.hattenberger@enac.fr>  Tue, 07 Apr 2020 23:27:34 +0200
+
 paparazzi-jsbsim (1.5-4) xenial; urgency=medium
 
   * ppa build for xenial
