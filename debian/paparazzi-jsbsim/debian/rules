@@ -25,5 +25,5 @@ get-orig-source:
 
 
 override_dh_auto_configure:
-	cmake -DCMAKE_CXX_FLAGS_RELEASE="-O3 -march=native -mtune=native" -DCMAKE_C_FLAGS_RELEASE="-O3 -march=native -mtune=native" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=/usr .
+	cmake -DCMAKE_CXX_FLAGS_RELEASE="-O3 -march=native -mtune=native -mno-avx -mno-avx2 -mno-bmi -mno-bmi2" -DCMAKE_C_FLAGS_RELEASE="-O3 -march=native -mtune=native -mno-avx -mno-avx2 -mno-bmi -mno-bmi2" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=/usr .
 
