@@ -1,3 +1,9 @@
+paparazzi-jsbsim (1.6-1) focal; urgency=medium
+
+  * change compilation options to use older processors (no extra instruction set)
+
+ -- Gautier Hattenberger <gautier.hattenberger@enac.fr>  Fri, 12 Mar 2021 13:57:26 +0100
+
 paparazzi-jsbsim (1.6) focal; urgency=medium
 
   * build package with upstream version v1.0.0-rc1
