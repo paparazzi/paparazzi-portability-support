@@ -1,3 +1,16 @@
+paparazzi-jsbsim (1.7-1) focal; urgency=medium
+
+  * conditional compilation x86
+
+ -- Gautier Hattenberger <gautier.hattenberger@enac.fr>  Fri, 12 Mar 2021 18:23:49 +0100
+
+paparazzi-jsbsim (1.7) focal; urgency=medium
+
+  * use upstream version 1.1.5 without patches (pkg-config file is now
+    available upstream), still compile our own package with dynamic library
+
+ -- Gautier Hattenberger <gautier.hattenberger@enac.fr>  Fri, 12 Mar 2021 17:43:26 +0100
+
 paparazzi-jsbsim (1.6-1) focal; urgency=medium
 
   * change compilation options to use older processors (no extra instruction set)

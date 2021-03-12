@@ -13,17 +13,24 @@
 	dh $@
 
 
-UPSTREAM_VER=Release_Candidate_v1.0.0
+UPSTREAM_VER=1.1.5
 VER=$(shell dpkg-parsechangelog | sed -rne 's,^Version: ([^-]+).*,\1,p')
 get-orig-source:
 	rm -rf paparazzi-jsbsim-$(VER)
-	wget https://github.com/JSBSim-Team/jsbsim/archive/$(UPSTREAM_VER).tar.gz
-	tar -xzf $(UPSTREAM_VER).tar.gz
+	wget https://github.com/JSBSim-Team/jsbsim/archive/v$(UPSTREAM_VER).tar.gz
+	tar -xzf v$(UPSTREAM_VER).tar.gz
 	mv jsbsim-${UPSTREAM_VER} paparazzi-jsbsim-$(VER)
 	GZIP='--best --no-name' tar -cz --owner root --group root --mode a+rX -f paparazzi-jsbsim_$(VER).orig.tar.gz paparazzi-jsbsim-$(VER)
 	rm -rf paparazzi-jsbsim-$(VER)
 
+ifeq ($(shell uname -m), x86_64)
+# options for old cpu on amd64 arch
+OPTIONS = -mno-avx -mno-avx2 -mno-bmi -mno-bmi2
+else
+OPTIONS =
+endif
+
 
 override_dh_auto_configure:
-	cmake -DCMAKE_CXX_FLAGS_RELEASE="-O3 -march=native -mtune=native -mno-avx -mno-avx2 -mno-bmi -mno-bmi2" -DCMAKE_C_FLAGS_RELEASE="-O3 -march=native -mtune=native -mno-avx -mno-avx2 -mno-bmi -mno-bmi2" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=/usr .
+	cmake -DCMAKE_CXX_FLAGS_RELEASE="-O3 -march=native -mtune=native $(OPTIONS)" -DCMAKE_C_FLAGS_RELEASE="-O3 -march=native -mtune=native $(OPTIONS)" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=/usr .
 

@@ -11,4 +11,4 @@ Architecture: any
 Depends: ${misc:Depends}
 Description: JSBSim support for Paparazzi
  JSBSim shared libraries package from sources (https://github.com/JSBSim-Team/jsbsim)
- Package made for the Paparazzi project (http://paparazziuav.org) with pkg-config support
+ Package made for the Paparazzi project (http://paparazziuav.org)
