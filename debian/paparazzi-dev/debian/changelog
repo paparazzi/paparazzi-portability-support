@@ -1,3 +1,11 @@
+paparazzi-dev (3.29) jammy; urgency=medium
+
+  * remove dependency to libgnomecanvas2-dev, the old GCS will not compile
+    anymore
+  * add fuse to use the new GCS with appimage
+
+ -- Gautier Hattenberger <gautier.hattenberger@enac.fr>  Fri, 01 Apr 2022 11:06:36 +0200
+
 paparazzi-dev (3.28) focal; urgency=medium
 
   * add recommended package appmenu for gtk2
