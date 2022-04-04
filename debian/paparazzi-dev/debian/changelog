@@ -1,3 +1,9 @@
+paparazzi-dev (3.29pprz1) jammy; urgency=medium
+
+  * add pprzgcs, clean old dep
+
+ -- Gautier Hattenberger <gautier.hattenberger@enac.fr>  Mon, 04 Apr 2022 16:48:23 +0200
+
 paparazzi-dev (3.29) jammy; urgency=medium
 
   * remove dependency to libgnomecanvas2-dev, the old GCS will not compile
