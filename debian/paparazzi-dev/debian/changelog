@@ -1,3 +1,9 @@
+paparazzi-dev (3.29pprz1ubuntu1) noble; urgency=medium
+
+  * clean old deps for ubuntu 24.04 
+
+ -- Fabien Bonneval <fabien.bonneval@gmail.com>  Mon, 03 Jun 2024 18:00:04 +0200
+
 paparazzi-dev (3.29pprz1) jammy; urgency=medium
 
   * add pprzgcs, clean old dep
