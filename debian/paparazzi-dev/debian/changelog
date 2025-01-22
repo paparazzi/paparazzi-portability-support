@@ -1,3 +1,10 @@
+paparazzi-dev (3.30) noble; urgency=medium
+
+  * add a minimal set of python packages to run paparazzi without venv
+  * gtk2 ocaml bindings not included, should be installed by hand if needed
+
+ -- Gautier Hattenberger <gautier.hattenberger@enac.fr>  Wed, 22 Jan 2025 10:04:00 +0100
+
 paparazzi-dev (3.29pprz1ubuntu1) noble; urgency=medium
 
   * clean old deps for ubuntu 24.04 

@@ -8,7 +8,7 @@ Standards-Version: 4.5.0
 
 Package: paparazzi-dev
 Architecture: all
-Depends: ivy-c-dev, ivy-c, ivy-ocaml, ocamlbuild, ocaml-findlib, liblablgtk3-ocaml-dev, libxml-light-ocaml-dev, libocamlnet-ocaml-dev, libocamlnet-ssl-ocaml-dev, libsdl-ocaml-dev, libpcre-ocaml-dev, camlp4, make, gcc, g++, libgsl-dev, bzip2, git, libusb-dev, speech-dispatcher, glade, libpcre3-dev, libxml2-dev, bc, wget
-Recommends: g++-arm-linux-gnueabi, gcc-arm-linux-gnueabi, g++-arm-linux-gnueabihf, gcc-arm-linux-gnueabihf, openocd (>= 0.5.0), gpsd, libgps-dev, meld, gitk, gnuplot, imagemagick, libipc-run-perl, astyle, fuse
+Depends: ivy-c-dev, ivy-c, ivy-ocaml, ocamlbuild, ocaml-findlib, liblablgtk3-ocaml-dev, libxml-light-ocaml-dev, libocamlnet-ocaml-dev, libocamlnet-ssl-ocaml-dev, libsdl-ocaml-dev, libpcre-ocaml-dev, python3-lxml, python3-numpy, python3-pyqtgraph, python3-unidecode, ivy-python, camlp4, make, gcc, g++, libgsl-dev, bzip2, git, libusb-dev, speech-dispatcher, glade, libpcre3-dev, libxml2-dev, bc
+Recommends: g++-arm-linux-gnueabi, gcc-arm-linux-gnueabi, g++-arm-linux-gnueabihf, gcc-arm-linux-gnueabihf, openocd (>= 0.5.0), gpsd, libgps-dev, meld, gitk, imagemagick, libipc-run-perl, astyle, fuse
 Suggests: paparazzi-jsbsim, pprzgcs, gedit
 Description: Paparazzi Meta Package : common support
