@@ -1,3 +1,9 @@
+paparazzi-dev (3.31~ubuntu4) jammy; urgency=medium
+
+  * Update to pcre2 
+
+ -- Fabien Bonneval <fabien.bonneval@gmail.com>  Mon, 13 Apr 2026 12:30:22 +0200
+
 paparazzi-dev (3.30) noble; urgency=medium
 
   * add a minimal set of python packages to run paparazzi without venv
